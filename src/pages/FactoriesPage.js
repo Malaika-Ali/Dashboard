@@ -1,13 +1,71 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import filterby from '../assets/filterby.svg'
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { FactoryCard } from '../components'
 
 
-const FactoriesPage = () => {
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+const FactoriesPage = (props) => {
+
+    const [open, setOpen] = useState(false);
+    const [total_critical, setTotalCritical] = useState(0);
+    const [total_faulty, setTotalFaulty] = useState(0);
+    const [total_flawless, setTotalFlawless] = useState(0);
+    const [factories, setFactories] = useState([]);
+    const [data, setData] = useState(null);
+    const navigate = useNavigate();
+
+
+    async function fetch_data(){
+
+        await axios.get(
+          API_URL + "factories_page",
+          {
+            headers: {
+              'Content-type': 'multipart/form-data',
+              "Access-Control-Allow-Origin": "*",
+            }
+          }
+        ).then((result) => {
+          
+          setData(result.data)
+    
+        }).catch(async (error) =>  {
+          setOpen(false);
+          alert(error.response.data);
+        })
+    
+      }
+
+    useEffect(() => {
+        if(!props.user_details){
+          
+          navigate("/")
+        }
+        else{
+            setOpen(true);
+            fetch_data();
+        }
+      }, []);
+
+    useEffect(() => {
+        if(data){
+          
+            setOpen(false);
+            setTotalCritical(data.total_critical);
+            setTotalFaulty(data.total_faulty);
+            setTotalFlawless(data.total_flawless);
+            setFactories(data.factories_list);
+          
+        }
+    }, [data]);
 
     const handleCardClick = (props) => {
         // Use the prop values in this function
@@ -18,6 +76,12 @@ const FactoriesPage = () => {
       
     return (
         <div>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+                >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             {/* Factories Report */}
             {/* <div className="flex flex-col m-5"> */}
 
@@ -39,7 +103,7 @@ const FactoriesPage = () => {
                     <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between'>
                         <img src={criticalalert} />
                         <span>Critical Alerts</span>
-                        <span>05</span>
+                        <span>{total_critical}</span>
                     </div>
                 </div>
 
@@ -50,7 +114,7 @@ const FactoriesPage = () => {
                     <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8 m-3 shadow-md flex flex-row justify-between'>
                         <img src={faultyalert} alt="" />
                         <span>Faulty Alerts</span>
-                        <span>03</span>
+                        <span>{total_faulty}</span>
                     </div>
                 </div>
 
@@ -61,7 +125,7 @@ const FactoriesPage = () => {
                     <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between '>
                         <img src={flawless} alt="" />
                         <div>Flawless</div>
-                        <div>14</div>
+                        <div>{total_flawless}</div>
                     </div>
                 </div>
 
@@ -79,8 +143,37 @@ const FactoriesPage = () => {
             {/* boxes section */}
             <div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '>
 
+                {
+                
+                    factories.map((row, idx) => {
+                    
+                        return (
+                            <div className="flex flex-row justify-between">  
+
+                            {
+                                row.map((row_loop, idx) =>{
+                                return(
+                                    <FactoryCard
+                                    FactoryName={row_loop.factory_name}
+                                    AreaName={row_loop.area_abbreviation}
+                                    CriticalMotor={row_loop.critical}
+                                    FaultyMotors={row_loop.faulty}
+                                    FlawlessMotors={row_loop.flawless}
+                                    onClick={handleCardClick} />
+                                )
+                                })
+                            }
+                            
+                            </div>
+                        )
+                        
+                    })
+
+                }
+
+
                 {/* row 1 */}
-                <div className="flex flex-row justify-between">
+                {/* <div className="flex flex-row justify-between">
                     <FactoryCard
                         FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
                         FaultyMotors='3'
@@ -104,7 +197,7 @@ const FactoriesPage = () => {
                         onClick={handleCardClick} />
                 </div>
 
-                {/* row 2 */}
+                 ======= row 2 ======
                 <div className="flex flex-row justify-between">
                     <FactoryCard
                         FactoryName="Hems"
@@ -129,7 +222,7 @@ const FactoriesPage = () => {
                         FaultyMotors='5'
                         FlawlessMotors='14'
                         onClick={handleCardClick} />
-                </div>
+                </div> */}
             </div>
 
 

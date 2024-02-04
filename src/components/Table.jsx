@@ -131,7 +131,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { FaSearch } from 'react-icons/fa';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
@@ -141,6 +141,10 @@ import PropTypes from 'prop-types'; // Import PropTypes
 const Table = ({ tableSubheading, column_headings, data }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [records, setRecords] = useState(data);
+
+  useEffect(() => {
+    setRecords(data);
+  }, [data]);
 
   const handleSearchChange = (event) => {
     const newSearchTerm = event.target.value;

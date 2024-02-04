@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TotalNumberCard } from '../summaryCards';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 import factory from '../assets/factory.svg'
 import motors from '../assets/motors.svg'
 import location from '../assets/location.svg'
 import { Table } from '../components';
 
-const FactoryInchargeHome = () => {
 
+const FactoryInchargeHome = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!props.user_details){
+      console.log("here", props.user_details)
+      sessionStorage.clear();
+      navigate("/")
+    }
+  }, [navigate, props.user_details]);
   // table columns headings
   const columns = [
     {

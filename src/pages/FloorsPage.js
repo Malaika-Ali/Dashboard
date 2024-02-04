@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FactoryCard } from '../components'
+import { Link, useNavigate } from 'react-router-dom';
 
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import filterby from '../assets/filterby.svg'
 
-const FloorsPage = () => {
+const FloorsPage = (props) => {
+    
+    const navigate = useNavigate();
+    // useEffect(() => {
+    //     if(!props.user_details){
+    //       console.log("here", props.user_details)
+    //       sessionStorage.clear();
+    //       navigate("/")
+    //     }
+    //   }, [navigate, props.user_details]);
+
   return (
     <>
                   {/* Floors Report */}

@@ -1,8 +1,9 @@
 import './App.css';
-import React from 'react'
+import React, {useEffect, useState}  from 'react'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStateContext } from './contexts/ContextProvider';
+
 
 
 // Importing components
@@ -69,6 +70,11 @@ import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryIncharg
 
 // export default MainDash;
 
+function getToken() {
+  const tokenString = localStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken
+}
 
 function MainDash() {
   const { activeMenu } = useStateContext();
@@ -77,7 +83,11 @@ function MainDash() {
     const currentPath = window.location.pathname;
     return currentPath === '/' || currentPath === '/signuppage';
   };
-
+  
+  const [token, setToken] = useState();
+  useEffect(() => {
+    setToken(getToken());
+  }, [token]);
   return (
     <div>
       <BrowserRouter>
@@ -93,17 +103,18 @@ function MainDash() {
               </button>
             </TooltipComponent>
           </div> */}
-          {activeMenu && !isLoginPageOrSignupPage() ? (
+          
+          {activeMenu && token && !isLoginPageOrSignupPage() ? (
             <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
               <Sidebar />
             </div>
           ) : null}
           <div
             className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
-              activeMenu && !isLoginPageOrSignupPage() ? 'md:ml-72' : 'flex-2'
+              activeMenu && token && !isLoginPageOrSignupPage() ? 'md:ml-72' : 'flex-2'
             }`}
           >
-            {!isLoginPageOrSignupPage() && (
+            {!isLoginPageOrSignupPage() && token && (
               <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                 <Navbar />
               </div>
@@ -111,24 +122,25 @@ function MainDash() {
 
             <div>
               <Routes>
-                <Route index path='/' element={<LoginPage />} />
+                
+                <Route index path='/' element={<LoginPage user_details={token} set_token={setToken} />} />
                 <Route index path='/signuppage' element={<SignupPage />} />
 
-                <Route path='/adminHomePage' element={<AdminHomePage />} />
-                <Route path='/areaspage' element={<AreasPage />} />
-                <Route path='/factoriespage' element={<FactoriesPage />} />
-                <Route path='/motors' element={<Motors />} />
+                <Route path='/adminHomePage' element={<AdminHomePage user_details={token} />} />
+                <Route path='/areaspage' element={<AreasPage user_details={token} />} />
+                <Route path='/factoriespage' element={<FactoriesPage user_details={token} />} />
+                <Route path='/motors' element={<Motors user_details={token} />} />
                 <Route
                   path='/factoryInchargeHome'
-                  element={<FactoryInchargeHome />}
+                  element={<FactoryInchargeHome user_details={token} />}
                 />
                 <Route
                   path='/floorInchargeHomePage'
-                  element={<FloorInchargeHomePage />}
+                  element={<FloorInchargeHomePage user_details={token} />}
                 />
                 <Route
                 path='/floorsPage'
-                element={<FloorsPage />} />
+                element={<FloorsPage user_details={token} />} />
               </Routes>
             </div>
           </div>

@@ -3,6 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import axios from 'axios';
+
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 
 const SignupPage = () => {
 
@@ -19,6 +26,8 @@ const SignupPage = () => {
     });
   }, []); // Empty dependency array ensures this effect runs only once
 
+  const [open, setOpen] = useState(false);
+
   const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
     shouldUnregister: false, // Prevent automatic unregistering of fields
   });
@@ -30,18 +39,62 @@ const SignupPage = () => {
   const onSubmit = async (data) => {
     // Perform signup logic here
     // setValue('role', selectedRole);
-    console.log(data);
+    // console.log(data);
+    setOpen(true);
+    const dat = { 'first_name': data.firstName, 'last_name': data.lastName, 'email': data.email, 'employee_id' : data.employeeID,
+                  'password': data.password, 'role': data.role};
+    if (data.role == 'factoryIncharge') {
+      dat["area_name"] = data.areaName;
+      dat["factory_name"] = data.factoryName;
+    }
+    else if(data.role == 'floorIncharge'){
+      dat["area_name"] = data.areaName;
+      dat["factory_name"] = data.factoryName;
+      dat["floor_number"] = data.floorNumber;
+    }
+    
+    await axios.post(
+      API_URL + "signup_user",
+      dat,
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+      setOpen(false);
+      alert('Success');
+      navigate('/');
+    }).catch(async (error) =>  {
+      setOpen(false);
+      alert(error.response.data);
+      // Reset the form fields
+      await reset({
+        firstName: '',
+        lastName: '',
+        email: '',
+        employeeID: '',
+        password: '',
+        confirmPassword: '',
+        role: 'selectedRole',
+      });
+  })
 
-    // Reset the form fields
-    await reset({
-      firstName: '',
-      lastName: '',
-      email: '',
-      employeeID: '',
-      password: '',
-      confirmPassword: '',
-      role: 'selectedRole',
-    });
+    
+
+    
+
+    // // Reset the form fields
+    // await reset({
+    //   firstName: '',
+    //   lastName: '',
+    //   email: '',
+    //   employeeID: '',
+    //   password: '',
+    //   confirmPassword: '',
+    //   role: 'selectedRole',
+    // });
 
   };
 
@@ -172,6 +225,13 @@ const SignupPage = () => {
   };
 
   return (
+    <>
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded shadow-md w-96 mt-8 mb-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
@@ -392,6 +452,7 @@ const SignupPage = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

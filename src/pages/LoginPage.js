@@ -1,31 +1,104 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import axios from 'axios';
 
-const LoginPage = () => {
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
+
+const LoginPage = (props) => {
+  const navigate = useNavigate();
+  
+
   const { handleSubmit, control, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
+    if(props.user_details){
+
+      if(props.user_details.role==='admin'){
+        navigate("/adminHomePage");
+      }
+      else if(props.user_details.role==='factoryIncharge'){
+        navigate("/factoryInchargeHome");
+      }
+      else if(props.user_details.role==='floorIncharge'){
+        navigate("/floorInchargeHomePage");
+      }
+    }
+
     // Clear the form after the page is loaded
     reset({
       email: '',
       password: '',
     });
-  }, []); // Empty dependency array ensures this effect runs only once
-
+    // eslint-disable-next-line
+  }, [navigate, props.user_details]); // Empty dependency array ensures this effect runs only once
+  const [open, setOpen] = useState(false);
   const onSubmit =async (data) => {
     // Handle login logic here
-    console.log(data);
-    <Link to="/signuppage"></Link>
+    // console.log(data);
+    setOpen(true);
+    const dat = { 'email': data.email, 'password': data.password};
+
+    await axios.post(
+      API_URL + "signin_user",
+      dat,
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+      // setOpen(false);
+      // alert('Success');
+      // navigate('/');
+      // console.log("result", result);
+      let data = Object.fromEntries(Object.entries(result.data).filter(([_, v]) => v != null));
+      // console.log(data);
+      localStorage.setItem('token', JSON.stringify(data));
+      props.set_token(data);
+      setOpen(false);
+      if(data.role==='admin'){
+        navigate("/adminHomePage");
+      }
+      else if(data.role==='factoryIncharge'){
+        navigate("/factoryInchargeHome");
+      }
+      if(data.role==='floorIncharge'){
+        navigate("/floorInchargeHomePage");
+      }
+
+    }).catch(async (error) =>  {
+      setOpen(false);
+      alert(error.response.data);
+      // Reset the form fields
+      await reset({
+        email: '',
+        password: '',
+      });
+      
+    })
+
+    // <Link to="/signuppage"></Link>
 
     // Reset the form fields
-    await reset({
-      email: '',
-      password: '',
-    });
+    // await reset({
+    //   email: '',
+    //   password: '',
+    // });
   };
 
   return (
+    <>
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back!</h2>
@@ -107,6 +180,7 @@ const LoginPage = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
