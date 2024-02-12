@@ -88,9 +88,9 @@ const FactoriesPage = (props) => {
             {/* heading section */}
             <div className="flex flex-row justify-between">
                 <h1 className='font-extrabold text-xl tracking-tight m-5 mr-10  text-slate-900 '>Factories Report</h1>
-                <div className="flex flex-row mr-5 justify-center">
+                {/* <div className="flex flex-row mr-5 justify-center">
                     <img src={filterby} alt="" />
-                    <span className='text-black'>Sort</span></div>
+                    <span className='text-black'>Sort</span></div> */}
             </div>
 
 

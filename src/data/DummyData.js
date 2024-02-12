@@ -12,16 +12,6 @@ import {factory} from '../assets/factory.svg'
 
 
 export const links = [
-    // {
-    //   title: 'Dashboard',
-    //   links: [
-    //     {
-    //       name: 'ecommerce',
-    //       icon: <FiShoppingBag />,
-    //     },
-    //   ],
-    // },
-  
     {
       title: 'Dashboard',
       links: [
@@ -38,6 +28,10 @@ export const links = [
           icon: <IoMdContacts/>,
         },
         {
+          name: 'FloorsPage',
+          icon: <IoMdContacts/>,
+        },
+        {
           name: 'Motors',
           icon: <RiContactsLine />,
         },
@@ -46,9 +40,55 @@ export const links = [
           icon: <RiContactsLine />,
         },
       ],
+    }   
+  ];
+
+  export const factoryInchargelinks = [
+    {
+      title: 'Dashboard',
+      links: [
+        {
+          name: 'FactoryInchargeHome',
+          icon: <AiOutlineBarChart />,
+        },
+        {
+          name: 'FactoriesPage',
+          icon: <IoMdContacts/>,
+        },
+        {
+          name: 'FloorsPage',
+          icon: <IoMdContacts/>,
+        },
+        {
+          name: 'Motors',
+          icon: <RiContactsLine />,
+        },
+      ],
+    }  
+  ];
+
+  export const floorInchargelinks = [
+    {
+      title: 'Dashboard',
+      links: [
+        {
+          name: 'FloorInchargeHomePage',
+          icon: <AiOutlineBarChart />,
+        },
+        {
+          name: 'FloorsPage',
+          icon: <IoMdContacts/>,
+        },
+        {
+          name: 'Motors',
+          icon: <RiContactsLine />,
+        },
+      ],
     }
     
   ];
+
+  
   
 
   export const dummy_api=[

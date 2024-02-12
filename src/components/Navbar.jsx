@@ -11,6 +11,9 @@ import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout } from "react-icons/tb";
 import { Link, useNavigate } from 'react-router-dom';
+import NotificationStack from './NotificationStack';
+
+import { IoMdNotifications } from "react-icons/io";
 
 
 // Navigation Button Component
@@ -22,6 +25,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     </button>
   </TooltipComponent>
 )
+
 
 export default function Navbar() {
 
@@ -82,12 +86,15 @@ export default function Navbar() {
   }, [divRef, dropDownRef]);
 
   const navigate=useNavigate();
+
+const [notificationOpen, setnotificationOpen] = useState(false)
+
     
   return (
     <div className='flex justify-between p-2 mt-2 md:mx-6 relative'>
 
       {/* This is that menu button in nav */}
-      <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)} color="blue" icon={<AiOutlineMenu />} />
+      <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu />} />
 
       
       {/* Div to contain all nav elements */}
@@ -126,13 +133,17 @@ export default function Navbar() {
         <NavButton
 
           title='Notifications'
-          dotColor="#03C9D7"
-          customFunc={() => handleClick("Notifications")}
-          color="blue"
-          icon={<RiNotification3Line />} />
+          dotColor="red"
+          customFunc={() => setnotificationOpen(!notificationOpen)}
+          // color="blue"
+          icon={<IoMdNotifications />} />
 
 
-        {isClicked.Notifications && <Notification />}
+        {/* {isClicked.Notifications && <Notification />} */}
+        {
+          notificationOpen &&
+          <NotificationStack/>
+        }
 
         <div onClick={()=>setopen(!open)} className='relative mt-3 cursor-pointer' ref={divRef}>
           <BsPersonCircle className='w-14 h-5' />
@@ -140,7 +151,7 @@ export default function Navbar() {
 
         {
           open &&
-          <div className='bg-white p-4 w-52 shadow-lg absolute -right-2 top-12' ref={dropDownRef} >
+          <div className='bg-white p-4 w-52 shadow-lg z-50  absolute -right-2 top-12' ref={dropDownRef} >
             <ul>
               {/* Profile Option */}
               <li onClick={()=>{setopen(false)

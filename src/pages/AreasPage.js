@@ -87,7 +87,7 @@ const AreasPage = (props) => {
 
             <div className="flex flex-row justify-between m-5">
                 <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
-                <div>Refresh</div>
+                {/* <div>Refresh</div> */}
             </div>
 
             {/* Flex Container */}

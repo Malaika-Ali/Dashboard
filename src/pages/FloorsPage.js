@@ -25,10 +25,10 @@ const FloorsPage = (props) => {
 
 {/* heading section */}
 <div className="flex flex-row justify-between">
-    <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 '>Floors Report</h1>
-    <div className="flex flex-row justify-between">
+    <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 ml-5 '>Floors Report</h1>
+    {/* <div className="flex flex-row justify-between">
         <img src={filterby} alt="" />
-        <span className='text-black'>Sort</span></div>
+        <span className='text-black'>Sort</span></div> */}
 </div>
 
 {/* Flex Container */}

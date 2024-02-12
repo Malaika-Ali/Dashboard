@@ -4,7 +4,7 @@ import { SiShopware } from 'react-icons/si'
 import { MdOutlineCancel } from 'react-icons/md'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 
-import { links } from '../data/DummyData';
+import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
 
 export default function Sidebar() {
@@ -20,6 +20,17 @@ export default function Sidebar() {
         if(activeMenu && screenSize<=900){
             setactiveMenu(false);
         }
+    }
+
+    const role='admin';
+
+    let roleLinks = [];
+    if (role === 'admin') {
+        roleLinks = links;
+    } else if (role === 'factoryIncharge') {
+        roleLinks = factoryInchargelinks;
+    } else if (role === 'floorIncharge') {
+        roleLinks = floorInchargelinks;
     }
 
     return (
@@ -50,7 +61,7 @@ export default function Sidebar() {
                 </div>
 
                 <div className='mt-10 '>
-                    {links.map((item) => (
+                    {roleLinks.map((item) => (
                         <div key={item.title}>
                             <p className='text-gray-400 m-3 mt-4 uppercase'>
                                 {item.title}
@@ -65,8 +76,8 @@ export default function Sidebar() {
 
                                     {link.icon}
                                     <span className='capitalize'>
-                                        {link.name}
-                                    </span>
+            {link.name.replace(/([a-z])([A-Z])/g, '$1 $2')}
+        </span>
 
                                 </NavLink>
                             ))}
