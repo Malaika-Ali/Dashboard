@@ -308,9 +308,18 @@ export default function AdminHomePage(props) {
   // }, [pie_data]);
 
 
+  // const lineChartData = {
+  //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  //   values: [30, 40, 25, 50, 49],
+  // };
+
   const lineChartData = {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    values: [30, 40, 25, 50, 49],
+    // X-axis labelling
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May','June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    // Y-Axis labelling
+    criticalValues: [10, 15, 8, 12, 18, 45, 66],
+    faultyValues: [5, 8, 3, 7, 10, 22, 33],
+    flawlessValues: [20, 25, 15, 22, 30,54, 22],
   };
 
   const factory_Incharge_headings=[
@@ -345,16 +354,8 @@ export default function AdminHomePage(props) {
     }
   ]
 
-
-
-
   return (
-
-
-
     <>
-
-
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -362,10 +363,7 @@ export default function AdminHomePage(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-
-
-      
-
+{/* *********Numbers of Areas, factories, motors **************** */}
 
       {/* Flex Container */}
       <div className='flex justify-between mt-4 bg-slate-200 rounded-xl w-90 m-5'>
@@ -387,9 +385,9 @@ export default function AdminHomePage(props) {
      {/* -------------PieChart and line Chart---------------- */}
       <div className='mt-10 bg-slate-200 rounded-xl m-5'>
         <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='bg-white h-96 rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-row justify-between gap-44'>
+          <div className='bg-white h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
             <PieChart title="Motors' Performance" />
-            <LineChart data={lineChartData} chartTitle="Monthly Report"/>
+            <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/>
             
           </div>
         </div>
@@ -408,292 +406,10 @@ export default function AdminHomePage(props) {
         </div>
       </div>
 
-
-      {/* Factories Report */}
-      {/* <div className="flex flex-col m-5 mt-14 mb-10"> */}
-
-        {/* heading section */}
-        {/* <div className="flex flex-row justify-between">
-          <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 '>Factories Report</h1>
-          <div className="flex flex-row justify-between">
-            <img src={filterby} alt="" />
-            <span className='text-black'>Sort</span></div>
-        </div> */}
-
-        {/* boxes section */}
-        {/* <div className='flex flex-col justify-between mt-4 bg-slate-200 rounded-xl m-2 w-full '>
-          {
-
-            factories.map((row, idx) => {
-
-              return (
-                <div className="flex flex-row justify-between">
-
-                  {
-                    row.map((row_loop, idx) => {
-                      return (
-                        <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                          <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                            <span>{row_loop.factory_name}</span> <span>{row_loop.area}</span>
-                          </div>
-                          <span>{`Total critical motors: ${row_loop.critical}`}</span>
-                          <span>{`Total Faulty motors: ${row_loop.faulty}`}</span>
-                          <span>{`Total Flawless motors: ${row_loop.flawless}`}</span>
-                        </div>
-                      )
-                    })
-                  }
-
-                </div>
-              )
-
-            })
-
-          } */}
-
-          {/* row 1 */}
-          {/* <div className="flex flex-row justify-between">
-
-           
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 1</span> <span>Area 1</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-
-              </div>
-            </div>
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 1</span> <span>Area 1</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-
-              </div>
-            </div>
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 2</span> <span>Area 1</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-              </div>
-            </div>
-          </div>
-
-
-           ------- row 2 --------------------
-          <div className="flex flex-row justify-between">
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 1</span> <span>Area 2</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-
-              </div>
-            </div>
-
-            
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 2</span> <span>Area 2</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-
-              </div>
-            </div>
-
-            <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-              <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-900 mb-8'>
-                  <span>Factory 3</span> <span>Area 3</span>
-                </div>
-                <span>{`Total critical motors: 2`}</span>
-                <span>{`Total Faulty motors: 3`}</span>
-                <span>{`Total Flawless motors: 0`}</span>
-
-              </div>
-            </div>
-          </div>
-          */}
-
-        {/* </div> */}
-
-
-        {/* Motors Report */}
-        {/* <div className="flex flex-col m-2"> */}
-
-          {/* heading section */}
-          {/* <div className="flex flex-row justify-between">
-            <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 '>Motors Report</h1>
-            <div className="flex flex-row justify-between">
-              <img src={filterby} alt="" />
-              <span className='text-black'>Sort</span></div>
-          </div> */}
-
-          {/* boxes section */}
-          {/* <div className='flex flex-col justify-between mt-4 bg-slate-200 rounded-xl m-0 w-full '>
-
-            {
-
-              motors.map((row, idx) => {
-
-                return (
-                  <div className="flex flex-row justify-between">
-
-                    {
-                      row.map((row_loop, idx) => {
-                        return (
-                          <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                            <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                              <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                                <span>{row_loop.factoryName}</span> <span>{row_loop.areaName}</span>
-                              </div>
-                              <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>{row_loop.motorName}</span>
-                              <span className='mx-auto'>{`Status: ${row_loop.status}`}</span>
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-
-                  </div>
-                )
-
-              })
-
-            } */}
-
-            {/* row 1 */}
-            {/* <div className="flex flex-row justify-between">
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 1</span> <span>Area 1</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-                  <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-                </div>
-              </div>
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 1</span> <span>Area 1</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>DEF Motor</span>
-                  <span className='mx-auto'>{`Status: Critical`}</span>
-
-
-
-                </div>
-              </div>
-
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 1</span> <span>Area 1</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-                  <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-                </div>
-              </div>
-            </div>
-
-
-             ---------- row 2 --------------------
-            <div className="flex flex-row justify-between">
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 3</span> <span>Area 2</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-                  <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-
-                </div>
-              </div>
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 1</span> <span>Area 1</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-                  <span className='mx-auto'>{`Status: Faulty`}</span>
-
-                </div>
-              </div>
-
-              <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                  <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                    <span>Factory 1</span> <span>Area 1</span>
-                  </div>
-                  <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-                  <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-                </div>
-              </div>
-            </div> */}
-{/* 
-          </div>
-        </div>
-      </div> */}
-
-
-      {/* Table section */}
+      {/* ***************Tabular Motors Summary **************** */}
       <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Report'} column_headings={columns} data={motors_data} />
       </div>
-
-
-      {/* Table section */}
-      {/* <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
-        <Table tableSubheading={'Factory Incharges Detail'} column_headings={factory_Incharge_headings} data={factory_Incharge_data} />
-      </div> */}
-
-      {/* Table section */}
-      {/* <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
-        <Table tableSubheading={'Floor Incharges Detail'} column_headings={factory_Incharge_headings} data={factory_Incharge_data} />
-      </div> */}
-
-
-
     </>
   )
 }
