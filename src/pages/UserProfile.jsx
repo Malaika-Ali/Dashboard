@@ -11,7 +11,7 @@ function UserProfile() {
     const [email, setEmail] = useState("ajlee@gmail.com")
     const [id, setId] = useState("16")
     const [password, setPassword] = useState("pass")
-    const [role, setrole] = useState("admin")
+    const [role, setRole] = useState("Admin")
     const [area, setarea] = useState("area")
     const [factory, setfactory] = useState("factory")
     const [floor, setfloor] = useState("1st")
@@ -27,23 +27,20 @@ function UserProfile() {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        navigate(-1); 
+        navigate(-1);
         // This will navigate back to the previous page in history
-      };
+    };
 
     return (
-        <>
+        <div>
             <div className="flex flex-row mt-8 m-5 pl-14 gap-5" onClick={handleGoBack}>
                 <FaArrowLeft className='h-8 w-8 cursor-pointer' />
                 <h1 className='font-extrabold text-2xl tracking-tight   text-slate-900' >My Account</h1>
             </div>
 
-            {/* <div className='flex flex-col justify-center items-center rounded gap-2 mt-10 w-96'> */}
-
-            <form onSubmit={handleSubmit}>
-
-
-                <table className='mt-10 w-96 mx-auto'>
+            <form onSubmit={handleSubmit} className='flex  flex-col items-center justify-center'>
+                <div className='border border-blue-950'>
+                <table className='mt-10 ml-40 w-[32rem] border border-red-600'>
                     <tbody>
                         <tr>
                             <td className='py-2'>
@@ -53,7 +50,7 @@ function UserProfile() {
                                 {isEditing ? (
                                     <input
                                         value={firstName}
-                                        className="border border-gray-500 p-2 "
+                                        className="border border-gray-500 p-2"
                                         onChange={(e) => setFirstName(e.target.value)}
                                     />
                                 ) : (
@@ -133,19 +130,43 @@ function UserProfile() {
                             </td>
                             <td className='py-2'>
                                 {isEditing ? (
-                                    <input
-                                        className="border border-gray-500 p-2"
-                                        type='password'
-                                        value={role}
-                                        onChange={(e) => setrole(e.target.value)}
-                                    />
+                                    <div>
+                                        <input
+                                            type='radio'
+                                            id='adminRole'
+                                            name='userRole'
+                                            value={role}
+                                            checked={role === 'admin'}
+                                            onChange={() => setRole('Admin')}
+                                        />
+                                        <label htmlFor='adminRole'
+                                            className='mr-3'>Admin</label>
+
+                                        <input
+                                            type='radio'
+                                            id='factoryInchargeRole'
+                                            name='userRole'
+                                            value='Factory Incharge'
+                                            checked={role === 'Factory Incharge'}
+                                            onChange={() => setRole('Factory Incharge')}
+                                        />
+                                        <label htmlFor='factoryInchargeRole' className='mr-3'>Factory Incharge</label>
+
+                                        <input
+                                            type='radio'
+                                            id='floorInchargeRole'
+                                            name='userRole'
+                                            value='Floor Incharge'
+                                            checked={role === 'Floor Incharge'}
+                                            onChange={() => setRole('Floor Incharge')}
+                                        />
+                                        <label htmlFor='floorInchargeRole'>Floor Incharge</label>
+                                    </div>
                                 ) : (
                                     <b className='text-gray-500'>{role}</b>
                                 )}
                             </td>
                         </tr>
-
-
 
 
                         {/* Conditionally rendering extra rows based on the position variable */}
@@ -238,38 +259,27 @@ function UserProfile() {
                                 </tr>
                             </>
                         )}
-
-
-
-
-
-
-
-
-
-                        <tr>
-                            <td className='py-5'>
-                                <button
-                                    className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-16"
-                                    type="submit"
-                                >
-                                    {isEditing ? "Save" : "Edit"}
-                                </button>
-                            </td>
-                            <td className='py-5'>
-                                <button
-                                    className=" border border-black bg-transparent text-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent w-16"
-                                    type="reset"
-                                >
-                                    {isEditing ? "Cancel" : "Delete"}
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    </tbody>                 
                 </table>
+                </div>
+
+                <div className='flex flex-row items-center justify-between mt-8 gap-5'>
+                    <button
+                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-16"
+                        type="submit"
+                    >
+                        {isEditing ? "Save" : "Edit"}
+                    </button>
+
+                    <button
+                        className=" border border-black bg-transparent text-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent w-16"
+                        type="reset">
+                        {isEditing ? "Cancel" : "Delete"}
+                    </button>
+                </div>
             </form>
-            {/* </div> */}
-        </>
+           
+        </div>
     )
 }
 
