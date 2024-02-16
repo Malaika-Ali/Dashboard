@@ -8,6 +8,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans",sans-serif;
+  background-image: linear-gradient(to right, #F4F3F2, #F4F2F3, #F5F3F4)
+}
+
+.card-color{
+  background-image: linear-gradient(to right, #FEFDFE, #FEFDFD, #FFFEFE)
+}
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+  }
 }
 
 

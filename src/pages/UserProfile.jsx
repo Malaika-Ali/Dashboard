@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { ConfirmationModal } from '../components';
+import { SecondaryButton, PrimaryButton } from '../components/buttons'
+import axios from 'axios';
+
 
 
 function UserProfile() {
@@ -15,13 +19,15 @@ function UserProfile() {
     const [area, setarea] = useState("area")
     const [factory, setfactory] = useState("factory")
     const [floor, setfloor] = useState("1st")
+    const [confirmationModal, setconfirmationModal] = useState(false)
 
     const handleSubmit = (e) => {
+        // setconfirmationModal(true)
         e.preventDefault();
         setisEditing(!isEditing);
     }
 
-    const position = "admin";
+    const position = "factoryIncharge";
 
     // for back button
     const navigate = useNavigate();
@@ -39,228 +45,228 @@ function UserProfile() {
             </div>
 
             <form onSubmit={handleSubmit} className='flex  flex-col items-center justify-center'>
-                <div className='border border-blue-950'>
-                <table className='mt-10 ml-40 w-[32rem] border border-red-600'>
-                    <tbody>
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>First Name</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <input
-                                        value={firstName}
-                                        className="border border-gray-500 p-2"
-                                        onChange={(e) => setFirstName(e.target.value)}
-                                    />
-                                ) : (
-                                    <b className='text-gray-500'>{firstName}</b>
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>Last Name</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <input
-                                        className="border border-gray-500 p-2"
-                                        value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
-                                    />
-                                ) : (
-                                    <b className='text-gray-500'>{lastName}</b>
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>Email Address</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <input
-                                        className="border border-gray-500 p-2"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                ) : (
-                                    <b className='text-gray-500'>{email}</b>
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>Employee ID</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <input
-                                        className="border border-gray-500 p-2"
-                                        value={id}
-                                        onChange={(e) => setId(e.target.value)}
-                                    />
-                                ) : (
-                                    <b className='text-gray-500'>{id}</b>
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>Password</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <input
-                                        className="border border-gray-500 p-2"
-                                        type='password'
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                ) : (
-                                    <b className='text-gray-500'>{password}</b>
-                                )}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td className='py-2'>
-                                <label className='text-left text-gray-400 font-medium text-lg'>Role</label>
-                            </td>
-                            <td className='py-2'>
-                                {isEditing ? (
-                                    <div>
+                <div className=' flex justify-between items-center  shadow-xl w-[30rem] card-color'>
+                    <table className='mt-5 mb-5 px-auto w-[32rem] ml-24'>
+                        <tbody>
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>First Name</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
                                         <input
-                                            type='radio'
-                                            id='adminRole'
-                                            name='userRole'
-                                            value={role}
-                                            checked={role === 'admin'}
-                                            onChange={() => setRole('Admin')}
+                                            value={firstName}
+                                            className="border border-gray-500 p-2"
+                                            onChange={(e) => setFirstName(e.target.value)}
                                         />
-                                        <label htmlFor='adminRole'
-                                            className='mr-3'>Admin</label>
-
+                                    ) : (
+                                        <b className='text-gray-500'>{firstName}</b>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>Last Name</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
                                         <input
-                                            type='radio'
-                                            id='factoryInchargeRole'
-                                            name='userRole'
-                                            value='Factory Incharge'
-                                            checked={role === 'Factory Incharge'}
-                                            onChange={() => setRole('Factory Incharge')}
+                                            className="border border-gray-500 p-2"
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
                                         />
-                                        <label htmlFor='factoryInchargeRole' className='mr-3'>Factory Incharge</label>
-
+                                    ) : (
+                                        <b className='text-gray-500'>{lastName}</b>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>Email Address</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
                                         <input
-                                            type='radio'
-                                            id='floorInchargeRole'
-                                            name='userRole'
-                                            value='Floor Incharge'
-                                            checked={role === 'Floor Incharge'}
-                                            onChange={() => setRole('Floor Incharge')}
+                                            className="border border-gray-500 p-2"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
-                                        <label htmlFor='floorInchargeRole'>Floor Incharge</label>
-                                    </div>
-                                ) : (
-                                    <b className='text-gray-500'>{role}</b>
-                                )}
-                            </td>
-                        </tr>
+                                    ) : (
+                                        <b className='text-gray-500'>{email}</b>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>Employee ID</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
+                                        <input
+                                            className="border border-gray-500 p-2"
+                                            value={id}
+                                            onChange={(e) => setId(e.target.value)}
+                                        />
+                                    ) : (
+                                        <b className='text-gray-500'>{id}</b>
+                                    )}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>Password</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
+                                        <input
+                                            className="border border-gray-500 p-2"
+                                            type='password'
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    ) : (
+                                        <b className='text-gray-500'>{password}</b>
+                                    )}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td className='py-2'>
+                                    <label className='text-left text-gray-400 font-medium text-lg'>Role</label>
+                                </td>
+                                <td className='py-2'>
+                                    {isEditing ? (
+                                        <div>
+                                            <input
+                                                type='radio'
+                                                id='adminRole'
+                                                name='userRole'
+                                                value={role}
+                                                checked={role === 'admin'}
+                                                onChange={() => setRole('Admin')}
+                                            />
+                                            <label htmlFor='adminRole'
+                                                className='mr-3'>Admin</label>
+
+                                            <input
+                                                type='radio'
+                                                id='factoryInchargeRole'
+                                                name='userRole'
+                                                value='Factory Incharge'
+                                                checked={role === 'Factory Incharge'}
+                                                onChange={() => setRole('Factory Incharge')}
+                                            />
+                                            <label htmlFor='factoryInchargeRole' className='mr-3'>Factory Incharge</label>
+
+                                            <input
+                                                type='radio'
+                                                id='floorInchargeRole'
+                                                name='userRole'
+                                                value='Floor Incharge'
+                                                checked={role === 'Floor Incharge'}
+                                                onChange={() => setRole('Floor Incharge')}
+                                            />
+                                            <label htmlFor='floorInchargeRole'>Floor Incharge</label>
+                                        </div>
+                                    ) : (
+                                        <b className='text-gray-500'>{role}</b>
+                                    )}
+                                </td>
+                            </tr>
 
 
-                        {/* Conditionally rendering extra rows based on the position variable */}
-                        {position === 'factoryIncharge' && (
-                            <>
-                                <tr>
-                                    <td className='py-2'>
-                                        <label className='text-left text-gray-400 font-medium text-lg'>Area Name</label>
-                                    </td>
-                                    <td className='py-2'>
-                                        {isEditing ? (
-                                            <input
-                                                value={area}
-                                                className="border border-gray-500 p-2"
-                                                onChange={(e) => setarea(e.target.value)}
-                                            />
-                                        ) : (
-                                            <b className='text-gray-500'>{area}</b>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className='py-2'>
-                                        <label className='text-left text-gray-400 font-medium text-lg'>Factory Name</label>
-                                    </td>
-                                    <td className='py-2'>
-                                        {isEditing ? (
-                                            <input
-                                                value={factory}
-                                                className="border border-gray-500 p-2"
-                                                onChange={(e) => setfactory(e.target.value)}
-                                            />
-                                        ) : (
-                                            <b className='text-gray-500'>{factory}</b>
-                                        )}
-                                    </td>
-                                </tr>
-                            </>
-                        )}
+                            {/* Conditionally rendering extra rows based on the position variable */}
+                            {position === 'factoryIncharge' && (
+                                <>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <label className='text-left text-gray-400 font-medium text-lg'>Area Name</label>
+                                        </td>
+                                        <td className='py-2'>
+                                            {isEditing ? (
+                                                <input
+                                                    value={area}
+                                                    className="border border-gray-500 p-2"
+                                                    onChange={(e) => setarea(e.target.value)}
+                                                />
+                                            ) : (
+                                                <b className='text-gray-500'>{area}</b>
+                                            )}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <label className='text-left text-gray-400 font-medium text-lg'>Factory Name</label>
+                                        </td>
+                                        <td className='py-2'>
+                                            {isEditing ? (
+                                                <input
+                                                    value={factory}
+                                                    className="border border-gray-500 p-2"
+                                                    onChange={(e) => setfactory(e.target.value)}
+                                                />
+                                            ) : (
+                                                <b className='text-gray-500'>{factory}</b>
+                                            )}
+                                        </td>
+                                    </tr>
+                                </>
+                            )}
 
-                        {position === 'floorIncharge' && (
-                            <>
-                                <tr>
-                                    <td className='py-2'>
-                                        <label className='text-left text-gray-400 font-medium text-lg'>Area Name</label>
-                                    </td>
-                                    <td className='py-2'>
-                                        {isEditing ? (
-                                            <input
-                                                value={area}
-                                                className="border border-gray-500 p-2"
-                                                onChange={(e) => setarea(e.target.value)}
-                                            />
-                                        ) : (
-                                            <b className='text-gray-500'>{area}</b>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className='py-2'>
-                                        <label className='text-left text-gray-400 font-medium text-lg'>Factory Name</label>
-                                    </td>
-                                    <td className='py-2'>
-                                        {isEditing ? (
-                                            <input
-                                                value={factory}
-                                                className="border border-gray-500 p-2"
-                                                onChange={(e) => setfactory(e.target.value)}
-                                            />
-                                        ) : (
-                                            <b className='text-gray-500'>{factory}</b>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className='py-2'>
-                                        <label className='text-left text-gray-400 font-medium text-lg'>Floor Name</label>
-                                    </td>
-                                    <td className='py-2'>
-                                        {isEditing ? (
-                                            <input
-                                                value={floor}
-                                                className="border border-gray-500 p-2"
-                                                onChange={(e) => setfloor(e.target.value)}
-                                            />
-                                        ) : (
-                                            <b className='text-gray-500'>{floor}</b>
-                                        )}
-                                    </td>
-                                </tr>
-                            </>
-                        )}
-                    </tbody>                 
-                </table>
+                            {position === 'floorIncharge' && (
+                                <>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <label className='text-left text-gray-400 font-medium text-lg'>Area Name</label>
+                                        </td>
+                                        <td className='py-2'>
+                                            {isEditing ? (
+                                                <input
+                                                    value={area}
+                                                    className="border border-gray-500 p-2"
+                                                    onChange={(e) => setarea(e.target.value)}
+                                                />
+                                            ) : (
+                                                <b className='text-gray-500'>{area}</b>
+                                            )}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <label className='text-left text-gray-400 font-medium text-lg'>Factory Name</label>
+                                        </td>
+                                        <td className='py-2'>
+                                            {isEditing ? (
+                                                <input
+                                                    value={factory}
+                                                    className="border border-gray-500 p-2"
+                                                    onChange={(e) => setfactory(e.target.value)}
+                                                />
+                                            ) : (
+                                                <b className='text-gray-500'>{factory}</b>
+                                            )}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <label className='text-left text-gray-400 font-medium text-lg'>Floor Name</label>
+                                        </td>
+                                        <td className='py-2'>
+                                            {isEditing ? (
+                                                <input
+                                                    value={floor}
+                                                    className="border border-gray-500 p-2"
+                                                    onChange={(e) => setfloor(e.target.value)}
+                                                />
+                                            ) : (
+                                                <b className='text-gray-500'>{floor}</b>
+                                            )}
+                                        </td>
+                                    </tr>
+                                </>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
 
                 <div className='flex flex-row items-center justify-between mt-8 gap-5'>
@@ -271,14 +277,19 @@ function UserProfile() {
                         {isEditing ? "Save" : "Edit"}
                     </button>
 
-                    <button
-                        className=" border border-black bg-transparent text-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent w-16"
-                        type="reset">
-                        {isEditing ? "Cancel" : "Delete"}
-                    </button>
+                    {
+                        isEditing ?
+                            <SecondaryButton SecondaryButtonText='Cancel' /> :
+                            <SecondaryButton SecondaryButtonText='Delete' onClick={() => setconfirmationModal(true)} />
+                    }
                 </div>
             </form>
-           
+
+            {
+                confirmationModal &&
+                <ConfirmationModal closeConfirmation={() => setconfirmationModal(false)} />
+            }
+
         </div>
     )
 }

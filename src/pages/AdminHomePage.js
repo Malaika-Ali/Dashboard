@@ -355,7 +355,7 @@ export default function AdminHomePage(props) {
   ]
 
   return (
-    <>
+    <div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -366,7 +366,7 @@ export default function AdminHomePage(props) {
 {/* *********Numbers of Areas, factories, motors **************** */}
 
       {/* Flex Container */}
-      <div className='flex justify-between mt-4 bg-slate-200 rounded-xl w-90 m-5'>
+      <div className='flex justify-between mt-4 rounded-xl w-[72%]'>
 
         {/* left box */}
         <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} />
@@ -383,7 +383,7 @@ export default function AdminHomePage(props) {
 
 
      {/* -------------PieChart and line Chart---------------- */}
-      <div className='mt-10 bg-slate-200 rounded-xl m-5'>
+      <div className='mt-10 rounded-xl'>
         <div className='flex flex-wrap lg:flex-nowrap justify-center'>
           <div className='bg-white h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
             <PieChart title="Motors' Performance" />
@@ -395,7 +395,7 @@ export default function AdminHomePage(props) {
 
 
       {/* -------Circular Progress Charts--------------------- */}
-      <div className='mt-8 bg-slate-200 rounded-xl m-5'>
+      <div className='mt-8 bg-slate-200 rounded-xl'>
         <div className='flex flex-wrap lg:flex-nowrap justify-center'>
           <div className='bg-white h-60 rounded-xl w-100 p-5 m-3 text-center flex flex-row justify-center items-center'>
             
@@ -410,6 +410,8 @@ export default function AdminHomePage(props) {
       <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Report'} column_headings={columns} data={motors_data} />
       </div>
-    </>
+    </div>
   )
 }
+
+

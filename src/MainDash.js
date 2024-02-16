@@ -3,6 +3,7 @@ import React, {useEffect, useState}  from 'react'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStateContext } from './contexts/ContextProvider';
+import { ContextProvider } from './contexts/ContextProvider';
 
 
 
@@ -90,6 +91,7 @@ function MainDash() {
   }, [token]);
   return (
     <div>
+      {/* <ContextProvider> */}
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>
           {/* <div className='fixed left-4 bottom-4' style={{ zIndex: '1000' }}>
@@ -105,7 +107,7 @@ function MainDash() {
           </div> */}
           
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
-            <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
+            <div className='fixed w-60 sidebar dark:bg-secondary-dark-bg bg-white'>
               <Sidebar />
             </div>
           ) : null}
@@ -154,6 +156,7 @@ function MainDash() {
           </div>
         </div>
       </BrowserRouter>
+      {/* </ContextProvider> */}
     </div>
   );
 }
