@@ -385,12 +385,21 @@ export default function AdminHomePage(props) {
      {/* -------------PieChart and line Chart---------------- */}
       <div className='mt-10 rounded-xl'>
         <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='bg-white h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
+          <div className='card-color h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
             <PieChart title="Motors' Performance" />
-            <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/>
+            {/* <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/> */}
             
           </div>
         </div>
+      </div>
+
+      <div className='mt-10 rounded-xl'>
+        {/* <div className='flex flex-wrap lg:flex-nowrap justify-center'> */}
+          <div className='card-color h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
+            <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/>
+            
+          </div>
+        {/* </div> */}
       </div>
 
 

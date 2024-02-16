@@ -10,7 +10,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { AreaCard } from '../components'
 import { useNavigate } from 'react-router-dom';
 import { FactoriesPage } from '../pages'
-import { FaBullseye } from 'react-icons/fa'
+import { AddNewArea } from '../components/modals'
+import { RiAddLine } from "react-icons/ri";
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 const AreasPage = (props) => {
@@ -21,67 +23,83 @@ const AreasPage = (props) => {
     const [total_flawless, setTotalFlawless] = useState(0);
     const [areas, setAreas] = useState([]);
     const [data, setData] = useState(null);
+    const [addNewItem, setAddNewItem] = useState(false)
     const navigate = useNavigate();
 
-    async function fetch_data(){
+    // State to handle sorting
+    const [sortedAreas, setSortedAreas] = useState([]);
+
+    async function fetch_data() {
 
         await axios.get(
-          API_URL + "area_page",
-          {
-            headers: {
-              'Content-type': 'multipart/form-data',
-              "Access-Control-Allow-Origin": "*",
+            API_URL + "area_page",
+            {
+                headers: {
+                    'Content-type': 'multipart/form-data',
+                    "Access-Control-Allow-Origin": "*",
+                }
             }
-          }
         ).then((result) => {
-          
-          setData(result.data)
-    
-        }).catch(async (error) =>  {
-          setOpen(false);
-          alert(error.response.data);
+
+            setData(result.data)
+
+        }).catch(async (error) => {
+            setOpen(false);
+            alert(error.response.data);
         })
-    
-      }
+
+    }
 
     useEffect(() => {
-        if(!props.user_details){
-          
-          navigate("/")
+        if (!props.user_details) {
+
+            navigate("/")
         }
-        else{
+        else {
             setOpen(true);
             fetch_data();
         }
-      }, []);
+    }, []);
 
     useEffect(() => {
-        if(data){
-          
+        if (data) {
+
             setOpen(false);
             setTotalCritical(data.total_critical);
             setTotalFaulty(data.total_faulty);
             setTotalFlawless(data.total_flawless);
             setAreas(data.area_list);
-          
+
         }
     }, [data]);
 
     const handleAreaCardClick = () => {
         // Navigate to the desired page with the areaName parameter
-        
-        // navigate(<FactoriesPage/>);
         navigate(`/FactoriesPage`);
     };
+
+    // function for handling areas sorting
+    const handleSort = () => {
+        const sorted = [...areas].sort((a, b) =>
+            // APi update hone k baaad sorting aise karna
+            // a.area_name.localeCompare(b.area_name)
+            a[0].props.AreaName.localeCompare(b[0].props.AreaName)
+        );
+        setSortedAreas(sorted);
+    };
+
+
+    // UseEffect to reset sortedAreas when areas change
+    useEffect(() => {
+        setSortedAreas([]);
+    }, [areas]);
+
     return (
-
-
         <>
-
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
-                >
+            >
                 <CircularProgress color="inherit" />
             </Backdrop>
 
@@ -131,22 +149,31 @@ const AreasPage = (props) => {
             <div className="flex flex-row justify-between mt-10 m-5">
                 <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Areas List</h1>
                 <div className='flex flex-row'>
-                    <img src={filterby} alt="" />
+                    <button
+                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto"
+                        onClick={() => setAddNewItem(true)}>
+                        Add Area
+                    </button>
+
+                    <img src={filterby} className='cursor-pointer' onClick={handleSort} />
                     Sort</div>
+
+                {
+                    addNewItem &&
+                    <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
+                }
             </div>
 
 
-            {/* boxes section */}
-            <div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '>
-           
-
-            {
-            
+            {/* ****************Areas Cards section************** */}
+            {/* {        
                 areas.map((row, idx) => {
                 
                 return (
-                   
-                    <div className="flex flex-row justify-between">  
+                
+                    <div className="grid justify-between h-52 mt-3 bg-slate-200 rounded-xl m-3 w-90"
+                    style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}
+                    >  
 
                     {
                         row.map((row_loop, idx) =>{
@@ -155,29 +182,95 @@ const AreasPage = (props) => {
                         )
                         })
                     }
-                    
-                    </div>
-                   
-                )
-                
-                })
 
-            }
 
-                {/* row 1 */}
-                {/* <div className="flex flex-row justify-between">
+                     
                     <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()}/>
                     <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()}/>
                     <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
-                </div>
+                
 
-                    ========= row 2 =========================
-                <div className="flex flex-row justify-between">
+                    
+                    
+               
                     <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
                     <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
                     <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
-                </div> */}
-            </div>
+                
+
+                    <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
+                    <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
+                    <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
+                
+
+               
+                    <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
+                    <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
+                    <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
+                    </div>  
+                )
+                })
+            } */}
+
+
+
+
+
+            {
+                sortedAreas.length > 0 ? (
+                    sortedAreas.map((row, idx) => (
+                        <div key={idx} className="grid grid-cols-3  h-52 mt-3 main-color rounded-xl m-3 w-90 px-auto"
+                            style={{ overflowY: 'auto', maxHeight: '100%' }}>
+                            {
+                                row.map((row_loop, idx) => (
+                                    <AreaCard key={idx} AreaName={row_loop.area_name} onClick={() => handleAreaCardClick()} />
+                                ))
+                            }
+
+
+                            {/* API update hone k baad yahan se remove karna */}
+                            <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
+
+
+                            <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} />
+
+                            {/* yahan tak remove karna */}
+
+                        </div>
+                    ))
+                ) : (
+                    areas.map((row, idx) => (
+                        <div key={idx} className="grid grid-cols-3 justify-between h-52 mt-3 main-color rounded-xl m-3 w-90"
+                            style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
+                            {
+                                row.map((row_loop, idx) => (
+                                    <AreaCard key={idx} AreaName={row_loop.area_name} onClick={() => handleAreaCardClick()} />
+                                ))
+                            }
+
+
+
+                            {/* API update hone k baad yahan se remove karna */}
+                            <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
+
+
+                            <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} />
+
+                            {/* yahan tak remove karna */}
+
+
+                        </div>
+                    ))
+                )
+            }
         </>
     )
 }
