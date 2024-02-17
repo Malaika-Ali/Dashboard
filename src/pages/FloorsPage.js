@@ -7,6 +7,7 @@ import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import filterby from '../assets/filterby.svg'
 import AddNewFloor from '../components/modals/AddNewFloor';
+import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 const FloorsPage = (props) => {
 
@@ -73,24 +74,17 @@ const FloorsPage = (props) => {
                 </div>
 
                 {/* Areas List Section */}
-                <div className="flex flex-row justify-between mt-10 m-5">
-                    <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Floors List</h1>
-                    <div className='flex flex-row'>
-                        <button
-                            className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto"
-                            onClick={() => setAddNewItem(true)}>
-                            Add Floor
-                        </button>
-
-                        <img src={filterby} className='cursor-pointer' />Sort
-                    </div>
-
-                    {
+                {
                     addNewItem &&
                     <AddNewFloor onClose={() => setAddNewItem(false)} name='Floor' />
                 }
+        
 
-                </div>
+            <CardsContainerHeader headingName='Floors Details' name='Floor' 
+            onAddButton={()=>setAddNewItem(true)} 
+            onDeleteButton={()=>alert('Deleted')}
+            onSortButton={()=>alert('Sorted')}
+            />
 
 
                 {/* boxes section */}

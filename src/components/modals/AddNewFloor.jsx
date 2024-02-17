@@ -55,17 +55,17 @@ const AddNewFloor = ({ onClose, name }) => {
 
           <div className="grid gap-4 mb-4 grid-cols-2">
             <div className="col-span-2">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
-                {name} Name
+              <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900">
+                {name} Number
               </label>
               <input
-                type="text"
-                name="name"
-                id="name"
-                value={formData.name}
+                type="number"
+                name="number"
+                id="number"
+                value={formData.number}
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type Area name"
+                placeholder="Type Floor Number"
                 required
               />
             </div>

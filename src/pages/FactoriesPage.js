@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { FactoryCard } from '../components'
 import { AddNewFactory } from '../components/modals'
+import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -137,7 +138,7 @@ const FactoriesPage = (props) => {
             </div>
 
             {/* Factories List Section */}
-            <div className="flex flex-row justify-between mt-10 m-5">
+            {/* <div className="flex flex-row justify-between mt-10 m-5">
                 <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Factories List</h1>
                 <div className='flex flex-row'>
                     <button
@@ -155,7 +156,19 @@ const FactoriesPage = (props) => {
                     addNewItem &&
                     <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
                 }
-                    </div>
+                    </div> */}
+
+{
+                    addNewItem &&
+                    <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
+                }
+        
+
+            <CardsContainerHeader headingName='Factories Details' name='Factory' 
+            onAddButton={()=>setAddNewItem(true)} 
+            onDeleteButton={()=>alert('Deleted')}
+            onSortButton={()=>alert('Sorted')}
+            />
 
             {/* boxes section */}
             {/* <div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '> */}

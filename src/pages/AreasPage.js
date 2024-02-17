@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { FactoriesPage } from '../pages'
 import { AddNewArea } from '../components/modals'
 import { RiAddLine } from "react-icons/ri";
+import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -23,6 +24,7 @@ const AreasPage = (props) => {
     const [total_flawless, setTotalFlawless] = useState(0);
     const [areas, setAreas] = useState([]);
     const [data, setData] = useState(null);
+// state to handle the addition of new area
     const [addNewItem, setAddNewItem] = useState(false)
     const navigate = useNavigate();
 
@@ -146,7 +148,7 @@ const AreasPage = (props) => {
             </div>
 
             {/* Areas List Section */}
-            <div className="flex flex-row justify-between mt-10 m-5">
+            {/* <div className="flex flex-row justify-between mt-10 m-5">
                 <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Areas List</h1>
                 <div className='flex flex-row'>
                     <button
@@ -156,13 +158,19 @@ const AreasPage = (props) => {
                     </button>
 
                     <img src={filterby} className='cursor-pointer' onClick={handleSort} />
-                    Sort</div>
+                    Sort</div> */}
 
                 {
                     addNewItem &&
                     <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
                 }
-            </div>
+            {/* </div> */}
+
+            <CardsContainerHeader headingName='Areas Details' name='Area' 
+            onAddButton={()=>setAddNewItem(true)} 
+            onDeleteButton={()=>alert('Deleted')}
+            onSortButton={handleSort}
+            />
 
 
             {/* ****************Areas Cards section************** */}

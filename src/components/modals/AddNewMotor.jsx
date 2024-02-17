@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
 
-const AddNewFactory = ({ onClose, name }) => {
+const AddNewMotor = ({ onClose, name }) => {
   const [formData, setFormData] = useState({
     name: '',
     area: '',
@@ -55,21 +55,21 @@ const AddNewFactory = ({ onClose, name }) => {
 
           <div className="grid gap-4 mb-4 grid-cols-2">
             <div className="col-span-2">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
+              <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900">
                 {name} Name
               </label>
               <input
-                type="text"
+                type="name"
                 name="name"
                 id="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type Factory Name"
+                placeholder="Type Motor Name"
                 required
               />
             </div>
-
+      
             <div className="col-span-2 sm:col-span-1">
               <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">
                 Area
@@ -91,12 +91,55 @@ const AddNewFactory = ({ onClose, name }) => {
               </select>
             </div>
 
+            <div className="col-span-2 sm:col-span-1">
+              <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">
+                Factory
+              </label>
+              <select
+                id="factory"
+                name="factory"
+                value={formData.factory}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+              >
+                <option value="" disabled>
+                  Select Factory
+                </option>
+                <option value="Factory1">Factory 1</option>
+                <option value="Factory2">Factory 2</option>
+                <option value="Factory3">Factory 3</option>
+                <option value="Factory4">Factory 4</option>
+              </select>
+            </div>
+
+            <div className="col-span-2 sm:col-span-1">
+              <label htmlFor="floor" className="block mb-2 text-sm font-medium text-gray-900">
+                Floor 
+              </label>
+              <select
+                id="floor"
+                name="floor"
+                value={formData.floor}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+              >
+                <option value="" disabled>
+                  Select Floor
+                </option>
+                <option value="Floor1">Floor 1</option>
+                <option value="Floor2">Floor 2</option>
+                <option value="Floor3">Floor 3</option>
+                <option value="Floor4">Floor 4</option>
+              </select>
+            </div>
+           
           </div>
-          <AddButton name={name} />
+
+<AddButton name={name}/>
         </form>
       </div>
     </div>
   );
 };
 
-export default AddNewFactory;
+export default AddNewMotor;

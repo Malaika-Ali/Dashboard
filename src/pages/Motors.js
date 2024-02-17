@@ -8,6 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import AddNewMotor from '../components/modals/AddNewMotor';
+import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -20,6 +22,8 @@ export default function Motors(props) {
   const [motors, setMotors] = useState([]);
   const [data, setData] = useState(null);
   const navigate = useNavigate();
+  // state to handle the addition of new motor
+  const [addNewItem, setAddNewItem] = useState(false)
 
 
   async function fetch_data(){
@@ -122,12 +126,17 @@ export default function Motors(props) {
             </div>
 
             {/* Motors Performance Section */}
-            <div className="flex flex-row justify-between mt-10 m-5">
-                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Motors' Performance</h1>
-                <div className='flex flex-row'>
-                    <img src={filterby} alt="" />
-                    Sort</div>
-            </div>
+            {
+                    addNewItem &&
+                    <AddNewMotor onClose={() => setAddNewItem(false)} name='Motor' />
+                }
+        
+
+            <CardsContainerHeader headingName='Motors Details' name='Motor' 
+            onAddButton={()=>setAddNewItem(true)} 
+            onDeleteButton={()=>alert('Deleted')}
+            onSortButton={()=>alert('Sorted')}
+            />
 
 
 
