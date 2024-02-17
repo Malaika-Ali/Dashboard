@@ -14,8 +14,6 @@ import  {Sidebar, Navbar} from './components';
 import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, FloorsPage, UserProfile, EmployeeDetails } from './pages';
 
 
-// function MainDash() {
-
 //   const {activeMenu}=useStateContext();
   
 //   return (
@@ -93,19 +91,7 @@ function MainDash() {
     <div>
       {/* <ContextProvider> */}
       <BrowserRouter>
-        <div className='flex relative dark:bg-main-dark-bg'>
-          {/* <div className='fixed left-4 bottom-4' style={{ zIndex: '1000' }}>
-            <TooltipComponent content="Settings" position="Top">
-              <button
-                type='button'
-                className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white'
-                style={{ background: 'purple', borderRadius: '50%' }}
-              >
-                <FiSettings />
-              </button>
-            </TooltipComponent>
-          </div> */}
-          
+        <div className='flex relative dark:bg-main-dark-bg'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
             <div className='fixed w-60 sidebar dark:bg-secondary-dark-bg bg-white'>
               <Sidebar />

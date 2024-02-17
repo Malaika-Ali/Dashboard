@@ -33,14 +33,14 @@ const Table = ({ tableSubheading, column_headings, data }) => {
   return (
     <>
       {/* heading section */}
-      <div className="flex flex-row justify-between w-[91%] mx-auto mt-8">
-        <h1 className='font-extrabold mt-4 mb-4 text-xl tracking-tight   text-slate-900 '>{tableSubheading}</h1>
+      <div className="flex flex-row justify-between w-[100%] mx-4 mt-8">
+        <h1 className='font-extrabold mt-4 mb-4 text-xl tracking-tight   text-slate-900'>{tableSubheading}</h1>
         <div className="flex flex-row justify-between">
           {/* Div to contain the search bar and the search Icon */}
-          <div className="flex mx-auto">
+          <div className="flex flex-row justify-center items-center mr-8">
             <div className="relative">
               {/* Search Bar */}
-              <div className="relative w-64 mt-3 mb-3 ">
+              <div className="relative w-60 mt-3 mb-3 ">
                 <input
                   type="text"
                   placeholder="Search..."
@@ -84,7 +84,7 @@ const Table = ({ tableSubheading, column_headings, data }) => {
           headRow: {
             style: {
               fontSize: '16px',
-              backgroundColor: '#DCDCDC'
+              // backgroundColor: '#DCDCDC'
             },
           },
         }}

@@ -34,7 +34,7 @@ export default function Sidebar() {
     }
 
     return (
-        <div className='ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
+        <div className='ml-2 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 rounded-xl'>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
                     <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight   text-slate-900 '><SiShopware /> <span>Hello</span></Link>

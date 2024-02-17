@@ -159,12 +159,13 @@ const AreasPage = (props) => {
 
                     <img src={filterby} className='cursor-pointer' onClick={handleSort} />
                     Sort</div> */}
+                        {/* </div> */}
 
                 {
                     addNewItem &&
                     <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
                 }
-            {/* </div> */}
+        
 
             <CardsContainerHeader headingName='Areas Details' name='Area' 
             onAddButton={()=>setAddNewItem(true)} 

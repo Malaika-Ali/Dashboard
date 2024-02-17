@@ -12,11 +12,15 @@ import { PieChart } from '../components/charts'
 import { CircularProgressChart } from '../components/charts'
 import { LineChart } from '../components/charts'
 
+import criticalalert from '../assets/criticalalert.png'
+import faultyalert from '../assets/faultyalert.png'
+
 
 
 // import { useStateContext } from '../contexts/ContextProvider'
 import { TotalNumberCard } from '../summaryCards';
 import { Table } from '../components';
+import Alert from '../components/Alert';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -154,7 +158,7 @@ export default function AdminHomePage(props) {
     }
   ];
 
-  
+
   //   {
   //     id: 1,
   //     motorName: 'ss1',
@@ -315,14 +319,14 @@ export default function AdminHomePage(props) {
 
   const lineChartData = {
     // X-axis labelling
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May','June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     // Y-Axis labelling
     criticalValues: [10, 15, 8, 12, 18, 45, 66],
     faultyValues: [5, 8, 3, 7, 10, 22, 33],
-    flawlessValues: [20, 25, 15, 22, 30,54, 22],
+    flawlessValues: [20, 25, 15, 22, 30, 54, 22],
   };
 
-  const factory_Incharge_headings=[
+  const factory_Incharge_headings = [
     {
       name: 'Incharge Name',
       selector: row => row.motorName,
@@ -345,17 +349,8 @@ export default function AdminHomePage(props) {
     },
   ];
 
-  const factory_Incharge_data=[
-    {
-      name: "Ali",
-      factory: "agri Auto",
-      Area: "Saddar",
-      email: "email"
-    }
-  ]
-
   return (
-    <div>
+    <div className='-ml-5 mr-5 mt-5'>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -363,10 +358,10 @@ export default function AdminHomePage(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-{/* *********Numbers of Areas, factories, motors **************** */}
-
+      {/* *********Numbers of Areas, factories, motors **************** */}
+     <div className='flex flex-row justify-between items-center'>
       {/* Flex Container */}
-      <div className='flex justify-between mt-4 rounded-xl w-[72%]'>
+      <div className='flex justify-between rounded-xl w-[70%]'>
 
         {/* left box */}
         <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} />
@@ -381,42 +376,42 @@ export default function AdminHomePage(props) {
 
       </div>
 
+      {/* ********************Alerts Div************************* */}
+      <div className='flex flex-col justify-center items-center gap-2'>
+        {/* Critical Alerts card */}
+        <Alert bgColor='red' textColor='red' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32' />
 
-     {/* -------------PieChart and line Chart---------------- */}
-      <div className='mt-10 rounded-xl'>
-        <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='card-color h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
-            <PieChart title="Motors' Performance" />
-            {/* <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/> */}
-            
-          </div>
+        {/* Faulty Alerts Card */}
+        <Alert bgColor='yellow' textColor='yellow' iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05' />
+      </div>
+
+      </div>
+
+
+      {/* ----- PieChart & Circular Progress Charts ------------ */}
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
+        <div className='card-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <PieChart title="Motors' Performance" />
+        </div>
+
+        <div className='h-60 rounded-xl w-[75%] p-5 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
+          <CircularProgressChart progress={76} barColor='#31C431' motorCategory='Flawless' />
+          <CircularProgressChart progress={82} barColor='#F9F502' motorCategory='Faulty' />
+          <CircularProgressChart progress={31} barColor='#DB1915' motorCategory='Critical' />
         </div>
       </div>
 
+      {/* ----------------- Line Chart ------------------------ */}
+
       <div className='mt-10 rounded-xl'>
-        {/* <div className='flex flex-wrap lg:flex-nowrap justify-center'> */}
-          <div className='card-color h-full rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-col justify-between gap-5'>
-            <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={300} chartWidth={800}/>
-            
-          </div>
-        {/* </div> */}
-      </div>
+        <div className='card-color h-80 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
+          <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
 
-
-      {/* -------Circular Progress Charts--------------------- */}
-      <div className='mt-8 bg-slate-200 rounded-xl'>
-        <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='bg-white h-60 rounded-xl w-100 p-5 m-3 text-center flex flex-row justify-center items-center'>
-            
-            <CircularProgressChart  progress={76} barColor='#31C431' motorCategory='Flawless'/>
-            <CircularProgressChart  progress={82} barColor='#F9F502' motorCategory='Faulty' />
-            <CircularProgressChart  progress={31} barColor='#DB1915' motorCategory='Critical' />
-          </div>
         </div>
       </div>
 
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
+      <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Report'} column_headings={columns} data={motors_data} />
       </div>
     </div>

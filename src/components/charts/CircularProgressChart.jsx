@@ -48,12 +48,14 @@ function CircularProgressChart( { progress, barColor, motorCategory }) {
 
   return (
     <>
+    <div className='bg-white h-52 rounded-xl w-52 flex flex-col justify-center items-center dark-box-shadow'>
  <ReactApexChart
       options={chartOptions}
       series={chartSeries}
       type="radialBar"
-      height={280}
+      height={250}
     />
+    </div>
     </>
   )
 }

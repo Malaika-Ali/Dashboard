@@ -6,8 +6,8 @@ const PieChart = ({ title }) => {
     <>
 <ReactApexChart
 type="pie"
-width={300}
-height={300}
+width={250}
+height={250}
 
 
 // This shows the quantity in piechart. We give it a number and it converts that number into % itself
@@ -35,9 +35,6 @@ options={{
   
 }}
 />
-
-
-
     </>
   );
 };
