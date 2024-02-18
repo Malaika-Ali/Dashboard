@@ -5,9 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
-import filterby from '../assets/filterby.svg'
 import AddNewFloor from '../components/modals/AddNewFloor';
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
+import {DeleteItem} from '../components/modals'
 
 const FloorsPage = (props) => {
 
@@ -20,20 +20,20 @@ const FloorsPage = (props) => {
     //     }
     //   }, [navigate, props.user_details]);
 
-    // state to handle the addition of new factory
+    // state to handle the addition of new floor
     const [addNewItem, setAddNewItem] = useState(false)
+    // state to handle the deletion of floor
+    const [deleteItem, setDeleteItem] = useState(false)
+
 
     return (
-        <>
+        <div className='-ml-5 mr-5 mt-5'>
             {/* Floors Report */}
             <div className="flex flex-col m-5">
 
                 {/* heading section */}
                 <div className="flex flex-row justify-between">
-                    <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 ml-5 '>Floors Report</h1>
-                    {/* <div className="flex flex-row justify-between">
-        <img src={filterby} alt="" />
-        <span className='text-black'>Sort</span></div> */}
+                    <h1 className='font-extrabold text-xl tracking-tight text-slate-900'>Floors Report</h1>
                 </div>
 
                 {/* Flex Container */}
@@ -73,39 +73,50 @@ const FloorsPage = (props) => {
 
                 </div>
 
-                {/* Areas List Section */}
+                {/* logic for showing add modal */}
                 {
                     addNewItem &&
                     <AddNewFloor onClose={() => setAddNewItem(false)} name='Floor' />
                 }
+                {/* logic for showing delete modal */}
+            {
+                deleteItem &&
+                <DeleteItem onClose={() => setDeleteItem(false)} name='Floor'
+                    options={[
+                        { label: 'Option 1', value: 'opt1' },
+                        { label: 'Option 2', value: 'opt2' },
+                        { label: 'Option 3', value: 'opt3' },
+                        { label: 'Option 4', value: 'opt4' },
+                    ]}
+                />
+            }
+
         
+{/* *******************     Cards section     **************/}
+
+{/* *******************     Cards Header     **************/}
 
             <CardsContainerHeader headingName='Floors Details' name='Floor' 
             onAddButton={()=>setAddNewItem(true)} 
-            onDeleteButton={()=>alert('Deleted')}
+            onDeleteButton={() => setDeleteItem(true)}
             onSortButton={()=>alert('Sorted')}
             />
 
+{/* *******************     Cards Container     **************/}
+               
+                <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
+                 style={{ overflowY: 'auto', maxHeight: '100%' }}>
 
-                {/* boxes section */}
-                <div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '>
-
-                    {/* row 1 */}
-                    <div className="flex flex-row justify-between">
                         <FactoryCard FactoryName="First Floor" />
                         <FactoryCard FactoryName="Second Floor" />
                         <FactoryCard FactoryName="Third Floor" />
-                    </div>
 
-                    {/* row 2 */}
-                    <div className="flex flex-row justify-between">
                         <FactoryCard FactoryName="Fourth Floor" />
                         <FactoryCard FactoryName="Fifth Floor" />
                         <FactoryCard FactoryName="Sixth Floor" />
-                    </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

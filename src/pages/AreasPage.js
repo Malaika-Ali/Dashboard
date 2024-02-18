@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { AreaCard } from '../components'
 import { useNavigate } from 'react-router-dom';
 import { FactoriesPage } from '../pages'
-import { AddNewArea } from '../components/modals'
+import { AddNewArea, DeleteItem } from '../components/modals'
 import { RiAddLine } from "react-icons/ri";
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
@@ -24,8 +24,10 @@ const AreasPage = (props) => {
     const [total_flawless, setTotalFlawless] = useState(0);
     const [areas, setAreas] = useState([]);
     const [data, setData] = useState(null);
-// state to handle the addition of new area
+    // state to handle the addition of new area
     const [addNewItem, setAddNewItem] = useState(false)
+    // state to handle the deletion of area
+    const [deleteItem, setDeleteItem] = useState(false)
     const navigate = useNavigate();
 
     // State to handle sorting
@@ -97,7 +99,7 @@ const AreasPage = (props) => {
     }, [areas]);
 
     return (
-        <>
+        <div className='-ml-5 mr-5 mt-5'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
@@ -147,31 +149,34 @@ const AreasPage = (props) => {
 
             </div>
 
-            {/* Areas List Section */}
-            {/* <div className="flex flex-row justify-between mt-10 m-5">
-                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Areas List</h1>
-                <div className='flex flex-row'>
-                    <button
-                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto"
-                        onClick={() => setAddNewItem(true)}>
-                        Add Area
-                    </button>
 
-                    <img src={filterby} className='cursor-pointer' onClick={handleSort} />
-                    Sort</div> */}
-                        {/* </div> */}
 
-                {
-                    addNewItem &&
-                    <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
-                }
-        
+        {/* *******************     Cards section     **************/}
 
-            <CardsContainerHeader headingName='Areas Details' name='Area' 
-            onAddButton={()=>setAddNewItem(true)} 
-            onDeleteButton={()=>alert('Deleted')}
-            onSortButton={handleSort}
+        {/* *******************     Cards Header     **************/}
+            <CardsContainerHeader headingName='Areas Details' name='Area'
+                onAddButton={() => setAddNewItem(true)}
+                onDeleteButton={() => setDeleteItem(true)}
+                onSortButton={handleSort}
             />
+
+            {/* logic for showing add modal */}
+            {
+                addNewItem &&
+                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
+            }
+            {/* logic for showing delete modal */}
+            {
+                deleteItem &&
+                <DeleteItem onClose={() => setDeleteItem(false)} name='Area'
+                    options={[
+                        { label: 'Option 1', value: 'opt1' },
+                        { label: 'Option 2', value: 'opt2' },
+                        { label: 'Option 3', value: 'opt3' },
+                        { label: 'Option 4', value: 'opt4' },
+                    ]}
+                />
+            }
 
 
             {/* ****************Areas Cards section************** */}
@@ -221,10 +226,7 @@ const AreasPage = (props) => {
                 })
             } */}
 
-
-
-
-
+            {/* *******************     Cards Container     **************/}
             {
                 sortedAreas.length > 0 ? (
                     sortedAreas.map((row, idx) => (
@@ -280,7 +282,7 @@ const AreasPage = (props) => {
                     ))
                 )
             }
-        </>
+        </div>
     )
 }
 

@@ -9,8 +9,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { FactoryCard } from '../components'
-import { AddNewFactory } from '../components/modals'
+import { AddNewFactory, DeleteItem } from '../components/modals'
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
+
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -26,6 +27,9 @@ const FactoriesPage = (props) => {
 
     // state to handle the addition of new factory
     const [addNewItem, setAddNewItem] = useState(false)
+
+     // state to handle the deletion of factory
+     const [deleteItem, setDeleteItem] = useState(false)
 
 
     async function fetch_data() {
@@ -81,7 +85,7 @@ const FactoriesPage = (props) => {
 
 
     return (
-        <div>
+        <div className='-ml-5 mr-5 mt-5'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
@@ -93,7 +97,7 @@ const FactoriesPage = (props) => {
 
             {/* heading section */}
             <div className="flex flex-row justify-between">
-                <h1 className='font-extrabold text-xl tracking-tight m-5 mr-10  text-slate-900 '>Factories Report</h1>
+                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 '>Factories Report</h1>
                 {/* <div className="flex flex-row mr-5 justify-center">
                     <img src={filterby} alt="" />
                     <span className='text-black'>Sort</span></div> */}
@@ -137,170 +141,109 @@ const FactoriesPage = (props) => {
 
             </div>
 
-            {/* Factories List Section */}
-            {/* <div className="flex flex-row justify-between mt-10 m-5">
-                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Factories List</h1>
-                <div className='flex flex-row'>
-                    <button
-                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto"
-                        onClick={() => setAddNewItem(true)}>
-                        Add Factory
-                    </button>
+  {/* logic for showing add modal */}
+            {
+                addNewItem &&
+                <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
+            }
+   {/* logic for showing delete modal */}
+   {
+                deleteItem &&
+                <DeleteItem onClose={() => setDeleteItem(false)} name='Factory'
+                    options={[
+                        { label: 'Option 1', value: 'opt1' },
+                        { label: 'Option 2', value: 'opt2' },
+                        { label: 'Option 3', value: 'opt3' },
+                        { label: 'Option 4', value: 'opt4' },
+                    ]}
+                />
+            }
 
-                    <img src={filterby} className='cursor-pointer'/>
-                    
-              
-                    
-                    Sort</div>
-                    {
-                    addNewItem &&
-                    <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
-                }
-                    </div> */}
 
-{
-                    addNewItem &&
-                    <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
-                }
-        
+    {/* *******************     Cards section     **************/}
 
-            <CardsContainerHeader headingName='Factories Details' name='Factory' 
-            onAddButton={()=>setAddNewItem(true)} 
-            onDeleteButton={()=>alert('Deleted')}
-            onSortButton={()=>alert('Sorted')}
+    {/* *******************     Cards Header     **************/}
+            <CardsContainerHeader headingName='Factories Details' name='Factory'
+                onAddButton={() => setAddNewItem(true)}
+                onDeleteButton={() => setDeleteItem(true)}
+                onSortButton={() => alert('Sorted')}
             />
 
-            {/* boxes section */}
-            {/* <div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '> */}
 
-                {
+{/* *******************     Cards Container     **************/}
+            {
+                factories.map((row, idx) => {
 
-                    factories.map((row, idx) => {
-
-                        return (
-                            <div className="grid grid-cols-3 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto"
+                    return (
+                        <div className="grid grid-cols-3 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto"
                             style={{ overflowY: 'auto', maxHeight: '100%' }}>
 
-                                {
-                                    row.map((row_loop, idx) => {
-                                        return (
-                                            <FactoryCard
-                                                FactoryName={row_loop.factory_name}
-                                                AreaName={row_loop.area_abbreviation}
-                                                CriticalMotor={row_loop.critical}
-                                                FaultyMotors={row_loop.faulty}
-                                                FlawlessMotors={row_loop.flawless}
-                                                onClick={handleCardClick} />
-                                        )
-                                    })
-                                }
+                            {
+                                row.map((row_loop, idx) => {
+                                    return (
+                                        <FactoryCard
+                                            FactoryName={row_loop.factory_name}
+                                            AreaName={row_loop.area_abbreviation}
+                                            CriticalMotor={row_loop.critical}
+                                            FaultyMotors={row_loop.faulty}
+                                            FlawlessMotors={row_loop.flawless}
+                                            onClick={handleCardClick} />
+                                    )
+                                })
+                            }
 
 
-                                <FactoryCard
-                                    FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
-                                    FaultyMotors='3'
-                                    FlawlessMotors='2'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
+                                FaultyMotors='3'
+                                FlawlessMotors='2'
+                                onClick={handleCardClick} />
 
-                                <FactoryCard
-                                    FactoryName="Matco"
-                                    AreaName="Jauhar"
-                                    CriticalMotor='5'
-                                    FaultyMotors='6'
-                                    FlawlessMotors='12'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="Matco"
+                                AreaName="Jauhar"
+                                CriticalMotor='5'
+                                FaultyMotors='6'
+                                FlawlessMotors='12'
+                                onClick={handleCardClick} />
 
-                                <FactoryCard
-                                    FactoryName="Auto"
-                                    AreaName="Jauhar"
-                                    CriticalMotor='9'
-                                    FaultyMotors='8'
-                                    FlawlessMotors='13'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="Auto"
+                                AreaName="Jauhar"
+                                CriticalMotor='9'
+                                FaultyMotors='8'
+                                FlawlessMotors='13'
+                                onClick={handleCardClick} />
 
-                                <FactoryCard
-                                    FactoryName="Hems"
-                                    AreaName="Jauhar"
-                                    CriticalMotor='10'
-                                    FaultyMotors='7'
-                                    FlawlessMotors='11'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="Hems"
+                                AreaName="Jauhar"
+                                CriticalMotor='10'
+                                FaultyMotors='7'
+                                FlawlessMotors='11'
+                                onClick={handleCardClick} />
 
-                                <FactoryCard
-                                    FactoryName="WebTech"
-                                    AreaName="Jauhar"
-                                    CriticalMotor='4'
-                                    FaultyMotors='7'
-                                    FlawlessMotors='10'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="WebTech"
+                                AreaName="Jauhar"
+                                CriticalMotor='4'
+                                FaultyMotors='7'
+                                FlawlessMotors='10'
+                                onClick={handleCardClick} />
 
-                                <FactoryCard
-                                    FactoryName="Auto"
-                                    AreaName="Jauhar"
-                                    CriticalMotor='6'
-                                    FaultyMotors='5'
-                                    FlawlessMotors='14'
-                                    onClick={handleCardClick} />
+                            <FactoryCard
+                                FactoryName="Auto"
+                                AreaName="Jauhar"
+                                CriticalMotor='6'
+                                FaultyMotors='5'
+                                FlawlessMotors='14'
+                                onClick={handleCardClick} />
 
-                            </div>
-                        )
-                    })
-                }
-
-
-                {/* row 1 */}
-                {/* <div className="flex flex-row justify-between">
-                    <FactoryCard
-                        FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
-                        FaultyMotors='3'
-                        FlawlessMotors='2'
-                        onClick={handleCardClick} />
-
-                    <FactoryCard
-                        FactoryName="Matco"
-                        AreaName="Jauhar"
-                        CriticalMotor='5'
-                        FaultyMotors='6'
-                        FlawlessMotors='12'
-                        onClick={handleCardClick} />
-
-                    <FactoryCard
-                        FactoryName="Auto"
-                        AreaName="Jauhar"
-                        CriticalMotor='9'
-                        FaultyMotors='8'
-                        FlawlessMotors='13'
-                        onClick={handleCardClick} />
-                </div>
-
-                 ======= row 2 ======
-                <div className="flex flex-row justify-between">
-                    <FactoryCard
-                        FactoryName="Hems"
-                        AreaName="Jauhar"
-                        CriticalMotor='10'
-                        FaultyMotors='7'
-                        FlawlessMotors='11'
-                        onClick={handleCardClick} />
-
-                    <FactoryCard
-                        FactoryName="WebTech"
-                        AreaName="Jauhar"
-                        CriticalMotor='4'
-                        FaultyMotors='7'
-                        FlawlessMotors='10'
-                        onClick={handleCardClick} />
-
-                    <FactoryCard
-                        FactoryName="Auto"
-                        AreaName="Jauhar"
-                        CriticalMotor='6'
-                        FaultyMotors='5'
-                        FlawlessMotors='14'
-                        onClick={handleCardClick} />
-                </div> */}
-            </div>
-        // </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
     )
 }
 

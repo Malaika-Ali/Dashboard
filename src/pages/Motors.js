@@ -10,6 +10,8 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import AddNewMotor from '../components/modals/AddNewMotor';
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
+import {DeleteItem} from '../components/modals'
+
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -24,6 +26,8 @@ export default function Motors(props) {
   const navigate = useNavigate();
   // state to handle the addition of new motor
   const [addNewItem, setAddNewItem] = useState(false)
+  // state to handle the deletion of motor
+  const [deleteItem, setDeleteItem] = useState(false)
 
 
   async function fetch_data(){
@@ -72,7 +76,7 @@ export default function Motors(props) {
 
 
     return (
-        <div>
+        <div className='-ml-5 mr-5 mt-5'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
@@ -126,29 +130,42 @@ export default function Motors(props) {
             </div>
 
             {/* Motors Performance Section */}
+            {/* logic for showing add modal */}
             {
                     addNewItem &&
                     <AddNewMotor onClose={() => setAddNewItem(false)} name='Motor' />
                 }
+                {/* logic for showing delete modal */}
+            {
+                deleteItem &&
+                <DeleteItem onClose={() => setDeleteItem(false)} name='Motor'
+                    options={[
+                        { label: 'Option 1', value: 'opt1' },
+                        { label: 'Option 2', value: 'opt2' },
+                        { label: 'Option 3', value: 'opt3' },
+                        { label: 'Option 4', value: 'opt4' },
+                    ]}
+                />
+            }
         
+{/* *******************     Cards section     **************/}
+
+{/* *******************     Cards Header     **************/}
 
             <CardsContainerHeader headingName='Motors Details' name='Motor' 
             onAddButton={()=>setAddNewItem(true)} 
-            onDeleteButton={()=>alert('Deleted')}
+            onDeleteButton={() => setDeleteItem(true)}
             onSortButton={()=>alert('Sorted')}
             />
 
 
 
-{/* boxes section */}
-<div className='flex flex-col justify-between mt-3 bg-slate-200 rounded-xl m-3 w-90 '>
+{/* *******************     Cards Container     **************/}
       {
-                
-        motors.map((row, idx) => {
-        
+        motors.map((row, idx) => {  
             return (
-                <div className="flex flex-row justify-between">  
-
+              <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
+              style={{ overflowY: 'auto', maxHeight: '100%' }}>
                 {
                     row.map((row_loop, idx) =>{
                     return(
@@ -159,106 +176,15 @@ export default function Motors(props) {
                           </div>
                           <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>{row_loop.motorName}</span>
                           <span className='mx-auto'>{`Status: ${row_loop.status}`}</span>
-                  
-                  
                         </div>
                       </div>
                     )
                     })
-                }
-                
+                }   
                 </div>
-            )
-            
+            )  
         })
-
       }
-
-
-  {/* row 1 */}
-  {/* <div className="flex flex-row justify-between">
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 1</span> <span>Area 1</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-        <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-      </div>
-    </div>
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 1</span> <span>Area 1</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>DEF Motor</span>
-        <span className='mx-auto'>{`Status: Critical`}</span>
-
-
-
-      </div>
-    </div>
-
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 1</span> <span>Area 1</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-        <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-      </div>
-    </div>
-  </div>
-
-
-      ========== row 2 ========
-  <div className="flex flex-row justify-between">
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 3</span> <span>Area 2</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-        <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-
-      </div>
-    </div>
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 1</span> <span>Area 1</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-        <span className='mx-auto'>{`Status: Faulty`}</span>
-
-      </div>
-    </div>
-
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-          <span>Factory 1</span> <span>Area 1</span>
-        </div>
-        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>ABC Motor</span>
-        <span className='mx-auto'>{`Status: Faulty`}</span>
-
-
-      </div>
-    </div>
-  </div> */}
-
-</div>
 </div>
 
     )
