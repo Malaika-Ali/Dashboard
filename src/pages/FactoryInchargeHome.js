@@ -14,13 +14,7 @@ import { LineChart } from '../components/charts'
 
 const FactoryInchargeHome = (props) => {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!props.user_details) {
-      console.log("here", props.user_details)
-      sessionStorage.clear();
-      navigate("/")
-    }
-  }, [navigate, props.user_details]);
+  
   // table columns headings
   const columns = [
     {

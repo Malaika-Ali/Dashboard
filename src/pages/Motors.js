@@ -52,14 +52,10 @@ export default function Motors(props) {
     }
 
   useEffect(() => {
-      if(!props.user_details){
-        
-        navigate("/")
-      }
-      else{
-          setOpen(true);
-          fetch_data();
-      }
+      
+      setOpen(true);
+      fetch_data();
+      
     }, []);
 
   useEffect(() => {

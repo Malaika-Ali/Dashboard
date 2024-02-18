@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect, useState}  from 'react'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useStateContext } from './contexts/ContextProvider';
 import { ContextProvider } from './contexts/ContextProvider';
 
@@ -82,11 +82,11 @@ function MainDash() {
     const currentPath = window.location.pathname;
     return currentPath === '/' || currentPath === '/signuppage';
   };
-  
+  const path_roles = {admin: "adminHomePage", floorIncharge: "FloorInchargeHomePage", factoryIncharge: "FactoryInchargeHomePage"};
   const [token, setToken] = useState();
   useEffect(() => {
     setToken(getToken());
-  }, [token]);
+  }, []);
   return (
     <div>
       {/* <ContextProvider> */}
@@ -111,32 +111,33 @@ function MainDash() {
             <div>
               <Routes>
                 
-                <Route index path='/' element={<LoginPage user_details={token} set_token={setToken} />} />
-                <Route index path='/signuppage' element={<SignupPage />} />
+                <Route index path='/signin' element={token?<Navigate to={`/${path_roles[token.role]}`}/>:<LoginPage set_token={setToken} />} />
+                <Route index path='/signuppage' element={token?<Navigate to={`/${path_roles[token.role]}`}/>:<SignupPage />} />
+                <Route index path='/' element={token?<Navigate replace to={`/${path_roles[token.role]}`}/>:<Navigate replace to="/signin"/>} /> 
 
-                <Route path='/adminHomePage' element={<AdminHomePage user_details={token} />} />
-                <Route path='/areaspage' element={<AreasPage user_details={token} />} />
-                <Route path='/factoriespage' element={<FactoriesPage user_details={token} />} />
-                <Route path='/motors' element={<Motors user_details={token} />} />
+                <Route path='/adminHomePage' element={token?<AdminHomePage user_details={token}/>:<LoginPage set_token={setToken} />} />
+                <Route path='/areaspage' element={token?<AreasPage user_details={token} />:<LoginPage set_token={setToken} />} />
+                <Route path='/factoriespage' element={token?<FactoriesPage user_details={token} />:<LoginPage set_token={setToken} />} />
+                <Route path='/motors' element={token?<Motors user_details={token} />:<LoginPage set_token={setToken} />} />
                 <Route
                   path='/factoryInchargeHome'
-                  element={<FactoryInchargeHome user_details={token} />}
+                  element={token?<FactoryInchargeHome user_details={token} />:<LoginPage set_token={setToken} />}
                 />
                 <Route
                   path='/floorInchargeHomePage'
-                  element={<FloorInchargeHomePage user_details={token} />}
+                  element={token?<FloorInchargeHomePage user_details={token} />:<LoginPage set_token={setToken} />}
                 />
                 <Route
                   path='/userProfile'
-                  element={<UserProfile user_details={token} />}
+                  element={token?<UserProfile user_details={token} />:<LoginPage set_token={setToken} />}
                 />
                 <Route
                   path='/employeeDetails'
-                  element={<EmployeeDetails user_details={token} />}
+                  element={token?<EmployeeDetails user_details={token} />:<LoginPage set_token={setToken} />}
                 />
                 <Route
                 path='/floorsPage'
-                element={<FloorsPage user_details={token} />} />
+                element={token?<FloorsPage user_details={token} />:<LoginPage set_token={setToken} />} />
               </Routes>
             </div>
           </div>
