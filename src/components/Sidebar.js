@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { SiShopware } from 'react-icons/si'
 import { MdOutlineCancel } from 'react-icons/md'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
+import logo from '../assets/logo.png'
 
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
@@ -37,17 +38,17 @@ export default function Sidebar() {
         <div className='ml-2 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 rounded-xl'>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
-                    <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight   text-slate-900 '><SiShopware /> <span>Hello</span></Link>
+                    <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-10' /></Link>
 
-                    <TooltipComponent content="Menu" position='BottomCenter'>
+                    {/* <TooltipComponent content="Menu" position='BottomCenter'>
                         <button type='button' className='text-xl hidden rounded-full p-3 hover:bg-light-gray mt-4 block '>
                             <MdOutlineCancel/>
                         </button>
-                    </TooltipComponent>
+                    </TooltipComponent> */}
 
-                    <Link to="/" className="  items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
+                    {/* <Link to="/" className="  items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
                         <SiShopware /> <span>Dash</span>
-                    </Link>
+                    </Link> */}
                     <TooltipComponent content="Menu" position="BottomCenter">
                         <button
                             type="button"
@@ -63,9 +64,9 @@ export default function Sidebar() {
                 <div className='mt-10 '>
                     {roleLinks.map((item) => (
                         <div key={item.title}>
-                            <p className='text-gray-400 m-3 mt-4 uppercase'>
+                            {/* <p className='text-gray-400 m-3 mt-4 uppercase'>
                                 {item.title}
-                            </p>
+                            </p> */}
                             {item.links.map((link) => (
                                 <NavLink
                                     to={`/${link.name}`}

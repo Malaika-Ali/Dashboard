@@ -151,7 +151,7 @@ export default function AdminHomePage(props) {
     },
     {
       name: "View",
-      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => alert(row.id)}>View</button>
+      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => alert(row.id)}>View</button>
     }
   ];
 

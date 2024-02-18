@@ -17,15 +17,8 @@ export { default as Notification } from './Notification';
 export { default as NotificationStack } from './NotificationStack';
 export { default as ConfirmationModal } from './ConfirmationModal';
 export { default as Alerts } from './Alert';
+export { default as SummaryAlertCard } from './SummaryAlertCard';
 
-
-
-
-
-
-// export { default as LocationSvg } from '../assets/location';
-
-// export { default as PieChart } from './charts/PieChart';
 
 
 

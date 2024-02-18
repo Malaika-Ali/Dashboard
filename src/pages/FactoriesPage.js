@@ -8,7 +8,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { FactoryCard } from '../components'
+import { FactoryCard, SummaryAlertCard } from '../components'
 import { AddNewFactory, DeleteItem } from '../components/modals'
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
@@ -101,39 +101,29 @@ const FactoriesPage = (props) => {
 
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 bg-slate-200 rounded-xl w-90 m-3'>
+            <div className='flex justify-between mt-4 rounded-xl w-90 m-3'>
 
-                {/* left box */}
-
-                <div className='flex flex-wrap lg:flex-nowrap '>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between'>
-                        <img src={criticalalert} />
-                        <span>Critical Alerts</span>
-                        <span>{total_critical}</span>
-                    </div>
-                </div>
-
-
-                {/* middle box */}
-
-                <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8 m-3 shadow-md flex flex-row justify-between'>
-                        <img src={faultyalert} alt="" />
-                        <span>Faulty Alerts</span>
-                        <span>{total_faulty}</span>
-                    </div>
-                </div>
-
-
-                {/* Right box */}
-
-                <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between '>
-                        <img src={flawless} alt="" />
-                        <div>Flawless</div>
-                        <div>{total_flawless}</div>
-                    </div>
-                </div>
+            <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
+                // bgColor='bg-green-50'
+                    iconBgColor="bg-green-200"
+                    value="12"
+                    label="Flawless Motors"
+                    percentage="12.6"
+                    isPositive />
+                <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
+                // bgColor='bg-yellow-100'
+                    iconBgColor="bg-yellow-200"
+                    value="10"
+                    label="Faulty Motors"
+                    percentage="11.6"
+                    isPositive />
+                         <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
+                        //  bgColor='bg-red-50'
+                    iconBgColor="bg-red-200"
+                    value="05"
+                    label="Critical Motors"
+                    percentage="9.6"
+                    isPositive />
 
             </div>
 

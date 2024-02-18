@@ -107,7 +107,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
             <input
               type="text"
               placeholder="Search..."
-              className="bg-gray-100 text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none focus:border-blue-500"
+              className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none focus:border-blue-500"
               value={searchTerm}
               onChange={handleSearchChange}
             />

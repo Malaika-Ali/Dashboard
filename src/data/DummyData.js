@@ -1,43 +1,38 @@
 import React from 'react';
-import { AiOutlineBarChart } from 'react-icons/ai';
-import { IoMdContacts } from 'react-icons/io';
-import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { GrLocation } from 'react-icons/gr';
-import {factory} from '../assets/factory.svg'
-
-
-
-// import {LocationSvg} from './assets';
-
-
+import { IoHome } from "react-icons/io5";
+import { MdFactory } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { GiStairs } from "react-icons/gi";
+import { IoMdSettings } from "react-icons/io";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 export const links = [
     {
-      title: 'Dashboard',
+      // title: 'Dashboard',
       links: [
         {
           name: 'AdminHomePage',
-          icon: <AiOutlineBarChart />,
+          icon: <IoHome />,
         },
         {
           name: 'AreasPage',
-          icon: <GrLocation />,
+          icon: <FaLocationDot />,
         },
         {
           name: 'FactoriesPage',
-          icon: <IoMdContacts/>,
+          icon: <MdFactory />,
         },
         {
           name: 'FloorsPage',
-          icon: <IoMdContacts/>,
+          icon: <GiStairs />,
         },
         {
           name: 'Motors',
-          icon: <RiContactsLine />,
+          icon: <IoMdSettings />,
         },
         {
           name: 'EmployeeDetails',
-          icon: <RiContactsLine />,
+          icon: <FaPeopleGroup />,
         },
       ],
     }   
@@ -45,23 +40,23 @@ export const links = [
 
   export const factoryInchargelinks = [
     {
-      title: 'Dashboard',
+      // title: 'Dashboard',
       links: [
         {
           name: 'FactoryInchargeHome',
-          icon: <AiOutlineBarChart />,
+          icon: <IoHome />,
         },
         {
           name: 'FactoriesPage',
-          icon: <IoMdContacts/>,
+          icon: <MdFactory />,
         },
         {
           name: 'FloorsPage',
-          icon: <IoMdContacts/>,
+          icon: <GiStairs />,
         },
         {
           name: 'Motors',
-          icon: <RiContactsLine />,
+          icon: <IoMdSettings />,
         },
       ],
     }  
@@ -73,15 +68,15 @@ export const links = [
       links: [
         {
           name: 'FloorInchargeHomePage',
-          icon: <AiOutlineBarChart />,
+          icon: <IoHome />,
         },
         {
           name: 'FloorsPage',
-          icon: <IoMdContacts/>,
+          icon: <GiStairs />,
         },
         {
           name: 'Motors',
-          icon: <RiContactsLine />,
+          icon: <IoMdSettings />,
         },
       ],
     }
