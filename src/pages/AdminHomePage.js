@@ -21,6 +21,8 @@ import faultyalert from '../assets/faultyalert.png'
 import { TotalNumberCard } from '../summaryCards';
 import { Table } from '../components';
 import Alert from '../components/Alert';
+import ViewMotorModal from '../components/modals/ViewMotorModal';
+import MotorsListModal from '../components/MotorsListModal';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -35,6 +37,9 @@ export default function AdminHomePage(props) {
   const [motors, setMotors] = useState([]);
   const [motors_data, setMotorsData] = useState([]);
   const [data, setData] = useState(null);
+
+  // state to control popup of Motor View modal
+  const [viewMotor, setViewMotor] = useState(false)
 
   const navigate = useNavigate();
 
@@ -60,11 +65,11 @@ export default function AdminHomePage(props) {
   }
 
   useEffect(() => {
-    
+
     setOpen(true);
     fetch_data();
 
-   
+
   }, []);
 
   useEffect(() => {
@@ -151,7 +156,7 @@ export default function AdminHomePage(props) {
     },
     {
       name: "View",
-      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => alert(row.id)}>View</button>
+      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
     }
   ];
 
@@ -346,6 +351,36 @@ export default function AdminHomePage(props) {
     },
   ];
 
+
+  const [redPie, setRedPie] = useState(false)
+  const [yellowPie, setYellowPie] = useState(false)
+  const [greenPie, setGreenPie] = useState(false)
+
+ 
+  const handleClick = (seriesIndex) => {
+    // Reset all states
+    setRedPie(false);
+    setYellowPie(false);
+    setGreenPie(false);
+
+    // Set the state based on the clicked pie slice color
+    switch (seriesIndex) {
+      case 0:
+        setRedPie(true);
+        break;
+      case 1:
+        setYellowPie(true);
+        break;
+      case 2:
+        setGreenPie(true);
+        break;
+      default:
+        // Do nothing or handle unexpected seriesIndex
+        break;
+    }
+  };
+
+
   return (
     <div className='ml-5 mr-5 mt-5'>
       <Backdrop
@@ -355,42 +390,42 @@ export default function AdminHomePage(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-{/* *********Numbers of Areas, factories, motors **************** */}
-     <div className='flex flex-row justify-between items-center'>
-      {/* Flex Container */}
-      <div className='flex justify-between rounded-xl w-[70%]'>
+      {/* *********Numbers of Areas, factories, motors **************** */}
+      <div className='flex flex-row justify-between items-center'>
+        {/* Flex Container */}
+        <div className='flex justify-between rounded-xl w-[70%]'>
 
-        {/* left box */}
-        <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={()=>navigate('/AreasPage')}/>
-
-
-        {/* middle box */}
-        <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={()=>navigate('/FactoriesPage')} />
+          {/* left box */}
+          <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/AreasPage')} />
 
 
-        {/* Right box */}
-        <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={()=>navigate('/Motors')} />
+          {/* middle box */}
+          <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={() => navigate('/FactoriesPage')} />
 
-      </div>
 
-      {/* ********************Alerts Div************************* */}
-      <div className='flex flex-col justify-center items-center gap-2'>
-        {/* Critical Alerts card */}
-        <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32'
-        textColor500='text-red-500' borderColor500='border-red-500' />
+          {/* Right box */}
+          <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={() => navigate('/Motors')} />
 
-        {/* Faulty Alerts Card */}
-        <Alert  iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05'
-        bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
-        textColor500='text-yellow-500' borderColor500='border-yellow-500' />
-      </div>
+        </div>
+
+        {/* ********************Alerts Div************************* */}
+        <div className='flex flex-col justify-center items-center gap-2'>
+          {/* Critical Alerts card */}
+          <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32'
+            textColor500='text-red-500' borderColor500='border-red-500' />
+
+          {/* Faulty Alerts Card */}
+          <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05'
+            bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
+            textColor500='text-yellow-500' borderColor500='border-yellow-500' />
+        </div>
 
       </div>
 
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
       <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
-       
+
 
         <div className='h-60 rounded-xl w-[75%] p-5 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
           <CircularProgressChart progress={76} barColor='#31C431' motorCategory='Flawless' />
@@ -399,19 +434,40 @@ export default function AdminHomePage(props) {
         </div>
 
         <div className='card-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" />
+          <PieChart title="Motors' Performance" onClick={handleClick}/>
         </div>
       </div>
 
       {/* ----------------- Line Chart ------------------------ */}
 
-        <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
-          <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
-        </div>
+      <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
+        <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
+      </div>
 
       {/* ***************Tabular Motors Summary **************** */}
       <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Report'} column_headings={columns} data={motors_data} />
+
+        {/* **************handle view button in table *************/}
+        {
+          viewMotor &&
+          <ViewMotorModal  />
+        }
+
+        {
+          redPie &&
+          <MotorsListModal onClick={()=>setRedPie(false)} TableHeading='Critical Motors'/>
+        }
+        
+          {
+            yellowPie &&
+            <MotorsListModal onClick={()=>setYellowPie(false)} TableHeading='Faulty Motors'/>
+          }
+  {
+            greenPie &&
+            <MotorsListModal onClick={()=>setGreenPie(false)} TableHeading='Flawless Motors'/>
+          }
+        
       </div>
     </div>
   )

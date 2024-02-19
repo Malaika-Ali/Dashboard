@@ -81,7 +81,7 @@ function EmployeeDetails() {
     }
 
     return (
-        <div className='-ml-5 mr-5 mt-5'>
+        <div className='ml-3 mr-5 mt-5'>
             {/* Factory Incharge Table section */}
             <div className='mt-5 mx-auto bg-slate-200  rounded-xl w-[96%]'>
                 <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data} />

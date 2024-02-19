@@ -4,9 +4,6 @@ import { AddButton } from '../buttons';
 const AddNewArea = ({ onClose, name }) => {
   const [formData, setFormData] = useState({
     name: '',
-    price: '',
-    category: '',
-    description: '',
   });
 
   const handleInputChange = (e) => {
