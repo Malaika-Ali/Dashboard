@@ -91,7 +91,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
 
     
   return (
-    <div className='flex justify-between p-2 mt-2 md:mx-6 relative'>
+    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative'>
 
       {/* This is that menu button in nav */}
       <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu />} />
@@ -103,11 +103,11 @@ const [notificationOpen, setnotificationOpen] = useState(false)
           {/* Search Bar */}
 
 
-          <div className="relative w-64 ">
+          <div className="relative w-64 mt-2">
             <input
               type="text"
               placeholder="Search..."
-              className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none focus:border-blue-500"
+              className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
               value={searchTerm}
               onChange={handleSearchChange}
             />

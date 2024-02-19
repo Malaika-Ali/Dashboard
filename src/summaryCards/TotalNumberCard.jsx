@@ -1,15 +1,12 @@
 import React from 'react'
 
-const TotalNumberCard = ({iconSrc, placeName, quantity}) => {
+const TotalNumberCard = ({iconSrc, placeName, quantity, onClick}) => {
   return (
-    <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-    <div className='bg-white dark:bg-secondary-dark-bg h-28 rounded-xl w-52 p-8  m-3 shadow-md flex flex-col justify-center align-center text-center'>
-      {/* <div className='m-auto'><GrLocation/></div> */}
+    <div className='bg-white h-28 rounded-xl w-52 p-5  m-3 dark-box-shadow flex flex-col gap-2 lg:flex-nowrap justify-center items-center cursor-pointer' onClick={onClick}>
       <img className='m-auto' src={iconSrc} alt="overview" />
-      <span className='text-[#9EA4B2]'>Total {placeName}</span>
-      <span className='text-[#111827]'>{quantity}</span>
+      <span className='text-sm text-gray-400'>Total {placeName}</span>
+      <span className='font-bold text-gray-600'>{quantity}</span>
     </div>
-  </div>
   )
 }
 

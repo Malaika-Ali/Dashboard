@@ -361,15 +361,15 @@ export default function AdminHomePage(props) {
       <div className='flex justify-between rounded-xl w-[70%]'>
 
         {/* left box */}
-        <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} />
+        <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={()=>navigate('/AreasPage')}/>
 
 
         {/* middle box */}
-        <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} />
+        <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={()=>navigate('/FactoriesPage')} />
 
 
         {/* Right box */}
-        <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} />
+        <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={()=>navigate('/Motors')} />
 
       </div>
 

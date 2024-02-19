@@ -19,6 +19,10 @@ body {
   background-image: linear-gradient(to right, #2F3549, #303548, #2F344B)
 }
 
+.main-color-focus:focus {
+  border-color: #2F3549; 
+}
+
 .dark-box-shadow{
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
