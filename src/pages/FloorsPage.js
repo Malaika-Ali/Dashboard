@@ -28,7 +28,7 @@ const FloorsPage = (props) => {
 
 
     return (
-        <div className='-ml-5 mr-5 mt-5'>
+        <div className='ml-2 mr-5 mt-5'>
             {/* Floors Report */}
             <div className="flex flex-col m-5">
 

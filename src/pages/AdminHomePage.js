@@ -347,7 +347,7 @@ export default function AdminHomePage(props) {
   ];
 
   return (
-    <div className='-ml-5 mr-5 mt-5'>
+    <div className='ml-5 mr-5 mt-5'>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -355,7 +355,7 @@ export default function AdminHomePage(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      {/* *********Numbers of Areas, factories, motors **************** */}
+{/* *********Numbers of Areas, factories, motors **************** */}
      <div className='flex flex-row justify-between items-center'>
       {/* Flex Container */}
       <div className='flex justify-between rounded-xl w-[70%]'>
@@ -376,10 +376,13 @@ export default function AdminHomePage(props) {
       {/* ********************Alerts Div************************* */}
       <div className='flex flex-col justify-center items-center gap-2'>
         {/* Critical Alerts card */}
-        <Alert bgColor='red' textColor='red' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32' />
+        <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32'
+        textColor500='text-red-500' borderColor500='border-red-500' />
 
         {/* Faulty Alerts Card */}
-        <Alert bgColor='yellow' textColor='yellow' iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05' />
+        <Alert  iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05'
+        bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
+        textColor500='text-yellow-500' borderColor500='border-yellow-500' />
       </div>
 
       </div>
@@ -387,25 +390,24 @@ export default function AdminHomePage(props) {
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
       <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
-        <div className='card-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" />
-        </div>
+       
 
         <div className='h-60 rounded-xl w-[75%] p-5 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
           <CircularProgressChart progress={76} barColor='#31C431' motorCategory='Flawless' />
           <CircularProgressChart progress={82} barColor='#F9F502' motorCategory='Faulty' />
           <CircularProgressChart progress={31} barColor='#DB1915' motorCategory='Critical' />
         </div>
+
+        <div className='card-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <PieChart title="Motors' Performance" />
+        </div>
       </div>
 
       {/* ----------------- Line Chart ------------------------ */}
 
-      <div className='mt-10 rounded-xl'>
-        <div className='card-color h-80 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
+        <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
           <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
-
         </div>
-      </div>
 
       {/* ***************Tabular Motors Summary **************** */}
       <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>

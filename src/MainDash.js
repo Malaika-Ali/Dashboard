@@ -93,13 +93,13 @@ function MainDash() {
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
-            <div className='fixed w-60 sidebar dark:bg-secondary-dark-bg bg-white'>
+            <div className='fixed w-60 sidebar bg-white '>
               <Sidebar />
             </div>
           ) : null}
           <div
             className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
-              activeMenu && token && !isLoginPageOrSignupPage() ? 'md:ml-72' : 'flex-2'
+              activeMenu && token && !isLoginPageOrSignupPage() ? 'md:ml-64' : 'flex-2'
             }`}
           >
             {!isLoginPageOrSignupPage() && token && (

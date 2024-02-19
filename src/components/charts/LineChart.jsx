@@ -66,18 +66,28 @@ function LineChart({ data, chartTitle, chartHeight, chartWidth }) {
     },
     xaxis: {
       categories: data.categories,
+      labels: {
+        style: {
+          colors: 'white', // Set x-axis label text color to white
+        },
+      },
     },
     yaxis: {
       title: {
         text: 'Numbers',
+        style: {
+          color: 'white',
+          fontSize:'16px'
+        },
       },
     },
     title: {
       text: chartTitle,
-      align: 'center',
+      align: 'left',
       style: {
         fontSize: '20px',
         fontWeight: 'bold',
+        color: 'white',
       },
     },
     stroke: {
@@ -91,7 +101,18 @@ function LineChart({ data, chartTitle, chartHeight, chartWidth }) {
         sizeOffset: 3,
         cursor: 'pointer'
       }
-  }
+  },
+  legend: {
+    position: 'top', // Set the legend position to top
+    horizontalAlign: 'right', // Set the horizontal alignment to right
+    offsetY: -10, // Adjust the vertical offset if needed
+    itemMargin: {
+      vertical: 3, // Adjust the vertical margin between legend items
+    },
+    labels: {
+      colors: ['#FF0000', '#FFFF00', '#00FF00'  ], // Set legend text color to white
+    },
+  },
   
   };
 
