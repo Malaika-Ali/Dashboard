@@ -3,10 +3,29 @@ import { RxCross2 } from "react-icons/rx";
 import { useForm, Controller } from 'react-hook-form';
 
 
-function PopupForm({closeForm}) {
+function PopupForm({closeForm, popup_data}) {
 
-    useEffect(() => {
+
+      const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
+        shouldUnregister: false, // Prevent automatic unregistering of fields
+      });
+
+      useEffect(() => {
         // Clear the form after the page is loaded
+      if (popup_data){
+        setSelectedRole(popup_data.role);
+        setValue('role', popup_data.role); 
+        reset({
+          firstName: popup_data.first_name,
+          lastName: popup_data.last_name,
+          email: popup_data.email,
+          employeeID: popup_data.employee_id,
+          password: '',
+          confirmPassword: '',
+          role: popup_data.role,
+        });
+      }
+      else{
         reset({
           firstName: '',
           lastName: '',
@@ -16,12 +35,8 @@ function PopupForm({closeForm}) {
           confirmPassword: '',
           role: '',
         });
-      }, []); // Empty dependency array ensures this effect runs only once
-
-
-      const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
-        shouldUnregister: false, // Prevent automatic unregistering of fields
-      });
+      }
+    }, []); // Empty dependency array ensures this effect runs only once
     
       const [selectedRole, setSelectedRole] = useState('');
 
@@ -330,7 +345,7 @@ function PopupForm({closeForm}) {
             Role
           </label>
           <div className="flex items-center">
-            <label className="mr-4">
+            {/* <label className="mr-4">
               <input
                 type="radio"
                 onChange={handleRoleChange}
@@ -341,7 +356,7 @@ function PopupForm({closeForm}) {
                 className="mr-2 leading-tight"
               />
               <span className="text-sm">Admin</span>
-            </label>
+            </label> */}
             <label className="mr-4">
               <input
                 type="radio"
@@ -349,6 +364,7 @@ function PopupForm({closeForm}) {
                 // onChange={() => setValue('role', 'factoryIncharge')}
                 name="role"
                 control={control}
+                checked={selectedRole=='factoryIncharge'?true:false}
                 value="factoryIncharge"
                 className="mr-2 leading-tight"
               />
@@ -361,6 +377,7 @@ function PopupForm({closeForm}) {
                 // onChange={() => setValue('role', 'floorIncharge')}
                 name="role"
                 control={control}
+                checked={selectedRole=='floorIncharge'?true:false}
                 value="floorIncharge"
                 className="mr-2 leading-tight"
               />
@@ -384,7 +401,7 @@ function PopupForm({closeForm}) {
 
            <button
             className="w-full bg-transparent text-black border border-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent"
-            type="reset">
+            type="reset" onClick={()=>{closeForm(false)}}>
             Cancel
           </button>
           
