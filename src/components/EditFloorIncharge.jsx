@@ -3,10 +3,32 @@ import { RxCross2 } from "react-icons/rx";
 import { useForm, Controller } from 'react-hook-form';
 
 
-function EditFloorIncharge({closeForm}) {
+function EditFloorIncharge({closeForm, popup_data}) {
 
-    useEffect(() => {
+      const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
+        shouldUnregister: false, // Prevent automatic unregistering of fields
+      });
+
+      useEffect(() => {
         // Clear the form after the page is loaded
+      if (popup_data){
+        setSelectedRole(popup_data.role);
+        setValue('role', popup_data.role); 
+        reset({
+          firstName: popup_data.first_name,
+          lastName: popup_data.last_name,
+          email: popup_data.email,
+          employeeID: popup_data.employee_id,
+          password: '',
+          confirmPassword: '',
+          role: popup_data.role,
+          areaName: popup_data.area_name,
+          floorNumber: popup_data.floor_number,
+          factoryName: popup_data.factory_name,
+          
+        });
+      }
+      else{
         reset({
           firstName: '',
           lastName: '',
@@ -14,14 +36,11 @@ function EditFloorIncharge({closeForm}) {
           employeeID: '',
           password: '',
           confirmPassword: '',
+          role: '',
         });
+      }
       }, []); // Empty dependency array ensures this effect runs only once
-
-
-      const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
-        shouldUnregister: false, // Prevent automatic unregistering of fields
-      });
-    
+        
       const [selectedRole, setSelectedRole] = useState('');
 
       const onSubmit = async (data) => {
@@ -102,6 +121,7 @@ function EditFloorIncharge({closeForm}) {
                 {...field}
                 type="email"
                 placeholder="Email Address"
+                readOnly={true}
                 className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
               />
             )}
@@ -121,6 +141,7 @@ function EditFloorIncharge({closeForm}) {
               <input
                 {...field}
                 type="text"
+                readOnly={true}
                 placeholder="Employee ID"
                 autoComplete='username'
                 className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
