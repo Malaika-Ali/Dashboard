@@ -27,7 +27,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 )
 
 
-export default function Navbar() {
+export default function Navbar(props) {
 
   // Calling sidebar's active state to adjust nav's width
   const { activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize } = useStateContext();
@@ -159,7 +159,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
               }} className='p-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-300'><CgProfile />My Profile</li>
 
               {/* Logout Option */}
-              <li onClick={()=>setopen(false)} className='p-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-300'><TbLogout />Logout</li>
+              <li onClick={()=>{setopen(false); localStorage.clear(); props.set_token(); navigate("/signin")}} className='p-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-300'><TbLogout />Logout</li>
             </ul>
           </div>
 

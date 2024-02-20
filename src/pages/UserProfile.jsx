@@ -5,17 +5,22 @@ import { ConfirmationModal } from '../components';
 import { SecondaryButton, PrimaryButton } from '../components/buttons'
 import axios from 'axios';
 
+function getToken() {
+    const tokenString = localStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken
+}
 
-
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 function UserProfile() {
-
+    const token_data = getToken()
     const [isEditing, setisEditing] = useState(false)
-    const [firstName, setFirstName] = useState("AJ")
-    const [lastName, setLastName] = useState("Lee")
-    const [email, setEmail] = useState("ajlee@gmail.com")
-    const [id, setId] = useState("16")
-    const [password, setPassword] = useState("pass")
-    const [role, setRole] = useState("Admin")
+    const [firstName, setFirstName] = useState(token_data.first_name);
+    const [lastName, setLastName] = useState(token_data.last_name)
+    const [email, setEmail] = useState(token_data.email);
+    const [id, setId] = useState(token_data.employee_id);
+    const [password, setPassword] = useState(token_data.password);
+    const [role, setRole] = useState(token_data.role);
     const [area, setarea] = useState("area")
     const [factory, setfactory] = useState("factory")
     const [floor, setfloor] = useState("1st")

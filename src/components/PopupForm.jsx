@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useForm, Controller } from 'react-hook-form';
 
 
-function PopupForm({closeForm, popup_data}) {
+function PopupForm({closeForm}) {
 
 
     const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
@@ -12,20 +12,7 @@ function PopupForm({closeForm, popup_data}) {
 
     useEffect(() => {
       // Clear the form after the page is loaded
-    if (popup_data){
-      setSelectedRole(popup_data.role);
-      setValue('role', popup_data.role); 
-      reset({
-        firstName: popup_data.first_name,
-        lastName: popup_data.last_name,
-        email: popup_data.email,
-        employeeID: popup_data.employee_id,
-        password: '',
-        confirmPassword: '',
-        role: popup_data.role,
-      });
-    }
-    else{
+    
       reset({
         firstName: '',
         lastName: '',
@@ -35,7 +22,7 @@ function PopupForm({closeForm, popup_data}) {
         confirmPassword: '',
         role: '',
       });
-    }
+    
     }, []); // Empty dependency array ensures this effect runs only once
     
       const [selectedRole, setSelectedRole] = useState('');

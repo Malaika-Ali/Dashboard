@@ -37,6 +37,8 @@ export default function AdminHomePage(props) {
   const [motors, setMotors] = useState([]);
   const [motors_data, setMotorsData] = useState([]);
   const [data, setData] = useState(null);
+  const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
+  const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor] = useState(false)
@@ -82,6 +84,8 @@ export default function AdminHomePage(props) {
       setMotors(data.motors_list);
       console.log(data.motors_data);
       setMotorsData(data.motors_data);
+      setPieChartSeries(data.pie_chart_result);
+      setSmallChartsData(data.percentages);
 
     }
   }, [data])
@@ -411,12 +415,11 @@ export default function AdminHomePage(props) {
         {/* ********************Alerts Div************************* */}
         <div className='flex flex-col justify-center items-center gap-2'>
           {/* Critical Alerts card */}
-          <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32'
-            textColor500='text-red-500' borderColor500='border-red-500'
-            onClick={()=>setRedPie(true)} />
+          <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
+           alertsNumber={pie_chart_series[2]} textColor500='text-red-500' borderColor500='border-red-500' onClick={()=>setRedPie(true)} />
 
           {/* Faulty Alerts Card */}
-          <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05'
+          <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber={pie_chart_series[1]}
             bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
             textColor500='text-yellow-500' borderColor500='border-yellow-500' 
             onClick={()=>setYellowPie(true)}/>
@@ -439,13 +442,13 @@ export default function AdminHomePage(props) {
 
 
         <div className='h-60 rounded-xl w-[75%] p-5 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
-          <CircularProgressChart progress={76} barColor='#31C431' motorCategory='Flawless' />
-          <CircularProgressChart progress={82} barColor='#F9F502' motorCategory='Faulty' />
-          <CircularProgressChart progress={31} barColor='#DB1915' motorCategory='Critical' />
+          <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
+          <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
+          <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
         </div>
 
         <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" onClick={handleClick}/>
+          <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
         </div>
       </div>
 

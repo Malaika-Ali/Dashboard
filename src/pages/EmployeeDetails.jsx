@@ -12,12 +12,13 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 function EmployeeDetails() {
     const [open, setOpen] = useState(false);
     const [factory_Incharge_data, setFactoryInchargeData] = useState([]);
     const [floor_Incharge_data, setFloorInchargeData] = useState([]);
     const [edit_data, setEditData] = useState([]);
+
     async function fetch_data() {
 
         await axios.get(
@@ -38,12 +39,59 @@ function EmployeeDetails() {
           alert(error.response.data);
         })
     
-      }
+    }
+
+    async function deleteData(row) {
+        setOpen(true);
+        console.log(row);
+        if (row.role == "floorIncharge"){
+            await axios.post(
+                API_URL + "delete_floor_incharge",
+                {employeeID: row.employee_id},
+                {
+                  headers: {
+                    'Content-type': 'multipart/form-data',
+                    "Access-Control-Allow-Origin": "*",
+                  }
+                }
+              ).then((result) => {
+                  setOpen(false);
+                  setFloorInchargeData(result.data);
+              }).catch(async (error) => {
+                setOpen(false);
+                alert(error.response.data);
+            })
+        }
+        
+        else if (row.role == "factoryIncharge"){
+            await axios.post(
+                API_URL + "delete_factory_incharge", {employeeID: row.employee_id},
+                {
+                  headers: {
+                    'Content-type': 'multipart/form-data',
+                    "Access-Control-Allow-Origin": "*",
+                  }
+                }
+              ).then((result) => {
+                  setOpen(false);
+                  setFactoryInchargeData(result.data);
+              }).catch(async (error) => {
+                setOpen(false);
+                alert(error.response.data);
+            })
+        }
+        
     
-      useEffect(() => {
+    }
+    
+    
+
+    useEffect(() => {
         setOpen(true);
         fetch_data()
-      }, []);
+    }, []);
+
+      
 
     // const factory_Incharge_data = [
     //     {
@@ -75,7 +123,7 @@ function EmployeeDetails() {
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
                 {setEditData(row); setEditFactoryIncharge(true)}
             }>Edit</button>
-                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
+                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => {deleteData(row)}}>Delete</button>
 
             </div>
         }
@@ -107,7 +155,7 @@ function EmployeeDetails() {
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
                 {setEditData(row); setEditFloorIncharge(true)}
             }>Edit</button>
-                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
+                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => {deleteData(row)}}>Delete</button>
 
             </div>
         }
@@ -139,7 +187,8 @@ function EmployeeDetails() {
                 <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
                  
                     {/* *******Add Factory Incharge Button***** */}
-                    <AnimatedIconButton text='Add Factory Incharge' color='main-color' onClick={() => setEditFactoryIncharge(true)}>
+                    <AnimatedIconButton text='Add Factory Incharge' color='main-color' onClick={() => {
+                        setEditData(); setEditFactoryIncharge(true)}}>
                         <RiAddLine size={23} />
                     </AnimatedIconButton>
 
@@ -169,7 +218,7 @@ function EmployeeDetails() {
             </div>
             {
                 isEditing &&
-                <PopupForm closeForm={() => setIsEditing(false)} popup_data={edit_data} />
+                <PopupForm closeForm={() => setIsEditing(false)}  />
             }
             {
                 editFactoryIncharge &&

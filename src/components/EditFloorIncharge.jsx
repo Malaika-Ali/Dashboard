@@ -6,7 +6,7 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
 
   const [open, setOpen] = useState(false);
@@ -52,29 +52,49 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
 
       // console.log(data)
       setOpen(true);
-  
-      await axios.post(
-        API_URL + "update_floor_incharge_data",
-        data,
-        {
-          headers: {
-            'Content-type': 'multipart/form-data',
-            "Access-Control-Allow-Origin": "*",
+      if(popup_data){
+        await axios.post(
+          API_URL + "update_floor_incharge_data",
+          data,
+          {
+            headers: {
+              'Content-type': 'multipart/form-data',
+              "Access-Control-Allow-Origin": "*",
+            }
           }
-        }
-      ).then((result) => {
-        
-        floor_data_update(result.data);
-        setOpen(false);
-        closeForm();
-  
-      }).catch(async (error) =>  {
-        setOpen(false);
-        alert(error.response.data);
-        // Reset the form fields
-        
-        
-      })
+        ).then((result) => {
+          
+          floor_data_update(result.data);
+          setOpen(false);
+          closeForm();
+    
+        }).catch(async (error) =>  {
+          setOpen(false);
+          alert(error.response.data);
+        })
+      }
+      else{
+        await axios.post(
+          API_URL + "add_floor_incharge_data",
+          data,
+          {
+            headers: {
+              'Content-type': 'multipart/form-data',
+              "Access-Control-Allow-Origin": "*",
+            }
+          }
+        ).then((result) => {
+          
+          floor_data_update(result.data);
+          setOpen(false);
+          closeForm();
+    
+        }).catch(async (error) =>  {
+          setOpen(false);
+          alert(error.response.data);
+        })
+
+      }
       
       // await reset({
       //     firstName: '',
@@ -160,7 +180,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 {...field}
                 type="email"
                 placeholder="Email Address"
-                readOnly={true}
+                readOnly={popup_data?true:false}
                 className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
               />
             )}
@@ -180,7 +200,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
               <input
                 {...field}
                 type="text"
-                readOnly={true}
+                readOnly={popup_data?true:false}
                 placeholder="Employee ID"
                 autoComplete='username'
                 className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
