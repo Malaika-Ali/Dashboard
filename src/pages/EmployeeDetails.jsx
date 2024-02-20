@@ -173,11 +173,13 @@ function EmployeeDetails() {
             }
             {
                 editFactoryIncharge &&
-                <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data} />
+                <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data} 
+                factory_data_update={setFactoryInchargeData} />
             }
              {
                 editFloorIncharge &&
-                <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)}  popup_data={edit_data} />
+                <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)}  popup_data={edit_data} 
+                floor_data_update={setFloorInchargeData} />
             }
 
         </div>
