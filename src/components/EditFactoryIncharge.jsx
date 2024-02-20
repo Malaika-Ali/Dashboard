@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useForm, Controller } from 'react-hook-form';
 
 
-function PopupForm({closeForm}) {
+function EditFactoryIncharge({closeForm}) {
 
     useEffect(() => {
         // Clear the form after the page is loaded
@@ -33,133 +33,7 @@ function PopupForm({closeForm}) {
             employeeID: '',
             password: '',
             confirmPassword: '',
-            role: 'selectedRole',
           });
-      };
-
-      
-
-      const renderAdditionalFields = (role) => {
-        switch (role) {
-          case 'factoryIncharge':
-            return (
-              <div className='grid grid-cols-2 gap-x-8'>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
-                    Area Name
-                  </label>
-                  <Controller
-                    name="areaName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="areaName"
-                        placeholder="Area Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
-                    Factory Name
-                  </label>
-                  <Controller
-                    name="factoryName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="factoryName"
-                        placeholder="Factory Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
-                </div>
-              </div>
-            );
-          case 'floorIncharge':
-            return (
-              <div className='grid grid-cols-3 gap-x-8'>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
-                    Area Name
-                  </label>
-                  <Controller
-                    name="areaName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="areaName"
-                        placeholder="Area Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
-                    Factory Name
-                  </label>
-                  <Controller
-                    name="factoryName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="factoryName"
-                        placeholder="Factory Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="floorNumber">
-                    Floor Number
-                  </label>
-                  <Controller
-                    name="floorNumber"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="floorNumber"
-                        placeholder="Floor Number"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.floorNumber ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.floorNumber && <p className="text-red-500 text-xs italic">{errors.floorNumber.message}</p>}
-                </div>
-              </div>
-            );
-          default:
-            return null;
-        }
-      };
-    
-      const handleRoleChange = (event) => {
-        // setSelectedRole(event.target.value);
-        setValue('role', event.target.value); // Use setValue from useForm
-        setSelectedRole(event.target.value);
       };
 
 
@@ -325,54 +199,52 @@ function PopupForm({closeForm}) {
           {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword.message}</p>}
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-600 text-sm font-semibold mb-2">
-            Role
-          </label>
-          <div className="flex items-center">
-            {/* <label className="mr-4">
-              <input
-                type="radio"
-                onChange={handleRoleChange}
-                // onChange={() => setValue('role', 'admin')}
-                name="role"
-                control={control}
-                value="admin"
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm">Admin</span>
-            </label> */}
-            <label className="mr-4">
-              <input
-                type="radio"
-                onChange={handleRoleChange}
-                // onChange={() => setValue('role', 'factoryIncharge')}
-                name="role"
-                control={control}
-                value="factoryIncharge"
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm">Factory Incharge</span>
-            </label>
-            <label>
-              <input
-                type="radio"
-                onChange={handleRoleChange}
-                // onChange={() => setValue('role', 'floorIncharge')}
-                name="role"
-                control={control}
-                value="floorIncharge"
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm">Floor Incharge</span>
-            </label>
-          </div>
-          {errors.role && <p className="text-red-500 text-xs italic">{errors.role.message}</p>}
-        </div>
+    
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
+                    Area Name
+                  </label>
+                  <Controller
+                    name="areaName"
+                    control={control}
+                    rules={{ required: 'This field is required' }}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        id="areaName"
+                        placeholder="Area Name"
+                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
+                      />
+                    )}
+                  />
+                  {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
+                    Factory Name
+                  </label>
+                  <Controller
+                    name="factoryName"
+                    control={control}
+                    rules={{ required: 'This field is required' }}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        id="factoryName"
+                        placeholder="Factory Name"
+                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
+                      />
+                    )}
+                  />
+                  {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
+                </div>
+              
+
+
         </div>
 
-        {/* Additional fields based on selected role */}
-        {renderAdditionalFields(selectedRole)}
 
         <div className="flex flex-row items-center justify-between gap-5">
           
@@ -395,4 +267,4 @@ function PopupForm({closeForm}) {
   )
 }
 
-export default PopupForm
+export default EditFactoryIncharge

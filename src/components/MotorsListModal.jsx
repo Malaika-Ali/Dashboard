@@ -1,9 +1,8 @@
 import React from 'react'
-import Table from './Table'
+import ModalTable from './modals/ModalTable';
+
 
 function MotorsListModal({onClick, TableHeading}) {
-
-
 // table columns headings
 const columns = [
     {
@@ -178,9 +177,9 @@ const motors_data =
 
   return (
     <div
-    className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful"
+    className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful"
   >
-      <button
+      {/* <button
             type="button"
             className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
             onClick={onClick}
@@ -200,9 +199,30 @@ const motors_data =
               />
             </svg>
             <span className="sr-only">Close modal</span>
-          </button>
-<div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
-        <Table tableSubheading={TableHeading} column_headings={columns} data={motors_data} />
+          </button> */}
+<div className='mt-5 mx-auto bg-white rounded-xl w-[70%] flex flex-col justify-center items-center pt-10 h-[70%]'>
+<button
+            type="button"
+            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
+            onClick={onClick}
+          >
+            <svg
+              className="w-3 h-3"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span className="sr-only">Close modal</span>
+          </button> 
+        <ModalTable tableSubheading={TableHeading} column_headings={columns} data={motors_data} />
 
       </div>
 
