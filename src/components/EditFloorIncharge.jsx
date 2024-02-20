@@ -2,60 +2,99 @@ import React, { useState, useEffect } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { useForm, Controller } from 'react-hook-form';
 
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function EditFloorIncharge({closeForm, popup_data}) {
+let API_URL = "http://localhost:5001/";
+function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
 
-      const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
-        shouldUnregister: false, // Prevent automatic unregistering of fields
-      });
+  const [open, setOpen] = useState(false);
+    const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
+      shouldUnregister: false, // Prevent automatic unregistering of fields
+    });
 
-      useEffect(() => {
-        // Clear the form after the page is loaded
-      if (popup_data){
-        setSelectedRole(popup_data.role);
-        setValue('role', popup_data.role); 
-        reset({
-          firstName: popup_data.first_name,
-          lastName: popup_data.last_name,
-          email: popup_data.email,
-          employeeID: popup_data.employee_id,
-          password: '',
-          confirmPassword: '',
-          role: popup_data.role,
-          areaName: popup_data.area_name,
-          floorNumber: popup_data.floor_number,
-          factoryName: popup_data.factory_name,
-          
-        });
-      }
-      else{
-        reset({
-          firstName: '',
-          lastName: '',
-          email: '',
-          employeeID: '',
-          password: '',
-          confirmPassword: '',
-          role: '',
-        });
-      }
-      }, []); // Empty dependency array ensures this effect runs only once
+    useEffect(() => {
+      // Clear the form after the page is loaded
+    if (popup_data){
+      setSelectedRole(popup_data.role);
+      setValue('role', popup_data.role); 
+      reset({
+        firstName: popup_data.first_name,
+        lastName: popup_data.last_name,
+        email: popup_data.email,
+        employeeID: popup_data.employee_id,
+        password: '',
+        confirmPassword: '',
+        role: popup_data.role,
+        areaName: popup_data.area_name,
+        floorNumber: popup_data.floor_number,
+        factoryName: popup_data.factory_name,
         
-      const [selectedRole, setSelectedRole] = useState('');
+      });
+    }
+    else{
+      reset({
+        firstName: '',
+        lastName: '',
+        email: '',
+        employeeID: '',
+        password: '',
+        confirmPassword: '',
+        role: '',
+      });
+    }
+    }, []); // Empty dependency array ensures this effect runs only once
+        
+    const [selectedRole, setSelectedRole] = useState('');
 
-      const onSubmit = async (data) => {
-        await reset({
-            firstName: '',
-            lastName: '',
-            email: '',
-            employeeID: '',
-            password: '',
-            confirmPassword: '',
-          });
-      };
+    const onSubmit = async (data) => {
+
+      // console.log(data)
+      setOpen(true);
   
+      await axios.post(
+        API_URL + "update_floor_incharge_data",
+        data,
+        {
+          headers: {
+            'Content-type': 'multipart/form-data',
+            "Access-Control-Allow-Origin": "*",
+          }
+        }
+      ).then((result) => {
+        
+        floor_data_update(result.data);
+        setOpen(false);
+        closeForm();
+  
+      }).catch(async (error) =>  {
+        setOpen(false);
+        alert(error.response.data);
+        // Reset the form fields
+        
+        
+      })
+      
+      // await reset({
+      //     firstName: '',
+      //     lastName: '',
+      //     email: '',
+      //     employeeID: '',
+      //     password: '',
+      //     confirmPassword: '',
+      //   });
+    };
+    
 
   return (
+    <>
+      <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+      >
+          <CircularProgress color="inherit" />
+      </Backdrop>
     <div className='fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm '>
       
       <div className='flex items-center justify-center h-full'>
@@ -307,6 +346,7 @@ function EditFloorIncharge({closeForm, popup_data}) {
       </form>
       </div>
     </div>
+  </>
   )
 }
 
