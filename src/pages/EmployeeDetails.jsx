@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { TotalNumberCard } from '../summaryCards';
 import { Table, PopupForm } from '../components';
 import { RiAddLine } from "react-icons/ri";
+import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
+import { RiDeleteBinLine } from "react-icons/ri";
+import EditFactoryIncharge from '../components/EditFactoryIncharge';
+import EditFloorIncharge from '../components/EditFloorIncharge';
+
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 let API_URL = "http://localhost:5001/";
 function EmployeeDetails() {
@@ -63,8 +72,8 @@ function EmployeeDetails() {
         },
         {
             name: "Action",
-            cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit(row)
+            cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
+                {setEditData(row); setEditFactoryIncharge(true)}
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -95,8 +104,8 @@ function EmployeeDetails() {
         },
         {
             name: "Action",
-            cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit(row)
+            cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
+                {setEditData(row); setEditFloorIncharge(true)}
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -111,49 +120,69 @@ function EmployeeDetails() {
     const [editFloorIncharge, setEditFloorIncharge] = useState(false)
 
 
-    const handleEdit = (data) => {
-        setEditData(data)
+    const handleEdit = () => {
         setIsEditing(true)
     }
 
     return (
+        <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         <div className='ml-3 mr-5 mt-5'>
             {/* Factory Incharge Table section */}
-            <div className='mt-5 mx-auto bg-slate-200  rounded-xl w-[96%]'>
+            <div className='mt-5 mx-auto bg-white  rounded-xl w-[96%]'>
                 <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data} />
-                <div className='bg-white'>
-                    <button
-                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
-                        Add Employee
-                    </button>
+                <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
+                 
+                    {/* *******Add Factory Incharge Button***** */}
+                    <AnimatedIconButton text='Add Factory Incharge' color='main-color' onClick={() => setEditFactoryIncharge(true)}>
+                        <RiAddLine size={23} />
+                    </AnimatedIconButton>
+
+                    {/* *******Delete Factory Incharge Button***** */}
+                    <AnimatedIconButton text='Delete Factory Incharge' color='main-color' onClick={() => alert('Delete')}>
+                        <RiDeleteBinLine size={20} />
+                    </AnimatedIconButton>
                 </div>
             </div>
 
 
             {/* Floor Incharge Table section */}
-            <div className='mt-8 mx-auto bg-slate-200 rounded-xl w-[96%]'>
-                <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={factory_Incharge_data} />
-                <div className='bg-white'>
-                    <button
-                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
-                        Add Employee
-                    </button>
+            <div className='mt-8 mx-auto bg-white rounded-xl w-[96%]'>
+                <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={floor_Incharge_data} />
+                <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
+                 
+                    {/* *******Add Floor Incharge Button***** */}
+                    <AnimatedIconButton text='Add Floor Incharge' color='main-color' onClick={() => setEditFloorIncharge(true)}>
+                        <RiAddLine size={23} />
+                    </AnimatedIconButton>
+
+                    {/* *******Delete Floor Incharge Button***** */}
+                    <AnimatedIconButton text='Delete Floor Incharge' color='main-color' onClick={() => alert('Delete')}>
+                        <RiDeleteBinLine size={20} />
+                    </AnimatedIconButton>
                 </div>
             </div>
             {
                 isEditing &&
-                <PopupForm closeForm={() => setIsEditing(false)} />
+                <PopupForm closeForm={() => setIsEditing(false)} popup_data={edit_data} />
+            }
+            {
+                editFactoryIncharge &&
+                <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data} />
+            }
+             {
+                editFloorIncharge &&
+                <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)}  popup_data={edit_data} />
             }
 
-            </div>
-        </>
+        </div>
+    </>
     )
 }
 
 export default EmployeeDetails
-
-
-
-
-
-
