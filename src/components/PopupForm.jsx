@@ -401,7 +401,7 @@ function PopupForm({closeForm, popup_data}) {
 
            <button
             className="w-full bg-transparent text-black border border-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent"
-            type="reset">
+            type="reset" onClick={closeForm()}>
             Cancel
           </button>
           

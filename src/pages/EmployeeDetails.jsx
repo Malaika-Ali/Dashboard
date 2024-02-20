@@ -64,7 +64,7 @@ function EmployeeDetails() {
         {
             name: "Action",
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit()
+                handleEdit(row)
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -96,7 +96,7 @@ function EmployeeDetails() {
         {
             name: "Action",
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit()
+                handleEdit(row)
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -151,3 +151,9 @@ function EmployeeDetails() {
 }
 
 export default EmployeeDetails
+
+
+
+
+
+
