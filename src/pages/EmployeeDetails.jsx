@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { TotalNumberCard } from '../summaryCards';
 import { Table, PopupForm } from '../components';
 import { RiAddLine } from "react-icons/ri";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import axios from 'axios';
 
 let API_URL = "http://localhost:5001/";
 function EmployeeDetails() {
@@ -67,7 +64,7 @@ function EmployeeDetails() {
         {
             name: "Action",
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit(row)
+                handleEdit()
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -99,7 +96,7 @@ function EmployeeDetails() {
         {
             name: "Action",
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400' onClick={() =>
-                handleEdit(row)
+                handleEdit()
             }>Edit</button>
                 <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => alert("Deleted")}>Delete</button>
 
@@ -109,6 +106,10 @@ function EmployeeDetails() {
 
     const [isEditing, setIsEditing] = useState(false)
 
+    const [editFactoryIncharge, setEditFactoryIncharge] = useState(false)
+
+    const [editFloorIncharge, setEditFloorIncharge] = useState(false)
+
 
     const handleEdit = (data) => {
         setEditData(data)
@@ -116,41 +117,33 @@ function EmployeeDetails() {
     }
 
     return (
-        <>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}f
-                open={open}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
-
-            <div className='ml-3 mr-5 mt-5'>
-                {/* Factory Incharge Table section */}
-                <div className='mt-5 mx-auto bg-slate-200  rounded-xl w-[96%]'>
-                    <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data} />
-                    <div className='bg-white'>
-                        <button
-                            className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
-                            Add Employee
-                        </button>
-                    </div>
+        <div className='ml-3 mr-5 mt-5'>
+            {/* Factory Incharge Table section */}
+            <div className='mt-5 mx-auto bg-slate-200  rounded-xl w-[96%]'>
+                <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data} />
+                <div className='bg-white'>
+                    <button
+                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
+                        Add Employee
+                    </button>
                 </div>
+            </div>
 
 
-                {/* Floor Incharge Table section */}
-                <div className='mt-8 mx-auto bg-slate-200 rounded-xl w-[96%]'>
-                    <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={floor_Incharge_data} />
-                    <div className='bg-white'>
-                        <button
-                            className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
-                            Add Employee
-                        </button>
-                    </div>
+            {/* Floor Incharge Table section */}
+            <div className='mt-8 mx-auto bg-slate-200 rounded-xl w-[96%]'>
+                <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={factory_Incharge_data} />
+                <div className='bg-white'>
+                    <button
+                        className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" onClick={() => setIsEditing(true)}><RiAddLine />
+                        Add Employee
+                    </button>
                 </div>
-                {
-                    isEditing &&
-                    <PopupForm closeForm={setIsEditing} popup_data={edit_data} />
-                }
+            </div>
+            {
+                isEditing &&
+                <PopupForm closeForm={() => setIsEditing(false)} />
+            }
 
             </div>
         </>

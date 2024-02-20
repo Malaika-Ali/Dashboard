@@ -366,13 +366,13 @@ export default function AdminHomePage(props) {
     // Set the state based on the clicked pie slice color
     switch (seriesIndex) {
       case 0:
-        setRedPie(true);
+        setGreenPie(true);
         break;
       case 1:
         setYellowPie(true);
         break;
       case 2:
-        setGreenPie(true);
+        setRedPie(true);
         break;
       default:
         // Do nothing or handle unexpected seriesIndex
@@ -412,14 +412,25 @@ export default function AdminHomePage(props) {
         <div className='flex flex-col justify-center items-center gap-2'>
           {/* Critical Alerts card */}
           <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts' alertsNumber='32'
-            textColor500='text-red-500' borderColor500='border-red-500' />
+            textColor500='text-red-500' borderColor500='border-red-500'
+            onClick={()=>setRedPie(true)} />
 
           {/* Faulty Alerts Card */}
           <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber='05'
             bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
-            textColor500='text-yellow-500' borderColor500='border-yellow-500' />
+            textColor500='text-yellow-500' borderColor500='border-yellow-500' 
+            onClick={()=>setYellowPie(true)}/>
         </div>
 
+        {
+          redPie &&
+          <MotorsListModal onClick={()=>setRedPie(false)} TableHeading='Critical Motors'/>
+        }
+        
+          {
+            yellowPie &&
+            <MotorsListModal onClick={()=>setYellowPie(false)} TableHeading='Faulty Motors'/>
+          }
       </div>
 
 
@@ -433,7 +444,7 @@ export default function AdminHomePage(props) {
           <CircularProgressChart progress={31} barColor='#DB1915' motorCategory='Critical' />
         </div>
 
-        <div className='card-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+        <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
           <PieChart title="Motors' Performance" onClick={handleClick}/>
         </div>
       </div>

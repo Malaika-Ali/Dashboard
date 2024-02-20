@@ -31,11 +31,12 @@ options={{
   // title:{text: title},
   title: {
     text: title,
-    align: 'left',
+    align: 'center',
     marginLeft: 3,
     style: {
       fontSize: '16px',
-      color: '#000000', 
+      // color: '#000000', 
+      color: 'white'
     }},
   noData: {text: "No Records found yet"},
   labels: ['Flawless', 'Faulty', 'Critical'],
@@ -45,28 +46,36 @@ options={{
     horizontalAlign: 'center',
     offsetY: 0,
     offsetX: 0,
+    labels: {
+      colors: ['#31C431', '#F9F502', '#DB1915'], // Set legend text color to white
+    },
   },
   chart: {
     events: {
       dataPointSelection: function (event, chartContext, config) {
         if (onClick) {
-          onClick(config.seriesIndex);
-          
+
+          // This will catch the index of the series(which pie slice) is clicked
+          onClick(config.dataPointIndex);
         }
       },
+    },
+  },
+
+      dropShadow: {
+        enabled: true,
+        top: 2,
+        left: 0,
+        blur: 4,
+        color: '#000000', // Shadow color
+        opacity: 0.5, // Shadow opacity
+      },
+    stroke: {
+      colors: ['#31C431', '#F9F502', '#DB1915'], // Border colors
+    },
   
-}}
-
-
 
   }}
-  
-
-
-
-
-
-
 style={{ cursor: 'pointer' }} // Set cursor as pointer
 />
     </>
