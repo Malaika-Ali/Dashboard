@@ -104,7 +104,7 @@ function MainDash() {
           >
             {!isLoginPageOrSignupPage() && token && (
               <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
-                <Navbar />
+                <Navbar user_details={token} set_token={setToken} />
               </div>
             )}
 
@@ -115,29 +115,29 @@ function MainDash() {
                 <Route index path='/signuppage' element={token?<Navigate to={`/${path_roles[token.role]}`}/>:<SignupPage />} />
                 <Route index path='/' element={token?<Navigate replace to={`/${path_roles[token.role]}`}/>:<Navigate replace to="/signin"/>} /> 
 
-                <Route path='/adminHomePage' element={token?<AdminHomePage user_details={token}/>:<LoginPage set_token={setToken} />} />
-                <Route path='/areaspage' element={token?<AreasPage user_details={token} />:<LoginPage set_token={setToken} />} />
-                <Route path='/factoriespage' element={token?<FactoriesPage user_details={token} />:<LoginPage set_token={setToken} />} />
-                <Route path='/motors' element={token?<Motors user_details={token} />:<LoginPage set_token={setToken} />} />
+                <Route path='/adminHomePage' element={token?<AdminHomePage user_details={token}/>:<Navigate replace to="/signin"/>} />
+                <Route path='/areaspage' element={token?<AreasPage user_details={token} />:<Navigate replace to="/signin"/>} />
+                <Route path='/factoriespage' element={token?<FactoriesPage user_details={token} />:<Navigate replace to="/signin"/>} />
+                <Route path='/motors' element={token?<Motors user_details={token} />:<Navigate replace to="/signin"/>} />
                 <Route
                   path='/factoryInchargeHome'
-                  element={token?<FactoryInchargeHome user_details={token} />:<LoginPage set_token={setToken} />}
+                  element={token?<FactoryInchargeHome user_details={token} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
                   path='/floorInchargeHomePage'
-                  element={token?<FloorInchargeHomePage user_details={token} />:<LoginPage set_token={setToken} />}
+                  element={token?<FloorInchargeHomePage user_details={token} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
                   path='/userProfile'
-                  element={token?<UserProfile user_details={token} />:<LoginPage set_token={setToken} />}
+                  element={token?<UserProfile user_details={token} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
                   path='/employeeDetails'
-                  element={token?<EmployeeDetails user_details={token} />:<LoginPage set_token={setToken} />}
+                  element={token?<EmployeeDetails user_details={token} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
                 path='/floorsPage'
-                element={token?<FloorsPage user_details={token} />:<LoginPage set_token={setToken} />} />
+                element={token?<FloorsPage user_details={token} />:<Navigate replace to="/signin"/>} />
               </Routes>
             </div>
           </div>

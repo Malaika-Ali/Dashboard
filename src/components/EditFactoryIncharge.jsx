@@ -7,7 +7,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
 
   const [open, setOpen] = useState(false);
@@ -53,28 +53,48 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
     // console.log(data)
     setOpen(true);
 
-    await axios.post(
-      API_URL + "update_factory_incharge_data",
-      data,
-      {
-        headers: {
-          'Content-type': 'multipart/form-data',
-          "Access-Control-Allow-Origin": "*",
+    if(popup_data){
+      await axios.post(
+        API_URL + "update_factory_incharge_data",
+        data,
+        {
+          headers: {
+            'Content-type': 'multipart/form-data',
+            "Access-Control-Allow-Origin": "*",
+          }
         }
-      }
-    ).then((result) => {
-      
-      factory_data_update(result.data);
-      setOpen(false);
-      closeForm();
+      ).then((result) => {
+        
+        factory_data_update(result.data);
+        setOpen(false);
+        closeForm();
 
-    }).catch(async (error) =>  {
-      setOpen(false);
-      alert(error.response.data);
-      // Reset the form fields
-      
-      
-    })
+      }).catch(async (error) =>  {
+        setOpen(false);
+        alert(error.response.data);      
+      })
+    }
+    else{
+      await axios.post(
+        API_URL + "add_factory_incharge_data",
+        data,
+        {
+          headers: {
+            'Content-type': 'multipart/form-data',
+            "Access-Control-Allow-Origin": "*",
+          }
+        }
+      ).then((result) => {
+        
+        factory_data_update(result.data);
+        setOpen(false);
+        closeForm();
+
+      }).catch(async (error) =>  {
+        setOpen(false);
+        alert(error.response.data);      
+      })
+    }
     
     // await reset({
     //     firstName: '',
@@ -162,7 +182,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   {...field}
                   type="email"
                   placeholder="Email Address"
-                  readOnly={true}
+                  readOnly={popup_data?true:false}
                   className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
                 />
               )}
@@ -183,7 +203,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   {...field}
                   type="text"
                   placeholder="Employee ID"
-                  readOnly={true}
+                  readOnly={popup_data?true:false}
                   autoComplete='username'
                   className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
                 />

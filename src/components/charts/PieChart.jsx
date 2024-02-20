@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const PieChart = ({ title , onClick }) => {
+const PieChart = ({ title , onClick, series }) => {
 
   // useEffect(() => {
   //   const handleDataPointSelection = (event, chartContext, config) => {
@@ -25,7 +25,7 @@ height={250}
 
 
 // This shows the quantity in piechart. We give it a number and it converts that number into % itself
-series={[23,40,78]}
+series={series}
 
 options={{
   // title:{text: title},
