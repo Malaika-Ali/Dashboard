@@ -106,20 +106,24 @@ function EmployeeDetails() {
         {
             name: 'Incharge Name',
             selector: row => row.first_name +" "+row.last_name,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: "Factory Name",
             selector: row => row.factory_name,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: "Area Name",
             selector: row => row.area_name,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: "Action",
+            center: true,
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
                 {setEditData(row); setEditFactoryIncharge(true)}
             }>Edit</button>
@@ -133,25 +137,30 @@ function EmployeeDetails() {
         {
             name: 'Incharge Name',
             selector: row => row.first_name +" "+row.last_name,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: 'Floor Number',
             selector: row => row.floor_number,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: "Factory Name",
             selector: row => row.factory_name,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: "Area Name",
             selector: row => row.area_name,
-            sortable: true
+            sortable: true,
+            center: true,
         },
         {
             name: "Action",
+            center: true,
             cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() =>
                 {setEditData(row); setEditFloorIncharge(true)}
             }>Edit</button>
