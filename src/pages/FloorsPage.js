@@ -9,6 +9,7 @@ import AddNewFloor from '../components/modals/AddNewFloor';
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import {DeleteItem} from '../components/modals'
 import { SummaryAlertCard } from '../components';
+import FloorCard from '../components/FloorCard';
 
 const FloorsPage = (props) => {
 
@@ -28,9 +29,9 @@ const FloorsPage = (props) => {
 
 
     return (
-        <div className='ml-2 mr-5 mt-5'>
+        <div className='ml-3 mr-5 mt-5'>
             {/* Floors Report */}
-            <div className="flex flex-col m-5">
+            {/* <div className="flex flex-col m-5"> */}
 
                 {/* heading section */}
                 <div className="flex flex-row justify-between">
@@ -97,16 +98,27 @@ const FloorsPage = (props) => {
                 <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
                  style={{ overflowY: 'auto', maxHeight: '100%' }}>
 
-                        <FactoryCard FactoryName="First Floor" />
-                        <FactoryCard FactoryName="Second Floor" />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        
+                        {/* <FactoryCard FactoryName="Second Floor" />
                         <FactoryCard FactoryName="Third Floor" />
 
                         <FactoryCard FactoryName="Fourth Floor" />
                         <FactoryCard FactoryName="Fifth Floor" />
-                        <FactoryCard FactoryName="Sixth Floor" />
+                        <FactoryCard FactoryName="Sixth Floor" /> */}
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

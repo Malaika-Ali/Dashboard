@@ -80,13 +80,13 @@ export default function Motors(props) {
                 >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <div className='mt-8'>
+        
 
                 <div className="flex flex-row justify-between m-5">
                     <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
                     {/* <div>Refresh</div> */}
                 </div>
-                </div>
+               
 
                 {/* Flex Container */}
                 <div className='flex justify-between mt-4 rounded-xl w-90 m-3'>

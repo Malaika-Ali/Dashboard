@@ -1,10 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 import { FaLocationDot } from "react-icons/fa6";
+import { MdFactory } from "react-icons/md";
 
 
-
-const FactoryCard = ({FactoryName, AreaName, CriticalMotor, FaultyMotors,FlawlessMotors, onClick}) => {
+const FloorCard = ({FloorNumber, FactoryName, AreaName, CriticalMotor, FaultyMotors,FlawlessMotors, onClick}) => {
 
 
   // const handleCardClick = () => {
@@ -25,7 +24,7 @@ const FactoryCard = ({FactoryName, AreaName, CriticalMotor, FaultyMotors,Flawles
               <div className='bg-white dark:bg-secondary-dark-bg
                h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer'>
                 <div className='flex flex-row justify-center  font-extrabold text-xl tracking-tight   text-slate-900 mb-2'>
-                  <span>{FactoryName}</span> 
+                  <span>Floor: {FloorNumber}</span> 
                 </div>
 
                 <div className='flex flex-col justify-center items-center'>
@@ -34,27 +33,21 @@ const FactoryCard = ({FactoryName, AreaName, CriticalMotor, FaultyMotors,Flawles
                 <span>{`Total Flawless motors: ${FlawlessMotors}`}</span>
                 </div>
 
+<div className='flex flex-row justify-between items-center px-2'>
                 <div className='flex flex-row justify-center items-center mt-2 gap-1'>
                 <FaLocationDot />
                 <span>{AreaName}</span>
                 </div>
-
+                <div className='flex flex-row justify-center items-center mt-2 gap-1'>
+                <MdFactory />
+                <span>{FactoryName}</span>
+                </div>
 
               </div>
             </div>
-
+            </div>
     </>
   )
 }
 
-
-FactoryCard.propTypes = {
-  FactoryName: PropTypes.string.isRequired,
-  AreaName: PropTypes.string.isRequired,
-  CriticalMotor: PropTypes.number.isRequired,
-  FaultyMotors: PropTypes.number.isRequired,
-  FlawlessMotors: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
-
-export default FactoryCard
+export default FloorCard
