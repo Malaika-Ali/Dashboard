@@ -82,7 +82,6 @@ export default function AdminHomePage(props) {
       setTotalMotors(data.motors_count);
       setFactories(data.factories_data);
       setMotors(data.motors_list);
-      console.log(data.motors_data);
       setMotorsData(data.motors_data);
       setPieChartSeries(data.pie_chart_result);
       setSmallChartsData(data.percentages);

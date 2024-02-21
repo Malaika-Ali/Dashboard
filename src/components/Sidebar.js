@@ -8,7 +8,7 @@ import logo from '../assets/logo.png'
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
 
-export default function Sidebar() {
+export default function Sidebar(props) {
 
     const {activeMenu, setactiveMenu, screenSize} = useStateContext();
     
@@ -23,7 +23,7 @@ export default function Sidebar() {
         }
     }
 
-    const role='factoryIncharge';
+    const role=props.user_details.role;
 
     let roleLinks = [];
     if (role === 'admin') {

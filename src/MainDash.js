@@ -83,10 +83,8 @@ function MainDash() {
     return currentPath === '/' || currentPath === '/signuppage';
   };
   const path_roles = {admin: "adminHomePage", floorIncharge: "FloorInchargeHomePage", factoryIncharge: "FactoryInchargeHomePage"};
-  const [token, setToken] = useState();
-  useEffect(() => {
-    setToken(getToken());
-  }, []);
+  const [token, setToken] = useState(getToken());
+  
   return (
     <div>
       {/* <ContextProvider> */}
@@ -94,7 +92,7 @@ function MainDash() {
         <div className='flex relative dark:bg-main-dark-bg'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
             <div className='fixed w-60 sidebar bg-white '>
-              <Sidebar />
+              <Sidebar user_details={token} />
             </div>
           ) : null}
           <div

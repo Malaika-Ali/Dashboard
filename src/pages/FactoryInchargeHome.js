@@ -19,14 +19,65 @@ import motors_icon from '../assets/motors.svg'
 import { GiStairs} from "react-icons/gi";
 import stairs from '../assets/stairs.png'
 
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-
-
-
-
-
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
 const FactoryInchargeHome = (props) => {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const [total_floors, setTotalFloors] = useState('0');
+  const [total_motors, setTotalMotors] = useState('0');
+  const [motors_data, setMotorsData] = useState([]);
+  const [data, setData] = useState(null);
+  const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
+  const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
+
+  const [viewMotor, setViewMotor] = useState(false)
+
+  async function fetch_data() {
+
+    await axios.post(
+      API_URL + "factory_incharge_homepage",{employee_id: props.user_details.employee_id},
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+
+      setData(result.data)
+
+    }).catch(async (error) => {
+      setOpen(false);
+      alert(error.response.data);
+    })
+
+  }
+
+  useEffect(() => {
+
+    setOpen(true);
+    fetch_data();
+
+
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setOpen(false);
+      setTotalFloors(data.total_floors);
+      setTotalMotors(data.total_motors);
+      setMotorsData(data.motors_data);
+      setPieChartSeries(data.pie_chart_result);
+      setSmallChartsData(data.percentages);
+
+    }
+  }, [data]);
 
   // table columns headings
   const columns = [
@@ -82,152 +133,152 @@ const FactoryInchargeHome = (props) => {
     }
   ];
 
-  const data = [
-    {
-      id: 1,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 2,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'new factory',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 3,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 4,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'new area',
-      status: 'Faulty'
-    },
-    {
-      id: 5,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 6,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 7,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 8,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 9,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 10,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 11,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 12,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 13,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 14,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 15,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 16,
-      motorName: 'ss1',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 17,
-      motorName: 'ss2',
-      floorNumber: 4,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 18,
-      motorName: 'ss3',
-      floorNumber: 2,
-      factoryName: 'Industry',
-      areaName: 'Industrial area',
-      status: 'Critical'
-    }
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 2,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'new factory',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 3,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 4,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'new area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 5,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 6,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 7,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 8,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 9,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 10,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 11,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 12,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 13,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 14,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 15,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 16,
+  //     motorName: 'ss1',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 17,
+  //     motorName: 'ss2',
+  //     floorNumber: 4,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 18,
+  //     motorName: 'ss3',
+  //     floorNumber: 2,
+  //     factoryName: 'Industry',
+  //     areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   }
+  // ];
 
   const lineChartData = {
     // X-axis labelling
@@ -268,122 +319,130 @@ const FactoryInchargeHome = (props) => {
   };
 
 
-  const pie_chart_series=['23','34','54']
+  // const pie_chart_series=['23','34','54']
 
 
   return (
-    <div className='ml-4 mr-5 mt-5'>
+    <>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <div className='ml-4 mr-5 mt-5'>
 
-      {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row justify-between items-center'>
-        {/* Flex Container */}
-        <div className='flex justify-start gap-5 rounded-xl w-[70%]'>
+        {/* *********Numbers of Areas, factories, motors **************** */}
+        <div className='flex flex-row justify-between items-center'>
+          {/* Flex Container */}
+          <div className='flex justify-start gap-5 rounded-xl w-[70%]'>
 
-          {/* left box */}
-          <TotalNumberCard iconSrc={stairs} placeName='Floors'
+            {/* left box */}
+            <TotalNumberCard iconSrc={stairs} placeName='Floors'
 
-            // quantity={'' + total_areas}
-            quantity='13'
+              quantity={'' + total_floors}
+              // quantity='13'
 
-            onClick={() => navigate('/FloorsPage')} />
-
-
-          {/* middle box */}
-          {/* <TotalNumberCard iconSrc={factory} placeName='Factories' */}
-
-           {/* quantity={'' + total_factories}  */}
-
-            {/* quantity='10'
-            onClick={() => navigate('/FactoriesPage')} /> */}
+              onClick={() => navigate('/FloorsPage')} />
 
 
-          {/* Right box */}
-          <TotalNumberCard iconSrc={motors_icon} placeName='Motors'
+            {/* middle box */}
+            {/* <TotalNumberCard iconSrc={factory} placeName='Factories' */}
 
-            // quantity={'' + total_motors} 
-            quantity='15'
-            onClick={() => navigate('/Motors')} />
+            {/* quantity={'' + total_factories}  */}
 
+              {/* quantity='10'
+              onClick={() => navigate('/FactoriesPage')} /> */}
+
+
+            {/* Right box */}
+            <TotalNumberCard iconSrc={motors_icon} placeName='Motors'
+
+              quantity={'' + total_motors} 
+              // quantity='15'
+              onClick={() => navigate('/Motors')} />
+
+          </div>
+
+          {/* ********************Alerts Div************************* */}
+          <div className='flex flex-col justify-center items-center gap-2'>
+            {/* Critical Alerts card */}
+            <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
+               alertsNumber={pie_chart_series[2]} 
+              // alertsNumber='20'
+              textColor500='text-red-500' borderColor500='border-red-500' onClick={() => setRedPie(true)} />
+
+            {/* Faulty Alerts Card */}
+            <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts'
+               alertsNumber={pie_chart_series[1]}
+              // alertsNumber='12'
+              bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
+              textColor500='text-yellow-500' borderColor500='border-yellow-500'
+              onClick={() => setYellowPie(true)} />
+          </div>
+
+          {
+            redPie &&
+            <MotorsListModal onClick={() => setRedPie(false)} TableHeading='Critical Motors' />
+          }
+
+          {
+            yellowPie &&
+            <MotorsListModal onClick={() => setYellowPie(false)} TableHeading='Faulty Motors' />
+          }
+          {
+            greenPie &&
+            <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
+          }
         </div>
 
-        {/* ********************Alerts Div************************* */}
-        <div className='flex flex-col justify-center items-center gap-2'>
-          {/* Critical Alerts card */}
-          <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
-            //  alertsNumber={pie_chart_series[2]} 
-            alertsNumber='20'
-            textColor500='text-red-500' borderColor500='border-red-500' onClick={() => setRedPie(true)} />
 
-          {/* Faulty Alerts Card */}
-          <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts'
-            //  alertsNumber={pie_chart_series[1]}
-            alertsNumber='12'
-            bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
-            textColor500='text-yellow-500' borderColor500='border-yellow-500'
-            onClick={() => setYellowPie(true)} />
+        {/* ----- PieChart & Circular Progress Charts ------------ */}
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
+
+
+          <div className='h-60 rounded-xl w-[75%] p-4 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
+            <CircularProgressChart
+             progress={small_charts_data[0]} 
+            // progress={}
+            barColor='#31C431' motorCategory='Flawless' />
+            <CircularProgressChart 
+            progress={small_charts_data[1]}
+            // progress={12}
+            barColor='#F9F502' motorCategory='Faulty' />
+            <CircularProgressChart
+             progress={small_charts_data[2]} 
+            // progress={21}
+            barColor='#DB1915' motorCategory='Critical' />
+          </div>
+
+          <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+          </div>
         </div>
 
-        {
-          redPie &&
-          <MotorsListModal onClick={() => setRedPie(false)} TableHeading='Critical Motors' />
-        }
+    {/* ----------------- Line Chart ------------------------ */}
 
-        {
-          yellowPie &&
-          <MotorsListModal onClick={() => setYellowPie(false)} TableHeading='Faulty Motors' />
-        }
-        {
-          greenPie &&
-          <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
-        }
-      </div>
-
-
-      {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
-
-
-        <div className='h-60 rounded-xl w-[75%] p-4 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
-          <CircularProgressChart
-          //  progress={small_charts_data[0]} 
-          progress={22}
-           barColor='#31C431' motorCategory='Flawless' />
-          <CircularProgressChart 
-          // progress={small_charts_data[1]}
-          progress={12}
-           barColor='#F9F502' motorCategory='Faulty' />
-          <CircularProgressChart
-          //  progress={small_charts_data[2]} 
-          progress={21}
-           barColor='#DB1915' motorCategory='Critical' />
+    <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
+          <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
         </div>
 
-        <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+
+
+      {/* ***************Tabular Motors Summary **************** */}
+
+        <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
+          <Table tableSubheading={'Overall Factory Report'} column_headings={columns} data={motors_data} />
         </div>
+
+        {/* **************handle view button in table *************/}
+        {/* {
+            viewMotor &&
+            <ViewMotorModal  />
+          } */}
+
       </div>
-
-   {/* ----------------- Line Chart ------------------------ */}
-
-   <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
-        <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
-      </div>
-
-
-
-     {/* ***************Tabular Motors Summary **************** */}
-
-      <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
-        <Table tableSubheading={'Overall Factory Report'} column_headings={columns} data={data} />
-      </div>
-
-       {/* **************handle view button in table *************/}
-       {/* {
-          viewMotor &&
-          <ViewMotorModal  />
-        } */}
-
-    </div>
+    </>
   )
 }
 
