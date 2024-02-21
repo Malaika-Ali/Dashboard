@@ -16,6 +16,7 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const AreasPage = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -116,21 +117,21 @@ const AreasPage = (props) => {
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
                 // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
-                    value="12"
+                    value={total_flawless}
                     label="Flawless Motors"
                     percentage="12.6"
                     isPositive />
                 <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
                 // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
-                    value="10"
+                    value={total_faulty}
                     label="Faulty Motors"
                     percentage="11.6"
                     isPositive />
                          <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
                         //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
-                    value="05"
+                    value={total_critical}
                     label="Critical Motors"
                     percentage="9.6"
                     isPositive />
@@ -185,7 +186,7 @@ const AreasPage = (props) => {
             {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' />
+                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} />
             }
             {/* logic for showing delete modal */}
             {
@@ -288,14 +289,14 @@ const AreasPage = (props) => {
 
 
                             {/* API update hone k baad yahan se remove karna */}
-                            <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
+                            {/* <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
 
 
                             <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} /> */}
 
                             {/* yahan tak remove karna */}
 

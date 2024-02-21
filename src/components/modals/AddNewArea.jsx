@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
 
-const AddNewArea = ({ onClose, name }) => {
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
+const AddNewArea = ({ onClose, name, setArea }) => {
+
+  const [open, setOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     name: '',
+    abbr: "",
   });
 
   const handleInputChange = (e) => {
@@ -14,16 +24,48 @@ const AddNewArea = ({ onClose, name }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    onClose();
+    setOpen(true)
+    
+    await axios.post(
+      API_URL + "add_area_admin",
+      {area_name: e.target[0].value, area_abbr: e.target[1].value},
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+      
+      setArea(result.data.area_list);
+      setOpen(false);
+      onClose();
+
+    }).catch(async (error) =>  {
+      setOpen(false);
+      onClose();
+      
+    })
+
+
+
+    
+    // onClose();
   };
 
   return (
     <div
       className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful"
     >
+      <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+      >
+          <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="bg-white rounded-lg shadow w-full max-w-md p-4 md:p-5">
         <div className="flex items-center justify-between border-b rounded-t">
           <h3 className="text-lg font-semibold text-gray-900">Add New {name} </h3>
@@ -65,6 +107,21 @@ const AddNewArea = ({ onClose, name }) => {
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Type Area name"
+                required
+              />
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="abbr" className="block mb-2 text-sm font-medium text-gray-900">
+                {name} Abbreviation
+              </label>
+              <input
+                type="text"
+                name="abbr"
+                id="abbr"
+                value={formData.abbr}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                placeholder="Type Area Abbreviation"
                 required
               />
             </div>
