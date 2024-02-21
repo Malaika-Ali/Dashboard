@@ -27,6 +27,10 @@ const FloorsPage = (props) => {
     // state to handle the deletion of floor
     const [deleteItem, setDeleteItem] = useState(false)
 
+    const handleFloorCardClick=()=>{
+        navigate('/Motors')
+    }
+
 
     return (
         <div className='ml-3 mr-5 mt-5'>
@@ -98,17 +102,23 @@ const FloorsPage = (props) => {
                 <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
                  style={{ overflowY: 'auto', maxHeight: '100%' }}>
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4'
+                         onClick={handleFloorCardClick} />
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4'
+                        onClick={handleFloorCardClick} />
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' 
+                        onClick={handleFloorCardClick}/>
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' 
+                        onClick={handleFloorCardClick}/>
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4'
+                        onClick={handleFloorCardClick} />
 
-                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' />
+                        <FloorCard FloorNumber='1' FactoryName='Agri' AreaName='Maymar' CriticalMotor='2' FaultyMotors='3' FlawlessMotors='4' 
+                        onClick={handleFloorCardClick}/>
                         
                         {/* <FactoryCard FactoryName="Second Floor" />
                         <FactoryCard FactoryName="Third Floor" />

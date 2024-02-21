@@ -75,7 +75,7 @@ export default function Motors(props) {
 
 
   return (
-    <div className='ml-4 mr-5 mt-5'>
+    <div className='ml-3 mr-5 mt-5'>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -84,7 +84,7 @@ export default function Motors(props) {
       </Backdrop>
 
 
-      <div className="flex flex-row justify-between m-5">
+      <div className="flex flex-row justify-between">
         <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
@@ -166,7 +166,11 @@ export default function Motors(props) {
                         <span className='mx-auto'>{`Status: ${row_loop.status}`}</span>
                       </div>
 
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' />
+                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
+                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
+                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
+                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
+                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
                     </>
                        
                      
