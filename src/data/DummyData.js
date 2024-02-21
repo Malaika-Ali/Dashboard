@@ -46,10 +46,10 @@ export const links = [
           name: 'FactoryInchargeHome',
           icon: <IoHome />,
         },
-        {
-          name: 'FactoriesPage',
-          icon: <MdFactory />,
-        },
+        // {
+        //   name: 'FactoriesPage',
+        //   icon: <MdFactory />,
+        // },
         {
           name: 'FloorsPage',
           icon: <GiStairs />,

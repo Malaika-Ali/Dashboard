@@ -23,7 +23,7 @@ export default function Sidebar() {
         }
     }
 
-    const role='admin';
+    const role='factoryIncharge';
 
     let roleLinks = [];
     if (role === 'admin') {
