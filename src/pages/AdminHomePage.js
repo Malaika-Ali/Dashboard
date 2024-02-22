@@ -479,7 +479,7 @@ export default function AdminHomePage(props) {
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-8 mx-auto bg-white rounded-xl w-[96%]'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}
