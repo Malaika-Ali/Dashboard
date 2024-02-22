@@ -17,7 +17,8 @@ import MotorCard from '../components/MotorCard';
 
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
 export default function Motors(props) {
 
   const [open, setOpen] = useState(false);
@@ -25,6 +26,7 @@ export default function Motors(props) {
   const [total_faulty, setTotalFaulty] = useState(0);
   const [total_flawless, setTotalFlawless] = useState(0);
   const [motors, setMotors] = useState([]);
+  const [motors_data, setMotorsData] = useState([]);
   const [data, setData] = useState(null);
   const navigate = useNavigate();
   // state to handle the addition of new motor
@@ -69,6 +71,7 @@ export default function Motors(props) {
       setTotalFaulty(data.total_faulty);
       setTotalFlawless(data.total_flawless);
       setMotors(data.motors_list);
+      setMotorsData(data.motors_data);
 
     }
   }, [data]);
@@ -95,21 +98,21 @@ export default function Motors(props) {
         <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
           // bgColor='bg-green-50'
           iconBgColor="bg-green-200"
-          value="12"
+          value={total_flawless}
           label="Flawless Motors"
           percentage="12.6"
           isPositive />
         <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
           // bgColor='bg-yellow-100'
           iconBgColor="bg-yellow-200"
-          value="10"
+          value={total_faulty}
           label="Faulty Motors"
           percentage="11.6"
           isPositive />
         <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
           //  bgColor='bg-red-50'
           iconBgColor="bg-red-200"
-          value="05"
+          value={total_critical}
           label="Critical Motors"
           percentage="9.6"
           isPositive />
@@ -127,12 +130,7 @@ export default function Motors(props) {
       {
         deleteItem &&
         <DeleteItem onClose={() => setDeleteItem(false)} name='Motor'
-          options={[
-            { label: 'Option 1', value: 'opt1' },
-            { label: 'Option 2', value: 'opt2' },
-            { label: 'Option 3', value: 'opt3' },
-            { label: 'Option 4', value: 'opt4' },
-          ]}
+          options={motors_data}
         />
       }
 
@@ -149,43 +147,21 @@ export default function Motors(props) {
 
 
       {/* *******************     Cards Container     **************/}
-      {
-        motors.map((row, idx) => {
-          return (
-            <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
-              style={{ overflowY: 'auto', maxHeight: '100%' }}>
-              {
-                row.map((row_loop, idx) => {
-                  return (
-                    <>
-                      <div className='bg-white dark:bg-secondary-dark-bg h-40 rounded-xl w-60 px-2 m-3 shadow-md flex flex-col justify-center '>
-                        <div className='flex flex-row justify-between  font-extrabold text-xl tracking-tight   text-slate-500 mb-8'>
-                          <span>{row_loop.factoryName}</span> <span>{row_loop.areaName}</span>
-                        </div>
-                        <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>{row_loop.motorName}</span>
-                        <span className='mx-auto'>{`Status: ${row_loop.status}`}</span>
-                      </div>
-
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
-                      <MotorCard motorName='XYZ' FloorNumber='2' AreaName='Maymar' FactoryName='Agri' motorStatus='Flawless' />
-                    </>
-                       
-                     
-                    )
-
-              })
+      <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
+        style={{ overflowY: 'auto', maxHeight: '100%' }}>
+        {
+          motors.map((row, idx) => {
+            return (
+              <>{ 
+                  row.map((row_loop, index) => <MotorCard motorName={row_loop.motorName} FloorNumber={row_loop.floorNumber} 
+                  AreaName={row_loop.areaName} FactoryName={row_loop.factoryName}
+                  motorStatus={row_loop.status} />)
                 }
-            {/* </div>
-                    
-        })
-      } */}
-                              </div>
-                    )
+                </>
+                  )
                 })
-            }
+              }
+      </div>
     </div>
 
   )

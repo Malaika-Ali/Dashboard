@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
 
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const AddNewMotor = ({ onClose, name }) => {
   const [formData, setFormData] = useState({
     name: '',
     area: '',
+    factory: '',
   });
 
   const handleInputChange = (e) => {
