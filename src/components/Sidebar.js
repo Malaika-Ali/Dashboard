@@ -23,7 +23,8 @@ export default function Sidebar(props) {
         }
     }
 
-    const role=props.user_details.role;
+    // const role=props.user_details.role;
+    const role='admin'
 
     let roleLinks = [];
     if (role === 'admin') {

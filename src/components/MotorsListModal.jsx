@@ -34,151 +34,151 @@ const columns = [
   ];
 
 
-const motors_data =
-[{id: 1,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 2,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 3,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  },
-  {
-    id: 4,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 5,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 6,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  },
-  {
-    id: 7,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 8,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 9,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  },
-  {
-    id: 10,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 11,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 12,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  },
-  {
-    id: 13,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 14,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 15,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  },
-  {
-    id: 16,
-    motorName: 'ss1',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Faulty'
-  },
-  {
-    id: 17,
-    motorName: 'ss2',
-    floorNumber: 4,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Flawless'
-  },
-  {
-    id: 18,
-    motorName: 'ss3',
-    floorNumber: 2,
-    factoryName: 'Industry',
-    areaName: 'Industrial area',
-    status: 'Critical'
-  }
-];
+  const motors_data =
+  [{id: 1,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'Agri',
+      areaName: 'maymar',
+      status: 'Faulty'
+    },
+    {
+      id: 2,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'WavTech',
+      areaName: 'Ahsan a bad',
+      status: 'Flawless'
+    },
+    {
+      id: 3,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Auto',
+      areaName: 'Gulistan e Jauhar',
+      status: 'Critical'
+    },
+    {
+      id: 4,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'Agri',
+      areaName: 'Gulshan',
+      status: 'Faulty'
+    },
+    {
+      id: 5,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'Wavtech',
+      areaName: 'Gulshan',
+      status: 'Flawless'
+    },
+    {
+      id: 6,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Hi-Warble',
+      areaName: 'Sddar',
+      status: 'Critical'
+    },
+    {
+      id: 7,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'Industry',
+      areaName: 'CandyLand',
+      status: 'saddar'
+    },
+    {
+      id: 8,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'Nestle',
+      areaName: 'Saddar',
+      status: 'Flawless'
+    },
+    {
+      id: 9,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Kings',
+      areaName: 'Saddar',
+      status: 'Critical'
+    },
+    {
+      id: 10,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'Factory',
+      areaName: 'Maymar',
+      status: 'Faulty'
+    },
+    {
+      id: 11,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'Loreal',
+      areaName: 'Gulshan',
+      status: 'Flawless'
+    },
+    {
+      id: 12,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Loreal',
+      areaName: 'Maymar',
+      status: 'Critical'
+    },
+    {
+      id: 13,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'factory2',
+      areaName: 'Maymar',
+      status: 'Faulty'
+    },
+    {
+      id: 14,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'Bisconni',
+      areaName: 'Gulshan',
+      status: 'Flawless'
+    },
+    {
+      id: 15,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Bisconni',
+      areaName: 'Gulistan e jauhar',
+      status: 'Critical'
+    },
+    {
+      id: 16,
+      motorName: 'ss1',
+      floorNumber: 2,
+      factoryName: 'Industry',
+      areaName: 'Industrial area',
+      status: 'Faulty'
+    },
+    {
+      id: 17,
+      motorName: 'ss2',
+      floorNumber: 4,
+      factoryName: 'Industry',
+      areaName: 'Industrial area',
+      status: 'Flawless'
+    },
+    {
+      id: 18,
+      motorName: 'ss3',
+      floorNumber: 2,
+      factoryName: 'Industry',
+      areaName: 'Industrial area',
+      status: 'Critical'
+    }
+  ];
 
 
   return (

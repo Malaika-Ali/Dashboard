@@ -23,6 +23,8 @@ import { Table } from '../components';
 import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
+import DateRangePicker from '../components/DateRangePicker';
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -453,8 +455,11 @@ export default function AdminHomePage(props) {
 
       {/* ----------------- Line Chart ------------------------ */}
 
-      <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-center gap-2'>
+      <div className='main-color h-80 mt-8 rounded-xl w-[70%]  p-8 pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-between'>
         <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
+      </div>
+      <DateRangePicker/>
       </div>
 
       {/* ***************Tabular Motors Summary **************** */}
