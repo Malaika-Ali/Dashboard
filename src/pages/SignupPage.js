@@ -121,7 +121,7 @@ const SignupPage = () => {
                     type="text"
                     id="areaName"
                     placeholder="Area Name"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.areaName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -141,7 +141,7 @@ const SignupPage = () => {
                     type="text"
                     id="factoryName"
                     placeholder="Factory Name"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.factoryName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -166,7 +166,7 @@ const SignupPage = () => {
                     type="text"
                     id="areaName"
                     placeholder="Area Name"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.areaName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -186,7 +186,7 @@ const SignupPage = () => {
                     type="text"
                     id="factoryName"
                     placeholder="Factory Name"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.factoryName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -206,7 +206,7 @@ const SignupPage = () => {
                     type="text"
                     id="floorNumber"
                     placeholder="Floor Number"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.floorNumber ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.floorNumber ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -250,7 +250,7 @@ const SignupPage = () => {
                 {...field}
                 type="text"
                 placeholder="First Name"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.firstName ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.firstName ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -270,7 +270,7 @@ const SignupPage = () => {
                 {...field}
                 type="text"
                 placeholder="Last Name"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.lastName ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.lastName ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -296,7 +296,7 @@ const SignupPage = () => {
                 {...field}
                 type="email"
                 placeholder="Email Address"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -317,7 +317,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder="Employee ID"
                 autoComplete='username'
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.employeeID ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -338,7 +338,7 @@ const SignupPage = () => {
                 type="password"
                 placeholder="Password"
                 autoComplete="new-password"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.password ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -385,7 +385,7 @@ const SignupPage = () => {
                 type="password"
                 placeholder="Confirm Password"
                 autoComplete="new-password"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.confirmPassword ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -443,7 +443,7 @@ const SignupPage = () => {
         <div className="flex items-center justify-between">
           
           <button
-            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            className="w-full main-color text-white p-2 rounded-md main-color-hover"
             type="submit"
             // onClick={()=>navigate('/')}
           >

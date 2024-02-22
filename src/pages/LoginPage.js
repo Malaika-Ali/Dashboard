@@ -123,7 +123,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="email"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
                     placeholder="malaika.baig@example.com"
                     autoComplete="email"
                   />
@@ -154,7 +154,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="password"
-                    className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.password ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
                     placeholder="********"
                     autoComplete="current-password"
                   />
@@ -168,7 +168,7 @@ const LoginPage = (props) => {
           {/* <Link to="/adminHomePage"> */}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            className="w-full main-color main-color-hover text-white p-2 rounded-md s"
           >
             Log In
           </button>
