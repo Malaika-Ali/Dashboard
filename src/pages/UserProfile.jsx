@@ -5,15 +5,11 @@ import { ConfirmationModal } from '../components';
 import { SecondaryButton, PrimaryButton } from '../components/buttons'
 import axios from 'axios';
 
-function getToken() {
-    const tokenString = localStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken
-}
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-function UserProfile() {
-    const token_data = getToken()
+function UserProfile(props) {
+    const token_data = props.user_details
     const [isEditing, setisEditing] = useState(false)
     const [firstName, setFirstName] = useState(token_data.first_name);
     const [lastName, setLastName] = useState(token_data.last_name)
@@ -32,7 +28,7 @@ function UserProfile() {
         setisEditing(!isEditing);
     }
 
-    const position = "factoryIncharge";
+    const position = props.user_details.role;
 
     // for back button
     const navigate = useNavigate();

@@ -15,8 +15,8 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const FloorsPage = (props) => {
 
     const navigate = useNavigate();
