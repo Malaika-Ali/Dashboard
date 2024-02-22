@@ -33,18 +33,18 @@ const ModalTable = ({ tableSubheading, column_headings, data }) => {
   return (
     <>
       {/* heading section */}
-      <div className="flex flex-row justify-between w-[100%] mx-4 mt-8">
+      <div className="flex flex-row justify-between w-[90%] mx-5 mt-0">
         <h1 className='font-extrabold mt-4 mb-4 text-xl tracking-tight   text-slate-900'>{tableSubheading}</h1>
         <div className="flex flex-row justify-between">
           {/* Div to contain the search bar and the search Icon */}
-          <div className="flex flex-row justify-center items-center mr-8">
+          <div className="flex flex-row justify-center items-center mr-2">
             <div className="relative">
               {/* Search Bar */}
-              <div className="relative w-60 mt-3 mb-3 ">
+              <div className="relative w-48 mt-3 mb-3 ">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="bg-gray-100 text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none focus:border-blue-500"
+                  className="bg-gray-100 text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />

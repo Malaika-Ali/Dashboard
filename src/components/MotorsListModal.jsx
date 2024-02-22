@@ -1,5 +1,7 @@
 import React from 'react'
 import ModalTable from './modals/ModalTable';
+import { RxCross2 } from "react-icons/rx";
+
 
 
 function MotorsListModal({onClick, TableHeading}) {
@@ -8,22 +10,26 @@ const columns = [
     {
       name: 'Motor Name',
       selector: row => row.motorName,
-      sortable: true
+      sortable: true,
+      center: true
     },
     {
       name: "Floor Number",
       selector: row => row.floorNumber,
-      sortable: true
+      sortable: true,
+      center: true
     },
     {
       name: "Factory Name",
       selector: row => row.factoryName,
-      sortable: true
+      sortable: true,
+      center: true
     },
     {
       name: "Area Name",
       selector: row => row.areaName,
-      sortable: true
+      sortable: true,
+      center: true
     },
   ];
 
@@ -200,8 +206,8 @@ const motors_data =
             </svg>
             <span className="sr-only">Close modal</span>
           </button> */}
-<div className='mt-5 mx-auto bg-white rounded-xl w-[70%] flex flex-col justify-center items-center pt-10 h-[70%]'>
-<button
+<div className='mt-5 mx-auto bg-white rounded-xl w-[70%] flex flex-col justify-center items-center pt-10 h-[70%] relative'>
+{/* <button
             type="button"
             className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
             onClick={onClick}
@@ -221,7 +227,11 @@ const motors_data =
               />
             </svg>
             <span className="sr-only">Close modal</span>
-          </button> 
+          </button>  */}
+
+<button className='mb-4 absolute top-2 right-2 hover:bg-gray-200 rounded-full p-2' onClick={onClick}><RxCross2 /></button>
+
+
         <ModalTable tableSubheading={TableHeading} column_headings={columns} data={motors_data} />
 
       </div>

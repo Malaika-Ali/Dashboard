@@ -464,7 +464,8 @@ export default function AdminHomePage(props) {
         {/* **************handle view button in table *************/}
         {
           viewMotor &&
-          <ViewMotorModal  />
+          <ViewMotorModal onClick={()=>setViewMotor(false)}
+          motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar'  />
         }
 
         {
