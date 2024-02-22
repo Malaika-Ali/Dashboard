@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
 
-const AddNewFactory = ({ onClose, name }) => {
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
+const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list  }) => {
+
+  const [open, setOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     area: '',
@@ -15,10 +24,33 @@ const AddNewFactory = ({ onClose, name }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    onClose();
+
+    await axios.post(
+      API_URL + "add_factory_admin",
+      {factory_name: e.target[0].value, area_id: e.target[1].value},
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+      
+      setFactory(result.data.factories_list);
+      setFactoriesList(result.data.factories_data)
+      setOpen(false);
+      onClose();
+
+    }).catch(async (error) =>  {
+      setOpen(false);
+      onClose();
+      
+    })
+
+    // onClose();
   };
 
   return (
@@ -84,10 +116,8 @@ const AddNewFactory = ({ onClose, name }) => {
                 <option value="" disabled>
                   Select Area
                 </option>
-                <option value="Area1">Area 1</option>
-                <option value="Area2">Area 2</option>
-                <option value="Area3">Area 3</option>
-                <option value="Area4">Area 4</option>
+                {areas_list.map((area, index) => <option value={area.id}>{area.area_name}</option>)}
+                
               </select>
             </div>
 

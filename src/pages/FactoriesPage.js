@@ -14,7 +14,8 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
 const FactoriesPage = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -22,6 +23,8 @@ const FactoriesPage = (props) => {
     const [total_faulty, setTotalFaulty] = useState(0);
     const [total_flawless, setTotalFlawless] = useState(0);
     const [factories, setFactories] = useState([]);
+    const [factories_list, setFactoriesList] = useState([]);
+    const [areas_list, setAreasList] = useState([]);
     const [data, setData] = useState(null);
     const navigate = useNavigate();
 
@@ -68,7 +71,8 @@ const FactoriesPage = (props) => {
             setTotalFaulty(data.total_faulty);
             setTotalFlawless(data.total_flawless);
             setFactories(data.factories_list);
-
+            setFactoriesList(data.factories_data);
+            setAreasList(data.areas);
         }
     }, [data]);
 
@@ -106,21 +110,21 @@ const FactoriesPage = (props) => {
             <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
                 // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
-                    value="12"
+                    value={total_flawless}
                     label="Flawless Motors"
                     percentage="12.6"
                     isPositive />
                 <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
                 // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
-                    value="10"
+                    value={total_faulty}
                     label="Faulty Motors"
                     percentage="11.6"
                     isPositive />
                          <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
                         //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
-                    value="05"
+                    value={total_critical}
                     label="Critical Motors"
                     percentage="9.6"
                     isPositive />
@@ -130,18 +134,14 @@ const FactoriesPage = (props) => {
   {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' />
+                <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' setFactory={setFactories} 
+                setFactoriesList={setFactoriesList} areas_list={areas_list} />
             }
    {/* logic for showing delete modal */}
    {
                 deleteItem &&
                 <DeleteItem onClose={() => setDeleteItem(false)} name='Factory'
-                    options={[
-                        { label: 'Option 1', value: 'opt1' },
-                        { label: 'Option 2', value: 'opt2' },
-                        { label: 'Option 3', value: 'opt3' },
-                        { label: 'Option 4', value: 'opt4' },
-                    ]}
+                    options={factories_list}
                 />
             }
 
@@ -179,7 +179,7 @@ const FactoriesPage = (props) => {
                             }
 
 
-                            <FactoryCard
+                            {/* <FactoryCard
                                 FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
                                 FaultyMotors='3'
                                 FlawlessMotors='2'
@@ -223,7 +223,7 @@ const FactoriesPage = (props) => {
                                 CriticalMotor='6'
                                 FaultyMotors='5'
                                 FlawlessMotors='14'
-                                onClick={handleCardClick} />
+                                onClick={handleCardClick} /> */}
 
                         </div>
                     )

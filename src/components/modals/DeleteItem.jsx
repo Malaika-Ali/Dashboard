@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
 import { DeleteButton } from '../buttons';
 
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function DeleteItem({ onClose, name, options }) {
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
+function DeleteItem({ onClose, name, options, setArea, setAreasList, emp_id }) {
+
+    const [open, setOpen] = useState(false);
 
     const [formData, setFormData] = useState({
         category: '',
     });
+
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -16,9 +25,34 @@ function DeleteItem({ onClose, name, options }) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
+        if (name=="Area"){
+
+            await axios.post(
+                API_URL + "delete_area_admin",
+                {area_id: e.target[0].value, employee_id: emp_id},
+                {
+                  headers: {
+                    'Content-type': 'multipart/form-data',
+                    "Access-Control-Allow-Origin": "*",
+                  }
+                }
+              ).then((result) => {
+                
+                setArea(result.data.area_list);
+                setAreasList(result.data.areas_data);
+                setOpen(false);
+                onClose();
+          
+              }).catch(async (error) =>  {
+                setOpen(false);
+                onClose();
+                
+              });
+
+        }
         onClose();
     };
 
