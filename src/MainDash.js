@@ -91,7 +91,7 @@ function MainDash() {
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
-            <div className='fixed w-60 sidebar bg-white '>
+            <div className='fixed w-64 sidebar bg-white '>
               <Sidebar user_details={token} />
             </div>
           ) : null}
