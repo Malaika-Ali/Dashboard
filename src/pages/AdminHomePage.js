@@ -24,6 +24,7 @@ import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
 import DateRangePicker from '../components/DateRangePicker';
+import CalendarClickModal from '../components/modals/CalendarClickModal';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -386,6 +387,9 @@ export default function AdminHomePage(props) {
   };
 
 
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
+
   return (
     <div className='ml-5 mr-5 mt-5'>
       <Backdrop
@@ -467,7 +471,11 @@ export default function AdminHomePage(props) {
         <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
           <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={670} />
         </div>
-        <DateRangePicker />
+        <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
+        {
+          calendarClick &&
+          <CalendarClickModal onClick={()=>setCalendarClick(false)} TableHeading='Motors Performance'/>
+        }
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
