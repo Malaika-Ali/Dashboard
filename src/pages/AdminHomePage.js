@@ -23,6 +23,9 @@ import { Table } from '../components';
 import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
+import DateRangePicker from '../components/DateRangePicker';
+import CalendarClickModal from '../components/modals/CalendarClickModal';
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -324,11 +327,11 @@ export default function AdminHomePage(props) {
 
   const lineChartData = {
     // X-axis labelling
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     // Y-Axis labelling
-    criticalValues: [10, 15, 8, 12, 18, 45, 66],
-    faultyValues: [5, 8, 3, 7, 10, 22, 33],
-    flawlessValues: [20, 25, 15, 22, 30, 54, 22],
+    criticalValues: [10, 15, 8, 12, 18, 45, 16, 25, 32, 46,55,62],
+    faultyValues: [5, 8, 3, 7, 10, 22, 33, 36, 45, 55, 66,68],
+    flawlessValues: [66, 60, 55, 48, 30, 24, 22, 20, 11, 9, 5, 0],
   };
 
   const factory_Incharge_headings = [
@@ -359,7 +362,7 @@ export default function AdminHomePage(props) {
   const [yellowPie, setYellowPie] = useState(false)
   const [greenPie, setGreenPie] = useState(false)
 
- 
+
   const handleClick = (seriesIndex) => {
     // Reset all states
     setRedPie(false);
@@ -383,6 +386,9 @@ export default function AdminHomePage(props) {
     }
   };
 
+
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
 
   return (
     <div className='ml-5 mr-5 mt-5'>
@@ -415,73 +421,88 @@ export default function AdminHomePage(props) {
         <div className='flex flex-col justify-center items-center gap-2'>
           {/* Critical Alerts card */}
           <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
-           alertsNumber={pie_chart_series[2]} textColor500='text-red-500' borderColor500='border-red-500' onClick={()=>setRedPie(true)} />
+            alertsNumber={pie_chart_series[2]} textColor500='text-red-500' borderColor500='border-red-500' onClick={() => setRedPie(true)} />
 
           {/* Faulty Alerts Card */}
           <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts' alertsNumber={pie_chart_series[1]}
             bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
-            textColor500='text-yellow-500' borderColor500='border-yellow-500' 
-            onClick={()=>setYellowPie(true)}/>
+            textColor500='text-yellow-500' borderColor500='border-yellow-500'
+            onClick={() => setYellowPie(true)} />
         </div>
 
         {
           redPie &&
-          <MotorsListModal onClick={()=>setRedPie(false)} TableHeading='Critical Motors'/>
+          <MotorsListModal onClick={() => setRedPie(false)} TableHeading='Critical Motors' />
         }
-        
-          {
-            yellowPie &&
-            <MotorsListModal onClick={()=>setYellowPie(false)} TableHeading='Faulty Motors'/>
-          }
+
+        {
+          yellowPie &&
+          <MotorsListModal onClick={() => setYellowPie(false)} TableHeading='Faulty Motors' />
+        }
       </div>
 
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
+      <div className='flex flex-col justify-center items-start mt-5'>
 
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
 
-        <div className='h-60 rounded-xl w-[75%] p-5 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
-          <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
-          <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
-          <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
+
+          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
+            <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
+            <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
+            <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
+          </div>
+
+          <div className='main-color h-60 rounded-xl w-60 pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+          </div>
         </div>
 
-        <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
-        </div>
       </div>
 
       {/* ----------------- Line Chart ------------------------ */}
+      <div className='flex flex-col justify-center items-start mt-5'>
 
-      <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
-        <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
+        <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
+          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
+        </div>
+        <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
+        {
+          calendarClick &&
+          <CalendarClickModal onClick={()=>setCalendarClick(false)} TableHeading='Motors Performance'/>
+        }
       </div>
-
+</div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
-        <Table tableSubheading={'Overall Report'} column_headings={columns} data={motors_data} />
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[96%]'>
+        <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}
         {
           viewMotor &&
-          <ViewMotorModal onClick={()=>setViewMotor(false)}
-          motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar'  />
+          <ViewMotorModal onClick={() => setViewMotor(false)}
+            motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
         }
 
         {
           redPie &&
-          <MotorsListModal onClick={()=>setRedPie(false)} TableHeading='Critical Motors'/>
+          <MotorsListModal onClick={() => setRedPie(false)} TableHeading='Critical Motors' />
         }
-        
-          {
-            yellowPie &&
-            <MotorsListModal onClick={()=>setYellowPie(false)} TableHeading='Faulty Motors'/>
-          }
-  {
-            greenPie &&
-            <MotorsListModal onClick={()=>setGreenPie(false)} TableHeading='Flawless Motors'/>
-          }
-        
+
+        {
+          yellowPie &&
+          <MotorsListModal onClick={() => setYellowPie(false)} TableHeading='Faulty Motors' />
+        }
+        {
+          greenPie &&
+          <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
+        }
+
       </div>
     </div>
   )

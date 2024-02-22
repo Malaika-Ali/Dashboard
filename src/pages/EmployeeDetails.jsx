@@ -202,9 +202,9 @@ function EmployeeDetails() {
                     </AnimatedIconButton>
 
                     {/* *******Delete Factory Incharge Button***** */}
-                    <AnimatedIconButton text='Delete Factory Incharge' color='main-color' onClick={() => alert('Delete')}>
+                    {/* <AnimatedIconButton text='Delete Factory Incharge' color='main-color' onClick={() => alert('Delete')}>
                         <RiDeleteBinLine size={20} />
-                    </AnimatedIconButton>
+                    </AnimatedIconButton> */}
                 </div>
             </div>
 
@@ -220,9 +220,9 @@ function EmployeeDetails() {
                     </AnimatedIconButton>
 
                     {/* *******Delete Floor Incharge Button***** */}
-                    <AnimatedIconButton text='Delete Floor Incharge' color='main-color' onClick={() => alert('Delete')}>
+                    {/* <AnimatedIconButton text='Delete Floor Incharge' color='main-color' onClick={() => alert('Delete')}>
                         <RiDeleteBinLine size={20} />
-                    </AnimatedIconButton>
+                    </AnimatedIconButton> */}
                 </div>
             </div>
             {

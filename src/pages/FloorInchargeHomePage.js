@@ -1,15 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TotalNumberCard } from '../summaryCards';
 import { Link, useNavigate } from 'react-router-dom';
 
-import factory from '../assets/factory.svg'
-import motors from '../assets/motors.svg'
-import location from '../assets/location.svg'
 import { Table } from '../components';
 
 import { PieChart } from '../components/charts'
 import { CircularProgressChart } from '../components/charts'
 import { LineChart } from '../components/charts'
+import MotorsListModal from '../components/MotorsListModal';
+import Alert from '../components/Alert';
+
+import criticalalert from '../assets/criticalalert.png'
+import faultyalert from '../assets/faultyalert.png'
+import motors_icon from '../assets/motors.svg'
+import { GiStairs } from "react-icons/gi";
+import stairs from '../assets/stairs.png'
+import ViewMotorModal from '../components/modals/ViewMotorModal';
+
+import DateRangePicker from '../components/DateRangePicker';
+
+
 
 const FloorInchargeHomePage = (props) => {
 
@@ -20,7 +30,8 @@ const FloorInchargeHomePage = (props) => {
     {
       name: 'Motor Name',
       selector: row => row.motorName,
-      sortable: true
+      sortable: true,
+      center: true
     },
     // {
     //   name: "Factory Name",
@@ -34,6 +45,7 @@ const FloorInchargeHomePage = (props) => {
     // },
     {
       name: "Status",
+      center: true,
       selector: (row) => {
         // Conditional styling based on the "Status" value
         let color = '';
@@ -56,7 +68,8 @@ const FloorInchargeHomePage = (props) => {
     },
     {
       name: "View",
-      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => alert(row.id)}>View</button>
+      center: true,
+      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
     }
   ];
 
@@ -189,58 +202,168 @@ const FloorInchargeHomePage = (props) => {
     }
   ];
 
+  // const lineChartData = {
+  //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  //   values: [30, 40, 25, 50, 49],
+  // };
+
+
   const lineChartData = {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    values: [30, 40, 25, 50, 49],
+    // X-axis labelling
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    // Y-Axis labelling
+    criticalValues: [10, 15, 8, 12, 18, 45, 66],
+    faultyValues: [5, 8, 3, 7, 10, 22, 33],
+    flawlessValues: [20, 25, 15, 22, 30, 54, 22],
   };
 
+  // States to handle the motors list popup
+  const [redPie, setRedPie] = useState(false)
+  const [yellowPie, setYellowPie] = useState(false)
+  const [greenPie, setGreenPie] = useState(false)
+
+  // function to change the popup states on pie click
+  const handleClick = (seriesIndex) => {
+    // Reset all states
+    setRedPie(false);
+    setYellowPie(false);
+    setGreenPie(false);
+
+    // Set the state based on the clicked pie slice color
+    switch (seriesIndex) {
+      case 0:
+        setGreenPie(true);
+        break;
+      case 1:
+        setYellowPie(true);
+        break;
+      case 2:
+        setRedPie(true);
+        break;
+      default:
+        // Do nothing or handle unexpected seriesIndex
+        break;
+    }
+  };
+
+
+  const pie_chart_series = ['23', '34', '54']
+
+  // state to handle view motor modal
+  const [viewMotor, setViewMotor] = useState(false)
+
+
   return (
-    <>
-      {/* Flex Container */}
-      <div className='flex justify-between mt-4 bg-slate-200 rounded-xl w-90 m-3'>
+    <div className='ml-4 mr-5 mt-5'>
+      {/* *********Numbers of Areas, factories, motors **************** */}
+      <div className='flex flex-row justify-between items-center'>
+        {/* Flex Container */}
+        <div className='flex justify-start gap-5 rounded-xl w-[70%]'>
 
-        {/* left box */}
-        <TotalNumberCard iconSrc={location} placeName='Areas' quantity='32' />
+          {/* left box */}
+          {/* <TotalNumberCard iconSrc={stairs} placeName='Floors'
+
+              quantity={'' + total_floors} */}
+          {/* // quantity='13' */}
+
+          {/* onClick={() => navigate('/FloorsPage')} /> */}
 
 
-        {/* middle box */}
-        <TotalNumberCard iconSrc={factory} placeName='Factories' quantity='30' />
+          {/* middle box */}
+          {/* <TotalNumberCard iconSrc={factory} placeName='Factories' */}
+
+          {/* quantity={'' + total_factories}  */}
+
+          {/* quantity='10'
+              onClick={() => navigate('/FactoriesPage')} /> */}
 
 
-        {/* Right box */}
-        <TotalNumberCard iconSrc={motors} placeName='Motors' quantity='50' />
+          {/* Right box */}
+          <TotalNumberCard iconSrc={motors_icon} placeName='Motors'
+
+            // quantity={'' + total_motors} 
+            quantity='15'
+            onClick={() => navigate('/Motors')} />
+
+        </div>
+
+        {/* ********************Alerts Div************************* */}
+        <div className='flex flex-col justify-center items-center gap-2'>
+          {/* Critical Alerts card */}
+          <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
+            alertsNumber={pie_chart_series[2]}
+            // alertsNumber='20'
+            textColor500='text-red-500' borderColor500='border-red-500' onClick={() => setRedPie(true)} />
+
+          {/* Faulty Alerts Card */}
+          <Alert iconSrc={faultyalert} iconColor='yellow' message='Faulty Alerts'
+            alertsNumber={pie_chart_series[1]}
+            // alertsNumber='12'
+            bgColor50='bg-yellow-50' borderColor600='border-yellow-600' textColor900='text-yellow-900'
+            textColor500='text-yellow-500' borderColor500='border-yellow-500'
+            onClick={() => setYellowPie(true)} />
+        </div>
+
+        {
+          redPie &&
+          <MotorsListModal onClick={() => setRedPie(false)} TableHeading='Critical Motors' />
+        }
+
+        {
+          yellowPie &&
+          <MotorsListModal onClick={() => setYellowPie(false)} TableHeading='Faulty Motors' />
+        }
+        {
+          greenPie &&
+          <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
+        }
       </div>
 
+      {/* ----- PieChart & Circular Progress Charts ------------ */}
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
 
-      {/* -------------PieChart and line Chart---------------- */}
-      <div className='mt-10 bg-slate-200 rounded-xl m-5'>
-        <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='bg-white h-96 rounded-xl w-100  p-8 pt-9 m-3 text-center flex flex-row justify-between gap-44'>
-            <PieChart title="Motors' Performance" />
-            <LineChart data={lineChartData} chartTitle="Monthly Report" />
 
-          </div>
+        <div className='h-60 rounded-xl w-[75%] p-4 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
+          <CircularProgressChart
+            //  progress={small_charts_data[0]} 
+            progress={2}
+            barColor='#31C431' motorCategory='Flawless' />
+          <CircularProgressChart
+            // progress={small_charts_data[1]}
+            progress={12}
+            barColor='#F9F502' motorCategory='Faulty' />
+          <CircularProgressChart
+            //  progress={small_charts_data[2]} 
+            progress={21}
+            barColor='#DB1915' motorCategory='Critical' />
+        </div>
+
+        <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
         </div>
       </div>
 
-      {/* -------Circular Progress Charts--------------------- */}
-      <div className='mt-8 bg-slate-200 rounded-xl m-5'>
-        <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-          <div className='bg-white h-60 rounded-xl w-100 p-5 m-3 text-center flex flex-row justify-center items-center'>
+         {/* ----------------- Line Chart ------------------------ */}
 
-            <CircularProgressChart progress={76} barColor='#31C431' motorCategory='Flawless' />
-            <CircularProgressChart progress={82} barColor='#F9F502' motorCategory='Faulty' />
-            <CircularProgressChart progress={31} barColor='#DB1915' motorCategory='Critical' />
-          </div>
-        </div>
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-center gap-2'>
+      <div className='main-color h-80 mt-8 rounded-xl w-[70%]  p-8 pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-between'>
+        <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
+      </div>
+      <DateRangePicker/>
       </div>
 
-      {/* Table section */}
-      <div className='mt-5 mx-auto bg-slate-200 rounded-xl w-[96%]'>
+      {/* ***************Tabular Motors Summary **************** */}
+
+      <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
         <Table tableSubheading={'Overall Floor Report'} column_headings={columns} data={data} />
       </div>
-
-    </>
+      {/* **************handle view button in table *************/}
+      {
+        viewMotor &&
+        <ViewMotorModal onClick={() => setViewMotor(false)}
+          motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+      }
+    </div>
   )
 }
 

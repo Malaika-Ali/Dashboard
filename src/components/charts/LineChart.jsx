@@ -83,11 +83,12 @@ function LineChart({ data, chartTitle, chartHeight, chartWidth }) {
     },
     title: {
       text: chartTitle,
-      align: 'left',
+      align: 'center',
       style: {
         fontSize: '20px',
         fontWeight: 'bold',
         color: 'white',
+        // marginLeft: '20px'
       },
     },
     stroke: {

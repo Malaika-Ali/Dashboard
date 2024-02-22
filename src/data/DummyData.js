@@ -70,10 +70,10 @@ export const links = [
           name: 'FloorInchargeHomePage',
           icon: <IoHome />,
         },
-        {
-          name: 'FloorsPage',
-          icon: <GiStairs />,
-        },
+        // {
+        //   name: 'FloorsPage',
+        //   icon: <GiStairs />,
+        // },
         {
           name: 'Motors',
           icon: <IoMdSettings />,

@@ -1,10 +1,10 @@
 import React from 'react'
-import ModalTable from './modals/ModalTable';
+import ModalTable from './ModalTable';
 import { RxCross2 } from "react-icons/rx";
 
 
 
-function MotorsListModal({onClick, TableHeading}) {
+function CalendarClickModal({onClick, TableHeading}) {
 // table columns headings
 const columns = [
     {
@@ -31,6 +31,28 @@ const columns = [
       sortable: true,
       center: true
     },
+    {
+        name: "Status",
+        selector: (row) => {
+          // Conditional styling based on the "Status" value
+          let color = '';
+          switch (row.status) {
+            case 'Flawless':
+              color = 'text-green-500';
+              break;
+            case 'Critical':
+              color = 'text-red-500';
+              break;
+            case 'Faulty':
+              color = 'text-yellow-500';
+              break;
+            default:
+              color = '';
+          }
+          return <span className={color}>{row.status}</span>;
+        },
+        sortable: true
+      },
   ];
 
 
@@ -244,4 +266,4 @@ const columns = [
   )
 }
 
-export default MotorsListModal
+export default CalendarClickModal

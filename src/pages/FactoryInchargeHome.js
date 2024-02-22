@@ -23,6 +23,9 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import DateRangePicker from '../components/DateRangePicker';
+import CalendarClickModal from '../components/modals/CalendarClickModal';
+
 // let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 let API_URL = "http://localhost:5001/";
 const FactoryInchargeHome = (props) => {
@@ -318,6 +321,9 @@ const FactoryInchargeHome = (props) => {
     }
   };
 
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
+
 
   // const pie_chart_series=['23','34','54']
 
@@ -398,10 +404,16 @@ const FactoryInchargeHome = (props) => {
 
 
         {/* ----- PieChart & Circular Progress Charts ------------ */}
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
+
+        <div className='flex flex-col justify-center items-start mt-5'>
+
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
 
 
-          <div className='h-60 rounded-xl w-[75%] p-4 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
+
+
+          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
             <CircularProgressChart
              progress={small_charts_data[0]} 
             // progress={}
@@ -416,17 +428,29 @@ const FactoryInchargeHome = (props) => {
             barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <div className='main-color h-60 rounded-xl w-60 pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
+        </div>
         </div>
 
     {/* ----------------- Line Chart ------------------------ */}
 
-    <div className='main-color h-80 mt-10 rounded-xl w-[70%]  p-8 pt-9 m-3 text-center flex flex-col flex-wrap lg:flex-nowrap justify-between gap-5'>
-          <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
-        </div>
+    <div className='flex flex-col justify-center items-start mt-5'>
 
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
+        <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
+          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
+        </div>
+        <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
+        {
+          calendarClick &&
+          <CalendarClickModal onClick={()=>setCalendarClick(false)} TableHeading='Motors Performance'/>
+        }
+      </div>
+</div>
 
 
       {/* ***************Tabular Motors Summary **************** */}
