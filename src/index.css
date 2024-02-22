@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
+/* regular lato */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Overpass:wght@300;800&family=Poppins&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +10,14 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans",sans-serif;
+  /* font-family: "Open Sans",sans-serif; */
+  font-family: "Lato", sans-serif;
   background-image: linear-gradient(to right, #F4F3F2, #F4F2F3, #F5F3F4)
+}
+
+.lato-regular-16{
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
 }
 
 .card-color{
@@ -17,6 +26,10 @@ body {
 
 .main-color{
   background-image: linear-gradient(to right, #2F3549, #303548, #2F344B)
+}
+
+.main-font{
+  color: #2F344B;
 }
 
 .light-main-color{
