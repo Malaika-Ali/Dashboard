@@ -237,7 +237,8 @@ const SignupPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded shadow-md w-96 mt-8 mb-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
-        <div className="mb-4">
+
+        <div className="mb-4 ">
           <label className="block text-gray-600 text-sm font-semibold mb-2">
             First Name
           </label>
@@ -436,6 +437,9 @@ const SignupPage = () => {
           </div>
           {errors.role && <p className="text-red-500 text-xs italic">{errors.role.message}</p>}
         </div>
+
+
+        
 
         {/* Additional fields based on selected role */}
         {renderAdditionalFields(selectedRole)}

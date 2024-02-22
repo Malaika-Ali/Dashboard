@@ -469,7 +469,7 @@ export default function AdminHomePage(props) {
 
       <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
         <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
-          <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={670} />
+          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
         </div>
         <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
         {
