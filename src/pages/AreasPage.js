@@ -15,8 +15,8 @@ import { RiAddLine } from "react-icons/ri";
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+let API_URL = "http://localhost:5001/";
 const AreasPage = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -24,6 +24,7 @@ const AreasPage = (props) => {
     const [total_faulty, setTotalFaulty] = useState(0);
     const [total_flawless, setTotalFlawless] = useState(0);
     const [areas, setAreas] = useState([]);
+    const [areas_list, setAreasList] = useState([]);
     const [data, setData] = useState(null);
     // state to handle the addition of new area
     const [addNewItem, setAddNewItem] = useState(false)
@@ -70,6 +71,7 @@ const AreasPage = (props) => {
             setTotalFaulty(data.total_faulty);
             setTotalFlawless(data.total_flawless);
             setAreas(data.area_list);
+            setAreasList(data.areas_data)
 
         }
     }, [data]);
@@ -186,18 +188,13 @@ const AreasPage = (props) => {
             {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} />
+                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} setAreasList={setAreasList} />
             }
             {/* logic for showing delete modal */}
             {
                 deleteItem &&
                 <DeleteItem onClose={() => setDeleteItem(false)} name='Area'
-                    options={[
-                        { label: 'Option 1', value: 'opt1' },
-                        { label: 'Option 2', value: 'opt2' },
-                        { label: 'Option 3', value: 'opt3' },
-                        { label: 'Option 4', value: 'opt4' },
-                    ]}
+                    options={areas_list} setArea={setAreas} setAreasList={setAreasList} emp_id={props.user_details.employee_id}
                 />
             }
 

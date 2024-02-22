@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const AddNewArea = ({ onClose, name, setArea }) => {
+const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
 
   const [open, setOpen] = useState(false);
   
@@ -31,7 +31,7 @@ const AddNewArea = ({ onClose, name, setArea }) => {
     
     await axios.post(
       API_URL + "add_area_admin",
-      {area_name: e.target[0].value, area_abbr: e.target[1].value},
+      {factory_name: e.target[0].value, area_abbr: e.target[1].value},
       {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -41,6 +41,7 @@ const AddNewArea = ({ onClose, name, setArea }) => {
     ).then((result) => {
       
       setArea(result.data.area_list);
+      setAreasList(result.data.areas_data)
       setOpen(false);
       onClose();
 
