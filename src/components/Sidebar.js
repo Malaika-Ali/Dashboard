@@ -14,7 +14,7 @@ export default function Sidebar(props) {
     
     const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-gray-200  text-md m-2';
     
-    const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-black hover:text-gray-200 dark:hover:text-gray-200 hover:bg-blue-500 hover:rounded-r-xl m-2';
+    const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-black hover:text-gray-200 dark:hover:text-gray-200 main-hover hover:rounded-full m-2';
 
 
     const handleCloseSideBar=()=>{

@@ -39,6 +39,9 @@ body {
 .main-color-hover:hover{
   background-image: linear-gradient(to right, #57627D, #5C6A89, #576481);
 }
+.main-hover:hover{
+  background-image: linear-gradient(to right, #2F3549, #303548, #2F344B)
+}
 
 .main-color-focus:focus {
   border-color: #2F3549; 
