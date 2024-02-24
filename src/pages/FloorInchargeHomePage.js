@@ -19,7 +19,7 @@ import ViewMotorModal from '../components/modals/ViewMotorModal';
 
 import DateRangePicker from '../components/DateRangePicker';
 
-
+import CalendarClickModal from '../components/modals/CalendarClickModal';
 
 const FloorInchargeHomePage = (props) => {
 
@@ -252,9 +252,12 @@ const FloorInchargeHomePage = (props) => {
   // state to handle view motor modal
   const [viewMotor, setViewMotor] = useState(false)
 
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
+
 
   return (
-    <div className='ml-4 mr-5 mt-5'>
+    <div className='ml-4 mr-3 mt-5'>
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className='flex flex-row justify-between items-center'>
         {/* Flex Container */}
@@ -320,41 +323,57 @@ const FloorInchargeHomePage = (props) => {
       </div>
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-center'>
+
+      <div className='flex flex-col justify-center items-start mt-5'>
+
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
 
 
-        <div className='h-60 rounded-xl w-[75%] p-4 text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center'>
-          <CircularProgressChart
-            //  progress={small_charts_data[0]} 
-            progress={2}
-            barColor='#31C431' motorCategory='Flawless' />
-          <CircularProgressChart
-            // progress={small_charts_data[1]}
-            progress={12}
-            barColor='#F9F502' motorCategory='Faulty' />
-          <CircularProgressChart
-            //  progress={small_charts_data[2]} 
-            progress={21}
-            barColor='#DB1915' motorCategory='Critical' />
+          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
+            <CircularProgressChart
+              //  progress={small_charts_data[0]} 
+              progress={2}
+              barColor='#31C431' motorCategory='Flawless' />
+            <CircularProgressChart
+              // progress={small_charts_data[1]}
+              progress={12}
+              barColor='#F9F502' motorCategory='Faulty' />
+            <CircularProgressChart
+              //  progress={small_charts_data[2]} 
+              progress={21}
+              barColor='#DB1915' motorCategory='Critical' />
+          </div>
+
+          <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+          </div>
         </div>
+      </div>
 
-        <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
-          <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+      {/* ----------------- Line Chart ------------------------ */}
+
+      <div className='flex flex-col justify-center items-start mt-5'>
+
+        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
+          <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
+            <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
+          </div>
+          <DateRangePicker handleDateChange={() => setCalendarClick(true)} />
+          {
+            calendarClick &&
+            <CalendarClickModal onClick={() => setCalendarClick(false)} TableHeading='Motors Performance' />
+          }
         </div>
       </div>
 
-         {/* ----------------- Line Chart ------------------------ */}
 
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-center gap-2'>
-      <div className='main-color h-80 mt-8 rounded-xl w-[70%]  p-8 pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-between'>
-        <LineChart data={lineChartData} chartTitle="Monthly Report" chartHeight={280} chartWidth={600} />
-      </div>
-      <DateRangePicker/>
-      </div>
 
       {/* ***************Tabular Motors Summary **************** */}
 
-      <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
+      <div className='mt-14 mx-auto bg-white rounded-xl w-[90%]'>
         <Table tableSubheading={'Overall Floor Report'} column_headings={columns} data={data} />
       </div>
       {/* **************handle view button in table *************/}

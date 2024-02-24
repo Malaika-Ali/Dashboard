@@ -14,8 +14,8 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const FactoriesPage = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -97,7 +97,7 @@ const FactoriesPage = (props) => {
 
             {/* heading section */}
             <div className="flex flex-row justify-between">
-                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900 '>Factories Report</h1>
+                <h1 className='font-extrabold text-2xl main-font ml-4 '>Factories Report</h1>
                 {/* <div className="flex flex-row mr-5 justify-center">
                     <img src={filterby} alt="" />
                     <span className='text-black'>Sort</span></div> */}

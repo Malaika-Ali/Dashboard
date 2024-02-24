@@ -39,7 +39,7 @@ const FloorsPage = (props) => {
         navigate('/Motors')
     }
     async function fetch_data() {
-
+        
         await axios.post(
           API_URL + "factory_incharge_floors_page",{employee_id: props.user_details.employee_id},
           {
@@ -95,7 +95,7 @@ const FloorsPage = (props) => {
 
                     {/* heading section */}
                     <div className="flex flex-row justify-between">
-                        <h1 className='font-extrabold text-xl tracking-tight text-slate-900'>Floors Report</h1>
+                        <h1 className='font-extrabold text-2xl main-font ml-4'>Floors Report</h1>
                     </div>
 
                     {/* Flex Container */}

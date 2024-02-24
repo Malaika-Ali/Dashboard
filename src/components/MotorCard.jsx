@@ -3,23 +3,42 @@ import { FaLocationDot } from "react-icons/fa6";
 import { MdFactory } from "react-icons/md";
 
 function MotorCard({motorName, FloorNumber, AreaName,FactoryName, motorStatus}) {
+
+
+  const getStatusColor = () => {
+    switch (motorStatus) {
+      case 'Flawless':
+        return 'text-green-500'; // Green color for Flawless
+      case 'Critical':
+        return 'text-red-500'; // Red color for Critical
+      case 'Faulty':
+        return 'text-yellow-500'; // Yellow color for Faulty
+      default:
+        return 'text-gray-500'; // Default color if none of the above conditions match
+    }
+  };
+
   return (
     <div className='flex flex-wrap lg:flex-nowrap justify-center' >
     <div className='bg-white dark:bg-secondary-dark-bg
      h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer'>
-      <div className='flex flex-row justify-center  font-extrabold text-xl tracking-tight   text-slate-900 mb-2'>
+      <div className='flex flex-row justify-center  font-extrabold text-3xl main-font mb-2 mt-3'>
         <span> {motorName}</span> 
       </div>
 
       <div className='flex flex-col justify-center items-center'>
-      <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  mb-2'>Floor number: {FloorNumber}</span>
+      <span className='mx-auto font-extrabold text-sm tracking-tight text-slate-400  mb-2'>Floor number: {FloorNumber}</span>
       </div>
 
-      <div className='flex flex-col justify-center items-center'>
+      {/* <div className='flex flex-col justify-center items-center'>
       <span className='mx-auto font-extrabold text-xl tracking-tight   text-slate-900  pb-5'>{motorStatus}</span>
+      </div> */}
+
+       <div className='flex flex-col justify-center items-center'>
+      <span className={`mx-auto font-extrabold text-xl ${getStatusColor()}  pb-5`}>{motorStatus} </span>
       </div>
 
-<div className='flex flex-row justify-between items-center px-2'>
+<div className='flex flex-row justify-between items-center px-2 text-gray-500'>
       <div className='flex flex-row justify-center items-center mt-2 gap-1'>
       <FaLocationDot />
       <span>{AreaName}</span>

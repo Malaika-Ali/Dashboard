@@ -87,8 +87,8 @@ export default function Motors(props) {
       </Backdrop>
 
 
-      <div className="flex flex-row justify-between">
-        <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
+      <div className="flex flex-row justify-between ml-4">
+        <h1 className='font-extrabold text-2xl main-font' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
 

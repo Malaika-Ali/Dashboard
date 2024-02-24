@@ -8,6 +8,11 @@ import logo from '../assets/logo.png'
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
 
+function getToken() {
+    const tokenString = localStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken
+  }
 export default function Sidebar(props) {
 
     const {activeMenu, setactiveMenu, screenSize} = useStateContext();
@@ -24,7 +29,8 @@ export default function Sidebar(props) {
     }
 
     // const role=props.user_details.role;
-    const role='admin'
+    const role=getToken().role;
+    // const role='floorIncharge'
 
     let roleLinks = [];
     if (role === 'admin') {
