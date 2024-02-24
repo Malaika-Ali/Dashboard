@@ -15,8 +15,8 @@ import { RiAddLine } from "react-icons/ri";
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const AreasPage = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -81,21 +81,36 @@ const AreasPage = (props) => {
         navigate(`/FactoriesPage`);
     };
 
+    function breakArrayInto2D(originalArray, itemsPerNestedList) {
+        const twoDArray = [];
+        let currentNestedList = [];
+      
+        for (let i = 0; i < originalArray.length; i++) {
+          currentNestedList.push(originalArray[i]);
+      
+          // Check if the current nested list is full or if we have reached the end of the original array
+          if (currentNestedList.length === itemsPerNestedList || i === originalArray.length - 1) {
+            twoDArray.push(currentNestedList);
+            currentNestedList = []; // Reset the current nested list
+          }
+        }
+      
+        return twoDArray;
+      }
+
     // function for handling areas sorting
     const handleSort = () => {
-        const sorted = [...areas].sort((a, b) =>
-            // APi update hone k baaad sorting aise karna
-            // a.area_name.localeCompare(b.area_name)
-            a[0].props.AreaName.localeCompare(b[0].props.AreaName)
-        );
+        let sorted = areas.flat(1).sort();
+        sorted =breakArrayInto2D(sorted, 3); 
+        console.log(sorted)
         setSortedAreas(sorted);
     };
 
 
     // UseEffect to reset sortedAreas when areas change
-    useEffect(() => {
-        setSortedAreas([]);
-    }, [areas]);
+    // useEffect(() => {
+    //     setSortedAreas([]);
+    // }, [areas]);
 
     return (
         <div className='ml-3 mr-5 mt-5'>
@@ -106,8 +121,8 @@ const AreasPage = (props) => {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <div className="flex flex-row justify-between m-5">
-                <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
+            <div className="flex flex-row justify-between m-4">
+                <h1 className='font-extrabold text-2xl main-font ml-0' >Summary</h1>
                 {/* <div>Refresh</div> */}
             </div>
 
@@ -260,14 +275,14 @@ const AreasPage = (props) => {
 
 
                             {/* API update hone k baad yahan se remove karna */}
-                            <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
+                            {/* <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
 
 
                             <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
                             <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} />
+                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} /> */}
 
                             {/* yahan tak remove karna */}
 

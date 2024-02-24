@@ -23,17 +23,17 @@ const FloorCard = ({FloorNumber, FactoryName, AreaName, CriticalMotor, FaultyMot
     <div className='flex flex-wrap lg:flex-nowrap justify-center' onClick={onClick}>
               <div className='bg-white dark:bg-secondary-dark-bg
                h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer'>
-                <div className='flex flex-row justify-center  font-extrabold text-xl tracking-tight   text-slate-900 mb-2'>
+                <div className='flex flex-row justify-center  font-extrabold text-3xl main-font mb-2'>
                   <span>Floor: {FloorNumber}</span> 
                 </div>
 
-                <div className='flex flex-col justify-center items-center'>
+                <div className='flex flex-col justify-center items-center text-sm text-slate-600'>
                 <span>{`Total critical motors: ${CriticalMotor}`}</span>
                 <span>{`Total Faulty motors: ${FaultyMotors}`}</span>
                 <span>{`Total Flawless motors: ${FlawlessMotors}`}</span>
                 </div>
 
-<div className='flex flex-row justify-between items-center px-2'>
+<div className='flex flex-row justify-between items-center px-2 text-gray-500'>
                 <div className='flex flex-row justify-center items-center mt-2 gap-1'>
                 <FaLocationDot />
                 <span>{AreaName}</span>

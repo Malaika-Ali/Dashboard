@@ -130,20 +130,21 @@ const [notificationOpen, setnotificationOpen] = useState(false)
 
       <div className='flex flex-row justify-between'>
         {/* Notifications Icon */}
-        <NavButton
+        {/* <NavButton
 
           title='Notifications'
           dotColor="red"
-          customFunc={() => setnotificationOpen(!notificationOpen)}
-          // color="blue"
-          icon={<IoMdNotifications />} />
+          customFunc={() => setnotificationOpen(!notificationOpen)} */}
+        
+
+          {/* icon={<IoMdNotifications />} /> */}
 
 
         {/* {isClicked.Notifications && <Notification />} */}
-        {
+        {/* {
           notificationOpen &&
           <NotificationStack/>
-        }
+        } */}
 
         <div onClick={()=>setopen(!open)} className='relative mt-3 cursor-pointer' ref={divRef}>
           <BsPersonCircle className='w-14 h-5' />

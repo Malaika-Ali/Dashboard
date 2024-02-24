@@ -12,7 +12,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 function CardsContainerHeader({headingName, name, onAddButton, onDeleteButton,onSortButton }) {
   return (
     <div className="flex flex-row justify-between mt-10 m-5">
-    <h1 className='header-heading' >{headingName}</h1>
+    <h1 className='header-heading text-2xl main-font' >{headingName}</h1>
     <div className='flex flex-row items-center gap-2'>
         {/* <button
             className="bg-blue-500 w-40 text-white p-2 rounded-md hover:bg-blue-600 flex flex-row items-center justify-center ml-auto" */}

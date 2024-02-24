@@ -31,7 +31,7 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
     
     await axios.post(
       API_URL + "add_area_admin",
-      {factory_name: e.target[0].value, area_abbr: e.target[1].value},
+      {area_name: e.target[0].value, area_abbr: e.target[1].value},
       {
         headers: {
           'Content-type': 'multipart/form-data',

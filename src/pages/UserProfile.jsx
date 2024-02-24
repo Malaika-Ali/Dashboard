@@ -272,7 +272,7 @@ function UserProfile(props) {
 
                 <div className='flex flex-row items-center justify-between mt-8 gap-5'>
                     <button
-                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-16"
+                        className="main-color text-white p-2 rounded-md main-color-hover w-16"
                         type="submit"
                     >
                         {isEditing ? "Save" : "Edit"}

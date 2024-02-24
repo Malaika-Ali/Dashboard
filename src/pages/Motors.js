@@ -17,8 +17,8 @@ import MotorCard from '../components/MotorCard';
 
 
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 export default function Motors(props) {
 
   const [open, setOpen] = useState(false);
@@ -87,8 +87,8 @@ export default function Motors(props) {
       </Backdrop>
 
 
-      <div className="flex flex-row justify-between">
-        <h1 className='font-extrabold text-xl tracking-tight   text-slate-900' >Summary</h1>
+      <div className="flex flex-row justify-between ml-4">
+        <h1 className='font-extrabold text-2xl main-font' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
 
