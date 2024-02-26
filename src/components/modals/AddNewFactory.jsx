@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list  }) => {
+const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list, sorted_list  }) => {
 
   const [open, setOpen] = useState(false);
 
@@ -43,6 +43,7 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
       
       setFactory(result.data.factories_list);
       setFactoriesList(result.data.factories_data)
+      sorted_list([])
       setOpen(false);
       onClose();
 

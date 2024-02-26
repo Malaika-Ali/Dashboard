@@ -33,7 +33,8 @@ export default function Motors(props) {
   const [addNewItem, setAddNewItem] = useState(false)
   // state to handle the deletion of motor
   const [deleteItem, setDeleteItem] = useState(false)
-
+  // State to handle sorting
+  const [sortedMotors, setSortedMotors] = useState([]);
 
   async function fetch_data() {
 
@@ -76,6 +77,10 @@ export default function Motors(props) {
     }
   }, [data]);
 
+  const handleSort = () => {
+    let sorted = motors.sort((a, b) => a.motorName.localeCompare(b.motorName));
+    setSortedMotors(sorted);
+  };
 
   return (
     <div className='ml-3 mr-5 mt-5'>
@@ -141,7 +146,7 @@ export default function Motors(props) {
       <CardsContainerHeader headingName='Motors Details' name='Motor'
         onAddButton={() => setAddNewItem(true)}
         onDeleteButton={() => setDeleteItem(true)}
-        onSortButton={() => alert('Sorted')}
+        onSortButton={handleSort}
       />
 
 
@@ -150,17 +155,24 @@ export default function Motors(props) {
       <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
         style={{ overflowY: 'auto', maxHeight: '100%' }}>
         {
-          motors.map((row, idx) => {
-            return (
-              <>{ 
-                  row.map((row_loop, index) => <MotorCard motorName={row_loop.motorName} FloorNumber={row_loop.floorNumber} 
-                  AreaName={row_loop.areaName} FactoryName={row_loop.factoryName}
-                  motorStatus={row_loop.status} />)
-                }
-                </>
-                  )
-                })
-              }
+          sortedMotors.length > 0 ? (
+            sortedMotors.map((row, idx) => (
+              <MotorCard motorName={row.motorName} FloorNumber={row.floorNumber}
+                  AreaName={row.areaName} FactoryName={row.factoryName}
+                  motorStatus={row.status} />
+            ))
+
+          ) : (
+
+            motors.map((row, idx) => {
+              return (
+                <MotorCard motorName={row.motorName} FloorNumber={row.floorNumber}
+                  AreaName={row.areaName} FactoryName={row.factoryName}
+                  motorStatus={row.status} />
+              )
+            })
+          )
+        }
       </div>
     </div>
 

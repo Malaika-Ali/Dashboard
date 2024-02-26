@@ -28,11 +28,15 @@ const FactoriesPage = (props) => {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
 
+
     // state to handle the addition of new factory
     const [addNewItem, setAddNewItem] = useState(false)
 
-     // state to handle the deletion of factory
-     const [deleteItem, setDeleteItem] = useState(false)
+    // state to handle the deletion of factory
+    const [deleteItem, setDeleteItem] = useState(false)
+
+    // State to handle sorting
+    const [sortedFactories, setSortedFactories] = useState([]);
 
 
     async function fetch_data() {
@@ -57,10 +61,10 @@ const FactoriesPage = (props) => {
     }
 
     useEffect(() => {
-        
+
         setOpen(true);
         fetch_data();
-            
+
     }, []);
 
     useEffect(() => {
@@ -79,8 +83,13 @@ const FactoriesPage = (props) => {
     const handleCardClick = (props) => {
         // Use the prop values in this function
         console.log('Clicked Card with Props:', props);
-        navigate(`/FloorsPage`);
+        // navigate(`/FloorsPage`);
         // Now you can pass these props to AnotherComponent or perform any other action
+    };
+
+    const handleSort = () => {
+        let sorted = factories.sort((a, b) => a.factory_name.localeCompare(b.factory_name));
+        setSortedFactories(sorted);
     };
 
 
@@ -107,22 +116,22 @@ const FactoriesPage = (props) => {
             {/* Flex Container */}
             <div className='flex justify-between mt-4 rounded-xl w-90 m-3'>
 
-            <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
-                // bgColor='bg-green-50'
+                <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
+                    // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
                     value={total_flawless}
                     label="Flawless Motors"
                     percentage="12.6"
                     isPositive />
                 <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
-                // bgColor='bg-yellow-100'
+                    // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
                     value={total_faulty}
                     label="Faulty Motors"
                     percentage="11.6"
                     isPositive />
-                         <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
-                        //  bgColor='bg-red-50'
+                <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
+                    //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
                     value={total_critical}
                     label="Critical Motors"
@@ -131,14 +140,14 @@ const FactoriesPage = (props) => {
 
             </div>
 
-  {/* logic for showing add modal */}
+            {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' setFactory={setFactories} 
-                setFactoriesList={setFactoriesList} areas_list={areas_list} />
+                <AddNewFactory onClose={() => setAddNewItem(false)} name='Factory' setFactory={setFactories}
+                    setFactoriesList={setFactoriesList} areas_list={areas_list} sorted_list={setSortedFactories} />
             }
-   {/* logic for showing delete modal */}
-   {
+            {/* logic for showing delete modal */}
+            {
                 deleteItem &&
                 <DeleteItem onClose={() => setDeleteItem(false)} name='Factory'
                     options={factories_list}
@@ -146,89 +155,47 @@ const FactoriesPage = (props) => {
             }
 
 
-    {/* *******************     Cards section     **************/}
+            {/* *******************     Cards section     **************/}
 
-    {/* *******************     Cards Header     **************/}
+            {/* *******************     Cards Header     **************/}
             <CardsContainerHeader headingName='Factories Details' name='Factory'
                 onAddButton={() => setAddNewItem(true)}
                 onDeleteButton={() => setDeleteItem(true)}
-                onSortButton={() => alert('Sorted')}
+                onSortButton={handleSort}
             />
 
 
-{/* *******************     Cards Container     **************/}
-            {
-                factories.map((row, idx) => {
-
-                    return (
-                        <div className="grid grid-cols-3 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto"
-                            style={{ overflowY: 'auto', maxHeight: '100%' }}>
-
-                            {
-                                row.map((row_loop, idx) => {
-                                    return (
-                                        <FactoryCard
-                                            FactoryName={row_loop.factory_name}
-                                            AreaName={row_loop.area_abbreviation}
-                                            CriticalMotor={row_loop.critical}
-                                            FaultyMotors={row_loop.faulty}
-                                            FlawlessMotors={row_loop.flawless}
-                                            onClick={handleCardClick} />
-                                    )
-                                })
-                            }
-
-
-                            {/* <FactoryCard
-                                FactoryName="Agri" AreaName="Jauhar" CriticalMotor='2'
-                                FaultyMotors='3'
-                                FlawlessMotors='2'
-                                onClick={handleCardClick} />
-
+            {/* *******************     Cards Container     **************/}
+            <div className="grid grid-cols-3 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto"
+                style={{ overflowY: 'auto', maxHeight: '100%' }}>
+                {
+                    sortedFactories.length > 0 ? (
+                        sortedFactories.map((row, idx) => (
                             <FactoryCard
-                                FactoryName="Matco"
-                                AreaName="Jauhar"
-                                CriticalMotor='5'
-                                FaultyMotors='6'
-                                FlawlessMotors='12'
+                                FactoryName={row.factory_name}
+                                AreaName={row.area_name}
+                                CriticalMotor={row.critical}
+                                FaultyMotors={row.faulty}
+                                FlawlessMotors={row.flawless}
                                 onClick={handleCardClick} />
+                        ))
+                    ) : (
 
-                            <FactoryCard
-                                FactoryName="Auto"
-                                AreaName="Jauhar"
-                                CriticalMotor='9'
-                                FaultyMotors='8'
-                                FlawlessMotors='13'
-                                onClick={handleCardClick} />
+                        factories.map((row, idx) => {
 
-                            <FactoryCard
-                                FactoryName="Hems"
-                                AreaName="Jauhar"
-                                CriticalMotor='10'
-                                FaultyMotors='7'
-                                FlawlessMotors='11'
-                                onClick={handleCardClick} />
-
-                            <FactoryCard
-                                FactoryName="WebTech"
-                                AreaName="Jauhar"
-                                CriticalMotor='4'
-                                FaultyMotors='7'
-                                FlawlessMotors='10'
-                                onClick={handleCardClick} />
-
-                            <FactoryCard
-                                FactoryName="Auto"
-                                AreaName="Jauhar"
-                                CriticalMotor='6'
-                                FaultyMotors='5'
-                                FlawlessMotors='14'
-                                onClick={handleCardClick} /> */}
-
-                        </div>
+                            return (
+                                <FactoryCard
+                                    FactoryName={row.factory_name}
+                                    AreaName={row.area_name}
+                                    CriticalMotor={row.critical}
+                                    FaultyMotors={row.faulty}
+                                    FlawlessMotors={row.flawless}
+                                    onClick={handleCardClick} />
+                            )
+                        })
                     )
-                })
-            }
+                }
+            </div>
         </div>
     )
 }

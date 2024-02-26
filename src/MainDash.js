@@ -127,7 +127,7 @@ function MainDash() {
                 />
                 <Route
                   path='/userProfile'
-                  element={token?<UserProfile user_details={token} />:<Navigate replace to="/signin"/>}
+                  element={token?<UserProfile user_details={token} set_token={setToken} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
                   path='/employeeDetails'

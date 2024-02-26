@@ -81,36 +81,12 @@ const AreasPage = (props) => {
         navigate(`/FactoriesPage`);
     };
 
-    function breakArrayInto2D(originalArray, itemsPerNestedList) {
-        const twoDArray = [];
-        let currentNestedList = [];
-      
-        for (let i = 0; i < originalArray.length; i++) {
-          currentNestedList.push(originalArray[i]);
-      
-          // Check if the current nested list is full or if we have reached the end of the original array
-          if (currentNestedList.length === itemsPerNestedList || i === originalArray.length - 1) {
-            twoDArray.push(currentNestedList);
-            currentNestedList = []; // Reset the current nested list
-          }
-        }
-      
-        return twoDArray;
-      }
 
     // function for handling areas sorting
     const handleSort = () => {
-        let sorted = areas.flat(1).sort();
-        sorted =breakArrayInto2D(sorted, 3); 
-        console.log(sorted)
+        let sorted = areas.sort((a, b) => a.area_name.localeCompare(b.area_name));
         setSortedAreas(sorted);
     };
-
-
-    // UseEffect to reset sortedAreas when areas change
-    // useEffect(() => {
-    //     setSortedAreas([]);
-    // }, [areas]);
 
     return (
         <div className='ml-3 mr-5 mt-5'>
@@ -152,40 +128,6 @@ const AreasPage = (props) => {
                     label="Critical Motors"
                     percentage="9.6"
                     isPositive />
-                   
-
-
-                {/* left box */}
-                {/* 
-                <div className='flex flex-wrap lg:flex-nowrap '>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between'>
-                        <img src={criticalalert} />
-                        <span>Critical Alerts</span>
-                        <span>{total_critical}</span>
-                    </div>
-                </div> */}
-
-
-                {/* middle box */}
-
-                {/* <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8 m-3 shadow-md flex flex-row justify-between'>
-                        <img src={faultyalert} alt="" />
-                        <span>Faulty Alerts</span>
-                        <span>{total_faulty}</span>
-                    </div>
-                </div> */}
-
-
-                {/* Right box */}
-
-                {/* <div className='flex flex-wrap lg:flex-nowrap justify-center'>
-                    <div className='bg-white dark:bg-secondary-dark-bg h-20 rounded-xl w-72 p-8  m-3 shadow-md flex flex-row justify-between '>
-                        <img src={flawless} alt="" />
-                        <div>Flawless</div>
-                        <div>{total_flawless}</div>
-                    </div>
-                </div> */}
 
             </div>
 
@@ -203,7 +145,8 @@ const AreasPage = (props) => {
             {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} setAreasList={setAreasList} />
+                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} setAreasList={setAreasList}
+                set_sorted_list={setSortedAreas} />
             }
             {/* logic for showing delete modal */}
             {
@@ -213,110 +156,21 @@ const AreasPage = (props) => {
                 />
             }
 
-
-            {/* ****************Areas Cards section************** */}
-            {/* {        
-                areas.map((row, idx) => {
-                
-                return (
-                
-                    <div className="grid justify-between h-52 mt-3 bg-slate-200 rounded-xl m-3 w-90"
-                    style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}
-                    >  
-
-                    {
-                        row.map((row_loop, idx) =>{
-                        return(
-                            <AreaCard AreaName={row_loop.area_name} onClick={() => handleAreaCardClick()}/>
-                        )
-                        })
-                    }
-
-
-                     
-                    <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()}/>
-                    <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()}/>
-                    <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
-                
-
-                    
-                    
-               
-                    <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
-                
-
-                    <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
-                
-
-               
-                    <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                    <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()}/>
-                    </div>  
-                )
-                })
-            } */}
-
             {/* *******************     Cards Container     **************/}
-            {
-                sortedAreas.length > 0 ? (
-                    sortedAreas.map((row, idx) => (
-                        <div key={idx} className="grid grid-cols-3  h-52 mt-3 main-color rounded-xl m-3 w-90 px-auto"
-                            style={{ overflowY: 'auto', maxHeight: '100%' }}>
-                            {
-                                row.map((row_loop, idx) => (
-                                    <AreaCard key={idx} AreaName={row_loop.area_name} onClick={() => handleAreaCardClick()} />
-                                ))
-                            }
-
-
-                            {/* API update hone k baad yahan se remove karna */}
-                            {/* <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
-
-
-                            <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} /> */}
-
-                            {/* yahan tak remove karna */}
-
-                        </div>
-                    ))
-                ) : (
-                    areas.map((row, idx) => (
-                        <div key={idx} className="grid grid-cols-3 justify-between h-52 mt-3 main-color rounded-xl m-3 w-90"
-                            style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
-                            {
-                                row.map((row_loop, idx) => (
-                                    <AreaCard key={idx} AreaName={row_loop.area_name} onClick={() => handleAreaCardClick()} />
-                                ))
-                            }
-
-
-
-                            {/* API update hone k baad yahan se remove karna */}
-                            {/* <AreaCard AreaName="Gulshan-e-Iqbal" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Gulshan-e-Maymar" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Jauhar" onClick={() => handleAreaCardClick()} />
-
-
-                            <AreaCard AreaName="Gulshan-e-Hadeed" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Safoora Goth" onClick={() => handleAreaCardClick()} />
-                            <AreaCard AreaName="Korangi" onClick={() => handleAreaCardClick()} /> */}
-
-                            {/* yahan tak remove karna */}
-
-
-                        </div>
-                    ))
-                )
-            }
+            <div  className="grid grid-cols-3 justify-between h-52 mt-3 main-color rounded-xl m-3 w-90"
+                style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
+                {
+                    sortedAreas.length > 0 ? (
+                        sortedAreas.map((row, idx) => (
+                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick()} />
+                        ))
+                    ) : (
+                        areas.map((row, idx) => (
+                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick()} />
+                        ))
+                        )
+                    }
+            </div>
         </div>
     )
 }

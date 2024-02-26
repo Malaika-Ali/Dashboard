@@ -22,10 +22,10 @@ export const links = [
           name: 'FactoriesPage',
           icon: <MdFactory />,
         },
-        {
-          name: 'FloorsPage',
-          icon: <GiStairs />,
-        },
+        // {
+        //   name: 'FloorsPage',
+        //   icon: <GiStairs />,
+        // },
         {
           name: 'Motors',
           icon: <IoMdSettings />,
