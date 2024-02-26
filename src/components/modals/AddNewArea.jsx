@@ -13,7 +13,6 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
   
   const [formData, setFormData] = useState({
     name: '',
-    abbr: "",
   });
 
   const handleInputChange = (e) => {
@@ -31,7 +30,7 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
     
     await axios.post(
       API_URL + "add_area_admin",
-      {area_name: e.target[0].value, area_abbr: e.target[1].value},
+      {area_name: e.target[0].value},
       {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -111,21 +110,7 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
                 required
               />
             </div>
-            <div className="col-span-2">
-              <label htmlFor="abbr" className="block mb-2 text-sm font-medium text-gray-900">
-                {name} Abbreviation
-              </label>
-              <input
-                type="text"
-                name="abbr"
-                id="abbr"
-                value={formData.abbr}
-                onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type Area Abbreviation"
-                required
-              />
-            </div>
+            
           </div>
 <AddButton name={name}/>
         </form>
