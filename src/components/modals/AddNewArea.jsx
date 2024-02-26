@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
+const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) => {
 
   const [open, setOpen] = useState(false);
   
@@ -40,7 +40,8 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList }) => {
     ).then((result) => {
       
       setArea(result.data.area_list);
-      setAreasList(result.data.areas_data)
+      setAreasList(result.data.areas_data);
+      set_sorted_list([])
       setOpen(false);
       onClose();
 

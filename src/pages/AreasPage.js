@@ -145,7 +145,8 @@ const AreasPage = (props) => {
             {/* logic for showing add modal */}
             {
                 addNewItem &&
-                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} setAreasList={setAreasList} />
+                <AddNewArea onClose={() => setAddNewItem(false)} name='Area' setArea={setAreas} setAreasList={setAreasList}
+                set_sorted_list={setSortedAreas} />
             }
             {/* logic for showing delete modal */}
             {
