@@ -10,7 +10,6 @@ import axios from 'axios';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 
 const SignupPage = () => {
 
@@ -392,7 +391,7 @@ const SignupPage = () => {
           />
           {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword.message}</p>}
         </div>
-
+{/* 
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-semibold mb-2">
             Role
@@ -436,7 +435,7 @@ const SignupPage = () => {
             </label>
           </div>
           {errors.role && <p className="text-red-500 text-xs italic">{errors.role.message}</p>}
-        </div>
+        </div> */}
 
 
         
