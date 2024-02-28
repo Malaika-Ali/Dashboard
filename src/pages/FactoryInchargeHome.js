@@ -26,8 +26,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DateRangePicker from '../components/DateRangePicker';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-let API_URL = "http://localhost:5001/";
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "http://localhost:5001/";
 const FactoryInchargeHome = (props) => {
   const navigate = useNavigate();
 
@@ -42,9 +42,10 @@ const FactoryInchargeHome = (props) => {
   const [viewMotor, setViewMotor] = useState(false)
 
   async function fetch_data() {
-
+    console.log(props.user_details.employee_id)
     await axios.post(
-      API_URL + "factory_incharge_homepage",{employee_id: props.user_details.employee_id},
+      API_URL + "factory_incharge_homepage",
+      {employee_id: props.user_details.employee_id},
       {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -72,6 +73,7 @@ const FactoryInchargeHome = (props) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data.motors_data);
       setOpen(false);
       setTotalFloors(data.total_floors);
       setTotalMotors(data.total_motors);

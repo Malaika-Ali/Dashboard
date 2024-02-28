@@ -162,6 +162,7 @@ const FactoriesPage = (props) => {
                 onAddButton={() => setAddNewItem(true)}
                 onDeleteButton={() => setDeleteItem(true)}
                 onSortButton={handleSort}
+                role={props.user_details.role}
             />
 
 

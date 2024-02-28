@@ -9,7 +9,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 
 
-function CardsContainerHeader({headingName, name, onAddButton, onDeleteButton,onSortButton }) {
+function CardsContainerHeader({headingName, name, onAddButton, onDeleteButton,onSortButton, role }) {
   return (
     <div className="flex flex-row justify-between mt-10 m-5">
     <h1 className='header-heading text-2xl main-font' >{headingName}</h1>
@@ -23,13 +23,19 @@ function CardsContainerHeader({headingName, name, onAddButton, onDeleteButton,on
             Add Factory
         </button> */}
 
-        <AnimatedIconButton  text={`Add ${name}`} color='main-color' onClick={onAddButton}>
+       {
+       role=="admin" &&
+       <AnimatedIconButton  text={`Add ${name}`} color='main-color' onClick={onAddButton}>
         <RiAddLine size={23}  />
         </AnimatedIconButton>
+        }
 
+       {
+        role=="admin" &&
         <AnimatedIconButton  text={`Delete ${name}`} color='main-color' onClick={onDeleteButton}>
         <RiDeleteBinLine size={20} />
         </AnimatedIconButton>
+        }
 
         <AnimatedIconButton  text={`Sort ${name}s`} color='main-color' onClick={onSortButton}>
         <GrSort size={18} />

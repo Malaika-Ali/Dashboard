@@ -326,7 +326,7 @@ function UserProfile(props) {
 
                     {
                         isEditing ?
-                            <SecondaryButton SecondaryButtonText='Cancel' /> :
+                            <SecondaryButton SecondaryButtonText='Cancel' onClick={() => setisEditing(false)}/> :
                             <SecondaryButton SecondaryButtonText='Delete' onClick={() => setconfirmationModal(true)} />
                     }
                 </div>
@@ -334,7 +334,7 @@ function UserProfile(props) {
 
             {
                 confirmationModal &&
-                <ConfirmationModal closeConfirmation={() => setconfirmationModal(false)} />
+                <ConfirmationModal closeConfirmation={() => setconfirmationModal(false)} user_name={token_data.employee_id}/>
             }
 
         </div>
