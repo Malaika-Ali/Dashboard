@@ -38,8 +38,10 @@ export default function Motors(props) {
 
   async function fetch_data() {
 
-    await axios.get(
+    console.log(props.user_details.employee_id)
+    await axios.post(
       API_URL + "motors_page",
+      {role: props.user_details.role, employee_id: props.user_details.employee_id},
       {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -147,6 +149,7 @@ export default function Motors(props) {
         onAddButton={() => setAddNewItem(true)}
         onDeleteButton={() => setDeleteItem(true)}
         onSortButton={handleSort}
+        role={props.user_details.role}
       />
 
 

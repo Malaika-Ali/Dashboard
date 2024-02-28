@@ -140,6 +140,7 @@ const AreasPage = (props) => {
                 onAddButton={() => setAddNewItem(true)}
                 onDeleteButton={() => setDeleteItem(true)}
                 onSortButton={handleSort}
+                role={props.user_details.role}
             />
 
             {/* logic for showing add modal */}
