@@ -25,6 +25,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import DateRangePicker from '../components/DateRangePicker';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
+import ViewMotorModal from '../components/modals/ViewMotorModal';
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -134,7 +136,7 @@ const FactoryInchargeHome = (props) => {
     {
       name: "View",
       center: true,
-      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => alert(row.id)}>View</button>
+      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
     }
   ];
 
@@ -326,7 +328,6 @@ const FactoryInchargeHome = (props) => {
   // state to popup modal on click on calendar
   const [calendarClick, setCalendarClick] = useState(false)
 
-
   // const pie_chart_series=['23','34','54']
 
 
@@ -462,11 +463,11 @@ const FactoryInchargeHome = (props) => {
         </div>
 
         {/* **************handle view button in table *************/}
-        {/* {
-            viewMotor &&
-            <ViewMotorModal  />
-          } */}
-
+        {
+          viewMotor &&
+          <ViewMotorModal onClick={() => setViewMotor(false)}
+            motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+        }
       </div>
     </>
   )

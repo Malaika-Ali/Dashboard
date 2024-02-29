@@ -351,13 +351,13 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
         <div className="flex flex-row items-center justify-between gap-5">
           
           <button
-            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            className="w-full main-color text-white p-2 rounded-md main-color-hover"
             type="submit">
             Save
           </button>
 
            <button
-            className="w-full bg-transparent text-black border border-black p-2 rounded-md hover:bg-blue-500 hover:text-white hover:border-transparent"
+            className="w-full bg-transparent text-black border border-black p-2 rounded-md main-hover hover:text-white hover:border-transparent"
             type="reset" onClick={closeForm}>
             Cancel
           </button>

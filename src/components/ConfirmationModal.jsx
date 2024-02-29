@@ -81,7 +81,7 @@ function ConfirmationModal({closeConfirmation, user_name}) {
       <div className='bg-white p-10 rounded-md shadow-md'>
         <h1 className='font-bold text-center text-lg my-5'>Delete User</h1>
         <p>
-          Are you sure you want to delete <b>{user_name}</b>
+          Are you sure you want to delete <b>{user_name}</b>?
           <p className='bg-[#ffe9d9] p-2 border-l-2 border-[#fa703f] text-[#bc4c2e] flex flex-col text-sm my-1'>
             <span className='text-[#771505] font-bold flex items-center gap-1'>
               <IoWarning />
@@ -93,10 +93,10 @@ function ConfirmationModal({closeConfirmation, user_name}) {
         <div className='flex justify-between mt-5'>
           <button className='outline outline-1 outline-[#101f20] bg-[#101f20] text-white py-2 px-4 hover:bg-transparent hover:text-black'
           onClick={closeConfirmation}
-          >No, Cancel</button>
+          >Cancel</button>
           <button className='outline outline-1 outline-[#101f20] hover:bg-[#101f20] hover:text-white py-2 px-4 bg-transparent text-black'
         //   onClick={() => }
-          >Yes, Delete</button>
+          >Delete</button>
         </div>
       </div>
     </div>

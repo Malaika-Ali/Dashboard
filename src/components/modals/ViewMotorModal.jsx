@@ -9,6 +9,20 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
           categories: ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
           values: [30, 40, 25, 50, 49, 70, 22],
         };
+
+
+        const getStatusColor = () => {
+          switch (motorStatus) {
+            case 'Flawless':
+              return 'text-green-500'; // Green color for Flawless
+            case 'Critical':
+              return 'text-red-500'; // Red color for Critical
+            case 'Faulty':
+              return 'text-yellow-500'; // Yellow color for Faulty
+            default:
+              return 'text-gray-500'; // Default color if none of the above conditions match
+          }
+        };
       
     return (
         <div className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful w-full" >
@@ -38,7 +52,7 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
              Feb 2nd, 2024</span>    <span> 4:00pm </span></div>
             <div className="flex w-full items-end mb-10 justify-between">
               <span className="block leading-none text-2xl text-gray-800">{motorName}</span>
-              <span className="block leading-5 text-sm ml-4 text-green-500">{motorStatus}</span>
+              <span className={`block leading-5 text-sm ml-4 ${getStatusColor()}`}>{motorStatus}</span>
             </div>
             <div className="flex flex-col w-full text-base">
               <div className="flex">

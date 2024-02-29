@@ -45,7 +45,7 @@ export default function Sidebar(props) {
         <div className='ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
-                    <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-10' /></Link>
+                    <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-8' /></Link>
 
                     {/* <TooltipComponent content="Menu" position='BottomCenter'>
                         <button type='button' className='text-xl hidden rounded-full p-3 hover:bg-light-gray mt-4 block '>
