@@ -93,14 +93,6 @@ function EmployeeDetails() {
 
       
 
-    // const factory_Incharge_data = [
-    //     {
-    //         name: "Ali",
-    //         factory: "agri Auto",
-    //         Area: "Saddar",
-    //         email: "email"
-    //     }
-    // ]
 
     const factoryinchargeHeadings = [
         {
@@ -215,7 +207,7 @@ function EmployeeDetails() {
                 <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
                  
                     {/* *******Add Floor Incharge Button***** */}
-                    <AnimatedIconButton text='Add Floor Incharge' color='main-color' onClick={() => setEditFloorIncharge(true)}>
+                    <AnimatedIconButton text='Add Floor Incharge' color='main-color' onClick={() => {setEditData(); setEditFloorIncharge(true)}}>
                         <RiAddLine size={23} />
                     </AnimatedIconButton>
 

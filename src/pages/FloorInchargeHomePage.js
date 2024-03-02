@@ -17,13 +17,73 @@ import { GiStairs } from "react-icons/gi";
 import stairs from '../assets/stairs.png'
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 
+import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import DateRangePicker from '../components/DateRangePicker';
 
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 
-const FloorInchargeHomePage = (props) => {
 
+let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+const FloorInchargeHomePage = (props) => {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const [total_motors, setTotalMotors] = useState('0');
+  const [motors_data, setMotorsData] = useState([]);
+  const [data, setData] = useState(null);
+  const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
+  const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
+
+  // state to handle view motor modal
+  const [viewMotor, setViewMotor] = useState(false)
+
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
+
+  async function fetch_data() {
+    await axios.post(
+      API_URL + "floor_incharge_homepage",
+      { employee_id: props.user_details.employee_id },
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
+    ).then((result) => {
+
+      setData(result.data)
+
+    }).catch(async (error) => {
+      setOpen(false);
+      alert(error.response.data);
+    })
+
+  }
+
+  useEffect(() => {
+
+    setOpen(true);
+    fetch_data();
+
+
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data.motors_data);
+      setOpen(false);
+      setTotalMotors(data.total_motors);
+      setMotorsData(data.motors_data);
+      setPieChartSeries(data.pie_chart_result);
+      setSmallChartsData(data.percentages);
+
+    }
+  }, [data]);
+
 
   // table columns headings
   const columns = [
@@ -73,134 +133,134 @@ const FloorInchargeHomePage = (props) => {
     }
   ];
 
-  const data = [
-    {
-      id: 1,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 2,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 3,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 4,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 5,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 6,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 7,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 8,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 9,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 10,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 11,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 12,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 13,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 14,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 15,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    },
-    {
-      id: 16,
-      motorName: 'ss1',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Faulty'
-    },
-    {
-      id: 17,
-      motorName: 'ss2',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Flawless'
-    },
-    {
-      id: 18,
-      motorName: 'ss3',
-      //   factoryName: 'Industry',
-      //   areaName: 'Industrial area',
-      status: 'Critical'
-    }
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 2,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 3,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 4,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 5,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 6,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 7,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 8,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 9,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 10,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 11,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 12,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 13,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 14,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 15,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   },
+  //   {
+  //     id: 16,
+  //     motorName: 'ss1',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Faulty'
+  //   },
+  //   {
+  //     id: 17,
+  //     motorName: 'ss2',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Flawless'
+  //   },
+  //   {
+  //     id: 18,
+  //     motorName: 'ss3',
+  //     //   factoryName: 'Industry',
+  //     //   areaName: 'Industrial area',
+  //     status: 'Critical'
+  //   }
+  // ];
 
   // const lineChartData = {
   //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -247,17 +307,17 @@ const FloorInchargeHomePage = (props) => {
   };
 
 
-  const pie_chart_series = ['23', '34', '54']
-
-  // state to handle view motor modal
-  const [viewMotor, setViewMotor] = useState(false)
-
-  // state to popup modal on click on calendar
-  const [calendarClick, setCalendarClick] = useState(false)
 
 
   return (
     <div className='ml-4 mr-3 mt-5'>
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className='flex flex-row justify-between items-center'>
         {/* Flex Container */}
@@ -285,7 +345,7 @@ const FloorInchargeHomePage = (props) => {
           <TotalNumberCard iconSrc={motors_icon} placeName='Motors'
 
             // quantity={'' + total_motors} 
-            quantity='15'
+            quantity={total_motors}
             onClick={() => navigate('/Motors')} />
 
         </div>
@@ -332,16 +392,16 @@ const FloorInchargeHomePage = (props) => {
 
           <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
             <CircularProgressChart
-              //  progress={small_charts_data[0]} 
-              progress={2}
+              progress={small_charts_data[0]}
+              // progress={}
               barColor='#31C431' motorCategory='Flawless' />
             <CircularProgressChart
-              // progress={small_charts_data[1]}
-              progress={12}
+              progress={small_charts_data[1]}
+              // progress={12}
               barColor='#F9F502' motorCategory='Faulty' />
             <CircularProgressChart
-              //  progress={small_charts_data[2]} 
-              progress={21}
+              progress={small_charts_data[2]}
+              // progress={21}
               barColor='#DB1915' motorCategory='Critical' />
           </div>
 
@@ -374,7 +434,7 @@ const FloorInchargeHomePage = (props) => {
       {/* ***************Tabular Motors Summary **************** */}
 
       <div className='mt-14 mx-auto bg-white rounded-xl w-[90%]'>
-        <Table tableSubheading={'Overall Floor Report'} column_headings={columns} data={data} />
+        <Table tableSubheading={'Overall Floor Report'} column_headings={columns} data={motors_data} />
       </div>
       {/* **************handle view button in table *************/}
       {
