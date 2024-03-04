@@ -60,7 +60,7 @@ const columns = [
     },
     {
       id: 4,
-      motorName: 'ss1',
+      motorName: 'ss4',
       floorNumber: 2,
       factoryName: 'Agri',
       areaName: 'Gulshan',
@@ -68,7 +68,7 @@ const columns = [
     },
     {
       id: 5,
-      motorName: 'ss2',
+      motorName: 'ss5',
       floorNumber: 4,
       factoryName: 'Wavtech',
       areaName: 'Gulshan',
@@ -76,7 +76,7 @@ const columns = [
     },
     {
       id: 6,
-      motorName: 'ss3',
+      motorName: 'ss6',
       floorNumber: 2,
       factoryName: 'Hi-Warble',
       areaName: 'Sddar',
@@ -84,7 +84,7 @@ const columns = [
     },
     {
       id: 7,
-      motorName: 'ss1',
+      motorName: 'ss7',
       floorNumber: 2,
       factoryName: 'Industry',
       areaName: 'CandyLand',
@@ -92,7 +92,7 @@ const columns = [
     },
     {
       id: 8,
-      motorName: 'ss2',
+      motorName: 'ss8',
       floorNumber: 4,
       factoryName: 'Nestle',
       areaName: 'Saddar',
@@ -100,7 +100,7 @@ const columns = [
     },
     {
       id: 9,
-      motorName: 'ss3',
+      motorName: 'ss9',
       floorNumber: 2,
       factoryName: 'Kings',
       areaName: 'Saddar',
@@ -108,7 +108,7 @@ const columns = [
     },
     {
       id: 10,
-      motorName: 'ss1',
+      motorName: 'ss10',
       floorNumber: 2,
       factoryName: 'Factory',
       areaName: 'Maymar',
@@ -116,7 +116,7 @@ const columns = [
     },
     {
       id: 11,
-      motorName: 'ss2',
+      motorName: 'ss11',
       floorNumber: 4,
       factoryName: 'Loreal',
       areaName: 'Gulshan',
@@ -124,7 +124,7 @@ const columns = [
     },
     {
       id: 12,
-      motorName: 'ss3',
+      motorName: 'ss12',
       floorNumber: 2,
       factoryName: 'Loreal',
       areaName: 'Maymar',
@@ -132,7 +132,7 @@ const columns = [
     },
     {
       id: 13,
-      motorName: 'ss1',
+      motorName: 'ss13',
       floorNumber: 2,
       factoryName: 'factory2',
       areaName: 'Maymar',
@@ -140,7 +140,7 @@ const columns = [
     },
     {
       id: 14,
-      motorName: 'ss2',
+      motorName: 'ss14',
       floorNumber: 4,
       factoryName: 'Bisconni',
       areaName: 'Gulshan',
@@ -148,7 +148,7 @@ const columns = [
     },
     {
       id: 15,
-      motorName: 'ss3',
+      motorName: 'ss15',
       floorNumber: 2,
       factoryName: 'Bisconni',
       areaName: 'Gulistan e jauhar',
@@ -156,7 +156,7 @@ const columns = [
     },
     {
       id: 16,
-      motorName: 'ss1',
+      motorName: 'ss16',
       floorNumber: 2,
       factoryName: 'Industry',
       areaName: 'Industrial area',
@@ -164,7 +164,7 @@ const columns = [
     },
     {
       id: 17,
-      motorName: 'ss2',
+      motorName: 'ss17',
       floorNumber: 4,
       factoryName: 'Industry',
       areaName: 'Industrial area',
@@ -172,7 +172,7 @@ const columns = [
     },
     {
       id: 18,
-      motorName: 'ss3',
+      motorName: 'ss18',
       floorNumber: 2,
       factoryName: 'Industry',
       areaName: 'Industrial area',

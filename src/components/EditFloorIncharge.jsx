@@ -105,6 +105,23 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
       //     confirmPassword: '',
       //   });
     };
+
+    const [showFactoryDropdown, setShowFactoryDropdown] = useState(false);
+  const [showFloorNumberDropdown, setShowFloorNumberDropdown] = useState(false);
+
+  const areas = [
+    { id: 1, name: 'Area 1' },
+    { id: 2, name: 'Area 2' },
+    
+  ];
+
+  const factories = [
+    { id: 1, name: 'Factory 1' },
+    { id: 2, name: 'Factory 2' },
+    
+  ];
+
+  const floorNumbers = [1, 2, 3, 4];
     
 
   return (
@@ -134,7 +151,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 {...field}
                 type="text"
                 placeholder="First Name"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.firstName ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.firstName ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -154,7 +171,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 {...field}
                 type="text"
                 placeholder="Last Name"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.lastName ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.lastName ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -181,7 +198,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 type="email"
                 placeholder="Email Address"
                 readOnly={popup_data?true:false}
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -203,7 +220,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 readOnly={popup_data?true:false}
                 placeholder="Employee ID"
                 autoComplete='username'
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.employeeID ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -224,7 +241,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 type="password"
                 placeholder="Password"
                 autoComplete="new-password"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.password ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -271,7 +288,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 type="password"
                 placeholder="Confirm Password"
                 autoComplete="new-password"
-                className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                className={`w-full p-2 border rounded-md main-color-focus ${errors.confirmPassword ? 'border-red-500' : ''}`}
               />
             )}
           />
@@ -281,7 +298,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
     
 
       
-                <div className="mb-4">
+                {/* <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
                     Area Name
                   </label>
@@ -300,8 +317,10 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                     )}
                   />
                   {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
-                </div>
-                <div className="mb-4">
+                </div> */}
+
+
+                {/* <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
                     Factory Name
                   </label>
@@ -320,9 +339,9 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                     )}
                   />
                   {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
-                </div>
+                </div> */}
 
-                <div className="mb-4">
+                {/* <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="floorNumber">
                     Floor Number
                   </label>
@@ -341,8 +360,106 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                     )}
                   />
                   {errors.floorNumber && <p className="text-red-500 text-xs italic">{errors.floorNumber.message}</p>}
-                </div>
-              
+                </div> */}
+
+
+
+
+                            {/* Area Name Dropdown */}
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
+                Area Name
+              </label>
+              <Controller
+                name="areaName"
+                control={control}
+                rules={{ required: 'This field is required' }}
+                render={({ field }) => (
+                  <select
+                    {...field}
+                    id="areaName"
+                    placeholder="Select Area"
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.areaName ? 'border-red-500' : ''}`}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setShowFactoryDropdown(!!e.target.value);
+                    }}
+                  >
+                    <option value="" disabled>Select Area</option>
+                    {areas.map((area) => (
+                      <option key={area.id} value={area.id}>
+                        {area.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              />
+              {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
+            </div>
+
+            {/* Factory Name Dropdown (Conditionally Rendered) */}
+            {showFactoryDropdown && (
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
+                  Factory Name
+                </label>
+                <Controller
+                  name="factoryName"
+                  control={control}
+                  rules={{ required: 'This field is required' }}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      id="factoryName"
+                      placeholder="Select Factory"
+                      className={`w-full p-2 border rounded-md main-color-focus ${errors.factoryName ? 'border-red-500' : ''}`}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setShowFloorNumberDropdown(!!e.target.value);
+                      }}
+                    >
+                      <option value="" disabled>Select Factory</option>
+                      {factories.map((factory) => (
+                        <option key={factory.id} value={factory.id}>
+                          {factory.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+                {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
+              </div>
+            )}
+
+            {/* Floor Number Dropdown (Conditionally Rendered) */}
+            {showFloorNumberDropdown && (
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="floorNumber">
+                  Floor Number
+                </label>
+                <Controller
+                  name="floorNumber"
+                  control={control}
+                  rules={{ required: 'This field is required' }}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      id="floorNumber"
+                      placeholder="Select Floor Number"
+                      className={`w-full p-2 border rounded-md main-color-focus ${errors.floorNumber ? 'border-red-500' : ''}`}
+                    >
+                      <option value="" disabled>Select Floor Number</option>
+                      {floorNumbers.map((floorNumber) => (
+                        <option key={floorNumber} value={floorNumber}>
+                          {floorNumber}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+                {errors.floorNumber && <p className="text-red-500 text-xs italic">{errors.floorNumber.message}</p>}
+              </div>
+             )} 
 
 
         </div>

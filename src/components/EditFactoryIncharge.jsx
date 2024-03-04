@@ -48,6 +48,12 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
 
   const [selectedRole, setSelectedRole] = useState('');
 
+  // state to handle the appearance of factory name input
+  const [showFactoryName, setShowFactoryName] = useState(false);
+
+  const factoryNames = ["Factory 1", "Factory 2", "Factory 3"];
+
+
   const onSubmit = async (data) => {
 
     // console.log(data)
@@ -135,7 +141,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   {...field}
                   type="text"
                   placeholder="First Name"
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.firstName ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.firstName ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -155,7 +161,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   {...field}
                   type="text"
                   placeholder="Last Name"
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.lastName ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.lastName ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -183,7 +189,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   type="email"
                   placeholder="Email Address"
                   readOnly={popup_data?true:false}
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.email ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -205,7 +211,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   placeholder="Employee ID"
                   readOnly={popup_data?true:false}
                   autoComplete='username'
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.employeeID ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.employeeID ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -226,7 +232,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   type="password"
                   placeholder="Password"
                   autoComplete="new-password"
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.password ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -273,7 +279,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                   type="password"
                   placeholder="Confirm Password"
                   autoComplete="new-password"
-                  className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded-md main-color-focus ${errors.confirmPassword ? 'border-red-500' : ''}`}
                 />
               )}
             />
@@ -281,7 +287,7 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
           </div>
 
       
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
                       Area Name
                     </label>
@@ -300,8 +306,38 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                       )}
                     />
                     {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
-                  </div>
+                  </div> */}
+
                   <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
+                Area Name
+              </label>
+              <Controller
+                name="areaName"
+                control={control}
+                rules={{ required: 'This field is required' }}
+                render={({ field }) => (
+                  <select
+                    {...field}
+                    id="areaName"
+                    className={`w-full p-2 border rounded-md main-color-focus ${errors.areaName ? 'border-red-500' : ''}`}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setShowFactoryName(!!e.target.value);
+                    }}
+                  >
+                    <option value="" disabled>Select Area</option>
+                    <option value="area1">Area 1</option>
+                    <option value="area2">Area 2</option>
+                    {/* Add more options as needed */}
+                  </select>
+                )}
+              />
+              {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
+            </div>
+
+
+                  {/* <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
                       Factory Name
                     </label>
@@ -320,7 +356,38 @@ function EditFactoryIncharge({closeForm, popup_data, factory_data_update}) {
                       )}
                     />
                     {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
-                  </div>
+                  </div> */}
+
+                            {/* Factory Name Input (Conditionally Rendered) */}
+            {showFactoryName && (
+                         <div className="mb-4">
+                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
+                           Factory Name
+                         </label>
+                         <Controller
+                           name="factoryName"
+                           control={control}
+                           rules={{ required: 'This field is required' }}
+                           render={({ field }) => (
+                             <select
+                               {...field}
+                               id="factoryName"
+                               placeholder="Factory Name"
+                               className={`w-full p-2 border rounded-md main-color-focus ${errors.factoryName ? 'border-red-500' : ''}`}
+                             >
+                               <option value="" disabled>Select Factory</option>
+                               {factoryNames.map((factoryName) => (
+                                 <option key={factoryName} value={factoryName}>
+                                   {factoryName}
+                                 </option>
+                               ))}
+                             </select>
+                           )}
+                         />
+                         {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
+                       </div>
+              
+            )}
                 
 
 
