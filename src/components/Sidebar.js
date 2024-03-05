@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { SiShopware } from 'react-icons/si'
 import { MdOutlineCancel } from 'react-icons/md'
@@ -40,6 +40,11 @@ export default function Sidebar(props) {
     } else if (role === 'floorIncharge') {
         roleLinks = floorInchargelinks;
     }
+
+    useEffect(() => {
+        // Set activeMenu to true when the component mounts or when the user logs in
+        setactiveMenu(true);
+    }, []);
 
     return (
         <div className='ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
