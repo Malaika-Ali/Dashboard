@@ -103,26 +103,25 @@ const [notificationOpen, setnotificationOpen] = useState(false)
           {/* Search Bar */}
 
 
-          <div className="relative w-64 mt-2">
-            <input
+          {/* <div className="relative w-64 mt-2"> */}
+            {/* <input
               type="text"
               placeholder="Search..."
               className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
               value={searchTerm}
               onChange={handleSearchChange}
-            />
+            /> */}
 
             {/* Search Icon */}
-            <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
+            {/* <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
               <FaSearch />
             </div>
-          </div>
+          </div> */}
 
           {/* Tooltip */}
-          <TooltipComponent content="Please enter a search term" position='BottomCenter' >
+          {/* <TooltipComponent content="Please enter a search term" position='BottomCenter' >
             <div className="absolute top-full mt-2 text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Please enter a search term</div>
-            {/* <div className="absolute top-full mt-2 text-red-500 text-sm">Please enter a search term</div> */}
-          </TooltipComponent>
+          </TooltipComponent> */}
         </div>
       </div>
 
