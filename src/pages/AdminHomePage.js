@@ -391,7 +391,7 @@ export default function AdminHomePage(props) {
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='ml-5 mr-5 mt-5'>
+    <div className='md:mt-8 md:mx-1 lg:ml-5 lg:mr-5 lg:mt-5 '>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -400,9 +400,9 @@ export default function AdminHomePage(props) {
       </Backdrop>
 
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row justify-between items-center'>
+      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[3em] lg:justify-between items-center w-full large:w-[90%]'>
         {/* Flex Container */}
-        <div className='flex justify-between rounded-xl w-[70%]'>
+        <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[80%]'>
 
           {/* left box */}
           <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/AreasPage')} />
@@ -443,19 +443,19 @@ export default function AdminHomePage(props) {
 
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='flex flex-col justify-center items-start mt-5'>
+      <div className='flex flex-col justify-center items-start mt-5 md:w-[95%] lg:w-full large:w-[95%]'>
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
 
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10 large:gap-16 large:w-[95%]'>
 
-          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
+          <div className='h-60 rounded-xl md:w-[100%] lg:w-[75%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center lg:gap-6 lg:ml-3 large:w-[90%]'>
             <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
             <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
             <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color h-60 rounded-xl w-60 pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <div className='main-color md:h-50 md:w-50 lg:h-60 rounded-xl lg:w-60 pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-64 large:w-64'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -467,19 +467,24 @@ export default function AdminHomePage(props) {
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
-        <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
+      <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8 md:w-[90%] large:w-[88%] large:gap-12'>
+
+        <div className='main-color h-80 mt-8 rounded-xl md:w-[60%] lg:w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
         </div>
         <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
         {
           calendarClick &&
-          <CalendarClickModal onClick={()=>setCalendarClick(false)} TableHeading='Motors Performance'/>
+          <CalendarClickModal 
+          onClick={()=>setCalendarClick(false)}
+           TableHeading='Motors Performance'
+           className='md:w-50'
+           />
         }
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-12 mx-auto bg-white rounded-xl w-[96%]'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[98%] large:w-[95%]'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}

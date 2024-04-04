@@ -48,7 +48,7 @@ function CircularProgressChart( { progress, barColor, motorCategory }) {
 
   return (
     <>
-    <div className='bg-white h-52 rounded-xl w-52 flex flex-col justify-center items-center dark-box-shadow'>
+    <div className='bg-white md:w-48 md:h-48 lg:h-52 rounded-xl lg:w-52 flex flex-col justify-center items-center dark-box-shadow large:w-60 large:h-60'>
  <ReactApexChart
       options={chartOptions}
       series={chartSeries}

@@ -12,24 +12,24 @@ function getToken() {
     const tokenString = localStorage.getItem('token');
     const userToken = JSON.parse(tokenString);
     return userToken
-  }
+}
 export default function Sidebar(props) {
 
-    const {activeMenu, setactiveMenu, screenSize} = useStateContext();
-    
+    const { activeMenu, setactiveMenu, screenSize } = useStateContext();
+
     const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-gray-200  text-md m-2';
-    
+
     const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-black hover:text-gray-200 dark:hover:text-gray-200 main-hover hover:rounded-full m-2';
 
 
-    const handleCloseSideBar=()=>{
-        if(activeMenu && screenSize<=900){
+    const handleCloseSideBar = () => {
+        if (activeMenu && screenSize <= 900) {
             setactiveMenu(false);
         }
     }
 
     // const role=props.user_details.role;
-    const role=getToken().role;
+    const role = getToken().role;
     // const role='floorIncharge'
 
     let roleLinks = [];
@@ -42,12 +42,12 @@ export default function Sidebar(props) {
     }
 
     useEffect(() => {
-        // Set activeMenu to true when the component mounts or when the user logs in
+        // Set activeMenu to true when the component loads or when the user logs in
         setactiveMenu(true);
     }, []);
 
     return (
-        <div className='ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
+        <div className='ml-1 hidden h-screen overflow-y-auto md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 lg:block'>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
                     <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-8' /></Link>
@@ -64,7 +64,7 @@ export default function Sidebar(props) {
                     <TooltipComponent content="Menu" position="BottomCenter">
                         <button
                             type="button"
-                            onClick={()=>setactiveMenu((prevActiveMenu)=>!prevActiveMenu)}
+                            onClick={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}
                             className="text-xl text-black rounded-full p-3 hover:bg-light-gray mt-4 block"
                         >
                             {/* <MdOutlineCancel /> */}
@@ -87,11 +87,24 @@ export default function Sidebar(props) {
                                     className={({ isActive }) =>
                                         isActive ? activeLink : normalLink}>
 
-                                    {link.icon}
+                                    {/* {link.icon}
                                     <span className='capitalize'>
             {link.name.replace(/([a-z])([A-Z])/g, '$1 $2')}
-        </span>
-
+        </span> */}
+                                    {/* Conditionally render "Home" for category 'home' */}
+                                    {link.category === 'home' ?   <>
+                                            {link.icon}
+                                            <span className='capitalize'>
+                                                Home
+                                            </span>
+                                        </> : (
+                                        <>
+                                            {link.icon}
+                                            <span className='capitalize'>
+                                                {link.name.replace(/([a-z])([A-Z])/g, '$1 $2')}
+                                            </span>
+                                        </>
+                                    )}
                                 </NavLink>
                             ))}
                         </div>

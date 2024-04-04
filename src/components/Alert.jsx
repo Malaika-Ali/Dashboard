@@ -2,7 +2,7 @@ import React from 'react'
 
 function Alert({ bgColor50, textColor900,iconSrc, iconColor, message, alertsNumber, borderColor600, textColor500,borderColor500, onClick }) {
   return (
-    <div className={`ml-auto mr-3 flex flex-col gap-2 w-60 border-b-4 ${borderColor600} cursor-pointer lato-regular-16 font-bold`} onClick={onClick}>
+    <div className={`ml-auto mr-3 flex flex-col gap-2 md:w-52 lg:w-60 large:w-64 border-b-4 ${borderColor600} cursor-pointer lato-regular-16 font-bold large:text-lg`} onClick={onClick}>
     <div className={`${bgColor50} rounded-t ${textColor900} px-4 py-3`} role="alert">
       <div className="flex flex-row items-center justify-between">
         <div>

@@ -91,7 +91,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
 
     
   return (
-    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative'>
+    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative  md:w-[750px] lg:w-[96%]'>
 
       {/* This is that menu button in nav */}
       <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu />} />

@@ -7,6 +7,8 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 
+import Swal from 'sweetalert2'; 
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -64,11 +66,21 @@ const SignupPage = () => {
       }
     ).then((result) => {
       setOpen(false);
-      alert('Success');
+      // Show SweetAlert message on successful registration
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Success',
+        text: 'You have successfully registered!',
+      });
       navigate('/');
     }).catch(async (error) =>  {
       setOpen(false);
-      alert(error.response.data);
+      // alert(error.response.data);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed',
+        text: 'An error occurred while registering. Please try again later.',
+      });
       // Reset the form fields
       await reset({
         firstName: '',
@@ -105,7 +117,7 @@ const SignupPage = () => {
     switch (role) {
       case 'factoryIncharge':
         return (
-          <div>
+          <div className='grid grid-cols-2 gap-x-8'>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
                 Area Name
@@ -233,10 +245,10 @@ const SignupPage = () => {
       <CircularProgress color="inherit" />
     </Backdrop>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded shadow-md w-96 mt-8 mb-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded shadow-md w-[50%] mt-8 mb-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
-
+<div className='grid grid-cols-2 gap-x-8'>
         <div className="mb-4 ">
           <label className="block text-gray-600 text-sm font-semibold mb-2">
             First Name
@@ -442,6 +454,7 @@ const SignupPage = () => {
 
         {/* Additional fields based on selected role */}
         {renderAdditionalFields(selectedRole)}
+        </div>
 
         <div className="flex items-center justify-between">
           

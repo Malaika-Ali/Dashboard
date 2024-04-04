@@ -13,14 +13,17 @@ export const links = [
         {
           name: 'AdminHomePage',
           icon: <IoHome />,
+          category: 'home'
         },
         {
           name: 'AreasPage',
           icon: <FaLocationDot />,
+          category: 'menu'
         },
         {
           name: 'FactoriesPage',
           icon: <MdFactory />,
+          category: 'menu'
         },
         // {
         //   name: 'FloorsPage',
@@ -29,10 +32,12 @@ export const links = [
         {
           name: 'Motors',
           icon: <IoMdSettings />,
+          category: 'menu'
         },
         {
           name: 'EmployeeDetails',
           icon: <FaPeopleGroup />,
+          category: 'menu'
         },
       ],
     }   
@@ -45,6 +50,7 @@ export const links = [
         {
           name: 'FactoryInchargeHome',
           icon: <IoHome />,
+          category: 'home'
         },
         // {
         //   name: 'FactoriesPage',
@@ -53,10 +59,12 @@ export const links = [
         {
           name: 'FloorsPage',
           icon: <GiStairs />,
+          category: 'menu'
         },
         {
           name: 'Motors',
           icon: <IoMdSettings />,
+          category: 'menu'
         },
       ],
     }  
@@ -69,6 +77,7 @@ export const links = [
         {
           name: 'FloorInchargeHomePage',
           icon: <IoHome />,
+          category: 'home'
         },
         // {
         //   name: 'FloorsPage',
@@ -77,6 +86,7 @@ export const links = [
         {
           name: 'Motors',
           icon: <IoMdSettings />,
+          category: 'menu'
         },
       ],
     }
