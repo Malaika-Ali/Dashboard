@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
+import logo from '../assets/logo.png'
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -99,8 +101,14 @@ const LoginPage = (props) => {
     >
       <CircularProgress color="inherit" />
     </Backdrop>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 large:w-[60%] rounded-lg">
+
+      {/* **********************logo************************** */}
+      <div className='w-24 absolute top-4 left-4'>
+      <img src={logo} alt="company logo" />
+      </div>
+
+      <div className="bg-white p-8 rounded-xl shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -173,9 +181,9 @@ const LoginPage = (props) => {
             Log In
           </button>
           {/* </Link> */}
-          <span className='text-center mt-4'>
+          <span className='text-center mt-[0.5em]'>
             Not registered on our platform yet?
-            <Link to="/signuppage"><span className='text-blue-900 mx-auto text-center'> Register Now </span></Link>
+            <Link to="/signuppage"><span className='text-blue-500 mx-auto text-center hover:text-blue-400'> Register Now </span></Link>
           </span>
         </form>
       </div>

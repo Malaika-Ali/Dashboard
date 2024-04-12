@@ -89,7 +89,7 @@ const AreasPage = (props) => {
     };
 
     return (
-        <div className='ml-3 mr-5 mt-5'>
+        <div className='sm:mt-20 ml-3 mr-5 md:mt-5 '>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
@@ -98,13 +98,13 @@ const AreasPage = (props) => {
             </Backdrop>
 
             <div className="flex flex-row justify-between m-4">
-                <h1 className='font-extrabold text-2xl main-font ml-0' >Summary</h1>
+                <h1 className='font-extrabold md:text-xl lg:text-2xl large:text-3xl main-font ml-0' >Summary</h1>
                 {/* <div>Refresh</div> */}
             </div>
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 rounded-xl
-                w-90 m-3'>
+            <div className='flex justify-between mt-4 rounded-xl md:w-[96%] large:gap-[2em]
+                lg:w-90 large:w-[95%] m-3'>
 
 
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
@@ -158,7 +158,7 @@ const AreasPage = (props) => {
             }
 
             {/* *******************     Cards Container     **************/}
-            <div  className="grid grid-cols-3 justify-between h-52 mt-3 main-color rounded-xl m-3 w-90"
+            <div  className="grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-52 large:h-80 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]"
                 style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
                 {
                     sortedAreas.length > 0 ? (

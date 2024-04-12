@@ -102,7 +102,7 @@ const FloorsPage = (props) => {
 
         {/* heading section */}
         <div className="flex flex-row justify-between">
-          <h1 className='font-extrabold text-2xl main-font ml-4'>Floors Report</h1>
+          <h1 className='font-extrabold text-2xl large:text-3xl main-font ml-4'>Floors Report</h1>
         </div>
 
         {/* Flex Container */}
@@ -163,7 +163,7 @@ const FloorsPage = (props) => {
 
         {/* *******************     Cards Container     **************/}
 
-        <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
+        <div className='grid grid-cols-3 justify-between h-60 large:h-80 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
           style={{ overflowY: 'auto', maxHeight: '100%' }}>
           {
 

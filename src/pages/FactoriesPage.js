@@ -106,7 +106,7 @@ const FactoriesPage = (props) => {
 
             {/* heading section */}
             <div className="flex flex-row justify-between">
-                <h1 className='font-extrabold text-2xl main-font ml-4 '>Factories Report</h1>
+                <h1 className='font-extrabold text-2xl large:text-3xl main-font ml-4 '>Factories Report</h1>
                 {/* <div className="flex flex-row mr-5 justify-center">
                     <img src={filterby} alt="" />
                     <span className='text-black'>Sort</span></div> */}
@@ -114,7 +114,7 @@ const FactoriesPage = (props) => {
 
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 rounded-xl w-90 m-3'>
+            <div className='flex justify-between mt-4 rounded-xl w-90 m-3 md:gap-[2em] large:w-[95%]'>
 
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
                     // bgColor='bg-green-50'
@@ -167,7 +167,7 @@ const FactoriesPage = (props) => {
 
 
             {/* *******************     Cards Container     **************/}
-            <div className="grid grid-cols-3 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto"
+            <div className="grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 h-60 large:h-80 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]"
                 style={{ overflowY: 'auto', maxHeight: '100%' }}>
                 {
                     sortedFactories.length > 0 ? (

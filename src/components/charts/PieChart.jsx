@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const PieChart = ({ title , onClick, series }) => {
+const PieChart = ({ title, onClick, series }) => {
 
   // useEffect(() => {
   //   const handleDataPointSelection = (event, chartContext, config) => {
@@ -16,68 +16,89 @@ const PieChart = ({ title , onClick, series }) => {
   //     document.removeEventListener('dataPointSelection', handleDataPointSelection);
   //   };
   // }, [onClick]);
+
+
+  // states and functions to handle the responsiveness of the height
+  const [screenSize, setScreenSize] = useState('');
+  useEffect(() => {
+    const handleResize = () => {
+      if (screenSize >= 768 && screenSize < 1024) {
+        setScreenSize('med');
+      } else {
+        setScreenSize('sml');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
     <>
-<ReactApexChart
-type="pie"
-width={250}
-height={250}
+      <ReactApexChart
+        type="pie"
+        // width={250}
+        // height={250}
+        height={screenSize === 'med' ? 232 : 250}
+        width={screenSize === 'med' ? 232 : 250}
 
 
-// This shows the quantity in piechart. We give it a number and it converts that number into % itself
-series={series}
+        // This shows the quantity in piechart. We give it a number and it converts that number into % itself
+        series={series}
 
-options={{
-  // title:{text: title},
-  title: {
-    text: title,
-    align: 'center',
-    marginLeft: 3,
-    style: {
-      fontSize: '16px',
-      // color: '#000000', 
-      color: 'white'
-    }},
-  noData: {text: "No Records found yet"},
-  labels: ['Flawless', 'Faulty', 'Critical'],
-  colors: ['#31C431', '#F9F502', '#DB1915'],
-  legend: {
-    position: 'top',
-    horizontalAlign: 'center',
-    offsetY: 0,
-    offsetX: 0,
-    labels: {
-      colors: ['#31C431', '#F9F502', '#DB1915'], // Set legend text color to white
-    },
-  },
-  chart: {
-    events: {
-      dataPointSelection: function (event, chartContext, config) {
-        if (onClick) {
+        options={{
+          // title:{text: title},
+          title: {
+            text: title,
+            align: 'center',
+            marginLeft: 3,
+            style: {
+              fontSize: '16px',
+              // color: '#000000', 
+              color: 'white'
+            }
+          },
+          noData: { text: "No Records found yet" },
+          labels: ['Flawless', 'Faulty', 'Critical'],
+          colors: ['#31C431', '#F9F502', '#DB1915'],
+          legend: {
+            position: 'top',
+            horizontalAlign: 'center',
+            offsetY: 0,
+            offsetX: 0,
+            labels: {
+              colors: ['#31C431', '#F9F502', '#DB1915'], // Set legend text color to white
+            },
+          },
+          chart: {
+            events: {
+              dataPointSelection: function (event, chartContext, config) {
+                if (onClick) {
 
-          // This will catch the index of the series(which pie slice) is clicked
-          onClick(config.dataPointIndex);
-        }
-      },
-    },
-  },
+                  // This will catch the index of the series(which pie slice) is clicked
+                  onClick(config.dataPointIndex);
+                }
+              },
+            },
+          },
 
-      dropShadow: {
-        enabled: true,
-        top: 2,
-        left: 0,
-        blur: 4,
-        color: '#000000', // Shadow color
-        opacity: 0.5, // Shadow opacity
-      },
-    stroke: {
-      colors: ['#31C431', '#F9F502', '#DB1915'], // Border colors
-    },
-  
-
-  }}
-style={{ cursor: 'pointer' }} // Set cursor as pointer
-/>
+          dropShadow: {
+            enabled: true,
+            top: 2,
+            left: 0,
+            blur: 4,
+            color: '#000000', // Shadow color
+            opacity: 0.5, // Shadow opacity
+          },
+          stroke: {
+            colors: ['#31C431', '#F9F502', '#DB1915'], // Border colors
+          },
+        }}
+        style={{ cursor: 'pointer' }} // Set cursor as pointer
+      />
     </>
   );
 };

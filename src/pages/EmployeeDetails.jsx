@@ -6,6 +6,7 @@ import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
 import { RiDeleteBinLine } from "react-icons/ri";
 import EditFactoryIncharge from '../components/EditFactoryIncharge';
 import EditFloorIncharge from '../components/EditFloorIncharge';
+import EmployeesTable from '../components/tables/EmployeesTable';
 
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
@@ -184,7 +185,8 @@ function EmployeeDetails() {
         <div className='ml-3 mr-5 mt-5'>
             {/* Factory Incharge Table section */}
             <div className='mt-5 mx-auto bg-white  rounded-xl w-[96%]'>
-                <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data} />
+                <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data}
+                 />
                 <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
                  
                     {/* *******Add Factory Incharge Button***** */}

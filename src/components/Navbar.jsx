@@ -91,10 +91,11 @@ const [notificationOpen, setnotificationOpen] = useState(false)
 
     
   return (
-    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative  md:w-[750px] lg:w-[96%]'>
+    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative  md:w-[94%] lg:w-[96%] large:w-[92%] large:mr-1'>
 
       {/* This is that menu button in nav */}
-      <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu />} />
+      <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu 
+      className='large:w-14 large:h-6 large:-ml-[14px]'/>} />
 
       
       {/* Div to contain all nav elements */}
@@ -146,7 +147,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
         } */}
 
         <div onClick={()=>setopen(!open)} className='relative mt-3 cursor-pointer' ref={divRef}>
-          <BsPersonCircle className='w-14 h-5' />
+          <BsPersonCircle className='w-14 h-5 large:w-16 large:h-6' />
         </div>
 
         {

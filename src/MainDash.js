@@ -9,6 +9,9 @@ import { ContextProvider } from './contexts/ContextProvider';
 
 // Importing components
 import  {Sidebar, Navbar} from './components'; 
+import FullPageCalendar from './components/calendars/FullPageCalendar'
+import History from './pages/History';
+
 
 // Importing Pages
 import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, FloorsPage, UserProfile, EmployeeDetails } from './pages';
@@ -136,6 +139,9 @@ function MainDash() {
                 <Route
                 path='/floorsPage'
                 element={token?<FloorsPage user_details={token} />:<Navigate replace to="/signin"/>} />
+                 <Route
+                path='/history'
+                element={token?<History user_details={token} />:<Navigate replace to="/signin"/>} />
               </Routes>
             </div>
           </div>

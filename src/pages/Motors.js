@@ -95,13 +95,13 @@ export default function Motors(props) {
 
 
       <div className="flex flex-row justify-between ml-4">
-        <h1 className='font-extrabold text-2xl main-font' >Summary</h1>
+        <h1 className='font-extrabold text-2xl large:text-3xl main-font' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
 
 
       {/* Flex Container */}
-      <div className='flex justify-between mt-4 rounded-xl w-90 m-3'>
+      <div className='flex justify-between mt-4 rounded-xl w-90 m-3 large:w-[95%] md:gap-[2em]'>
         <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
           // bgColor='bg-green-50'
           iconBgColor="bg-green-200"
@@ -155,7 +155,7 @@ export default function Motors(props) {
 
 
       {/* *******************     Cards Container     **************/}
-      <div className='grid grid-cols-3 justify-between h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto'
+      <div className='grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-60 large:h-80 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
         style={{ overflowY: 'auto', maxHeight: '100%' }}>
         {
           sortedMotors.length > 0 ? (

@@ -94,12 +94,6 @@ const Table = ({ tableSubheading, column_headings, data }) => {
 }
 
 
-// Add PropTypes for each prop
-Table.propTypes = {
-  tableSubheading: PropTypes.string.isRequired,
-  column_headings: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired,
-};
 
 export default Table;
 

@@ -39,6 +39,11 @@ export const links = [
           icon: <FaPeopleGroup />,
           category: 'menu'
         },
+        {
+          name: 'History',
+          icon: <FaPeopleGroup />,
+          category: 'menu'
+        },
       ],
     }   
   ];
