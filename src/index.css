@@ -14,7 +14,9 @@ body {
   overflow-x: hidden;
   /* font-family: "Open Sans",sans-serif; */
   font-family: "Lato", sans-serif;
-  background-image: linear-gradient(to right, #F4F3F2, #F4F2F3, #F5F3F4)
+  /* dark grey bg */
+  /* background-image: linear-gradient(to right, #F4F3F2, #F4F2F3, #F5F3F4); */
+  background-color: #F0F4F8;
 }
 
 .lato-regular-16{
@@ -58,7 +60,9 @@ body {
 }
 
 /* Colors */
-
+.gray-icon{
+  color: #8F939F;
+}
 
 @layer components {
   .btn-primary {

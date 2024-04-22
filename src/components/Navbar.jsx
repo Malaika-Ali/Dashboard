@@ -10,7 +10,7 @@ import Notification from './Notification';
 import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout } from "react-icons/tb";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NotificationStack from './NotificationStack';
 
 import { IoMdNotifications } from "react-icons/io";
@@ -91,7 +91,9 @@ const [notificationOpen, setnotificationOpen] = useState(false)
 
     
   return (
-    <div className='flex justify-between p-2 mx-2 mt-2 md:mx-6 relative  md:w-[94%] lg:w-[96%] large:w-[92%] large:mr-1'>
+    <div className='flex justify-between bg-white p-2 relative w-[100%] large:px-8
+   
+     '> 
 
       {/* This is that menu button in nav */}
       <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu 
@@ -147,7 +149,7 @@ const [notificationOpen, setnotificationOpen] = useState(false)
         } */}
 
         <div onClick={()=>setopen(!open)} className='relative mt-3 cursor-pointer' ref={divRef}>
-          <BsPersonCircle className='w-14 h-5 large:w-16 large:h-6' />
+          <BsPersonCircle className='w-14 h-5 large:w-16 large:h-6 gray-icon' />
         </div>
 
         {

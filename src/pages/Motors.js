@@ -85,7 +85,7 @@ export default function Motors(props) {
   };
 
   return (
-    <div className='ml-3 mr-5 mt-5'>
+    <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -155,7 +155,7 @@ export default function Motors(props) {
 
 
       {/* *******************     Cards Container     **************/}
-      <div className='grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-60 large:h-80 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
+      <div className='grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-60 large:h-96 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
         style={{ overflowY: 'auto', maxHeight: '100%' }}>
         {
           sortedMotors.length > 0 ? (

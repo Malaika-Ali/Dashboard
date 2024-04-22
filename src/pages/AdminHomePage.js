@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import filterby from '../assets/filterby.svg'
+import { useNavigate } from 'react-router-dom';
 import factory from '../assets/factory.svg'
 import motors_icon from '../assets/motors.svg'
 import location from '../assets/location.svg'
@@ -16,9 +15,7 @@ import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 
 
-
-// import { useStateContext } from '../contexts/ContextProvider'
-import { TotalNumberCard } from '../summaryCards';
+import TotalNumberCard from '../components/cards/TotalNumberCard';
 import { Table } from '../components';
 import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
@@ -91,30 +88,6 @@ export default function AdminHomePage(props) {
 
     }
   }, [data])
-
-  // const pie_data = [
-  //   {
-  //     "motorname": "Motor1",
-  //     "status": "Faulty",
-  //     "number": 25,
-  //     "textnum": "25",
-  //     "color": "#F9F502"
-  //   },
-  //   {
-  //     "motorname": "Motor2",
-  //     "status": "critical",
-  //     "number": 25,
-  //     "textnum": "25",
-  //     "color": "#DB1915"
-  //   },
-  //   {
-  //     "motorname": "Motor3",
-  //     "status": "Flawless",
-  //     "number": 50,
-  //     "textnum": "50",
-  //     "color": "#31C431"
-  //   },
-  // ]
 
   // table columns headings
   const columns = [
@@ -391,7 +364,7 @@ export default function AdminHomePage(props) {
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 '>
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-16'>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -400,9 +373,9 @@ export default function AdminHomePage(props) {
       </Backdrop>
 
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[3em] lg:justify-between items-center w-full large:w-[92%]'>
+      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:justify-between items-center w-full large:w-full'>
         {/* Flex Container */}
-        <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[80%]'>
+        <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
 
           {/* left box */}
           <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/AreasPage')} />
@@ -443,19 +416,19 @@ export default function AdminHomePage(props) {
 
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-[98%]'>
+      <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-full'>
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
 
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between md:gap-6 lg:gap-10 md:w-[100%] lg:w-[98%] large:gap-16 large:w-[95%]'>
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between md:gap-6 lg:gap-10 md:w-[100%] lg:w-[98%] large:gap-[3em] large:w-full'>
 
-          <div className='h-60 rounded-xl md:w-[68%] lg:w-[72%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[90%]'>
+          <div className='h-60 rounded-xl md:w-[68%] lg:w-[72%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
             <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
             <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
             <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-60 rounded-xl lg:w-60 md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-64 large:w-64'>
+          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-60 rounded-xl lg:w-60 md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -467,11 +440,11 @@ export default function AdminHomePage(props) {
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row items-center md:justify-center lg:justify-between gap-8 md:w-[98%] lg:w-[97%] large:w-[88%] large:gap-14'>
-
-        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[75%] large:w-[95%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
-          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
+      <div className='mt-2 rounded-xl flex flex-row items-center md:justify-center lg:justify-between gap-8 md:w-[98%] lg:w-[97%] large:w-full'>
+        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[75%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center'>
+          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
+
         <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
         {
           calendarClick &&
@@ -483,7 +456,7 @@ export default function AdminHomePage(props) {
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-12 mx-auto bg-white rounded-xl w-[98%] large:w-[95%]'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[98%] large:w-full'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}

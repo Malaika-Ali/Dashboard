@@ -18,22 +18,58 @@ const PieChart = ({ title, onClick, series }) => {
   // }, [onClick]);
 
 
-  // states and functions to handle the responsiveness of the height
-  const [screenSize, setScreenSize] = useState('');
-  useEffect(() => {
-    const handleResize = () => {
-      if (screenSize >= 768 && screenSize < 1024) {
-        setScreenSize('med');
-      } else {
-        setScreenSize('sml');
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+   // logic for handling responsiveness of chart
+   const [screenSize, setScreenSize] = useState('');
+
+   useEffect(() => {
+     const handleResize = () => {
+       const width = window.innerWidth;
+       if (width < 768) {
+         setScreenSize('small');
+       } else if (width >= 768 && width < 1024) {
+         setScreenSize('medium');}
+         else if (width > 1400) {
+ setScreenSize('very large');
+         }
+       else {
+         setScreenSize('large');
+       }
+     };
+ 
+     handleResize();
+     window.addEventListener('resize', handleResize);
+ 
+     return () => {
+       window.removeEventListener('resize', handleResize);
+     };
+   }, []);
+ 
+ 
+ // chart heights for different screen sizes
+   let chartHeight;
+   if (screenSize === 'small') {
+     chartHeight = 200;
+   } else if (screenSize === 'medium') {
+     chartHeight = 220;
+   }
+   else if (screenSize === 'very large') {
+     chartHeight = 300;
+   } else {
+     chartHeight = 250;
+   }
+ 
+   // chart widths for different screen sizes
+   let chartWidth;
+   if (screenSize === 'small') {
+     chartWidth = 200;
+   } else if (screenSize === 'medium') {
+     chartWidth = 220;
+   }
+   else if (screenSize === 'very large'){
+     chartWidth = 300;
+   } else {
+     chartWidth = 250;
+   }
 
 
   return (
@@ -42,8 +78,8 @@ const PieChart = ({ title, onClick, series }) => {
         type="pie"
         // width={250}
         // height={250}
-        height={screenSize === 'med' ? 232 : 250}
-        width={screenSize === 'med' ? 232 : 250}
+        height={chartHeight}
+        width={chartWidth}
 
 
         // This shows the quantity in piechart. We give it a number and it converts that number into % itself

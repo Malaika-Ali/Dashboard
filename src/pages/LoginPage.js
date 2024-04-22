@@ -83,14 +83,6 @@ const LoginPage = (props) => {
       });
       
     })
-
-    // <Link to="/signuppage"></Link>
-
-    // Reset the form fields
-    // await reset({
-    //   email: '',
-    //   password: '',
-    // });
   };
 
   return (
@@ -101,14 +93,14 @@ const LoginPage = (props) => {
     >
       <CircularProgress color="inherit" />
     </Backdrop>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 large:w-[60%] rounded-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 rounded-lg">
 
       {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4'>
+      <div className='w-24 absolute top-4 left-4 large:w-44'>
       <img src={logo} alt="company logo" />
       </div>
 
-      <div className="bg-white p-8 rounded-xl shadow-md w-96">
+      <div className="bg-white p-8 rounded-xl shadow-md w-96 mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">

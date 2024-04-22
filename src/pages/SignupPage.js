@@ -94,22 +94,6 @@ const SignupPage = () => {
         role: 'selectedRole',
       });
     })
-
-
-
-
-
-    // // Reset the form fields
-    // await reset({
-    //   firstName: '',
-    //   lastName: '',
-    //   email: '',
-    //   employeeID: '',
-    //   password: '',
-    //   confirmPassword: '',
-    //   role: 'selectedRole',
-    // });
-
   };
 
   const passwordFieldValue = control.fieldsRef?.current?.password?.value;
@@ -132,12 +116,12 @@ const SignupPage = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
 
 {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4'>
+      <div className='w-24 absolute top-4 left-4 large:w-44'>
       <img src={logo} alt="company logo" />
       </div>
 
 
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-xl shadow-md w-[50%] mt-8 mb-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-xl shadow-md w-[50%] large:w-[40%] mt-8 mb-8">
           <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-8'>

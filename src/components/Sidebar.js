@@ -47,7 +47,7 @@ export default function Sidebar(props) {
     }, []);
 
     return (
-        <div className={`md:z-50 md:shadow-md ml-1 h-screen overflow-y-auto md:overflow-x-hidden md:hover:overflow-y-auto pb-10 ${activeMenu ? 'lg:block' : 'hidden'}`}>
+        <div className={`md:z-50 md:shadow-md ml-1 h-screen overflow-y-auto md:overflow-x-hidden pb-10 ${activeMenu ? 'lg:block' : 'hidden'}`}>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
                     <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-8' /></Link>
@@ -73,7 +73,7 @@ export default function Sidebar(props) {
 
                 </div>
 
-                <div className='mt-10 '>
+                <div className='mt-12 large:mt-20 '>
                     {roleLinks.map((item) => (
                         <div key={item.title}>
                             {/* <p className='text-gray-400 m-3 mt-4 uppercase'>

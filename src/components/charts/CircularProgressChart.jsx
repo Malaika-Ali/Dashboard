@@ -3,24 +3,6 @@ import ReactApexChart from 'react-apexcharts';
 
 
 function CircularProgressChart({ progress, barColor, motorCategory }) {
-// states and functions to handle the responsiveness of the height
-  const [screenSize, setScreenSize] = useState('');
-  useEffect(() => {
-    const handleResize = () => {
-      if (screenSize < 1024) {
-        setScreenSize('med');
-      } else {
-        setScreenSize('sml');
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-
   const chartOptions = {
     plotOptions: {
       radialBar: {
@@ -59,17 +41,55 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
 
   const chartSeries = [progress];
 
+   // logic for handling responsiveness of chart
+   const [screenSize, setScreenSize] = useState('');
 
-
+   useEffect(() => {
+     const handleResize = () => {
+       const width = window.innerWidth;
+       if (width < 768) {
+         setScreenSize('small');
+       } else if (width >= 768 && width < 1024) {
+         setScreenSize('medium');}
+         else if (width > 1400) {
+ setScreenSize('very large');
+         }
+       else {
+         setScreenSize('large');
+       }
+     };
+ 
+     handleResize();
+     window.addEventListener('resize', handleResize);
+ 
+     return () => {
+       window.removeEventListener('resize', handleResize);
+     };
+   }, []);
+ 
+ 
+ // chart heights for different screen sizes
+   let chartHeight;
+   if (screenSize === 'small') {
+     chartHeight = 200;
+   } else if (screenSize === 'medium') {
+     chartHeight = 180;
+   }
+   else if (screenSize === 'very large') {
+     chartHeight = 320;
+   } else {
+     chartHeight = 280;
+   }
+ 
   return (
     <>
-      <div className='bg-white md:w-40 md:h-40 lg:h-52 rounded-xl lg:w-52 flex flex-col justify-center items-center dark-box-shadow large:w-60 large:h-60'>
+      <div className='bg-white md:w-40 md:h-40 lg:h-52 rounded-xl lg:w-52 flex flex-col justify-center items-center dark-box-shadow shadow-xl large:w-80 large:h-64'>
         <ReactApexChart
           options={chartOptions}
           series={chartSeries}
           type="radialBar"
           // height={250}
-          height={screenSize === 'med' ? 220 : 250}
+          height={chartHeight}
         />
       </div>
     </>
