@@ -47,20 +47,11 @@ export default function Sidebar(props) {
     }, []);
 
     return (
-        <div className={`md:z-50 md:shadow-md ml-1 h-screen overflow-y-auto md:overflow-x-hidden pb-10 ${activeMenu ? 'lg:block' : 'hidden'}`}>
+        <div className={`md:z-50 md:shadow-md ml-1 h-screen overflow-y-auto md:overflow-x-hidden pb-10 ${activeMenu ? 'lg:block' : 'hidden'} sidebar-bg`}>
             {activeMenu && (<>
                 <div className='flex justify-between items-center '>
                     <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-8' /></Link>
 
-                    {/* <TooltipComponent content="Menu" position='BottomCenter'>
-                        <button type='button' className='text-xl hidden rounded-full p-3 hover:bg-light-gray mt-4 block '>
-                            <MdOutlineCancel/>
-                        </button>
-                    </TooltipComponent> */}
-
-                    {/* <Link to="/" className="  items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-                        <SiShopware /> <span>Dash</span>
-                    </Link> */}
                     <TooltipComponent content="Menu" position="BottomCenter">
                         <button
                             type="button"
@@ -87,10 +78,6 @@ export default function Sidebar(props) {
                                     className={({ isActive }) =>
                                         isActive ? activeLink : normalLink}>
 
-                                    {/* {link.icon}
-                                    <span className='capitalize'>
-            {link.name.replace(/([a-z])([A-Z])/g, '$1 $2')}
-        </span> */}
                                     {/* Conditionally render "Home" for category 'home' */}
                                     {link.category === 'home' ?   <>
                                             {link.icon}

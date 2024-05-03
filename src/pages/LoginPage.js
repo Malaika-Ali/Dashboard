@@ -93,7 +93,7 @@ const LoginPage = (props) => {
     >
       <CircularProgress color="inherit" />
     </Backdrop>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 rounded-lg">
+    <div className="min-h-screen flex items-center justify-center rounded-lg">
 
       {/* **********************logo************************** */}
       <div className='w-24 absolute top-4 left-4 large:w-44'>

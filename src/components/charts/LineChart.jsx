@@ -29,6 +29,8 @@ function LineChart({ data, chartTitle }) {
       labels: {
         style: {
           colors: 'white', // Set x-axis label text color to white
+          marginRight: '20px',
+          marginLeft: '20px'
         },
       },
     },
@@ -125,7 +127,7 @@ setScreenSize('very large');
   else if (screenSize === 'very large') {
     chartHeight = 400;
   } else {
-    chartHeight = 280;
+    chartHeight = 250;
   }
 
   // chart widths for different screen sizes
@@ -143,7 +145,7 @@ setScreenSize('very large');
 
 
   return (
-    <>
+    <div className='table-font flex justify-between items-center'>
       <ReactApexChart
         options={chartOptions}
         series={chartSeries}
@@ -152,7 +154,7 @@ setScreenSize('very large');
         width={chartWidth}
       
       />
-    </>
+    </div>
   );
 }
 

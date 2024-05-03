@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
 
@@ -14,7 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import NotificationStack from './NotificationStack';
 
 import { IoMdNotifications } from "react-icons/io";
-
+import Loader from "../shared/Loader";
+import { StateContext } from '../contexts/ContextProvider';
 
 // Navigation Button Component
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
@@ -58,6 +59,7 @@ export default function Navbar(props) {
   // Chatgpt code for search bar
   const [searchTerm, setSearchTerm] = useState('');
   const [isTooltipVisible, setTooltipVisible] = useState(false);
+  const {loading, setLoading}=useContext(StateContext);
 
   const handleSearchChange = (event) => {
     const newSearchTerm = event.target.value;
@@ -88,12 +90,13 @@ export default function Navbar(props) {
   const navigate=useNavigate();
 
 const [notificationOpen, setnotificationOpen] = useState(false)
+const [first, setfirst] = useState(true)
 
     
   return (
-    <div className='flex justify-between bg-white p-2 relative w-[100%] large:px-8
-   
-     '> 
+    <div className='flex justify-between bg-white p-2 relative w-[100%] large:px-8'> 
+    {loading && <Loader />}
+    
 
       {/* This is that menu button in nav */}
       <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import factory from '../assets/factory.svg'
 import motors_icon from '../assets/motors.svg'
@@ -22,6 +22,8 @@ import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
 import DateRangePicker from '../components/DateRangePicker';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
+import { StateContext } from '../contexts/ContextProvider';
+import { SmallCalendar } from '../components/calendars';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -39,6 +41,8 @@ export default function AdminHomePage(props) {
   const [data, setData] = useState(null);
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
+
+const {loading, setLoading}=useContext(StateContext);
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor] = useState(false)
@@ -60,15 +64,19 @@ export default function AdminHomePage(props) {
       setData(result.data)
 
     }).catch(async (error) => {
-      setOpen(false);
-      alert(error.response.data);
+      // setOpen(false);
+      setLoading(true)
+      alert(loading)
+      // alert(error.response.data);
     })
 
   }
 
   useEffect(() => {
 
-    setOpen(true);
+    // setOpen(true);
+    setLoading(false)
+    alert(loading)
     fetch_data();
 
 
@@ -94,25 +102,30 @@ export default function AdminHomePage(props) {
     {
       name: 'Motor Name',
       selector: row => row.motorName,
-      sortable: true
+      sortable: true,
+      center: true,
     },
     {
       name: "Floor Number",
       selector: row => row.floorNumber,
-      sortable: true
+      sortable: true,
+      center: true,
     },
     {
       name: "Factory Name",
       selector: row => row.factoryName,
-      sortable: true
+      sortable: true,
+      center: true,
     },
     {
       name: "Area Name",
       selector: row => row.areaName,
-      sortable: true
+      sortable: true,
+      center: true,
     },
     {
       name: "Status",
+      center: true,
       selector: (row) => {
         // Conditional styling based on the "Status" value
         let color = '';
@@ -135,168 +148,10 @@ export default function AdminHomePage(props) {
     },
     {
       name: "View",
+      center: true,
       cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
     }
   ];
-
-
-  //   {
-  //     id: 1,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 2,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 3,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 4,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 5,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 6,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 7,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 8,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 9,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 10,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 11,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 12,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 13,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 14,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 15,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 16,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 17,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 18,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   }
-  // ];
-
-  // useEffect(() => {
-  //   console.log('Component is rendering');
-  //   console.log('pie_data:', pie_data);
-
-  // }, [pie_data]);
-
-
-  // const lineChartData = {
-  //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  //   values: [30, 40, 25, 50, 49],
-  // };
 
   const lineChartData = {
     // X-axis labelling
@@ -364,14 +219,8 @@ export default function AdminHomePage(props) {
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-16'>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
+    
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:justify-between items-center w-full large:w-full'>
         {/* Flex Container */}
@@ -440,12 +289,12 @@ export default function AdminHomePage(props) {
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row items-center md:justify-center lg:justify-between gap-8 md:w-[98%] lg:w-[97%] large:w-full'>
-        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[75%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center'>
+      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:justify-between gap-8 md:w-[98%] lg:w-[97%] large:w-full'>
+        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[75%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
 
-        <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
+        <SmallCalendar/>
         {
           calendarClick &&
           <CalendarClickModal 

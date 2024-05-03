@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
@@ -13,6 +13,7 @@ import { FactoriesPage } from '../pages'
 import { AddNewArea, DeleteItem } from '../components/modals'
 import { RiAddLine } from "react-icons/ri";
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
+import { StateContext } from '../contexts/ContextProvider';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -30,6 +31,8 @@ const AreasPage = (props) => {
     const [addNewItem, setAddNewItem] = useState(false)
     // state to handle the deletion of area
     const [deleteItem, setDeleteItem] = useState(false)
+
+    const {loading, setLoading}=useContext(StateContext);
     const navigate = useNavigate();
 
     // State to handle sorting
@@ -50,7 +53,8 @@ const AreasPage = (props) => {
             setData(result.data)
 
         }).catch(async (error) => {
-            setOpen(false);
+            // setOpen(false);
+            setLoading(true);
             alert(error.response.data);
         })
 
@@ -58,7 +62,8 @@ const AreasPage = (props) => {
 
     useEffect(() => {
 
-        setOpen(true);
+        // setOpen(true);
+        setLoading(false)
         fetch_data();
 
     }, []);
@@ -90,12 +95,7 @@ const AreasPage = (props) => {
 
     return (
         <div className='sm:mt-20 ml-3 mr-5 md:mt-5 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
+           
 
             <div className="flex flex-row justify-between m-4">
                 <h1 className='font-extrabold md:text-xl lg:text-2xl large:text-3xl main-font ml-0' >Summary</h1>

@@ -33,18 +33,18 @@ const Table = ({ tableSubheading, column_headings, data }) => {
   return (
     <>
       {/* heading section */}
-      <div className="flex flex-row justify-between w-[100%] mx-4 mt-8">
-        <h1 className='mt-4 mb-4 main-font  text-2xl font-extrabold'>{tableSubheading}</h1>
-        <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between w-[100%] mx-8 mt-[1.5rem] mb-4">
+        <h1 className='main-font mt-[1.5rem]  text-2xl font-extrabold'>{tableSubheading}</h1>
+        <div className="flex flex-row justify-between mt-[1.5rem]">
           {/* Div to contain the search bar and the search Icon */}
-          <div className="flex flex-row justify-center items-center mr-8">
+          <div className="flex flex-row justify-center items-center mr-[5rem]">
             <div className="relative">
               {/* Search Bar */}
-              <div className="relative w-60 mt-3 mb-3 ">
+              <div className="relative w-60 mb-3 ">
                 <input
                   type="text"
-                  placeholder="Search..."
-                  className="bg-gray-100 text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
+                  placeholder="Search"
+                  className="text-gray-700 table-font border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -64,7 +64,7 @@ const Table = ({ tableSubheading, column_headings, data }) => {
         </div>
       </div>
 
-      <DataTable
+      <DataTable className='table-font'
         columns={column_headings}
         data={records}
         highlightOnHover
@@ -79,12 +79,25 @@ const Table = ({ tableSubheading, column_headings, data }) => {
           rows: {
             style: {
               fontSize: '14px',
+              fontWeight: '450',
+              color: '#494F55'
             },
           },
           headRow: {
             style: {
-              fontSize: '16px',
-              // backgroundColor: '#DCDCDC'
+              fontSize: '14px',
+              fontWeight: 'bold',
+                paddingLeft: '0 8px',
+                justifyContent: 'center',
+                backgroundColor: '#F8FAFC',
+                borderRadius: 0,
+
+            },
+            cells: {
+              style: {
+                textAlign: 'center',   // Change text alignment to center
+                color: '#494F55' 
+              },
             },
           },
         }}

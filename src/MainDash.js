@@ -16,62 +16,6 @@ import History from './pages/History';
 // Importing Pages
 import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, FloorsPage, UserProfile, EmployeeDetails } from './pages';
 
-
-//   const {activeMenu}=useStateContext();
-  
-//   return (
-//     <div >
-//       <BrowserRouter>
-//       <div className='flex relative dark:bg-main-dark-bg'>
-//       <div className='fixed left-4 bottom-4' style={{ zIndex: '1000' }}>
-//          <TooltipComponent content="Settings" position="Top">
-//             <button type='button' className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white' style={{ background: 'purple', borderRadius: '50%'}}> <FiSettings/> </button>
-//           </TooltipComponent> 
-//         </div>
-//         {activeMenu ? (
-//           <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
-//             <Sidebar/>
-            
-//           </div>
-//         ) : (
-//           <div className='w-0 dark:bg-secondary-dark-bg'>
-//             <Sidebar/>
-            
-//             </div>
-//         )}
-//         <div className={ `'dark:bg-main-bg bg-main-bg min-h-screen w-full ${activeMenu ? 'md:ml-72' : 'flex-2' }`
-//         }>
-
-//           <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
-//             <Navbar/>
-//           </div>
-
-        
-//         <div>
-//           <Routes>
-//             <Route index path='/' element={<LoginPage/>} />
-//             <Route index path='/signuppage' element={<SignupPage/>} />
-
-//             <Route path='/adminHomePage' element={<AdminHomePage/>} />
-//             <Route path='/areaspage' element={<AreasPage/>} />
-//             <Route path='/factoriespage' element={<FactoriesPage/> } />
-//             <Route path='/motors' element={<Motors/>} />
-//             <Route path='/factoryInchargeHome' element={<FactoryInchargeHome/>} />
-//             <Route path='/floorInchargeHomePage' element={<FloorInchargeHomePage/>} />
-            
-//           </Routes>
-//           </div>
-
-
-//         </div>
-//       </div>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
-
-// export default MainDash;
-
 function getToken() {
   const tokenString = localStorage.getItem('token');
   const userToken = JSON.parse(tokenString);
@@ -94,7 +38,7 @@ function MainDash() {
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
-            <div className='fixed w-60 large:w-64 sidebar bg-white '>
+            <div className='fixed w-60 large:w-64 sidebar main-color '>
               <Sidebar user_details={token} />
             </div>
           ) : null}
