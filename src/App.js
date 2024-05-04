@@ -9,10 +9,7 @@ import MainDash from './MainDash';
 function App() {  
    return (
     <div>
-      
-   
     <MainDash/>
-
   </div>
 )
 }

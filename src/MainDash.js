@@ -36,7 +36,7 @@ function MainDash() {
     <div>
       {/* <ContextProvider> */}
       <BrowserRouter>
-        <div className='flex relative dark:bg-main-dark-bg'>   
+        <div className='flex relative'>   
           {activeMenu && token && !isLoginPageOrSignupPage() ? (
             <div className='fixed w-60 large:w-64 sidebar main-color '>
               <Sidebar user_details={token} />

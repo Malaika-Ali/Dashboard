@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import Calendar from 'react-calendar';
+import React,{useState} from 'react'
+import 'react-calendar/dist/Calendar.css';
+import './SmallCalendar.css'; // Import custom CSS file
 
-const SmallCalendar = ({ selectedDate, onChange }) => {
+
+const SmallCalendar = ({onClickDay}) => {
+
+  const [date,setDate] = useState(new Date());
+
+  const onChange=date=>{
+setDate(date)
+  }
+
   return (
-    <div className="custom-calendar">
-      <DatePicker
-        selected={selectedDate}
-        onChange={onChange}
-        dateFormat="dd/MM/yyyy"
-        placeholderText="Select Date"
-      />
-    </div>
-  );
-};
+    
+    <Calendar onChange={onChange} value={date} onClickDay={onClickDay} className='rounded-xl'/>
+    
+  )
+}
 
-export default SmallCalendar;
+export default SmallCalendar

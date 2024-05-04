@@ -2,6 +2,7 @@
 
 .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+  background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) !important;
 }
 .nav-item,
 .navbar {
@@ -18,11 +19,11 @@
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 40px;
+  background-image: linear-gradient(to right, #2F3549, #303548, #2F344B);
+  border-radius: 50px;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;

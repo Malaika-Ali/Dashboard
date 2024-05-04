@@ -294,7 +294,7 @@ const {loading, setLoading}=useContext(StateContext);
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
 
-        <SmallCalendar/>
+        <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>
         {
           calendarClick &&
           <CalendarClickModal 
