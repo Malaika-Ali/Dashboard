@@ -100,7 +100,7 @@ const [first, setfirst] = useState(true)
 
       {/* This is that menu button in nav */}
       <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}  icon={<AiOutlineMenu 
-      className='large:w-14 large:h-6 large:-ml-[14px]'/>} />
+      className='large:w-14 large:h-6 large:-ml-[14px] gray-icon'/>} />
 
       
       {/* Div to contain all nav elements */}

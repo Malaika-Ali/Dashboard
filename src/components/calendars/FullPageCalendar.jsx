@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './FullPageCalendar.css'
 
 const localizer = momentLocalizer(moment);
 
-const FullPageCalendar = () => {
+const FullPageCalendar = ({dateClick}) => {
     const [events, setEvents] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -46,6 +47,7 @@ alert("day was clicked")
                     endAccessor="end"
                     style={{ height: '100%', width: '100%' }}
                     onSelectEvent={handleEventClick}
+                    onSelectSlot={dateClick}
                     // views={['month', 'week', 'day']} 
                     // components={{
                     //     toolbar: customToolbar,

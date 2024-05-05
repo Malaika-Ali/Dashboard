@@ -76,7 +76,7 @@ const {loading, setLoading}=useContext(StateContext);
 
     // setOpen(true);
     setLoading(false)
-    alert(loading)
+    // alert(loading)
     fetch_data();
 
 
@@ -219,7 +219,7 @@ const {loading, setLoading}=useContext(StateContext);
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-16 large:mt-[4rem]'>
     
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:justify-between items-center w-full large:w-full'>

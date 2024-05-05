@@ -33,6 +33,7 @@ const columns = [
     },
     {
         name: "Status",
+        center: true,
         selector: (row) => {
           // Conditional styling based on the "Status" value
           let color = '';
