@@ -38,7 +38,7 @@ alert("day was clicked")
 
     return (
         <div className="h-screen">
-            <h1 className="text-3xl text-center py-4 main-color text-white">Motor Performance Calendar</h1>
+            <h1 className="text-3xl text-center py-4 main-color text-white rounded-xl">Motor Performance History</h1>
             <div className="h-full">
                 <Calendar
                     localizer={localizer}
@@ -48,7 +48,7 @@ alert("day was clicked")
                     style={{ height: '100%', width: '100%' }}
                     onSelectEvent={handleEventClick}
                     onSelectSlot={dateClick}
-                    // views={['month', 'week', 'day']} 
+                    views={['month', 'week', 'day']} 
                     // components={{
                     //     toolbar: customToolbar,
                     // }}

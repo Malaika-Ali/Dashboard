@@ -23,9 +23,9 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import DateRangePicker from '../components/DateRangePicker';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
+import { SmallCalendar } from '../components/calendars';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -447,10 +447,13 @@ const FactoryInchargeHome = (props) => {
         <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
         </div>
-        <DateRangePicker handleDateChange={()=>setCalendarClick(true)} />
+        <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>
         {
           calendarClick &&
-          <CalendarClickModal onClick={()=>setCalendarClick(false)} TableHeading='Motors Performance'/>
+          <CalendarClickModal 
+          onClick={()=>setCalendarClick(false)}
+           TableHeading='Motors Performance'
+           />
         }
       </div>
 </div>

@@ -1,7 +1,47 @@
+:root{
+    --bg-main-color: #2F3549;
+}
+
+.rbc-toolbar{
+    background-color: var(--bg-main-color);
+    color: whitesmoke;
+    font-size: 1.2rem;
+    border-radius: 0.75rem;
+    margin-top: 1.2em;
+    margin-bottom: 0;
+
+}
+
+.rbc-toolbar button{
+    color: whitesmoke;
+}
+
+.rbc-btn-group{
+    color: whitesmoke;
+}
+
+.rbc-header{
+    height: 3rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-color: #F8FAFC;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.rbc-month-view{
+    border-radius: 0.75rem;
+    background-color: white;
+}
+
 .rbc-day-bg.rbc-today{
-    background-color: #2F3549;
+    background-color: var(--bg-main-color);
 }
 
 .rbc-date-cell.rbc-now{
     color: whitesmoke;
 }
+

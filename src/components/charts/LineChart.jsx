@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 function LineChart({ data, chartTitle }) {
@@ -55,20 +55,20 @@ function LineChart({ data, chartTitle }) {
         sizeOffset: 3,
         cursor: 'pointer'
       }
-  },
-  legend: {
-    position: 'bottom', // Set the legend position to top
-    horizontalAlign: 'center', // Set the horizontal alignment to right
-    offsetY: 15, // Adjust the vertical offset if needed
-    itemMargin: {
-      vertical: 10, // Adjust the vertical margin between legend items
-      horizontal: 25,
     },
-    labels: {
-      colors: ['#FF0000', '#FFFF00', '#00FF00'  ], // Set legend text color to white
+    legend: {
+      position: 'bottom', // Set the legend position to top
+      horizontalAlign: 'center', // Set the horizontal alignment to right
+      offsetY: 15, // Adjust the vertical offset if needed
+      itemMargin: {
+        vertical: 10, // Adjust the vertical margin between legend items
+        horizontal: 25,
+      },
+      labels: {
+        colors: ['#FF0000', '#FFFF00', '#00FF00'], // Set legend text color to white
+      },
     },
-  },
-  
+
   };
 
   const chartSeries = [
@@ -99,10 +99,11 @@ function LineChart({ data, chartTitle }) {
       if (width < 768) {
         setScreenSize('small');
       } else if (width >= 768 && width < 1024) {
-        setScreenSize('medium');}
-        else if (width > 1400) {
-setScreenSize('very large');
-        }
+        setScreenSize('medium');
+      }
+      else if (width > 1400) {
+        setScreenSize('very large');
+      }
       else {
         setScreenSize('large');
       }
@@ -117,7 +118,7 @@ setScreenSize('very large');
   }, []);
 
 
-// chart heights for different screen sizes
+  // chart heights for different screen sizes
   let chartHeight;
   if (screenSize === 'small') {
     chartHeight = 200;
@@ -127,7 +128,7 @@ setScreenSize('very large');
   else if (screenSize === 'very large') {
     chartHeight = 400;
   } else {
-    chartHeight = 250;
+    chartHeight = 290;
   }
 
   // chart widths for different screen sizes
@@ -137,7 +138,7 @@ setScreenSize('very large');
   } else if (screenSize === 'medium') {
     chartWidth = 220;
   }
-  else if (screenSize === 'very large'){
+  else if (screenSize === 'very large') {
     chartWidth = 1000;
   } else {
     chartWidth = 670;
@@ -152,7 +153,7 @@ setScreenSize('very large');
         type="line"
         height={chartHeight}
         width={chartWidth}
-      
+
       />
     </div>
   );

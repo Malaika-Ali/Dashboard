@@ -55,7 +55,7 @@ const PieChart = ({ title, onClick, series }) => {
    else if (screenSize === 'very large') {
      chartHeight = 300;
    } else {
-     chartHeight = 250;
+     chartHeight = 270;
    }
  
    // chart widths for different screen sizes
@@ -68,7 +68,7 @@ const PieChart = ({ title, onClick, series }) => {
    else if (screenSize === 'very large'){
      chartWidth = 300;
    } else {
-     chartWidth = 250;
+     chartWidth = 290;
    }
 
 
@@ -94,6 +94,7 @@ const PieChart = ({ title, onClick, series }) => {
             style: {
               fontSize: '16px',
               // color: '#000000', 
+              fontFamily: 'poppins',
               color: 'white'
             }
           },

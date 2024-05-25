@@ -39,6 +39,14 @@ body {
   background-image: linear-gradient(to right, #2F3549, #303548, #2F344B)
 }
 
+.light-blue{
+  background-color: #5C61F2;
+}
+
+.secondary-color{
+  background-color: #7D8CF8;
+}
+
 .sidebar-bg{
   background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) !important;
 }
@@ -102,18 +110,13 @@ body {
 
 /* ************************Loader******************************* */
 .load-bar {
-  height: 1.5rem;
-  /* Set the height of the loader */
   width: 100%;
-  /* Set the width to full */
   background-color: #ccc;
-  /* Set the background color of the
-  loader bar */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 0.4rem;
 }
 
 .bar {
@@ -143,6 +146,19 @@ body {
 .animate-loader {
   animation: loader 5s linear infinite;
   /* Duration, timing function, and loop */
+}
+
+/* ***********************************Navbar Background styling******************************************* */
+.navbar-bg{
+  transition: .3s ease-in;
+}
+
+.navbar-bg-onscroll{
+  background-color: blue;
+}
+
+.navbutton-hover:hover{
+  background-color: #e1ebfd;
 }
 
 

@@ -182,7 +182,7 @@ function EmployeeDetails() {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-        <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
+        <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
             {/* Factory Incharge Table section */}
             <div className='mt-5 mx-auto bg-white  rounded-xl w-[96%]'>
                 <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data}

@@ -15,6 +15,7 @@ import History from './pages/History';
 
 // Importing Pages
 import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, FloorsPage, UserProfile, EmployeeDetails } from './pages';
+import NotificationsPage from './pages/NotificationsPage';
 
 function getToken() {
   const tokenString = localStorage.getItem('token');
@@ -43,12 +44,12 @@ function MainDash() {
             </div>
           ) : null}
           <div
-            className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
-              activeMenu && token && !isLoginPageOrSignupPage() ? 'md:ml-64' : 'flex-2'
+            className={`min-h-screen w-full ${
+              activeMenu && token && !isLoginPageOrSignupPage() ? 'md:ml-[15rem]' : 'flex-2'
             }`}
           >
             {!isLoginPageOrSignupPage() && token && (
-              <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+              <div className='fixed md:static navbar w-full'>
                 <Navbar user_details={token} set_token={setToken} />
               </div>
             )}
@@ -86,6 +87,9 @@ function MainDash() {
                  <Route
                 path='/history'
                 element={token?<History user_details={token} />:<Navigate replace to="/signin"/>} />
+                <Route
+                path='/notificationsPage'
+                element={token?<NotificationsPage user_details={token} />:<Navigate replace to="/signin"/>} />
               </Routes>
             </div>
           </div>

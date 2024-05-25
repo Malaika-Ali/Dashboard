@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import ReactApexChart from 'react-apexcharts';
 
 
+
 function CircularProgressChart({ progress, barColor, motorCategory }) {
   const chartOptions = {
     plotOptions: {
@@ -15,12 +16,14 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
           name: {
             offsetY: -10,
             show: true,
-            color: '#888',
-            fontSize: '13px',
+            color: '#5b6b79',
+            fontSize: '15px',
+            fontFamily: 'Poppins',
           },
           value: {
-            color: '#111',
+            color: 'rgb(52, 71, 103)',
             fontSize: '30px',
+            fontFamily: 'Poppins',
             show: true,
             formatter: function (val) {
               return parseInt(val) + '%';
@@ -78,7 +81,7 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
    else if (screenSize === 'very large') {
      chartHeight = 320;
    } else {
-     chartHeight = 280;
+     chartHeight = 260;
    }
  
   return (

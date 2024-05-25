@@ -96,7 +96,7 @@ const FloorsPage = (props) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className='ml-3 mr-5 mt-5'>
+      <div className='ml-3 mr-5 lg:mt-[5.25rem]'>
         {/* Floors Report */}
         {/* <div className="flex flex-col m-5"> */}
 

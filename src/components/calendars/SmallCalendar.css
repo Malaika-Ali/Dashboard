@@ -30,3 +30,10 @@
     color: #2F344B;
     font-family: "Poppins", sans-serif;
 }
+
+@media  screen and (max-width:1400px) {
+    .react-calendar {
+        width: 25%;
+        margin-top: 1.8em;
+    }
+}

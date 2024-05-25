@@ -94,7 +94,7 @@ const FactoriesPage = (props) => {
 
 
     return (
-        <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-12 large:mt-[4rem]'>
+        <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}

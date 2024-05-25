@@ -68,7 +68,7 @@ function UserProfile(props) {
     };
 
     return (
-        <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg flex flex-col items-center justify-center ml-44 mt-10 mb-14">
+        <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg flex flex-col items-center justify-center ml-44 mt-10 mb-14 lg:mt-[5.25rem]">
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
                 <CircularProgress color="inherit" />
             </Backdrop>

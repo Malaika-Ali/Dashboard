@@ -20,7 +20,6 @@ import { Table } from '../components';
 import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
-import DateRangePicker from '../components/DateRangePicker';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import { StateContext } from '../contexts/ContextProvider';
 import { SmallCalendar } from '../components/calendars';
@@ -219,7 +218,7 @@ const {loading, setLoading}=useContext(StateContext);
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-5 large:mx-16 large:mt-[4rem]'>
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
     
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:justify-between items-center w-full large:w-full'>
@@ -269,15 +268,15 @@ const {loading, setLoading}=useContext(StateContext);
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
 
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between md:gap-6 lg:gap-10 md:w-[100%] lg:w-[98%] large:gap-[3em] large:w-full'>
+        <div className='mt-2 rounded-xl flex flex-row items-center justify-between md:gap-6 lg:gap-12 md:w-[100%] lg:w-full large:gap-[3em]'>
 
-          <div className='h-60 rounded-xl md:w-[68%] lg:w-[72%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
+          <div className='h-60 rounded-xl md:w-[68%] lg:w-[67%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
             <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
             <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
             <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-60 rounded-xl lg:w-60 md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
+          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -289,8 +288,8 @@ const {loading, setLoading}=useContext(StateContext);
 
         <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:justify-between gap-8 md:w-[98%] lg:w-[97%] large:w-full'>
-        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[75%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
+      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:justify-between lg:gap-10 large:gap-8 md:w-[98%] lg:w-full'>
+        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[73%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
 

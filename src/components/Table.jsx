@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { FaSearch } from 'react-icons/fa';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import PropTypes from 'prop-types'; // Import PropTypes
 
 
@@ -56,9 +55,9 @@ const Table = ({ tableSubheading, column_headings, data }) => {
               </div>
 
               {/* Tooltip */}
-              <TooltipComponent content="Please enter a search term" position='BottomCenter'>
+              
                 <div className="absolute top-full mt-2 text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Please enter a search term</div>
-              </TooltipComponent>
+             
             </div>
           </div>
         </div>

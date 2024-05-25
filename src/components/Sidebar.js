@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { SiShopware } from 'react-icons/si'
 import { MdOutlineCancel } from 'react-icons/md'
-import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import logo from '../assets/logo.png'
 
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
@@ -19,7 +18,7 @@ export default function Sidebar(props) {
 
     const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-gray-200  text-md m-2';
 
-    const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-black hover:text-gray-200 dark:hover:text-gray-200 main-hover hover:rounded-full m-2';
+    const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-black hover:text-gray-200 main-hover hover:rounded-full m-2';
 
 
     const handleCloseSideBar = () => {
@@ -52,7 +51,7 @@ export default function Sidebar(props) {
                 <div className='flex justify-between items-center '>
                     <Link to="/" onClick={handleCloseSideBar} className='items-center gap-3 mt-5 flex text-xl font-extrabold tracking-tight   text-slate-900 justify-center mx-auto '><img src={logo} alt="logo" className='h-8' /></Link>
 
-                    <TooltipComponent content="Menu" position="BottomCenter">
+                    
                         <button
                             type="button"
                             onClick={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}
@@ -60,7 +59,6 @@ export default function Sidebar(props) {
                         >
                             {/* <MdOutlineCancel /> */}
                         </button>
-                    </TooltipComponent>
 
                 </div>
 
