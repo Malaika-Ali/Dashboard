@@ -1,17 +1,17 @@
 @import url('https://cdn.syncfusion.com/ej2/material.css');
 
-.sidebar {
+/* .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
   background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) !important;
-}
+} */
 .nav-item,
 .navbar {
   z-index: 10000;
 }
 @media  screen and (max-width:800px) {
-  .sidebar{
+  /* .sidebar{
     z-index: 10000000;
-  }
+  } */
 }
 
 .e-dlg-center-center, .e-quick-popup-wrapper.e-device{

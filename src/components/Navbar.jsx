@@ -4,19 +4,19 @@ import { RiNotification3Line } from 'react-icons/ri';
 
 import { useStateContext } from '../contexts/ContextProvider'
 import { FaSearch } from 'react-icons/fa';
-import Notification from './Notification';
 
 import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
-import NotificationStack from './NotificationStack';
 
 import { IoMdNotifications } from "react-icons/io";
 import Loader from "../shared/Loader";
 import { StateContext } from '../contexts/ContextProvider';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import NotificationsDropDown from './notifications/NotificationsDropDown';
+
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 // Navigation Button Component
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
@@ -27,17 +27,20 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </button>
 
 )
+function getToken() {
+      const tokenString = localStorage.getItem('token');
+      const userToken = JSON.parse(tokenString);
+      return userToken
+   }
+
+   const role = getToken().role;
+   const name=getToken().name;
 
 
 export default function Navbar(props) {
 
   // Calling sidebar's active state to adjust nav's width
   const { activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize } = useStateContext();
-
-  // Function to handle notification
-  // const handleClick=()=>{
-  //   console.log('Sab set Chal raha')
-  // }
 
   useEffect(() => {
     const handleResize = () => setscreenSize(window.innerWidth);
@@ -131,7 +134,11 @@ let notificationsRef=useRef();
 })
 
   return (
-    <div className={`fixed top-0 flex justify-between p-2 w-[83%] lg:px-8 large:px-8 z-10 navbar-bg  ${color ? "navbar-bg-onscroll" : "bg-white"} border-b border-gray-200`}>
+    //  ${color ? "navbar-bg-onscroll" : "bg-white"}
+    <div className={`fixed top-0 flex justify-between h-[10vh] w-[83%] lg:px-8 large:px-8 z-10 navbar-bg
+     bg-white
+     ${!activeMenu ? "w-full" : "w-[83%]"}
+       border-b border-gray-200 shadow-sm`}>
       {loading && <Loader />}
 
 
@@ -170,13 +177,13 @@ let notificationsRef=useRef();
 
 
 
-      <div className='flex flex-row justify-between'>
+      <div className='flex flex-row justify-between items-center'>
         <NavButton
           title='Notifications'
           dotColor="#5C61F2"
           customFunc={() => setNotificationsClicked(!notificationsClicked)}
           icon={<IoMdNotificationsOutline />}
-          className='text-gray-500'
+          className='gray-icon'
            />
           {
             notificationsClicked &&
@@ -184,14 +191,29 @@ let notificationsRef=useRef();
           }
 
         {/* Vertical line */}
-        <div className="h-6 border-[1.2px] border-gray-400 mx-4"></div>
+        <div className="h-6 border-[1.2px] border-gray-400 mx-4 my-3"></div>
 
 
-
+{/* 
         <div onClick={() => setopen(!open)}
           className='relative mt-3 cursor-pointer navbutton-hover rounded-full'
           ref={divRef}>
           <BsPersonCircle className='w-14 h-5 large:w-16 large:h-6 gray-icon navbutton-hover' />
+        </div> */}
+
+        {/* profile photo */}
+        <div className="flex flex-row items-center justify-between gap-2 px-4 navbutton-hover w-full h-full mx-auto">
+        <NavButton
+          title='Profile'
+          customFunc={() => setopen(!open)}
+          icon={<IoPersonCircleOutline />}
+          className='gray-icon h-10 w-6'
+           />
+
+           <div className="flex flex-col">
+            <span className='text-md'>name</span>
+            <span className='text-xs text-gray-400'>{role}</span>
+           </div>
         </div>
 
         {

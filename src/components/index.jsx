@@ -13,8 +13,6 @@ export { default as TableSubHeader } from './TableSubHeader';
 
 export { default as PopupForm } from './PopupForm';
 
-export { default as Notification } from './Notification';
-export { default as NotificationStack } from './NotificationStack';
 export { default as ConfirmationModal } from './ConfirmationModal';
 export { default as Alerts } from './Alert';
 export { default as SummaryAlertCard } from './SummaryAlertCard';

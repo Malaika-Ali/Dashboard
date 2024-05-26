@@ -48,7 +48,8 @@ body {
 }
 
 .sidebar-bg{
-  background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) !important;
+  /* background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) !important; */
+    background-color: blue;
 }
 
 .main-font{

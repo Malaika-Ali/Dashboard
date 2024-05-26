@@ -31,6 +31,10 @@
     font-family: "Poppins", sans-serif;
 }
 
+abbr:where([title]) {
+    text-decoration: underline;
+}
+
 @media  screen and (max-width:1400px) {
     .react-calendar {
         width: 25%;

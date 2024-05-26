@@ -5,11 +5,12 @@ import { FaLocationDot } from "react-icons/fa6";
 import { GiStairs } from "react-icons/gi";
 import { IoMdSettings } from "react-icons/io";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { MdOutlineManageHistory } from "react-icons/md";
 
 export const links = [
-    {
+    
       // title: 'Dashboard',
-      links: [
+      // links: [
         {
           name: 'AdminHomePage',
           icon: <IoHome />,
@@ -41,17 +42,15 @@ export const links = [
         },
         {
           name: 'History',
-          icon: <FaPeopleGroup />,
+          icon: <MdOutlineManageHistory />,
           category: 'menu'
         },
-      ],
-    }   
   ];
 
   export const factoryInchargelinks = [
-    {
+    
       // title: 'Dashboard',
-      links: [
+      // links: [
         {
           name: 'FactoryInchargeHome',
           icon: <IoHome />,
@@ -71,8 +70,8 @@ export const links = [
           icon: <IoMdSettings />,
           category: 'menu'
         },
-      ],
-    }  
+      // ],
+     
   ];
 
   export const floorInchargelinks = [

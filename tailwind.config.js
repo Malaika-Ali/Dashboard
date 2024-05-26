@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       screens: {
         'large': '1400px'
-      }
+      },
+      colors: {
+        'main-color': '#1a1a2e',
+      },
     },
   },
   plugins: [],
