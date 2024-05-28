@@ -36,7 +36,8 @@ body {
 }
 
 .main-color{
-  background-image: linear-gradient(to right, #2F3549, #303548, #2F344B)
+  /* background-image: linear-gradient(to right, #2F3549, #303548, #2F344B) */
+  background-color: #1a1a2e;
 }
 
 .light-blue{

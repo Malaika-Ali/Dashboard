@@ -80,22 +80,7 @@ export default function Navbar(props) {
   // state variable to handle the profile dropdown menu
   const [open, setopen] = useState(false)
 
-  const divRef = useRef();
   const dropDownRef = useRef();
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (divRef.current && !divRef.current.contains(e.target) && dropDownRef.current && !dropDownRef.current.contains(e.target)) {
-        setopen(false);
-      }
-    };
-
-    window.addEventListener("click", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [divRef, dropDownRef]);
 
   const navigate = useNavigate();
 
@@ -118,13 +103,16 @@ export default function Navbar(props) {
 
   // Closing the notifications dropdown when clicked outside
   let notificationsRef = useRef();
-
+  let divRef = useRef();
 
   useEffect(() => {
-    let notificationsHandler = (e) => {
+  let notificationsHandler = (e) => {
       if (
-        notificationsRef.current &&
-        !notificationsRef.current.contains(e.target)
+        (notificationsRef.current &&
+        !notificationsRef.current.contains(e.target))
+        &&
+      (divRef.current && !divRef.current.contains(e.target))
+      
       ) {
         setNotificationsClicked(false);
       }
@@ -136,7 +124,33 @@ export default function Navbar(props) {
       document.removeEventListener("mousedown", notificationsHandler);
     }
 
-  })
+  }, [divRef, notificationsRef])
+
+
+   // Closing the Profile dropdown when clicked outside
+   let ProfileRef = useRef();
+   let ProfiledivRef = useRef();
+ 
+   useEffect(() => {
+   let profileHandler = (e) => {
+       if (
+         (ProfileRef.current &&
+         !ProfileRef.current.contains(e.target))
+         &&
+       (ProfiledivRef.current && !ProfiledivRef.current.contains(e.target))
+       
+       ) {
+         setopen(false);
+       }
+     };
+     document.addEventListener("mousedown", profileHandler)
+ 
+ 
+     return () => {
+       document.removeEventListener("mousedown", profileHandler);
+     }
+ 
+   }, [ProfiledivRef, ProfileRef])
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
@@ -147,7 +161,7 @@ export default function Navbar(props) {
       {loading && <Loader />}
 
 
-      {/* This is that menu button in nav */}
+      {/* ******************Menu Button********************* */}
       <NavButton title='Menu'
         customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}
         icon={<SlMenu
@@ -183,13 +197,15 @@ export default function Navbar(props) {
       </div>
 
 
-
-      <div className='flex flex-row justify-between items-center'>
+{/* ************************Notifications button*********** */}
+      <div className='flex flex-row justify-between items-center'
+      ref={divRef}>
         <NavButton
           title='Notifications'
           dotColor="#5C61F2"
           customFunc={() => setNotificationsClicked(!notificationsClicked)}
           icon={<IoNotifications />}
+          
         // className='gray-icon'
         />
         {
@@ -197,35 +213,27 @@ export default function Navbar(props) {
           <NotificationsDropDown ref={notificationsRef} />
         }
 
-        {/* Vertical line */}
+        {/* ***********************Vertical line************** */}
         <div className="h-6 border-[1.2px] border-gray-400 mx-4 my-3"></div>
 
-
-        {/* 
-        <div onClick={() => setopen(!open)}
-          className='relative mt-3 cursor-pointer navbutton-hover rounded-full'
-          ref={divRef}>
-          <BsPersonCircle className='w-14 h-5 large:w-16 large:h-6 gray-icon navbutton-hover' />
-        </div> */}
-
-        {/* profile photo */}
-        <div className="flex flex-row items-center justify-between gap-2 navbutton-hover w-full h-full cursor-pointer" onClick={() => setopen(!open)}>
+        {/* ************************profile section************ */}
+        <div className="flex flex-row items-center justify-between gap-3 hover:bg-gray-100 w-full h-full cursor-pointer px-3" onClick={() => setopen(!open)}
+        ref={ProfiledivRef}>
           <div
-            className='flex justify-center items-center gray-icon rounded-full h-16 w-16 font-bold'
-            onClick={() => setopen(!open)}
-          >
-            <IoPersonCircle className='w-full' />
+            className='flex justify-center items-center gray-icon h-full w-full font-bold'>
+            <IoPersonCircle className='text-3xl' />
           </div>
 
           <div className="flex flex-col">
-            <span className='text-md text-black'>name</span>
+            <span className='text-sm text-black'>name</span>
             <span className='text-xs text-gray-400'>{role}</span>
           </div>
         </div>
 
         {
           open &&
-          <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg  absolute right-4 top-14 text-gray-500' ref={dropDownRef} >
+          <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg  absolute right-4 top-14 text-gray-500'
+           ref={ProfileRef} >
             <ul>
               {/* Profile Option */}
               <li onClick={() => {
