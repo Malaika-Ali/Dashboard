@@ -13,6 +13,7 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import { DeleteItem } from '../components/modals'
 import { SummaryAlertCard } from '../components';
 import MotorCard from '../components/MotorCard';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -20,6 +21,8 @@ import MotorCard from '../components/MotorCard';
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
 export default function Motors(props) {
+  const location = useLocation();
+  const { factoryName } = location.state || {};
 
   const [open, setOpen] = useState(false);
   const [total_critical, setTotalCritical] = useState(0);
@@ -145,7 +148,7 @@ export default function Motors(props) {
 
       {/* *******************     Cards Header     **************/}
 
-      <CardsContainerHeader headingName='Motors Details' name='Motor'
+      <CardsContainerHeader headingName={`${factoryName ? factoryName : 'Motors Details'}`} name='Motor'
         onAddButton={() => setAddNewItem(true)}
         onDeleteButton={() => setDeleteItem(true)}
         onSortButton={handleSort}

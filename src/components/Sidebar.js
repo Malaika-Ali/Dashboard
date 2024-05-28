@@ -115,6 +115,7 @@ import logo from '../assets/logo.png'
 
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
+import { CgRowFirst } from 'react-icons/cg';
 
 function getToken() {
     const tokenString = localStorage.getItem('token');
@@ -152,6 +153,10 @@ const Sidebar = (props) => {
         setactiveMenu(true);
     }, []);
 
+    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-base font-medium transition-all duration-400";
+
+    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-base font-medium transition-all duration-400";
+
     return (
         <div className="bg-main-color text-white h-screen flex flex-col">
             <div className="flex items-center justify-between p-4">
@@ -163,23 +168,46 @@ const Sidebar = (props) => {
                     alt="Profile"
                     className="rounded-full w-20 h-20"
                 /> */}
-                Logo
-                <h3 className="mt-4 text-md font-medium">Brian Hughes</h3>
+                <span className='text-seconday-color'>Logo</span>
+                <h3 className="mt-4 text-md font-medium">Name</h3>
                 <p className="text-sm text-gray-400">{role}</p>
             </div>
             <div className="mt-8">
-                {/* <h4 className="px-4 mb-2 text-xs font-semibold uppercase">Dashboards</h4> */}
+                {/* <h4 className="px-4 mb-2 text-xs text-seconday-color font-semibold uppercase">Dashboards</h4> */}
                 <ul className='px-2 pt-8'>
                     {roleLinks.map((link) => (
 
-                        <li className="flex items-center gap-2 p-2 px-4 hover:bg-gray-700 rounded-full cursor-pointer">
+                        <li
+                        >
                             <NavLink
                                 to={`/${link.name}`}
                                 key={link.name}
                                 onClick={handleCloseSideBar}
-                            />
-                            {link.icon}
-                            {link.name}
+                                className={({ isActive }) =>
+                                    isActive ? activeLink : normalLink}
+                            >
+                                {/* {link.icon}
+                            {link.name} */}
+                                {/* </li> */}
+
+                                {/* Conditionally render "Home" for category 'home' */}
+                                {
+                                    link.category === 'home' ? <div className='flex flex-row justify-between items-center gap-4'>
+                                        {link.icon}
+                                        <span className='capitalize'>
+                                            Home
+                                        </span>
+                                    </div> : (
+                                        <div className='flex flex-row justify-between items-center gap-4'>
+                                            {link.icon}
+                                            <span className='capitalize'>
+                                                {link.name.replace(/([a-z])([A-Z])/g, '$1 $2')}
+                                            </span>
+                                        </div>
+                                    )
+                                }
+
+                            </NavLink>
                         </li>
                     ))}
                 </ul>

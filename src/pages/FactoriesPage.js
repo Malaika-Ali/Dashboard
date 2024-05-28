@@ -6,7 +6,7 @@ import filterby from '../assets/filterby.svg'
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { FactoryCard, SummaryAlertCard } from '../components'
 import { AddNewFactory, DeleteItem } from '../components/modals'
@@ -17,6 +17,9 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
 const FactoriesPage = (props) => {
+
+    const location = useLocation();
+    const { areaName } = location.state || {}; 
 
     const [open, setOpen] = useState(false);
     const [total_critical, setTotalCritical] = useState(0);
@@ -80,11 +83,8 @@ const FactoriesPage = (props) => {
         }
     }, [data]);
 
-    const handleCardClick = (props) => {
-        // Use the prop values in this function
-        console.log('Clicked Card with Props:', props);
-        // navigate(`/FloorsPage`);
-        // Now you can pass these props to AnotherComponent or perform any other action
+    const handleCardClick = (factoryName) => {
+        navigate(`/Motors`, { state: { factoryName } });
     };
 
     const handleSort = () => {
@@ -158,7 +158,7 @@ const FactoriesPage = (props) => {
             {/* *******************     Cards section     **************/}
 
             {/* *******************     Cards Header     **************/}
-            <CardsContainerHeader headingName='Factories Details' name='Factory'
+            <CardsContainerHeader headingName={`${areaName ? areaName : 'Factories'} Details`} name='Factory'
                 onAddButton={() => setAddNewItem(true)}
                 onDeleteButton={() => setDeleteItem(true)}
                 onSortButton={handleSort}
@@ -178,7 +178,7 @@ const FactoriesPage = (props) => {
                                 CriticalMotor={row.critical}
                                 FaultyMotors={row.faulty}
                                 FlawlessMotors={row.flawless}
-                                onClick={handleCardClick} />
+                                onClick={()=>handleCardClick(row.factory_name)} />
                         ))
                     ) : (
 
@@ -191,7 +191,7 @@ const FactoriesPage = (props) => {
                                     CriticalMotor={row.critical}
                                     FaultyMotors={row.faulty}
                                     FlawlessMotors={row.flawless}
-                                    onClick={handleCardClick} />
+                                    onClick={()=>handleCardClick(row.factory_name)} />
                             )
                         })
                     )

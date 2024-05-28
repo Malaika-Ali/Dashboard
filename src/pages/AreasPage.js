@@ -2,16 +2,11 @@ import React, { useEffect, useState,useContext } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
-import filterby from '../assets/filterby.svg'
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import { AreaCard, SummaryAlertCard } from '../components'
 import { useNavigate } from 'react-router-dom';
-import { FactoriesPage } from '../pages'
 import { AddNewArea, DeleteItem } from '../components/modals'
-import { RiAddLine } from "react-icons/ri";
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import { StateContext } from '../contexts/ContextProvider';
 
@@ -81,9 +76,9 @@ const AreasPage = (props) => {
         }
     }, [data]);
 
-    const handleAreaCardClick = () => {
+    const handleAreaCardClick = (areaName) => {
         // Navigate to the desired page with the areaName parameter
-        navigate(`/FactoriesPage`);
+        navigate(`/FactoriesPage`, { state: { areaName } });
     };
 
 
@@ -163,11 +158,11 @@ const AreasPage = (props) => {
                 {
                     sortedAreas.length > 0 ? (
                         sortedAreas.map((row, idx) => (
-                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick()} />
+                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick(row.area_name)} />
                         ))
                     ) : (
                         areas.map((row, idx) => (
-                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick()} />
+                            <AreaCard key={idx} AreaName={row.area_name} onClick={() => handleAreaCardClick(row.area_name)} />
                         ))
                         )
                     }

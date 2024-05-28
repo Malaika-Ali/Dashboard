@@ -37,9 +37,9 @@ alert("day was clicked")
 
 
     return (
-        <div className="h-screen">
-            <h1 className="text-3xl text-center py-4 main-color text-white rounded-xl">Motor Performance History</h1>
-            <div className="h-full">
+        <div className="h-screen bg-white">
+            <h1 className="text-3xl text-center py-4 main-color text-white rounded-xl w-full">Motor Performance History</h1>
+            <div className="h-full bg-white">
                 <Calendar
                     localizer={localizer}
                     events={events}

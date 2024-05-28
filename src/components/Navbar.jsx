@@ -17,24 +17,29 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import NotificationsDropDown from './notifications/NotificationsDropDown';
 
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { IoNotifications } from "react-icons/io5";
+import { IoPersonCircle } from "react-icons/io5";
+import { TiThMenu } from "react-icons/ti";
+import { IoMenu } from "react-icons/io5";
+import { SlMenu } from "react-icons/sl";
 
 // Navigation Button Component
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
   <button type='button' onClick={customFunc} style={{ color, borderRadius: '50%' }}
     className='relative text-xl rounded-full p-3 navbutton-hover'>
-    <span style={{ background: dotColor }} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2' />{icon}
+    <span style={{ background: dotColor }} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2 font-bold' />{icon}
   </button>
 
 )
 function getToken() {
-      const tokenString = localStorage.getItem('token');
-      const userToken = JSON.parse(tokenString);
-      return userToken
-   }
+  const tokenString = localStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken
+}
 
-   const role = getToken().role;
-   const name=getToken().name;
+const role = getToken().role;
+const name = getToken().name;
 
 
 export default function Navbar(props) {
@@ -112,11 +117,11 @@ export default function Navbar(props) {
 
 
   // Closing the notifications dropdown when clicked outside
-let notificationsRef=useRef();
+  let notificationsRef = useRef();
 
 
-  useEffect(()=>{
-    let notificationsHandler=(e)=>{
+  useEffect(() => {
+    let notificationsHandler = (e) => {
       if (
         notificationsRef.current &&
         !notificationsRef.current.contains(e.target)
@@ -124,18 +129,18 @@ let notificationsRef=useRef();
         setNotificationsClicked(false);
       }
     };
-    document.addEventListener("mousedown",notificationsHandler)
+    document.addEventListener("mousedown", notificationsHandler)
 
 
-  return()=>{
-    document.removeEventListener("mousedown",notificationsHandler);
-  }
+    return () => {
+      document.removeEventListener("mousedown", notificationsHandler);
+    }
 
-})
+  })
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
-    <div className={`fixed top-0 flex justify-between h-[10vh] w-[83%] lg:px-8 large:px-8 z-10 navbar-bg
+    <div className={`fixed top-0 flex justify-between h-[10vh] w-[83%] lg:px-8 large:px-8 z-10 gray-icon
      bg-white
      ${!activeMenu ? "w-full" : "w-[83%]"}
        border-b border-gray-200 shadow-sm`}>
@@ -143,8 +148,10 @@ let notificationsRef=useRef();
 
 
       {/* This is that menu button in nav */}
-      <NavButton title='Menu' customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)} icon={<AiOutlineMenu
-        className='large:w-14 large:h-6 large:-ml-[14px] gray-icon' />} />
+      <NavButton title='Menu'
+        customFunc={() => setactiveMenu((prevActiveMenu) => !prevActiveMenu)}
+        icon={<SlMenu
+          className='large:w-14 large:h-6 large:-ml-[14px]' />} />
 
 
       {/* Div to contain all nav elements */}
@@ -182,19 +189,19 @@ let notificationsRef=useRef();
           title='Notifications'
           dotColor="#5C61F2"
           customFunc={() => setNotificationsClicked(!notificationsClicked)}
-          icon={<IoMdNotificationsOutline />}
-          className='gray-icon'
-           />
-          {
-            notificationsClicked &&
-            <NotificationsDropDown ref={notificationsRef} />
-          }
+          icon={<IoNotifications />}
+        // className='gray-icon'
+        />
+        {
+          notificationsClicked &&
+          <NotificationsDropDown ref={notificationsRef} />
+        }
 
         {/* Vertical line */}
         <div className="h-6 border-[1.2px] border-gray-400 mx-4 my-3"></div>
 
 
-{/* 
+        {/* 
         <div onClick={() => setopen(!open)}
           className='relative mt-3 cursor-pointer navbutton-hover rounded-full'
           ref={divRef}>
@@ -202,32 +209,33 @@ let notificationsRef=useRef();
         </div> */}
 
         {/* profile photo */}
-        <div className="flex flex-row items-center justify-between gap-2 px-4 navbutton-hover w-full h-full mx-auto">
-        <NavButton
-          title='Profile'
-          customFunc={() => setopen(!open)}
-          icon={<IoPersonCircleOutline />}
-          className='gray-icon h-10 w-6'
-           />
+        <div className="flex flex-row items-center justify-between gap-2 navbutton-hover w-full h-full cursor-pointer" onClick={() => setopen(!open)}>
+          <div
+            className='flex justify-center items-center gray-icon rounded-full h-16 w-16 font-bold'
+            onClick={() => setopen(!open)}
+          >
+            <IoPersonCircle className='w-full' />
+          </div>
 
-           <div className="flex flex-col">
-            <span className='text-md'>name</span>
+          <div className="flex flex-col">
+            <span className='text-md text-black'>name</span>
             <span className='text-xs text-gray-400'>{role}</span>
-           </div>
+          </div>
         </div>
 
         {
           open &&
-          <div className='bg-white p-4 w-52 shadow-lg z-50  absolute -right-2 top-12' ref={dropDownRef} >
+          <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg  absolute right-4 top-14 text-gray-500' ref={dropDownRef} >
             <ul>
               {/* Profile Option */}
               <li onClick={() => {
                 setopen(false)
                 navigate('/userProfile')
-              }} className='p-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-300'><CgProfile />My Profile</li>
+              }}
+                className='py-4 px-2 w-full text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><CgProfile />My Profile</li>
 
               {/* Logout Option */}
-              <li onClick={() => { setopen(false); localStorage.clear(); props.set_token(); navigate("/signin") }} className='p-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-300'><TbLogout />Logout</li>
+              <li onClick={() => { setopen(false); localStorage.clear(); props.set_token(); navigate("/signin") }} className='py-4 px-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><TbLogout />Logout</li>
             </ul>
           </div>
 
