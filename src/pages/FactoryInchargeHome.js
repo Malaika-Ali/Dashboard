@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { TotalNumberCard } from '../summaryCards';
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 import factory from '../assets/factory.svg'
 import motors from '../assets/motors.svg'
 import location from '../assets/location.svg'
 import { Table } from '../components';
+import TotalNumberCard from '../components/cards/TotalNumberCard';
 
 import { PieChart } from '../components/charts'
 import { CircularProgressChart } from '../components/charts'
 import { LineChart } from '../components/charts'
 import MotorsListModal from '../components/MotorsListModal';
 import Alert from '../components/Alert';
+
 
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
@@ -20,12 +21,13 @@ import { GiStairs} from "react-icons/gi";
 import stairs from '../assets/stairs.png'
 
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import { SmallCalendar } from '../components/calendars';
+import { StateContext } from '../contexts/ContextProvider';
+import SecondNavbar from '../components/SecondNavbar';
+
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -42,6 +44,7 @@ const FactoryInchargeHome = (props) => {
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
   const [viewMotor, setViewMotor] = useState(false)
+  const {loading, setLoading}=useContext(StateContext);
 
   async function fetch_data() {
     console.log(props.user_details.employee_id)
@@ -59,15 +62,16 @@ const FactoryInchargeHome = (props) => {
       setData(result.data)
 
     }).catch(async (error) => {
-      setOpen(false);
-      alert(error.response.data);
+      // setOpen(false);
+      // alert(error.response.data);
+      setLoading(true)
     })
 
   }
 
   useEffect(() => {
 
-    setOpen(true);
+    setLoading(false)
     fetch_data();
 
 
@@ -140,152 +144,8 @@ const FactoryInchargeHome = (props) => {
     }
   ];
 
-  // const data = [
-  //   {
-  //     id: 1,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 2,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'new factory',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 3,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 4,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'new area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 5,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 6,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 7,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 8,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 9,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 10,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 11,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 12,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 13,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 14,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 15,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 16,
-  //     motorName: 'ss1',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 17,
-  //     motorName: 'ss2',
-  //     floorNumber: 4,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 18,
-  //     motorName: 'ss3',
-  //     floorNumber: 2,
-  //     factoryName: 'Industry',
-  //     areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   }
-  // ];
+  
+ 
 
   const lineChartData = {
     // X-axis labelling
@@ -332,19 +192,19 @@ const FactoryInchargeHome = (props) => {
 
 
   return (
-    <>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <div className='ml-4 mr-5 mt-5'>
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
+   
+   {/* *********Div To Show Page Name**************** */}
+   <div className='px-4 my-4'>
+      <SecondNavbar pageName='Home'/>
+      </div>
+    
+      
 
         {/* *********Numbers of Areas, factories, motors **************** */}
-        <div className='flex flex-row justify-between items-center'>
+        <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:gap-8 items-center w-full large:w-full'>
           {/* Flex Container */}
-          <div className='flex justify-start gap-5 rounded-xl w-[70%]'>
+          <div className='flex rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
 
             {/* left box */}
             <TotalNumberCard iconSrc={stairs} placeName='Floors'
@@ -408,15 +268,15 @@ const FactoryInchargeHome = (props) => {
 
         {/* ----- PieChart & Circular Progress Charts ------------ */}
 
-        <div className='flex flex-col justify-center items-start mt-5'>
+        <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-full'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
-
-
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
 
-          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
+        <div className='mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[3em]'>
+
+
+          <div className='h-60 rounded-xl md:w-[68%] flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
             <CircularProgressChart
              progress={small_charts_data[0]} 
             // progress={}
@@ -431,7 +291,7 @@ const FactoryInchargeHome = (props) => {
             barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color h-60 rounded-xl w-60 pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -441,10 +301,10 @@ const FactoryInchargeHome = (props) => {
 
     <div className='flex flex-col justify-center items-start mt-5'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
-        <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
+      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full'>
+        <div className='bg-main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
         </div>
         <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>
@@ -461,7 +321,7 @@ const FactoryInchargeHome = (props) => {
 
       {/* ***************Tabular Motors Summary **************** */}
 
-        <div className='mt-5 mx-auto bg-white rounded-xl w-[96%]'>
+        <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-full'>
           <Table tableSubheading={'Overall Factory Report'} column_headings={columns} data={motors_data} />
         </div>
 
@@ -472,7 +332,6 @@ const FactoryInchargeHome = (props) => {
             motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
         }
       </div>
-    </>
   )
 }
 

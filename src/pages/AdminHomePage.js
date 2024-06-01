@@ -4,8 +4,6 @@ import factory from '../assets/factory.svg'
 import motors_icon from '../assets/motors.svg'
 import location from '../assets/location.svg'
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import { PieChart } from '../components/charts'
 import { CircularProgressChart } from '../components/charts'
@@ -23,6 +21,7 @@ import MotorsListModal from '../components/MotorsListModal';
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import { StateContext } from '../contexts/ContextProvider';
 import { SmallCalendar } from '../components/calendars';
+import SecondNavbar from '../components/SecondNavbar';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -44,7 +43,7 @@ export default function AdminHomePage(props) {
 const {loading, setLoading}=useContext(StateContext);
 
   // state to control popup of Motor View modal
-  const [viewMotor, setViewMotor] = useState(false)
+  const [viewMotor, setViewMotor, activeMenu] = useState(false)
 
   const navigate = useNavigate();
 
@@ -65,7 +64,6 @@ const {loading, setLoading}=useContext(StateContext);
     }).catch(async (error) => {
       // setOpen(false);
       setLoading(true)
-      alert(loading)
       // alert(error.response.data);
     })
 
@@ -148,7 +146,7 @@ const {loading, setLoading}=useContext(StateContext);
     {
       name: "View",
       center: true,
-      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
+      cell: row => <button className='bg-seconday-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
     }
   ];
 
@@ -218,10 +216,15 @@ const {loading, setLoading}=useContext(StateContext);
   const [calendarClick, setCalendarClick] = useState(false)
 
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
+    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]`}>
+
+      {/* *********Div To Show Page Name**************** */}
+      <div className='px-4 my-4'>
+      <SecondNavbar pageName='Home'/>
+      </div>
     
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:justify-between items-center w-full large:w-full'>
+      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:gap-8 items-center w-full large:w-full'>
         {/* Flex Container */}
         <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
 
@@ -266,11 +269,11 @@ const {loading, setLoading}=useContext(StateContext);
       {/* ----- PieChart & Circular Progress Charts ------------ */}
       <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-full'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between md:gap-6 lg:gap-12 md:w-[100%] lg:w-full large:gap-[3em]'>
+        <div className='mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[3em]'>
 
-          <div className='h-60 rounded-xl md:w-[68%] lg:w-[67%] text-center flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
+          <div className='h-60 rounded-xl md:w-[68%] flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
             <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
             <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
             <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
@@ -286,10 +289,10 @@ const {loading, setLoading}=useContext(StateContext);
       {/* ----------------- Line Chart ------------------------ */}
       <div className='flex flex-col justify-center items-start mt-5'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:justify-between lg:gap-10 large:gap-8 md:w-[98%] lg:w-full'>
-        <div className='main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[73%] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
+      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full'>
+        <div className='bg-main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
 
@@ -304,7 +307,7 @@ const {loading, setLoading}=useContext(StateContext);
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-12 mx-auto bg-white rounded-xl w-[98%] large:w-full'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-full'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}

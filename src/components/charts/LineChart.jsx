@@ -39,8 +39,9 @@ function LineChart({ data, chartTitle }) {
       align: 'center',
       style: {
         fontSize: '20px',
-        fontWeight: 'bold',
-        color: 'white',
+        fontWeight: '600',
+        color: '#5C61F2',
+        fontFamily: 'poppins',
         // marginLeft: '20px'
       },
     },

@@ -9,21 +9,22 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
       radialBar: {
         hollow: {
           margin: 15,
-          size: '50%',
+          size: '70%',
         },
         dataLabels: {
           showOn: 'always',
           name: {
             offsetY: -10,
             show: true,
-            color: '#5b6b79',
+            color: '#5C61F2',
             fontSize: '15px',
             fontFamily: 'Poppins',
           },
           value: {
             color: 'rgb(52, 71, 103)',
-            fontSize: '30px',
+            fontSize: '20px',
             fontFamily: 'Poppins',
+            fontWeight: '600',
             show: true,
             formatter: function (val) {
               return parseInt(val) + '%';
@@ -86,7 +87,7 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
  
   return (
     <>
-      <div className='bg-white md:w-40 md:h-40 lg:h-52 rounded-xl lg:w-52 flex flex-col justify-center items-center dark-box-shadow shadow-xl large:w-80 large:h-64'>
+      <div className='bg-white md:w-40 md:h-40 lg:h-56 rounded-xl lg:w-[15rem] flex flex-col justify-center items-center dark-box-shadow shadow-xl large:w-80 large:h-64'>
         <ReactApexChart
           options={chartOptions}
           series={chartSeries}

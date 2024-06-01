@@ -95,7 +95,7 @@ const PieChart = ({ title, onClick, series }) => {
               fontSize: '16px',
               // color: '#000000', 
               fontFamily: 'poppins',
-              color: 'white'
+              color: '#5C61F2'
             }
           },
           noData: { text: "No Records found yet" },

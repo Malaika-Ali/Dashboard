@@ -32,18 +32,18 @@ const Table = ({ tableSubheading, column_headings, data }) => {
   return (
     <>
       {/* heading section */}
-      <div className="flex flex-row justify-between w-[100%] mx-8 mt-[1.5rem] mb-4">
-        <h1 className='main-font mt-[1.5rem]  text-2xl font-extrabold'>{tableSubheading}</h1>
-        <div className="flex flex-row justify-between mt-[1.5rem]">
+      <div className="flex flex-row justify-between items-center w-[100%] mx-8  mb-3">
+        <h1 className='py-auto  text-md text-seconday-color font-medium'>{tableSubheading}</h1>
+        <div className="flex flex-row justify-between mt-[1rem]">
           {/* Div to contain the search bar and the search Icon */}
           <div className="flex flex-row justify-center items-center mr-[5rem]">
             <div className="relative">
               {/* Search Bar */}
-              <div className="relative w-60 mb-3 ">
+              <div className="relative w-56">
                 <input
                   type="text"
                   placeholder="Search"
-                  className="text-gray-700 table-font border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
+                  className="text-gray-700 table-font border-2 border-gray-200 rounded-full py-2 px-3 w-full transition-all duration-300 focus:outline-none main-color-focus"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />

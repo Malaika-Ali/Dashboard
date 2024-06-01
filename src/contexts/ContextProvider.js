@@ -12,6 +12,8 @@ export const ContextProvider = ({ children }) => {
     const [activeMenu, setactiveMenu] = useState(true);
     const [isClicked, setisClicked] = useState(initialState)
     const [screenSize, setscreenSize] = useState(undefined)
+    const [searchTerm, setSearchTerm] = useState('')
+
     //For handling signup details of the user
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(false)
@@ -21,7 +23,7 @@ export const ContextProvider = ({ children }) => {
     }
 
     return (
-        <StateContext.Provider value={{ activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize, userData, setUserData,loading, setLoading }}>
+        <StateContext.Provider value={{ activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize, userData, setUserData,loading, setLoading, searchTerm, setSearchTerm }}>
             {children}
 
         </StateContext.Provider>

@@ -18,7 +18,7 @@ const NotificationCard = ({type, message, date, time, onClick}) => {
                   <p className="text-xs text-gray-400">{time}</p>
                   </div>
                 </div>
-                <div className=' flex mt-0 secondary-color w-1  h-2 rounded-full p-1 ml-2'></div>
+                <div className=' flex justify-ceter items-center secondary-color w-1  h-2 -mt-6 rounded-full p-1 ml-2'></div>
               </div>
             
   )

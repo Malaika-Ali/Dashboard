@@ -69,7 +69,7 @@ const NotificationsPage = () => {
     return (
         <div className='rounded-xl box-shadow-xl flex flex-col bg-white md:mt-8 md:mx-2 lg:mx-10 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
             <div className="flex flex-row justify-between items-center w-full py-6 px-10">
-                <h3 className='text-lg'>Notifications</h3>
+                <h3 className='text-2xl'>Notifications</h3>
                 <span className='rounded-xl text-white px-2 py-1 light-blue'>3 New</span>
             </div>
 

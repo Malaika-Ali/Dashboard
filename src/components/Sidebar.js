@@ -153,9 +153,9 @@ const Sidebar = (props) => {
         setactiveMenu(true);
     }, []);
 
-    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-base font-medium transition-all duration-400";
+    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-400";
 
-    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-base font-medium transition-all duration-400";
+    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-400";
 
     return (
         <div className="bg-main-color text-white h-screen flex flex-col">

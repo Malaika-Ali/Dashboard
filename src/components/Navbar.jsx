@@ -45,7 +45,7 @@ const name = getToken().name;
 export default function Navbar(props) {
 
   // Calling sidebar's active state to adjust nav's width
-  const { activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize } = useStateContext();
+  const { activeMenu, setactiveMenu, screenSize, setscreenSize, searchTerm, setSearchTerm } = useStateContext();
 
   useEffect(() => {
     const handleResize = () => setscreenSize(window.innerWidth);
@@ -65,8 +65,8 @@ export default function Navbar(props) {
 
 
 
-  // Chatgpt code for search bar
-  const [searchTerm, setSearchTerm] = useState('');
+
+
   const [isTooltipVisible, setTooltipVisible] = useState(false);
   const { loading, setLoading } = useContext(StateContext);
   const [notificationsClicked, setNotificationsClicked] = useState(false)
@@ -79,6 +79,8 @@ export default function Navbar(props) {
 
   // state variable to handle the profile dropdown menu
   const [open, setopen] = useState(false)
+
+  const [searchinput, setSearchInput] = useState('search...')
 
   const dropDownRef = useRef();
 
@@ -106,13 +108,13 @@ export default function Navbar(props) {
   let divRef = useRef();
 
   useEffect(() => {
-  let notificationsHandler = (e) => {
+    let notificationsHandler = (e) => {
       if (
         (notificationsRef.current &&
-        !notificationsRef.current.contains(e.target))
+          !notificationsRef.current.contains(e.target))
         &&
-      (divRef.current && !divRef.current.contains(e.target))
-      
+        (divRef.current && !divRef.current.contains(e.target))
+
       ) {
         setNotificationsClicked(false);
       }
@@ -127,30 +129,37 @@ export default function Navbar(props) {
   }, [divRef, notificationsRef])
 
 
-   // Closing the Profile dropdown when clicked outside
-   let ProfileRef = useRef();
-   let ProfiledivRef = useRef();
- 
-   useEffect(() => {
-   let profileHandler = (e) => {
-       if (
-         (ProfileRef.current &&
-         !ProfileRef.current.contains(e.target))
-         &&
-       (ProfiledivRef.current && !ProfiledivRef.current.contains(e.target))
-       
-       ) {
-         setopen(false);
-       }
-     };
-     document.addEventListener("mousedown", profileHandler)
- 
- 
-     return () => {
-       document.removeEventListener("mousedown", profileHandler);
-     }
- 
-   }, [ProfiledivRef, ProfileRef])
+  // Closing the Profile dropdown when clicked outside
+  let ProfileRef = useRef();
+  let ProfiledivRef = useRef();
+
+  useEffect(() => {
+    let profileHandler = (e) => {
+      if (
+        (ProfileRef.current &&
+          !ProfileRef.current.contains(e.target))
+        &&
+        (ProfiledivRef.current && !ProfiledivRef.current.contains(e.target))
+
+      ) {
+        setopen(false);
+      }
+    };
+    document.addEventListener("mousedown", profileHandler)
+
+
+    return () => {
+      document.removeEventListener("mousedown", profileHandler);
+    }
+
+  }, [ProfiledivRef, ProfileRef])
+
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(searchinput);
+    }
+  };
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
@@ -171,41 +180,37 @@ export default function Navbar(props) {
       {/* Div to contain all nav elements */}
       <div className="flex mx-auto">
         <div className="relative">
+
+
           {/* Search Bar */}
-
-
-          {/* <div className="relative w-64 mt-2"> */}
-          {/* <input
+          <div className="relative w-64 mt-2">
+            <input
               type="text"
               placeholder="Search..."
               className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            /> */}
+              value={searchinput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={handleSearch}
+            />
 
-          {/* Search Icon */}
-          {/* <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
+            {/* Search Icon */}
+            <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
               <FaSearch />
             </div>
-          </div> */}
-
-          {/* Tooltip */}
-          {/* <TooltipComponent content="Please enter a search term" position='BottomCenter' >
-            <div className="absolute top-full mt-2 text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Please enter a search term</div>
-          </TooltipComponent> */}
+          </div>
         </div>
       </div>
 
 
-{/* ************************Notifications button*********** */}
+      {/* ************************Notifications button*********** */}
       <div className='flex flex-row justify-between items-center'
-      ref={divRef}>
+        ref={divRef}>
         <NavButton
           title='Notifications'
           dotColor="#5C61F2"
           customFunc={() => setNotificationsClicked(!notificationsClicked)}
           icon={<IoNotifications />}
-          
+
         // className='gray-icon'
         />
         {
@@ -214,11 +219,11 @@ export default function Navbar(props) {
         }
 
         {/* ***********************Vertical line************** */}
-        <div className="h-6 border-[1.2px] border-gray-400 mx-4 my-3"></div>
+        <div className="h-6 border-[0.8px] border-gray-400 mx-4 my-3"></div>
 
         {/* ************************profile section************ */}
         <div className="flex flex-row items-center justify-between gap-3 hover:bg-gray-100 w-full h-full cursor-pointer px-3" onClick={() => setopen(!open)}
-        ref={ProfiledivRef}>
+          ref={ProfiledivRef}>
           <div
             className='flex justify-center items-center gray-icon h-full w-full font-bold'>
             <IoPersonCircle className='text-3xl' />
@@ -233,7 +238,7 @@ export default function Navbar(props) {
         {
           open &&
           <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg  absolute right-4 top-14 text-gray-500'
-           ref={ProfileRef} >
+            ref={ProfileRef} >
             <ul>
               {/* Profile Option */}
               <li onClick={() => {
@@ -252,3 +257,4 @@ export default function Navbar(props) {
     </div>
   )
 }
+

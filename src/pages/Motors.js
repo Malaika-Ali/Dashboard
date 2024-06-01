@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { RiNotification3Line } from 'react-icons/ri';
+import React, { useEffect, useState, useContext } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
-import filterby from '../assets/filterby.svg'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import AddNewMotor from '../components/modals/AddNewMotor';
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import { DeleteItem } from '../components/modals'
 import { SummaryAlertCard } from '../components';
 import MotorCard from '../components/MotorCard';
 import { useLocation } from 'react-router-dom';
+import SecondNavbar from '../components/SecondNavbar';
+import { StateContext } from '../contexts/ContextProvider';
+
 
 
 
@@ -38,6 +37,8 @@ export default function Motors(props) {
   const [deleteItem, setDeleteItem] = useState(false)
   // State to handle sorting
   const [sortedMotors, setSortedMotors] = useState([]);
+  // state to handle loading of page
+  const { loading, setLoading } = useContext(StateContext);
 
   async function fetch_data() {
 
@@ -56,7 +57,8 @@ export default function Motors(props) {
       setData(result.data)
 
     }).catch(async (error) => {
-      setOpen(false);
+      // setOpen(false);
+      setLoading(true);
       alert(error.response.data);
     })
 
@@ -64,15 +66,15 @@ export default function Motors(props) {
 
   useEffect(() => {
 
-    setOpen(true);
+    // setOpen(true);
+    setLoading(false)
     fetch_data();
 
   }, []);
 
   useEffect(() => {
     if (data) {
-
-      setOpen(false);
+      setLoading(false)
       setTotalCritical(data.total_critical);
       setTotalFaulty(data.total_faulty);
       setTotalFlawless(data.total_flawless);
@@ -89,22 +91,21 @@ export default function Motors(props) {
 
   return (
     <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
 
+       {/* *********Div To Show Page Name**************** */}
+       <div className='px-4 my-4'>
+                <SecondNavbar pageName='Motors' />
+            </div>
 
+      
       <div className="flex flex-row justify-between ml-4">
-        <h1 className='font-extrabold text-2xl large:text-3xl main-font' >Summary</h1>
+        <h1 className='font-semibold text-xl large:text-3xl main-font' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
 
 
       {/* Flex Container */}
-      <div className='flex justify-between mt-4 rounded-xl w-90 m-3 large:w-[95%] md:gap-[2em]'>
+      <div className='flex justify-between mt-4 rounded-xl md:w-[96%] lg:w-90 m-3 large:w-[95%] large:gap-[2em]'>
         <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
           // bgColor='bg-green-50'
           iconBgColor="bg-green-200"

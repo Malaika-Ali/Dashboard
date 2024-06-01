@@ -6,28 +6,36 @@
   }
    */
 
+:root{
+    --bg-color: #5C61F2;
+}
+
 .react-calendar {
     width: 20%;
     height: 30%;
     max-width: 100%;
+    padding-bottom: 0.8rem;
     background: white;
-    border: 2px solid #2F344B;
+    /* border: none; */
+    border: 1px solid rgb(162, 158, 158);
     font-family: "Poppins", sans-serif;
 }
 
 .react-calendar__tile--active {
-    background: #2F3549;
+    background: var(--bg-color);
     border-radius: 50%;
 }
 
 .react-calendar__navigation{
-    background: #2F3549;
+    background: var(--bg-color);
     color: whitesmoke;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
 
+
 .react-calendar__month-view__weekdays{
-    color: #2F344B;
+    color: var(--bg-color);
     font-family: "Poppins", sans-serif;
 }
 

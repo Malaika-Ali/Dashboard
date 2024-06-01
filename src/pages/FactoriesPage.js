@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
-import filterby from '../assets/filterby.svg'
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import {  useNavigate, useLocation } from 'react-router-dom';
+import { StateContext } from '../contexts/ContextProvider';
+
 
 import { FactoryCard, SummaryAlertCard } from '../components'
 import { AddNewFactory, DeleteItem } from '../components/modals'
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
+import SecondNavbar from '../components/SecondNavbar'
 
 
 
@@ -19,7 +19,7 @@ let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 const FactoriesPage = (props) => {
 
     const location = useLocation();
-    const { areaName } = location.state || {}; 
+    const { areaName } = location.state || {};
 
     const [open, setOpen] = useState(false);
     const [total_critical, setTotalCritical] = useState(0);
@@ -41,6 +41,10 @@ const FactoriesPage = (props) => {
     // State to handle sorting
     const [sortedFactories, setSortedFactories] = useState([]);
 
+    // state to handle loading of the page
+    const { loading, setLoading } = useContext(StateContext);
+
+
 
     async function fetch_data() {
 
@@ -57,7 +61,7 @@ const FactoriesPage = (props) => {
             setData(result.data)
 
         }).catch(async (error) => {
-            setOpen(false);
+            setLoading(true)
             alert(error.response.data);
         })
 
@@ -65,7 +69,8 @@ const FactoriesPage = (props) => {
 
     useEffect(() => {
 
-        setOpen(true);
+        // setOpen(true);
+        setLoading(false)
         fetch_data();
 
     }, []);
@@ -73,7 +78,8 @@ const FactoriesPage = (props) => {
     useEffect(() => {
         if (data) {
 
-            setOpen(false);
+            // setOpen(false);
+            setLoading(false)
             setTotalCritical(data.total_critical);
             setTotalFaulty(data.total_faulty);
             setTotalFlawless(data.total_flawless);
@@ -95,18 +101,17 @@ const FactoriesPage = (props) => {
 
     return (
         <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
             {/* Factories Report */}
             {/* <div className="flex flex-col m-5"> */}
 
+            {/* *********Div To Show Page Name**************** */}
+            <div className='px-4 my-4'>
+                <SecondNavbar pageName='Factories' />
+            </div>
+
             {/* heading section */}
             <div className="flex flex-row justify-between">
-                <h1 className='font-extrabold text-2xl large:text-3xl main-font ml-4 '>Factories Report</h1>
+                <h1 className='font-semibold text-xl large:text-3xl main-font ml-4 '>Factories Report</h1>
                 {/* <div className="flex flex-row mr-5 justify-center">
                     <img src={filterby} alt="" />
                     <span className='text-black'>Sort</span></div> */}
@@ -114,7 +119,7 @@ const FactoriesPage = (props) => {
 
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 rounded-xl w-90 m-3 md:gap-[2em] large:w-[95%]'>
+            <div className='flex justify-between mt-4 rounded-xl  md:w-[96%] lg:w-90 m-3 large:gap-[2em] large:w-[95%]'>
 
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
                     // bgColor='bg-green-50'
@@ -178,7 +183,7 @@ const FactoriesPage = (props) => {
                                 CriticalMotor={row.critical}
                                 FaultyMotors={row.faulty}
                                 FlawlessMotors={row.flawless}
-                                onClick={()=>handleCardClick(row.factory_name)} />
+                                onClick={() => handleCardClick(row.factory_name)} />
                         ))
                     ) : (
 
@@ -191,7 +196,7 @@ const FactoriesPage = (props) => {
                                     CriticalMotor={row.critical}
                                     FaultyMotors={row.faulty}
                                     FlawlessMotors={row.flawless}
-                                    onClick={()=>handleCardClick(row.factory_name)} />
+                                    onClick={() => handleCardClick(row.factory_name)} />
                             )
                         })
                     )

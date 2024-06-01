@@ -14,6 +14,7 @@ import FloorCard from '../components/FloorCard';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import SecondNavbar from '../components/SecondNavbar';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
@@ -96,13 +97,18 @@ const FloorsPage = (props) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className='ml-3 mr-5 lg:mt-[5.25rem]'>
+      <div className='sm:mt-20 ml-3 mr-5 md:mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
+
+         {/* *********Div To Show Page Name**************** */}
+         <div className='px-4 my-4'>
+                <SecondNavbar pageName='Floors' />
+            </div>
         {/* Floors Report */}
         {/* <div className="flex flex-col m-5"> */}
 
         {/* heading section */}
         <div className="flex flex-row justify-between">
-          <h1 className='font-extrabold text-2xl large:text-3xl main-font ml-4'>Floors Report</h1>
+          <h1 className='font-semibold text-xl large:text-3xl main-font ml-4'>Floors Report</h1>
         </div>
 
         {/* Flex Container */}
