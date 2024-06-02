@@ -70,14 +70,17 @@ export const links = [
           icon: <IoMdSettings />,
           category: 'menu'
         },
+        {
+          name: 'History',
+          icon: <MdOutlineManageHistory />,
+          category: 'menu'
+        },
       // ],
      
   ];
 
   export const floorInchargelinks = [
-    {
-      title: 'Dashboard',
-      links: [
+    
         {
           name: 'FloorInchargeHomePage',
           icon: <IoHome />,
@@ -92,9 +95,11 @@ export const links = [
           icon: <IoMdSettings />,
           category: 'menu'
         },
-      ],
-    }
-    
+        {
+          name: 'History',
+          icon: <MdOutlineManageHistory />,
+          category: 'menu'
+        },
   ];
 
   

@@ -48,7 +48,7 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
         ><RxCross2 /></button>
           <div className="w-full">
             {/* <h3 className="text-lg font-semibold leading-tight text-gray-800">Motor Name</h3> */}
-            <div className="text-sm leading-tight mb-10 flex flex-row justify-between items-start"><span>Updated:
+            <div className="text-sm mb-10 flex flex-row justify-between items-start w-full"><span>Updated:
              Feb 2nd, 2024</span>    <span> 4:00pm </span></div>
             <div className="flex w-full items-end mb-10 justify-between">
               <span className="block leading-none text-2xl text-gray-800">{motorName}</span>

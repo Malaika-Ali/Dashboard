@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { TotalNumberCard } from '../summaryCards';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react'
+import TotalNumberCard from '../components/cards/TotalNumberCard';
+
+import { useNavigate } from 'react-router-dom';
 
 import { Table } from '../components';
 
@@ -23,6 +24,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import { SmallCalendar } from '../components/calendars';
+import SecondNavbar from '../components/SecondNavbar';
+import { StateContext } from '../contexts/ContextProvider';
+
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -35,6 +39,9 @@ const FloorInchargeHomePage = (props) => {
   const [data, setData] = useState(null);
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
+
+  const { loading, setLoading } = useContext(StateContext);
+
 
   // state to handle view motor modal
   const [viewMotor, setViewMotor] = useState(false)
@@ -57,7 +64,8 @@ const FloorInchargeHomePage = (props) => {
       setData(result.data)
 
     }).catch(async (error) => {
-      setOpen(false);
+      // setOpen(false);
+      setLoading(true)
       alert(error.response.data);
     })
 
@@ -65,7 +73,8 @@ const FloorInchargeHomePage = (props) => {
 
   useEffect(() => {
 
-    setOpen(true);
+    // setOpen(true);
+    setLoading(false)
     fetch_data();
 
 
@@ -74,7 +83,8 @@ const FloorInchargeHomePage = (props) => {
   useEffect(() => {
     if (data) {
       console.log(data.motors_data);
-      setOpen(false);
+      // setOpen(false);
+      setLoading(false)
       setTotalMotors(data.total_motors);
       setMotorsData(data.motors_data);
       setPieChartSeries(data.pie_chart_result);
@@ -92,16 +102,6 @@ const FloorInchargeHomePage = (props) => {
       sortable: true,
       center: true
     },
-    // {
-    //   name: "Factory Name",
-    //   selector: row => row.factoryName,
-    //   sortable: true
-    // },
-    // {
-    //   name: "Area Name",
-    //   selector: row => row.areaName,
-    //   sortable: true
-    // },
     {
       name: "Status",
       center: true,
@@ -132,141 +132,7 @@ const FloorInchargeHomePage = (props) => {
     }
   ];
 
-  // const data = [
-  //   {
-  //     id: 1,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 2,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 3,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 4,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 5,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 6,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 7,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 8,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 9,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 10,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 11,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 12,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 13,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 14,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 15,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   },
-  //   {
-  //     id: 16,
-  //     motorName: 'ss1',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Faulty'
-  //   },
-  //   {
-  //     id: 17,
-  //     motorName: 'ss2',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Flawless'
-  //   },
-  //   {
-  //     id: 18,
-  //     motorName: 'ss3',
-  //     //   factoryName: 'Industry',
-  //     //   areaName: 'Industrial area',
-  //     status: 'Critical'
-  //   }
-  // ];
-
-  // const lineChartData = {
-  //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  //   values: [30, 40, 25, 50, 49],
-  // };
-
-
+ 
   const lineChartData = {
     // X-axis labelling
     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -309,36 +175,17 @@ const FloorInchargeHomePage = (props) => {
 
 
   return (
-    <div className='ml-4 mr-3 mt-5'>
+    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
 
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+       {/* *********Div To Show Page Name**************** */}
+       <div className='px-4 my-4'>
+      <SecondNavbar pageName='Home'/>
+      </div>
+
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row justify-between items-center'>
+      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:gap-8 items-center w-full large:w-full'>
         {/* Flex Container */}
-        <div className='flex justify-start gap-5 rounded-xl w-[70%]'>
-
-          {/* left box */}
-          {/* <TotalNumberCard iconSrc={stairs} placeName='Floors'
-
-              quantity={'' + total_floors} */}
-          {/* // quantity='13' */}
-
-          {/* onClick={() => navigate('/FloorsPage')} /> */}
-
-
-          {/* middle box */}
-          {/* <TotalNumberCard iconSrc={factory} placeName='Factories' */}
-
-          {/* quantity={'' + total_factories}  */}
-
-          {/* quantity='10'
-              onClick={() => navigate('/FactoriesPage')} /> */}
-
+        <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
 
           {/* Right box */}
           <TotalNumberCard iconSrc={motors_icon} placeName='Motors'
@@ -383,13 +230,13 @@ const FloorInchargeHomePage = (props) => {
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
 
-      <div className='flex flex-col justify-center items-start mt-5'>
+      <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-full'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Overall Motors Analytics</h2>
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-10'>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
+        <div className='mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[3em]'>
 
 
-          <div className='h-60 rounded-xl w-[75%] text-center flex flex-row flex-wrap lg:flex-nowrap justify-between items-center gap-6 ml-3'>
+          <div className='h-60 rounded-xl md:w-[68%] flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
             <CircularProgressChart
               progress={small_charts_data[0]}
               // progress={}
@@ -404,7 +251,7 @@ const FloorInchargeHomePage = (props) => {
               barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color h-60 rounded-xl w-60 p-2 pt-9 m-3  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center'>
+          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -414,20 +261,20 @@ const FloorInchargeHomePage = (props) => {
 
       <div className='flex flex-col justify-center items-start mt-5'>
 
-        <h2 className='ml-3 main-font  text-2xl font-extrabold'>Monthly Motors Report</h2>
+        <h2 className='ml-3 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-        <div className='mt-2 rounded-xl flex flex-row items-center justify-between gap-8'>
-          <div className='main-color h-80 mt-8 rounded-xl w-[80%]   pt-9  text-center flex flex-col flex-wrap lg:flex-nowrap justify-center ml-2'>
-            <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
+        <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full'>
+          <div className='bg-main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
+            <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
           </div>
-          <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>
-        {
-          calendarClick &&
-          <CalendarClickModal 
-          onClick={()=>setCalendarClick(false)}
-           TableHeading='Motors Performance'
-           />
-        }
+          <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+          {
+            calendarClick &&
+            <CalendarClickModal
+              onClick={() => setCalendarClick(false)}
+              TableHeading='Motors Performance'
+            />
+          }
         </div>
       </div>
 

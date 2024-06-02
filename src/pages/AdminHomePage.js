@@ -81,7 +81,8 @@ const {loading, setLoading}=useContext(StateContext);
 
   useEffect(() => {
     if (data) {
-      setOpen(false);
+      setLoading(false)
+      // setOpen(false);
       setTotalAreas(data.areas_count);
       setTotalFactories(data.factories_count);
       setTotalMotors(data.motors_count);
