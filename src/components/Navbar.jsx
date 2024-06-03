@@ -178,12 +178,12 @@ export default function Navbar(props) {
 
 
       {/* Div to contain all nav elements */}
-      <div className="flex mx-auto">
-        <div className="relative">
+      {/* <div className="flex mx-auto">
+        <div className="relative"> */}
 
 
           {/* Search Bar */}
-          <div className="relative w-64 mt-2">
+          {/* <div className="relative w-64 mt-2">
             <input
               type="text"
               placeholder="Search..."
@@ -191,15 +191,15 @@ export default function Navbar(props) {
               value={searchinput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
-            />
+            /> */}
 
             {/* Search Icon */}
-            <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
+            {/* <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
               <FaSearch />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
 
       {/* ************************Notifications button*********** */}
@@ -230,7 +230,7 @@ export default function Navbar(props) {
           </div>
 
           <div className="flex flex-col">
-            <span className='text-sm text-black'>name</span>
+            <span className='text-sm text-black'>Farah</span>
             <span className='text-xs text-gray-400'>{role}</span>
           </div>
         </div>

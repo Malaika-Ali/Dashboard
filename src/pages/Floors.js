@@ -18,7 +18,7 @@ import SecondNavbar from '../components/SecondNavbar';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const FloorsPage = (props) => {
+const Floors = (props) => {
 
   const navigate = useNavigate();
 
@@ -197,4 +197,4 @@ const FloorsPage = (props) => {
   )
 }
 
-export default FloorsPage
+export default Floors

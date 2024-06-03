@@ -19,8 +19,6 @@ import stairs from '../assets/stairs.png'
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import CalendarClickModal from '../components/modals/CalendarClickModal';
 import { SmallCalendar } from '../components/calendars';

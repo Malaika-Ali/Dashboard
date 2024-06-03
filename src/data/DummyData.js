@@ -17,12 +17,12 @@ export const links = [
           category: 'home'
         },
         {
-          name: 'AreasPage',
+          name: 'Areas',
           icon: <FaLocationDot />,
           category: 'menu'
         },
         {
-          name: 'FactoriesPage',
+          name: 'Factories',
           icon: <MdFactory />,
           category: 'menu'
         },
@@ -36,7 +36,7 @@ export const links = [
           category: 'menu'
         },
         {
-          name: 'EmployeeDetails',
+          name: 'Employees',
           icon: <FaPeopleGroup />,
           category: 'menu'
         },
@@ -61,7 +61,7 @@ export const links = [
         //   icon: <MdFactory />,
         // },
         {
-          name: 'FloorsPage',
+          name: 'Floors',
           icon: <GiStairs />,
           category: 'menu'
         },

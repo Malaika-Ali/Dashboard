@@ -16,7 +16,7 @@ import SecondNavbar from '../components/SecondNavbar'
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const FactoriesPage = (props) => {
+const Factories = (props) => {
 
     const location = useLocation();
     const { areaName } = location.state || {};
@@ -206,4 +206,4 @@ const FactoriesPage = (props) => {
     )
 }
 
-export default FactoriesPage
+export default Factories

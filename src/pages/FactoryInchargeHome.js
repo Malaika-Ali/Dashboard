@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import factory from '../assets/factory.svg'
 import motors from '../assets/motors.svg'
@@ -212,7 +212,7 @@ const FactoryInchargeHome = (props) => {
               quantity={'' + total_floors}
               // quantity='13'
 
-              onClick={() => navigate('/FloorsPage')} />
+              onClick={() => navigate('/Floors')} />
 
 
             {/* middle box */}

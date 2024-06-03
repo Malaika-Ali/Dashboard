@@ -15,6 +15,7 @@
     height: 30%;
     max-width: 100%;
     padding-bottom: 0.8rem;
+    /* padding-inline: 0.5rem; */
     background: white;
     /* border: none; */
     border: 1px solid rgb(162, 158, 158);
@@ -31,6 +32,7 @@
     color: whitesmoke;
     font-family: "Poppins", sans-serif;
     overflow: hidden;
+    /* width: 100%; */
 }
 
 

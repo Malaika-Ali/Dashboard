@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { TotalNumberCard } from '../summaryCards';
 import { Table, PopupForm } from '../components';
 import { RiAddLine } from "react-icons/ri";
 import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
@@ -15,7 +14,7 @@ import SecondNavbar from '../components/SecondNavbar';
 
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-function EmployeeDetails() {
+function Employees() {
     const [open, setOpen] = useState(false);
     const [factory_Incharge_data, setFactoryInchargeData] = useState([]);
     const [floor_Incharge_data, setFloorInchargeData] = useState([]);
@@ -247,4 +246,4 @@ function EmployeeDetails() {
     )
 }
 
-export default EmployeeDetails
+export default Employees

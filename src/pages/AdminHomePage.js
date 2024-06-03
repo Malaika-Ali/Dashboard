@@ -230,11 +230,11 @@ const {loading, setLoading}=useContext(StateContext);
         <div className='flex justify-between rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
 
           {/* left box */}
-          <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/AreasPage')} />
+          <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/Areas')} />
 
 
           {/* middle box */}
-          <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={() => navigate('/FactoriesPage')} />
+          <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={() => navigate('/Factories')} />
 
 
           {/* Right box */}

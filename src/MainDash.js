@@ -14,7 +14,7 @@ import History from './pages/History';
 
 
 // Importing Pages
-import { FactoriesPage, LoginPage, SignupPage, Motors, AreasPage, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, FloorsPage, UserProfile, EmployeeDetails } from './pages';
+import { Factories, LoginPage, SignupPage, Motors, Areas, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, Floors, UserProfile, Employees } from './pages';
 import NotificationsPage from './pages/NotificationsPage';
 
 function getToken() {
@@ -62,8 +62,8 @@ function MainDash() {
                 <Route index path='/' element={token?<Navigate replace to={`/${path_roles[token.role]}`}/>:<Navigate replace to="/signin"/>} /> 
 
                 <Route path='/adminHomePage' element={token?<AdminHomePage user_details={token}/>:<Navigate replace to="/signin"/>} />
-                <Route path='/areaspage' element={token?<AreasPage user_details={token} />:<Navigate replace to="/signin"/>} />
-                <Route path='/factoriespage' element={token?<FactoriesPage user_details={token} />:<Navigate replace to="/signin"/>} />
+                <Route path='/areas' element={token?<Areas user_details={token} />:<Navigate replace to="/signin"/>} />
+                <Route path='/factories' element={token?<Factories user_details={token} />:<Navigate replace to="/signin"/>} />
                 <Route path='/motors' element={token?<Motors user_details={token} />:<Navigate replace to="/signin"/>} />
                 <Route
                   path='/factoryInchargeHome'
@@ -78,12 +78,12 @@ function MainDash() {
                   element={token?<UserProfile user_details={token} set_token={setToken} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
-                  path='/employeeDetails'
-                  element={token?<EmployeeDetails user_details={token} />:<Navigate replace to="/signin"/>}
+                  path='/employees'
+                  element={token?<Employees user_details={token} />:<Navigate replace to="/signin"/>}
                 />
                 <Route
-                path='/floorsPage'
-                element={token?<FloorsPage user_details={token} />:<Navigate replace to="/signin"/>} />
+                path='/floors'
+                element={token?<Floors user_details={token} />:<Navigate replace to="/signin"/>} />
                  <Route
                 path='/history'
                 element={token?<History user_details={token} />:<Navigate replace to="/signin"/>} />

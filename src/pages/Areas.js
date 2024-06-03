@@ -14,7 +14,7 @@ import SecondNavbar from '../components/SecondNavbar';
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
-const AreasPage = (props) => {
+const Areas = (props) => {
 
     const [open, setOpen] = useState(false);
     const [total_critical, setTotalCritical] = useState(0);
@@ -80,7 +80,7 @@ setLoading(false)
 
     const handleAreaCardClick = (areaName) => {
         // Navigate to the desired page with the areaName parameter
-        navigate(`/FactoriesPage`, { state: { areaName } });
+        navigate(`/Factories`, { state: { areaName } });
     };
 
 
@@ -174,4 +174,4 @@ setLoading(false)
     )
 }
 
-export default AreasPage
+export default Areas
