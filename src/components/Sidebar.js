@@ -153,9 +153,9 @@ const Sidebar = (props) => {
         setactiveMenu(true);
     }, []);
 
-    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-400";
+    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-300";
 
-    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-400";
+    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-300";
 
     return (
         <div className="bg-main-color text-white h-screen flex flex-col">
@@ -169,7 +169,7 @@ const Sidebar = (props) => {
                     className="rounded-full w-20 h-20"
                 /> */}
                 <span className='text-seconday-color'>Logo</span>
-                <h3 className="mt-4 text-md font-medium">Name</h3>
+                <h3 className="mt-4 text-md font-medium">Malaika</h3>
                 <p className="text-sm text-gray-400">{role}</p>
             </div>
             <div className="mt-8">

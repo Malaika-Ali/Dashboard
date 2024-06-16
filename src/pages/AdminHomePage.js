@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext,useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import factory from '../assets/factory.svg'
 import motors_icon from '../assets/motors.svg'
@@ -14,7 +14,7 @@ import faultyalert from '../assets/faultyalert.png'
 
 
 import TotalNumberCard from '../components/cards/TotalNumberCard';
-import { Table } from '../components';
+import Table from '../components/tables/Table'
 import Alert from '../components/Alert';
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 import MotorsListModal from '../components/MotorsListModal';
@@ -24,8 +24,10 @@ import { SmallCalendar } from '../components/calendars';
 import SecondNavbar from '../components/SecondNavbar';
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 
 export default function AdminHomePage(props) {
 
@@ -40,7 +42,7 @@ export default function AdminHomePage(props) {
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
-const {loading, setLoading}=useContext(StateContext);
+const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor, activeMenu] = useState(false)
@@ -216,8 +218,50 @@ const {loading, setLoading}=useContext(StateContext);
   // state to popup modal on click on calendar
   const [calendarClick, setCalendarClick] = useState(false)
 
+
+
+
+
+// *************************Search Functionality*********************
+  const contentRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (searchTerm) {
+  //     const regex = new RegExp(`(${searchTerm})`, 'gi');
+  //     const content = contentRef.current.innerHTML;
+  //     const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+      
+  //     contentRef.current.innerHTML = newContent;
+
+  //     const firstMatch = contentRef.current.querySelector('.highlight');
+  //     if (firstMatch) {
+  //       firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  //     }
+  //   }
+  // }, [searchTerm]);
+
+
+  useEffect(() => {
+    if (searchTerm) {
+      const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
+      const content = contentRef.current.innerHTML;
+      const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+      
+      contentRef.current.innerHTML = newContent;
+  
+      const firstMatch = contentRef.current.querySelector('.highlight');
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [searchTerm]);
+  
+  
+
+
   return (
-    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]`}>
+    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]`}
+    ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
       <div className='px-4 my-4'>
@@ -331,10 +375,12 @@ const {loading, setLoading}=useContext(StateContext);
           greenPie &&
           <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
         }
+    
 
       </div>
     </div>
   )
 }
+
 
 

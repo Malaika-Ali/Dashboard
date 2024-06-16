@@ -8,17 +8,16 @@ import AddNewMotor from '../components/modals/AddNewMotor';
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import { DeleteItem } from '../components/modals'
 import { SummaryAlertCard } from '../components';
-import MotorCard from '../components/MotorCard';
+import MotorCard from '../components/cards/MotorCard';
 import { useLocation } from 'react-router-dom';
 import SecondNavbar from '../components/SecondNavbar';
 import { StateContext } from '../contexts/ContextProvider';
 
 
-
-
-
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 export default function Motors(props) {
   const location = useLocation();
   const { factoryName } = location.state || {};
@@ -89,6 +88,21 @@ export default function Motors(props) {
     setSortedMotors(sorted);
   };
 
+  // ************************Delete Motor Function************************
+  const handleDeleteMotor = async (motor_id) => {
+    try {
+      const response = await axios.delete(API_URL + 'delete_motor', {
+        data: { motor_id, role: props.user_details.role }
+      });
+      if (response.status === 200) {
+        // Refresh data after deletion
+        fetch_data();
+      }
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+
   return (
     <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
 
@@ -142,6 +156,8 @@ export default function Motors(props) {
         deleteItem &&
         <DeleteItem onClose={() => setDeleteItem(false)} name='Motor'
           options={motors_data}
+          // setMotor={setMotor} setMotorsList={setMotorsList} emp_id={props.user_details.employee_id}
+          onDelete={handleDeleteMotor}
         />
       }
 
@@ -159,7 +175,7 @@ export default function Motors(props) {
 
 
       {/* *******************     Cards Container     **************/}
-      <div className='grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-60 large:h-96 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
+      <div className='grid grid-cols-2 lg:grid-cols-4 large:grid-cols-4 justify-between h-60 large:h-96 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]'
         style={{ overflowY: 'auto', maxHeight: '100%' }}>
         {
           sortedMotors.length > 0 ? (

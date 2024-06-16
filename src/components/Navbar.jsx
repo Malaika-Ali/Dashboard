@@ -1,26 +1,18 @@
 import React, { useEffect, useRef, useState, useContext, forwardRef } from 'react'
-import { AiOutlineMenu } from 'react-icons/ai';
-import { RiNotification3Line } from 'react-icons/ri';
 
 import { useStateContext } from '../contexts/ContextProvider'
 import { FaSearch } from 'react-icons/fa';
 
-import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
 
-import { IoMdNotifications } from "react-icons/io";
 import Loader from "../shared/Loader";
 import { StateContext } from '../contexts/ContextProvider';
-import { IoMdNotificationsOutline } from "react-icons/io";
 import NotificationsDropDown from './notifications/NotificationsDropDown';
 
-import { IoPersonCircleOutline } from "react-icons/io5";
 import { IoNotifications } from "react-icons/io5";
 import { IoPersonCircle } from "react-icons/io5";
-import { TiThMenu } from "react-icons/ti";
-import { IoMenu } from "react-icons/io5";
 import { SlMenu } from "react-icons/sl";
 
 // Navigation Button Component
@@ -32,14 +24,14 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </button>
 
 )
-function getToken() {
-  const tokenString = localStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken
-}
+// function getToken() {
+//   const tokenString = localStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken
+// }
 
-const role = getToken().role;
-const name = getToken().name;
+// const role = getToken().role;
+// const name = getToken().name;
 
 
 export default function Navbar(props) {
@@ -68,19 +60,14 @@ export default function Navbar(props) {
 
 
   const [isTooltipVisible, setTooltipVisible] = useState(false);
-  const { loading, setLoading } = useContext(StateContext);
+  const { loading } = useContext(StateContext);
   const [notificationsClicked, setNotificationsClicked] = useState(false)
 
-  const handleSearchChange = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm);
-    setTooltipVisible(newSearchTerm.length === 0); // Show tooltip when the search term is empty
-  };
 
   // state variable to handle the profile dropdown menu
   const [open, setopen] = useState(false)
 
-  const [searchinput, setSearchInput] = useState('search...')
+  const [searchinput, setSearchInput] = useState('')
 
   const dropDownRef = useRef();
 
@@ -157,16 +144,21 @@ export default function Navbar(props) {
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
+      // const newSearchTerm = e.target.value;
       setSearchTerm(searchinput);
     }
   };
+
+
+  
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
     <div className={`fixed top-0 flex justify-between h-[10vh] w-[83%] lg:px-8 large:px-8 z-10 gray-icon
      bg-white
      ${!activeMenu ? "w-full" : "w-[83%]"}
-       border-b border-gray-200 shadow-sm`}>
+       border-b border-gray-200 shadow-sm`}
+       >
       {loading && <Loader />}
 
 
@@ -178,12 +170,12 @@ export default function Navbar(props) {
 
 
       {/* Div to contain all nav elements */}
-      {/* <div className="flex mx-auto">
-        <div className="relative"> */}
+      <div className="flex mx-auto">
+        <div className="relative">
 
 
-          {/* Search Bar */}
-          {/* <div className="relative w-64 mt-2">
+          {/* *****************Search Bar****************** */}
+          <div className="relative w-64 mt-2">
             <input
               type="text"
               placeholder="Search..."
@@ -191,15 +183,15 @@ export default function Navbar(props) {
               value={searchinput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
-            /> */}
+            />
 
             {/* Search Icon */}
-            {/* <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
+            <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
               <FaSearch />
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
 
       {/* ************************Notifications button*********** */}
@@ -230,8 +222,8 @@ export default function Navbar(props) {
           </div>
 
           <div className="flex flex-col">
-            <span className='text-sm text-black'>Farah</span>
-            <span className='text-xs text-gray-400'>{role}</span>
+            <span className='text-sm text-black'>Malaika</span>
+            <span className='text-xs text-gray-400'>role</span>
           </div>
         </div>
 

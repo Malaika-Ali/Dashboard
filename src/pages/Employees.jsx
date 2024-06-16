@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Table, PopupForm } from '../components';
+import { PopupForm } from '../components';
+import Table from '../components/tables/Table'
+
 import { RiAddLine } from "react-icons/ri";
 import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
 import { RiDeleteBinLine } from "react-icons/ri";

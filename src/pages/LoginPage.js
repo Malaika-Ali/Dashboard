@@ -7,8 +7,9 @@ import axios from 'axios';
 import logo from '../assets/logo.png'
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 
 const LoginPage = (props) => {
   const navigate = useNavigate();

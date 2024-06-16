@@ -4,12 +4,6 @@ export { default as Sidebar } from './Sidebar';
 export { default as Navbar } from './Navbar';
 
 
-export { default as AreaCard } from './AreaCard';
-export { default as FactoryCard } from './FactoryCard';
-
-export { default as Table } from './Table';
-
-export { default as TableSubHeader } from './TableSubHeader';
 
 export { default as PopupForm } from './PopupForm';
 

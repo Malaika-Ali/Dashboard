@@ -3,7 +3,7 @@ import TotalNumberCard from '../components/cards/TotalNumberCard';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Table } from '../components';
+import Table from '../components/tables/Table'
 
 import { PieChart } from '../components/charts'
 import { CircularProgressChart } from '../components/charts'
@@ -14,8 +14,6 @@ import Alert from '../components/Alert';
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import motors_icon from '../assets/motors.svg'
-import { GiStairs } from "react-icons/gi";
-import stairs from '../assets/stairs.png'
 import ViewMotorModal from '../components/modals/ViewMotorModal';
 
 import axios from 'axios';
@@ -27,7 +25,10 @@ import { StateContext } from '../contexts/ContextProvider';
 
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
+
 const FloorInchargeHomePage = (props) => {
   const navigate = useNavigate();
 

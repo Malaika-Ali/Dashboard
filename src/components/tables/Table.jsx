@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { FaSearch } from 'react-icons/fa';
-import PropTypes from 'prop-types'; // Import PropTypes
+import './Table.css'; // Import custom CSS file
+
 
 
 const Table = ({ tableSubheading, column_headings, data }) => {
@@ -77,15 +78,16 @@ const Table = ({ tableSubheading, column_headings, data }) => {
         customStyles={{
           rows: {
             style: {
-              fontSize: '14px',
-              fontWeight: '450',
-              color: '#494F55'
+              fontSize: '13px',
+              fontWeight: '420',
+              color: '#5b6b79'
             },
           },
           headRow: {
             style: {
               fontSize: '14px',
-              fontWeight: 'bold',
+              fontWeight: '450',
+              color: 'rgb(107 114 128)',
                 paddingLeft: '0 8px',
                 justifyContent: 'center',
                 backgroundColor: '#F8FAFC',

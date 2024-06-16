@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import factory from '../assets/factory.svg'
-import motors from '../assets/motors.svg'
-import location from '../assets/location.svg'
-import { Table } from '../components';
+import Table from '../components/tables/Table'
 import TotalNumberCard from '../components/cards/TotalNumberCard';
 
 import { PieChart } from '../components/charts'
@@ -17,7 +14,6 @@ import Alert from '../components/Alert';
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import motors_icon from '../assets/motors.svg'
-import { GiStairs} from "react-icons/gi";
 import stairs from '../assets/stairs.png'
 
 import axios from 'axios';
@@ -30,8 +26,11 @@ import SecondNavbar from '../components/SecondNavbar';
 
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
+
 const FactoryInchargeHome = (props) => {
   const navigate = useNavigate();
 

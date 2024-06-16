@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+let API_URL = process.env.REACT_APP_USERS_API;
 const AddNewMotor = ({ onClose, name }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -72,7 +73,7 @@ const AddNewMotor = ({ onClose, name }) => {
                 required
               />
             </div>
-      
+
             <div className="col-span-2 sm:col-span-1">
               <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">
                 Area
@@ -117,7 +118,7 @@ const AddNewMotor = ({ onClose, name }) => {
 
             <div className="col-span-2 sm:col-span-1">
               <label htmlFor="floor" className="block mb-2 text-sm font-medium text-gray-900">
-                Floor 
+                Floor
               </label>
               <select
                 id="floor"
@@ -135,10 +136,10 @@ const AddNewMotor = ({ onClose, name }) => {
                 <option value="Floor4">Floor 4</option>
               </select>
             </div>
-           
+
           </div>
 
-<AddButton name={name}/>
+          <AddButton name={name} />
         </form>
       </div>
     </div>

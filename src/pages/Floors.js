@@ -16,8 +16,10 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import SecondNavbar from '../components/SecondNavbar';
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 const Floors = (props) => {
 
   const navigate = useNavigate();

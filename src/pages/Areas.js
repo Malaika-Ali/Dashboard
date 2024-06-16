@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import axios from 'axios';
 
-import { AreaCard, SummaryAlertCard } from '../components'
+import { SummaryAlertCard } from '../components'
+import AreaCard from '../components/cards/AreaCard'
 import { useNavigate } from 'react-router-dom';
 import { AddNewArea, DeleteItem } from '../components/modals'
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
@@ -12,8 +13,10 @@ import { StateContext } from '../contexts/ContextProvider';
 import SecondNavbar from '../components/SecondNavbar';
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 const Areas = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -29,7 +32,7 @@ const Areas = (props) => {
     const [deleteItem, setDeleteItem] = useState(false)
 
     // state to handle loading of page
-    const { loading, setLoading } = useContext(StateContext);
+    const { loading, setLoading, searchTerm, setSearchTerm } = useContext(StateContext);
     const navigate = useNavigate();
 
     // State to handle sorting
@@ -90,8 +93,59 @@ setLoading(false)
         setSortedAreas(sorted);
     };
 
+    
+// *************************Search Functionality*********************
+//     const contentRef = useRef(null);
+
+// useEffect(() => {
+//     if (searchTerm) {
+//       const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
+//       const content = contentRef.current.innerHTML;
+//       const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+      
+//       contentRef.current.innerHTML = newContent;
+  
+//       const firstMatch = contentRef.current.querySelector('.highlight');
+//       if (firstMatch) {
+//         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+//       }
+//     }
+//   }, [searchTerm]);
+
+const contentRef = useRef(null);
+const originalContentRef = useRef('');
+
+useEffect(() => {
+  if (contentRef.current && !originalContentRef.current) {
+    // Save the original content only once
+    originalContentRef.current = contentRef.current.innerHTML;
+  }
+}, []);
+
+useEffect(() => {
+  if (contentRef.current && originalContentRef.current) {
+    // Reset to the original content before highlighting
+    contentRef.current.innerHTML = originalContentRef.current;
+
+    if (searchTerm) {
+      const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
+      const content = contentRef.current.innerHTML;
+      const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+      
+      contentRef.current.innerHTML = newContent;
+
+      const firstMatch = contentRef.current.querySelector('.highlight');
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+}, [searchTerm]);
+
+
     return (
-        <div className='sm:mt-20 ml-3 mr-5 md:mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
+        <div className='sm:mt-20 ml-3 mr-5 md:mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'
+        ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
             <div className='px-4 my-4'>
@@ -156,7 +210,7 @@ setLoading(false)
             }
 
             {/* *******************     Cards Container     **************/}
-            <div className="grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 justify-between h-52 large:h-96 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%]"
+            <div className="grid grid-cols-2 lg:grid-cols-4 large:grid-cols-4 justify-between h-52 large:h-96 mt-3 bg-main-color shadow-xl rounded-xl m-3 w-90 px-auto large:w-[96%]"
                 style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
                 {
                     sortedAreas.length > 0 ? (
@@ -175,3 +229,5 @@ setLoading(false)
 }
 
 export default Areas
+
+

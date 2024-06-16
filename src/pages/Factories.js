@@ -7,15 +7,18 @@ import {  useNavigate, useLocation } from 'react-router-dom';
 import { StateContext } from '../contexts/ContextProvider';
 
 
-import { FactoryCard, SummaryAlertCard } from '../components'
+import { SummaryAlertCard } from '../components'
+import FactoryCard from '../components/cards/FactoryCard';
 import { AddNewFactory, DeleteItem } from '../components/modals'
 import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import SecondNavbar from '../components/SecondNavbar'
 
 
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
+// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 const Factories = (props) => {
 
     const location = useLocation();
@@ -172,7 +175,7 @@ const Factories = (props) => {
 
 
             {/* *******************     Cards Container     **************/}
-            <div className="grid grid-cols-2 lg:grid-cols-3 large:grid-cols-4 h-60 mt-3 main-color rounded-xl m-3 w-90 px-auto large:w-[96%] large:h-96"
+            <div className="grid grid-cols-2 lg:grid-cols-4 large:grid-cols-4 pt-3 h-56 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%] large:h-96"
                 style={{ overflowY: 'auto', maxHeight: '100%' }}>
                 {
                     sortedFactories.length > 0 ? (
