@@ -22,12 +22,12 @@ function MotorCard({ motorName, FloorNumber, AreaName, FactoryName, motorStatus 
     <div className='flex flex-wrap lg:flex-nowrap justify-center' >
       <div className='bg-white dark:bg-secondary-dark-bg
      h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer card'>
-        <div className='flex flex-row justify-center  font-semibold text-xl text-seconday-color mb-2 mt-3'>
+        <div className='flex flex-row justify-center  font-semibold md:text-lg lg:text-xl text-seconday-color mb-2 mt-3'>
           <span> {motorName}</span>
         </div>
 
         <div className='flex flex-col justify-center items-center'>
-          <span className='mx-auto font-medium text-md tracking-tight text-gray-500  mb-2'>Floor number: {FloorNumber}</span>
+          <span className='mx-auto font-medium md:text-sm lg:text-md tracking-tight text-gray-500  mb-2'>Floor number: {FloorNumber}</span>
         </div>
 
         {/* <div className='flex flex-col justify-center items-center'>
@@ -35,7 +35,7 @@ function MotorCard({ motorName, FloorNumber, AreaName, FactoryName, motorStatus 
       </div> */}
 
         <div className='flex flex-col justify-center items-center'>
-          <span className={`mx-auto font-medium text-xl ${getStatusColor()}  pb-5`}>{motorStatus} </span>
+          <span className={`mx-auto font-medium md:text-lg lg:text-base ${getStatusColor()}  pb-5`}>{motorStatus} </span>
         </div>
 
         <div className='flex flex-row justify-between items-center px-2 text-gray-500'>

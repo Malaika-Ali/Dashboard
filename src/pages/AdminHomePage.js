@@ -264,7 +264,7 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
     ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className='px-4 my-4'>
+      <div className='px-4 my-4 lg:mr-3'>
       <SecondNavbar pageName='Home'/>
       </div>
     

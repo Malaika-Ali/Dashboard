@@ -142,6 +142,7 @@ export default function Navbar(props) {
   }, [ProfiledivRef, ProfileRef])
 
 
+  // Search Functionality
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
       // const newSearchTerm = e.target.value;
@@ -150,11 +151,9 @@ export default function Navbar(props) {
   };
 
 
-  
-
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
-    <div className={`fixed top-0 flex justify-between h-[10vh] w-[83%] lg:px-8 large:px-8 z-10 gray-icon
+    <div className={`fixed top-0 flex justify-between md:h-[13vh] lg:h-[10vh]  md:px-6 md:w-full lg:w-[83%] lg:px-8 z-10 gray-icon
      bg-white
      ${!activeMenu ? "w-full" : "w-[83%]"}
        border-b border-gray-200 shadow-sm`}
@@ -175,11 +174,11 @@ export default function Navbar(props) {
 
 
           {/* *****************Search Bar****************** */}
-          <div className="relative w-64 mt-2">
+          <div className="relative md:w-52 lg:w-56 md:mt-1 lg:mt-2">
             <input
               type="text"
               placeholder="Search..."
-              className="bg-white text-gray-700 border-2 border-gray-200 rounded-full py-2 px-4 w-full transition-all duration-300 focus:outline-none main-color-focus"
+              className="bg-white lg:text-sm text-gray-700 border-2 border-gray-200 rounded-full md:pl-6 lg:pl-5  md:p-1 lg:p-2 w-full transition-all duration-300 focus:outline-none main-color-focus"
               value={searchinput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
