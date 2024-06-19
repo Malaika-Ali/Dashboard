@@ -19,8 +19,8 @@ import { SlMenu } from "react-icons/sl";
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
   <button type='button' onClick={customFunc} style={{ color, borderRadius: '50%' }}
-    className='relative text-xl rounded-full p-3 navbutton-hover'>
-    <span style={{ background: dotColor }} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2 font-bold' />{icon}
+    className='relative md:text-lg lg:text-xl rounded-full p-3 navbutton-hover'>
+    <span style={{ background: dotColor }} className='absolute inline-flex rounded-full md:h-1 md:w-1 lg:h-2 lg:w-2 right-2 top-2 font-bold' />{icon}
   </button>
 
 )
@@ -153,7 +153,7 @@ export default function Navbar(props) {
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
-    <div className={`fixed top-0 flex justify-between md:h-[13vh] lg:h-[10vh]  md:px-6 md:w-full lg:w-[83%] lg:px-8 z-10 gray-icon
+    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] sm:px-3  md:px-6 md:w-full lg:w-[83%] lg:px-8 z-10 gray-icon
      bg-white
      ${!activeMenu ? "w-full" : "w-[83%]"}
        border-b border-gray-200 shadow-sm`}
@@ -174,18 +174,18 @@ export default function Navbar(props) {
 
 
           {/* *****************Search Bar****************** */}
-          <div className="relative md:w-52 lg:w-56 md:mt-1 lg:mt-2">
+          <div className="relative sm:w-44 md:w-48 lg:w-56 sm:mt-2 md:mt-1 lg:mt-2">
             <input
               type="text"
               placeholder="Search..."
-              className="bg-white lg:text-sm text-gray-700 border-2 border-gray-200 rounded-full md:pl-6 lg:pl-5  md:p-1 lg:p-2 w-full transition-all duration-300 focus:outline-none main-color-focus"
+              className="bg-white sm:text-sm md:text-base lg:text-sm text-gray-700 border-2 border-gray-200 rounded-full sm:pl-4 md:pl-6 lg:pl-5  sm:p-1 lg:p-2 w-full transition-all duration-300 focus:outline-none main-color-focus"
               value={searchinput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
             />
 
             {/* Search Icon */}
-            <div className="absolute right-0 top-0 mt-3 mr-4 text-gray-500">
+            <div className="absolute right-0 top-0 sm:mt-2 lg:mt-3 mr-4 text-gray-500">
               <FaSearch />
             </div>
           </div>
@@ -210,18 +210,19 @@ export default function Navbar(props) {
         }
 
         {/* ***********************Vertical line************** */}
-        <div className="h-6 border-[0.8px] border-gray-400 mx-4 my-3"></div>
+        <div className="h-6 border-[0.8px] border-gray-400 sm:mx-1 md:mx-4 my-3"></div>
+
 
         {/* ************************profile section************ */}
         <div className="flex flex-row items-center justify-between gap-3 hover:bg-gray-100 w-full h-full cursor-pointer px-3" onClick={() => setopen(!open)}
           ref={ProfiledivRef}>
           <div
             className='flex justify-center items-center gray-icon h-full w-full font-bold'>
-            <IoPersonCircle className='text-3xl' />
+            <IoPersonCircle className='sm:text-2xl md:text-3xl' />
           </div>
 
           <div className="flex flex-col">
-            <span className='text-sm text-black'>Malaika</span>
+            <span className='sm:text-xs md:text-sm text-black'>Malaika</span>
             <span className='text-xs text-gray-400'>role</span>
           </div>
         </div>

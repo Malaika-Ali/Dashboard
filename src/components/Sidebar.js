@@ -109,13 +109,12 @@
 
 
 import React, { useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { MdOutlineCancel } from 'react-icons/md'
 import logo from '../assets/logo.png'
 
 import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
 import { useStateContext } from '../contexts/ContextProvider'
-import { CgRowFirst } from 'react-icons/cg';
 
 function getToken() {
     const tokenString = localStorage.getItem('token');
@@ -127,13 +126,7 @@ const Sidebar = (props) => {
 
     const { activeMenu, setactiveMenu, screenSize } = useStateContext();
 
-    const handleCloseSideBar = () => {
-        if (activeMenu && screenSize <= 1024) {
-            setactiveMenu(true);
-        }
-    }
-
-
+    
     // const role = props.user_details.role;
     const role = getToken().role;
     // const role = 'floorIncharge'
@@ -157,10 +150,27 @@ const Sidebar = (props) => {
 
     const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-300";
 
+    const handleCloseSideBar = () => {
+        if (activeMenu && screenSize <= 1024) {
+            setactiveMenu(false);
+        }
+    }
+
+
+    if (screenSize <= 1024 && !activeMenu) {
+        return null;
+    }
+
     return (
         <div className="bg-main-color text-white h-screen flex flex-col">
-            <div className="flex items-center justify-between p-4">
-
+            <div className="flex items-center justify-end p-4">
+            <button
+                    type="button"
+                    onClick={handleCloseSideBar}
+                    className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
+                >
+                    <MdOutlineCancel />
+                </button>
             </div>
             <div className="flex flex-col items-center p-4">
                 {/* <img

@@ -10,7 +10,7 @@ export default function AnimatedIconButton({ children, text, color, onClick,  ..
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`
-        flex flex-row p-1.5 items-center rounded-full
+        flex flex-row sm:p-1 md:p-1.5 items-center rounded-full
         text-white ${color || "bg-gray-600"}
       `}
       {...props}
@@ -21,7 +21,7 @@ export default function AnimatedIconButton({ children, text, color, onClick,  ..
         style={{ width: hovered ? ref.current?.offsetWidth || 0 : 0 , whiteSpace: "nowrap"}}
         className="overflow-x-hidden transition-all duration-300 ease-out inline-flex"
       >
-        <span ref={ref} className="px-1.5 flex flex-row">
+        <span ref={ref} className="sm:px-1 md:px-1.5 flex flex-row">
           {text}
         </span>
       </div>

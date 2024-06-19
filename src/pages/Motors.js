@@ -107,19 +107,19 @@ export default function Motors(props) {
     <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'>
 
        {/* *********Div To Show Page Name**************** */}
-       <div className='px-4 md:mt-14 lg:mb-2'>
+       <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14'>
                 <SecondNavbar pageName='Motors' />
             </div>
 
       
       <div className="flex flex-row justify-between ml-4">
-        <h1 className='font-semibold md:text-lg lg:text-xl large:text-3xl main-font header-heading' >Summary</h1>
+        <h1 className='font-semibold sm:text-base md:text-lg lg:text-xl large:text-3xl main-font header-heading' >Summary</h1>
         {/* <div>Refresh</div> */}
       </div>
 
 
       {/* Flex Container */}
-      <div className='flex justify-between mt-4 rounded-xl md:w-[96%] md:gap-2 lg:w-[98%] m-3 large:w-[95%] large:gap-[2em]'>
+      <div className='flex justify-between mt-4 rounded-xl md:w-[96%] sm:gap-3 md:gap-2 lg:w-[98%] m-3 large:w-[95%] large:gap-[2em]'>
         <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
           // bgColor='bg-green-50'
           iconBgColor="bg-green-200"
@@ -174,7 +174,7 @@ export default function Motors(props) {
 
 
       {/* *******************     Cards Container     **************/}
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 large:grid-cols-4 justify-between lg:h-[44vh] large:h-96 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%]'
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 large:grid-cols-4 justify-between sm:h-[40vh] md:h-[40vh] lg:h-[44vh] large:h-96 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%]'
         style={{ overflowY: 'auto', maxHeight: '100%' }}>
         {
           sortedMotors.length > 0 ? (

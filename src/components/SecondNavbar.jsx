@@ -8,7 +8,7 @@ const SecondNavbar = ({pageName}) => {
                 <h4 className='gray-icon text-sm'>Dashboard</h4>
             </div> */}
 
-            <div className='gray-icon text-sm'>
+            <div className='gray-icon sm:text-xs md:text-sm'>
                 <h4>{pageName} / Dashboard</h4>
             </div>
 

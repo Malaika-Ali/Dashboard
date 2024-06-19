@@ -20,14 +20,14 @@ function MotorCard({ motorName, FloorNumber, AreaName, FactoryName, motorStatus 
 
   return (
     <div className='flex flex-wrap lg:flex-nowrap justify-center' >
-      <div className='bg-white dark:bg-secondary-dark-bg
-     h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer card'>
+      <div className='bg-white sm:h-44 sm:w-64
+     md:h-48 rounded-xl md:w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer card'>
         <div className='flex flex-row justify-center  font-semibold md:text-lg lg:text-xl text-seconday-color mb-2 mt-3'>
           <span> {motorName}</span>
         </div>
 
         <div className='flex flex-col justify-center items-center'>
-          <span className='mx-auto font-medium md:text-sm lg:text-md tracking-tight text-gray-500  mb-2'>Floor number: {FloorNumber}</span>
+          <span className='mx-auto font-medium sm:text-xs md:text-sm lg:text-md tracking-tight text-gray-500  mb-2'>Floor number: {FloorNumber}</span>
         </div>
 
         {/* <div className='flex flex-col justify-center items-center'>

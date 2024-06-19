@@ -176,6 +176,16 @@ body {
   /* transform: translateY(-5px); */
 }
 
+.card-up{
+  /* card going up animation */
+  transition: transform 0.3s;
+}
+
+.card-up:hover{
+  /* card going up animation */
+  transform: translateY(-5px);
+}
+
 
 .highlight {
   background-color: yellow;
