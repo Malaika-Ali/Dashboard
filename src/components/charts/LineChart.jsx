@@ -147,7 +147,7 @@ function LineChart({ data, chartTitle }) {
 
 
   return (
-    <div className='table-font flex justify-between items-center'>
+    <div className='table-font flex justify-between items-center shadow-xl'>
       <ReactApexChart
         options={chartOptions}
         series={chartSeries}

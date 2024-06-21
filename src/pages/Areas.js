@@ -95,70 +95,39 @@ setLoading(false)
 
     
 // *************************Search Functionality*********************
-//     const contentRef = useRef(null);
-
-// useEffect(() => {
-//     if (searchTerm) {
-//       const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
-//       const content = contentRef.current.innerHTML;
-//       const newContent = content.replace(regex, '<span class="highlight">$1</span>');
-      
-//       contentRef.current.innerHTML = newContent;
-  
-//       const firstMatch = contentRef.current.querySelector('.highlight');
-//       if (firstMatch) {
-//         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-//       }
-//     }
-//   }, [searchTerm]);
-
-const contentRef = useRef(null);
-const originalContentRef = useRef('');
+    const contentRef = useRef(null);
 
 useEffect(() => {
-  if (contentRef.current && !originalContentRef.current) {
-    // Save the original content only once
-    originalContentRef.current = contentRef.current.innerHTML;
-  }
-}, []);
-
-useEffect(() => {
-  if (contentRef.current && originalContentRef.current) {
-    // Reset to the original content before highlighting
-    contentRef.current.innerHTML = originalContentRef.current;
-
     if (searchTerm) {
       const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
       const content = contentRef.current.innerHTML;
       const newContent = content.replace(regex, '<span class="highlight">$1</span>');
       
       contentRef.current.innerHTML = newContent;
-
+  
       const firstMatch = contentRef.current.querySelector('.highlight');
       if (firstMatch) {
         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
-  }
-}, [searchTerm]);
+  }, [searchTerm]);
 
 
     return (
-        <div className='sm:mt-20 ml-3 mr-5 md:mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'
+        <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'
         ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
-            <div className='px-4 my-4'>
+            <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14'>
                 <SecondNavbar pageName='Areas' />
             </div>
 
-            <div className="flex flex-row justify-between m-4">
-                <h1 className='font-semibold md:text-xl lg:text-xl large:text-3xl main-font ml-0' >Summary</h1>
-                {/* <div>Refresh</div> */}
+            <div className="flex flex-row justify-between ml-4">
+                <h1 className='font-semibold sm:text-base md:text-lg lg:text-xl large:text-3xl main-font header-heading' >Summary</h1>
             </div>
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 rounded-xl md:w-[96%] large:gap-[2em] lg:w-90  large:w-[95%] m-3'>
+            <div className='flex justify-between mt-4 rounded-xl md:w-[96%] sm:gap-3 md:gap-2 lg:w-[98%] m-3 large:w-[95%] large:gap-[2em]'>
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
                     // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
@@ -182,7 +151,6 @@ useEffect(() => {
                     isPositive />
 
             </div>
-
 
 
             {/* *******************     Cards section     **************/}
@@ -209,8 +177,8 @@ useEffect(() => {
                 />
             }
 
-            {/* *******************     Cards Container     **************/}
-            <div className="grid grid-cols-2 lg:grid-cols-4 large:grid-cols-4 justify-between h-52 large:h-96 mt-3 bg-main-color shadow-xl rounded-xl m-3 w-90 px-auto large:w-[96%]"
+            {/* ******************* Cards Container     **************/}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 large:grid-cols-4 justify-between sm:h-[40vh] md:h-[40vh] lg:h-[44vh] large:h-96 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%]"
                 style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
                 {
                     sortedAreas.length > 0 ? (

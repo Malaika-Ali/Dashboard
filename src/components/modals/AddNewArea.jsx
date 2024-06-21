@@ -10,7 +10,7 @@ let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) => {
 
   const [open, setOpen] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     name: '',
   });
@@ -27,10 +27,10 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
     e.preventDefault();
     // Handle form submission logic here
     setOpen(true)
-    
+
     await axios.post(
       API_URL + "add_area_admin",
-      {area_name: e.target[0].value},
+      { area_name: e.target[0].value },
       {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -38,22 +38,18 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
         }
       }
     ).then((result) => {
-      
+
       setArea(result.data.area_list);
       setAreasList(result.data.areas_data);
       set_sorted_list([])
       setOpen(false);
       onClose();
 
-    }).catch(async (error) =>  {
+    }).catch(async (error) => {
       setOpen(false);
       onClose();
-      
+
     })
-
-
-
-    
     // onClose();
   };
 
@@ -62,10 +58,10 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
       className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful"
     >
       <Backdrop
-          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
       >
-          <CircularProgress color="inherit" />
+        <CircularProgress color="inherit" />
       </Backdrop>
       <div className="bg-white rounded-lg shadow w-full max-w-md p-4 md:p-5">
         <div className="flex items-center justify-between border-b rounded-t">
@@ -111,9 +107,9 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
                 required
               />
             </div>
-            
+
           </div>
-<AddButton name={name}/>
+          <AddButton name={name} />
         </form>
       </div>
     </div>

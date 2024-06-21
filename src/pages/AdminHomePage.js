@@ -256,15 +256,13 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
     }
   }, [searchTerm]);
   
-  
-
 
   return (
-    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]`}
+    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-16 large:mt-[4rem]`}
     ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className='px-4 my-4 lg:mr-3'>
+      <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3'>
       <SecondNavbar pageName='Home'/>
       </div>
     
@@ -336,8 +334,8 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
 
         <h2 className='ml-3 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full'>
-        <div className='bg-main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
+      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full large:w-full'>
+        <div className='bg-main-color h-80 mt-8 rounded-xl shadow-xl md:w-[90%] lg:w-[71%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
         </div>
 

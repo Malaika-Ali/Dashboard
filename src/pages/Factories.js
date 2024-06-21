@@ -3,7 +3,7 @@ import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import axios from 'axios';
-import {  useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { StateContext } from '../contexts/ContextProvider';
 
 
@@ -103,42 +103,42 @@ const Factories = (props) => {
 
 
     return (
-        <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
-            {/* Factories Report */}
-            {/* <div className="flex flex-col m-5"> */}
+        <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'>
 
             {/* *********Div To Show Page Name**************** */}
-            <div className='px-4 my-4'>
+            <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14'>
                 <SecondNavbar pageName='Factories' />
             </div>
 
             {/* heading section */}
-            <div className="flex flex-row justify-between">
-                <h1 className='font-semibold text-xl large:text-3xl main-font ml-4 '>Factories Report</h1>
-                {/* <div className="flex flex-row mr-5 justify-center">
-                    <img src={filterby} alt="" />
-                    <span className='text-black'>Sort</span></div> */}
+            <div className="flex flex-row justify-between ml-4">
+                <h1 className='font-semibold sm:text-base md:text-lg lg:text-xl large:text-3xl main-font header-heading'>Summary</h1>
             </div>
 
 
             {/* Flex Container */}
-            <div className='flex justify-between mt-4 rounded-xl  md:w-[96%] lg:w-90 m-3 large:gap-[2em] large:w-[95%]'>
-
-                <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
+            <div className='flex justify-between mt-4 rounded-xl md:w-[96%] sm:gap-3 md:gap-2 lg:w-[98%] m-3 large:w-[95%] large:gap-[2em]'>
+                <SummaryAlertCard
+                    iconSrc={flawless}
+                    iconColor="text-green-700"
                     // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
                     value={total_flawless}
                     label="Flawless Motors"
                     percentage="12.6"
                     isPositive />
-                <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
+                <SummaryAlertCard
+                    iconSrc={faultyalert}
+                    iconColor="text-yellow-700"
                     // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
                     value={total_faulty}
                     label="Faulty Motors"
                     percentage="11.6"
                     isPositive />
-                <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
+                <SummaryAlertCard
+                    iconSrc={criticalalert}
+                    iconColor="text-red-700"
                     //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
                     value={total_critical}
@@ -174,9 +174,9 @@ const Factories = (props) => {
             />
 
 
-            {/* *******************     Cards Container     **************/}
-            <div className="grid grid-cols-2 lg:grid-cols-4 large:grid-cols-4 pt-3 h-56 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%] large:h-96"
-                style={{ overflowY: 'auto', maxHeight: '100%' }}>
+            {/* *******************Cards Container**************/}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 large:grid-cols-4 justify-between sm:h-[40vh] md:h-[40vh] lg:h-[44vh] large:h-96 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%]"
+                style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
                 {
                     sortedFactories.length > 0 ? (
                         sortedFactories.map((row, idx) => (

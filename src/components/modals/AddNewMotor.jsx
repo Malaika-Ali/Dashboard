@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { AddButton } from '../buttons';
+import axios from 'axios';
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
+
 let API_URL = process.env.REACT_APP_USERS_API;
-const AddNewMotor = ({ onClose, name }) => {
+
+const AddNewMotor = ({ areas, factories, floors, onClose, name }) => {
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
+
     name: '',
     area: '',
     factory: '',
+    floor: '',
   });
 
   const handleInputChange = (e) => {
@@ -19,10 +23,34 @@ const AddNewMotor = ({ onClose, name }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Handle form submission logic here
+  //   onClose();
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    onClose();
+    setOpen(true);
+
+    try {
+      await axios.post(
+        API_URL + 'add_motor',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
+      );
+      setOpen(false);
+      onClose();
+    } catch (error) {
+      console.error('Error adding motor:', error);
+      setOpen(false);
+      onClose();
+    }
   };
 
   return (
@@ -63,7 +91,7 @@ const AddNewMotor = ({ onClose, name }) => {
                 {name} Name
               </label>
               <input
-                type="name"
+                type="text"
                 name="name"
                 id="name"
                 value={formData.name}
@@ -88,10 +116,9 @@ const AddNewMotor = ({ onClose, name }) => {
                 <option value="" disabled>
                   Select Area
                 </option>
-                <option value="Area1">Area 1</option>
-                <option value="Area2">Area 2</option>
-                <option value="Area3">Area 3</option>
-                <option value="Area4">Area 4</option>
+                {areas.map((area) => (
+                  <option key={area.id} value={area.id}>{area.name}</option>
+                ))}
               </select>
             </div>
 
@@ -109,10 +136,9 @@ const AddNewMotor = ({ onClose, name }) => {
                 <option value="" disabled>
                   Select Factory
                 </option>
-                <option value="Factory1">Factory 1</option>
-                <option value="Factory2">Factory 2</option>
-                <option value="Factory3">Factory 3</option>
-                <option value="Factory4">Factory 4</option>
+                {factories.map((factory) => (
+                  <option key={factory.id} value={factory.id}>{factory.name}</option>
+                ))}
               </select>
             </div>
 
@@ -130,10 +156,9 @@ const AddNewMotor = ({ onClose, name }) => {
                 <option value="" disabled>
                   Select Floor
                 </option>
-                <option value="Floor1">Floor 1</option>
-                <option value="Floor2">Floor 2</option>
-                <option value="Floor3">Floor 3</option>
-                <option value="Floor4">Floor 4</option>
+                {floors.map((floor) => (
+                  <option key={floor.id} value={floor.id}>{floor.name}</option>
+                ))}
               </select>
             </div>
 
