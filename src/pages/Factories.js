@@ -14,9 +14,6 @@ import CardsContainerHeader from '../components/headers/CardsContainerHeader'
 import SecondNavbar from '../components/SecondNavbar'
 
 
-
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
 // Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_USERS_API;
 const Factories = (props) => {
@@ -89,6 +86,7 @@ const Factories = (props) => {
             setFactories(data.factories_list);
             setFactoriesList(data.factories_data);
             setAreasList(data.areas);
+            console.log('factories data',data)
         }
     }, [data]);
 
@@ -100,6 +98,51 @@ const Factories = (props) => {
         let sorted = factories.sort((a, b) => a.factory_name.localeCompare(b.factory_name));
         setSortedFactories(sorted);
     };
+
+     // ****************Delete Factory Function************************
+  const handleDeleteFactory = async (factory_id) => {
+    alert("Deleted factories", factory_id)
+    try {
+      const response = await axios.delete(API_URL + 'delete_factory', {
+        data: { factory_id }
+      });
+      if (response.status === 200) {
+        // Refresh data after deletion
+        fetch_data();
+        alert('Deleted 2', factory_id)
+      }
+    } catch (error) {
+    //   alert(error.response.data.error);
+    }
+  };
+
+// ****************Delete Factory Function************************
+// const handleDeleteFactory = async (factory_id) => {
+//     try {
+//       const response = await axios.delete(API_URL + 'delete_factory', {
+//         params: { id: factory_id }
+//       });
+  
+//       if (response.data) {
+//         // Assuming response.data contains the status of the delete operation
+//         if (response.data.success) {
+//           // Update your state or UI to reflect the deletion
+//         //   set_user_data(user_data.map(row => 
+//         //     row.ID === factory_id ? { ...row, permanentlyDeleted: true } : row
+//         //   ));
+//         alert("deleted successfully")
+//           setOpen(false);
+       
+//         } else {
+//           console.log(response.data);
+//           setOpen(false);
+//         }
+//       }
+//     } catch (error) {
+//       console.log(error.response ? error.response.data.error : error.message);
+//     }
+//   };
+  
 
 
     return (
@@ -157,8 +200,11 @@ const Factories = (props) => {
             {/* logic for showing delete modal */}
             {
                 deleteItem &&
-                <DeleteItem onClose={() => setDeleteItem(false)} name='Factory'
+                <DeleteItem
+                    onClose={() => setDeleteItem(false)}
+                    name='Factory'
                     options={factories_list}
+                    onDelete={handleDeleteFactory}
                 />
             }
 

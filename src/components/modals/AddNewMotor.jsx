@@ -5,7 +5,7 @@ import axios from 'axios';
 
 let API_URL = process.env.REACT_APP_USERS_API;
 
-const AddNewMotor = ({ areas, factories, floors, onClose, name }) => {
+const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
 
@@ -116,8 +116,8 @@ const AddNewMotor = ({ areas, factories, floors, onClose, name }) => {
                 <option value="" disabled>
                   Select Area
                 </option>
-                {areas.map((area) => (
-                  <option key={area.id} value={area.id}>{area.name}</option>
+                {areas_list.map((area) => (
+                  <option key={area.id} value={area.id}>{area.area_name}</option>
                 ))}
               </select>
             </div>
@@ -137,7 +137,7 @@ const AddNewMotor = ({ areas, factories, floors, onClose, name }) => {
                   Select Factory
                 </option>
                 {factories.map((factory) => (
-                  <option key={factory.id} value={factory.id}>{factory.name}</option>
+                  <option key={factory.id} value={factory.id}>{factory.factory_name}</option>
                 ))}
               </select>
             </div>
@@ -157,7 +157,7 @@ const AddNewMotor = ({ areas, factories, floors, onClose, name }) => {
                   Select Floor
                 </option>
                 {floors.map((floor) => (
-                  <option key={floor.id} value={floor.id}>{floor.name}</option>
+                  <option key={floor.floor_number} value={floor.floor_number}>{floor.floor_number}</option>
                 ))}
               </select>
             </div>

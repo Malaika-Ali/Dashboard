@@ -27,6 +27,7 @@ function DeleteItem({ onClose, name, options, setArea, setAreasList, emp_id, onD
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Form Data before deletion:', formData);
         // Handle form submission logic here
         if (name == "Motor") {
 
@@ -51,10 +52,12 @@ function DeleteItem({ onClose, name, options, setArea, setAreasList, emp_id, onD
             //     onClose();
 
             // });
-            console.log(formData.category)
+            onDelete(formData.category);
+        }
+
+        else if (name == "Factory") {
             alert(formData.category)
             onDelete(formData.category);
-
         }
         onClose();
     };

@@ -85,6 +85,7 @@ const FactoryInchargeHome = (props) => {
       setMotorsData(data.motors_data);
       setPieChartSeries(data.pie_chart_result);
       setSmallChartsData(data.percentages);
+      console.log(data)
 
     }
   }, [data]);

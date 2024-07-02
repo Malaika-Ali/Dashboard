@@ -3,8 +3,6 @@ import DataTable from 'react-data-table-component';
 import { FaSearch } from 'react-icons/fa';
 import './Table.css'; // Import custom CSS file
 
-
-
 const Table = ({ tableSubheading, column_headings, data }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [records, setRecords] = useState(data);
@@ -40,11 +38,11 @@ const Table = ({ tableSubheading, column_headings, data }) => {
           <div className="flex flex-row justify-center items-center mr-[5rem]">
             <div className="relative">
               {/* Search Bar */}
-              <div className="relative w-56">
+              <div className="relative w-48">
                 <input
                   type="text"
-                  placeholder="Search"
-                  className="text-gray-700 table-font border-2 border-gray-200 rounded-full py-2 px-3 w-full transition-all duration-300 focus:outline-none main-color-focus"
+                  placeholder="Search..."
+                  className="text-gray-700 table-font border-2 border-gray-200 text-sm rounded-full py-2 px-2 pl-5 w-full transition-all duration-300 focus:outline-none main-color-focus"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />

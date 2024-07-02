@@ -40,6 +40,7 @@ function Employees() {
             setLoading(false)
             setFactoryInchargeData(result.data.factory_incharge_data);
             setFloorInchargeData(result.data.floor_incharge_data);
+            console.log(result.data)
         }).catch(async (error) => {
             //   setOpen(false);
             setLoading(true);

@@ -53,6 +53,7 @@ const Floors = (props) => {
     ).then((result) => {
 
       setData(result.data)
+      console.log(result)
 
     }).catch(async (error) => {
       setOpen(false);

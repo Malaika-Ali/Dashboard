@@ -140,7 +140,7 @@ const Sidebar = (props) => {
         roleLinks = floorInchargelinks;
     }
 
-    console.log(roleLinks)
+
     useEffect(() => {
         // Set activeMenu to true when the component loads or when the user logs in
         setactiveMenu(true);

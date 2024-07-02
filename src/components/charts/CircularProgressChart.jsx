@@ -77,7 +77,7 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
    if (screenSize === 'small') {
      chartHeight = 200;
    } else if (screenSize === 'medium') {
-     chartHeight = 180;
+     chartHeight = 190;
    }
    else if (screenSize === 'very large') {
      chartHeight = 320;
@@ -87,7 +87,7 @@ function CircularProgressChart({ progress, barColor, motorCategory }) {
  
   return (
     <>
-      <div className='bg-white shadow-xl md:w-40 md:h-40 lg:h-56 rounded-xl border border-slate-200 lg:w-[15rem] flex flex-col justify-center items-center large:w-80 large:h-64'>
+      <div className='bg-white shadow-xl md:w-44 md:h-44 lg:h-56 rounded-xl border border-slate-200 lg:w-[15rem] flex flex-col justify-center items-center large:w-80 large:h-64'>
         <ReactApexChart
           options={chartOptions}
           series={chartSeries}

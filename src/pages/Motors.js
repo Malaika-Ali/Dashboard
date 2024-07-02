@@ -37,8 +37,12 @@ export default function Motors(props) {
   const { loading, setLoading } = useContext(StateContext);
 
   const [areas, setAreas] = useState([]);
-  const [factories, setFactories] = useState([]);
   const [floors, setFloors] = useState([]);
+
+  const [factories_list, setFactoriesList] = useState([]);
+  const [areas_list, setAreasList] = useState([]);
+  const [factories, setFactories] = useState([]);
+
 
   async function fetch_data() {
 
@@ -80,6 +84,10 @@ export default function Motors(props) {
       setTotalFlawless(data.total_flawless);
       setMotors(data.motors_list);
       setMotorsData(data.motors_data);
+      setAreasList(data.areas);
+      setFactories(data.factories)
+      setFloors(data.floors)
+      console.log('data',data)
 
     }
   }, [data]);
@@ -212,7 +220,7 @@ export default function Motors(props) {
           onClose={() => setAddNewItem(false)}
           name='Motor'
           // onAddMotor={handleAddMotor}
-          areas={areas}
+          areas_list={areas_list}
           factories={factories}
           floors={floors} />
       }

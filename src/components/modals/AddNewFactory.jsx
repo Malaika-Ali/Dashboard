@@ -115,7 +115,7 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
                 {name} Floors
               </label>
               <input
-                type="text"
+                type="number"
                 name="floors"
                 id="floors"
                 value={formData.floors}

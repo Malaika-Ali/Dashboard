@@ -18,58 +18,59 @@ const PieChart = ({ title, onClick, series }) => {
   // }, [onClick]);
 
 
-   // logic for handling responsiveness of chart
-   const [screenSize, setScreenSize] = useState('');
+  // logic for handling responsiveness of chart
+  const [screenSize, setScreenSize] = useState('');
 
-   useEffect(() => {
-     const handleResize = () => {
-       const width = window.innerWidth;
-       if (width < 768) {
-         setScreenSize('small');
-       } else if (width >= 768 && width < 1024) {
-         setScreenSize('medium');}
-         else if (width > 1400) {
- setScreenSize('very large');
-         }
-       else {
-         setScreenSize('large');
-       }
-     };
- 
-     handleResize();
-     window.addEventListener('resize', handleResize);
- 
-     return () => {
-       window.removeEventListener('resize', handleResize);
-     };
-   }, []);
- 
- 
- // chart heights for different screen sizes
-   let chartHeight;
-   if (screenSize === 'small') {
-     chartHeight = 200;
-   } else if (screenSize === 'medium') {
-     chartHeight = 220;
-   }
-   else if (screenSize === 'very large') {
-     chartHeight = 300;
-   } else {
-     chartHeight = 270;
-   }
- 
-   // chart widths for different screen sizes
-   let chartWidth;
-   if (screenSize === 'small') {
-     chartWidth = 200;
-   } else if (screenSize === 'medium') {
-     chartWidth = 220;
-   }
-   else if (screenSize === 'very large'){
-     chartWidth = 300;
-   } else {
-     chartWidth = 290;
-   }
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setScreenSize('small');
+      } else if (width >= 768 && width < 1024) {
+        setScreenSize('medium');
+      }
+      else if (width > 1400) {
+        setScreenSize('very large');
+      }
+      else {
+        setScreenSize('large');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  // chart heights for different screen sizes
+  let chartHeight;
+  if (screenSize === 'small') {
+    chartHeight = 200;
+  } else if (screenSize === 'medium') {
+    chartHeight = 220;
+  }
+  else if (screenSize === 'very large') {
+    chartHeight = 300;
+  } else {
+    chartHeight = 270;
+  }
+
+  // chart widths for different screen sizes
+  let chartWidth;
+  if (screenSize === 'small') {
+    chartWidth = 200;
+  } else if (screenSize === 'medium') {
+    chartWidth = 220;
+  }
+  else if (screenSize === 'very large') {
+    chartWidth = 300;
+  } else {
+    chartWidth = 290;
+  }
 
 
   return (
@@ -95,7 +96,8 @@ const PieChart = ({ title, onClick, series }) => {
               fontSize: '16px',
               // color: '#000000', 
               fontFamily: 'poppins',
-              color: '#5C61F2'
+              color: '#5C61F2',
+              fontWeight: '450'
             }
           },
           noData: { text: "No Records found yet" },
@@ -130,9 +132,23 @@ const PieChart = ({ title, onClick, series }) => {
             color: '#000000', // Shadow color
             opacity: 0.5, // Shadow opacity
           },
+          
           stroke: {
             colors: ['#31C431', '#F9F502', '#DB1915'], // Border colors
           },
+          dataLabels: {
+            offset: -50,
+            offsetY: -50,
+            style: {
+              fontWeight: 300,
+              fontSize: '12px',
+              fontFamily: 'poppins',
+              color:'#FFFFFF',
+              offsetX: -50,
+            },
+          
+          }
+        
         }}
         style={{ cursor: 'pointer' }} // Set cursor as pointer
       />
