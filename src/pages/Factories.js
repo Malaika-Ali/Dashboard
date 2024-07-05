@@ -86,7 +86,6 @@ const Factories = (props) => {
             setFactories(data.factories_list);
             setFactoriesList(data.factories_data);
             setAreasList(data.areas);
-            console.log('factories data',data)
         }
     }, [data]);
 

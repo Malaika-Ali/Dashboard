@@ -119,52 +119,7 @@ export default function Motors(props) {
     }
   };
 
-  // Fetching Data for AddMotor modal
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const areasResponse = await axios.get(API_URL + 'areas');
-  //       const factoriesResponse = await axios.get(API_URL + 'factories');
-  //       const floorsResponse = await axios.get(API_URL + 'floors');
-
-  //       console.log('Areas:', areasResponse.data); // Check the data here
-  //       console.log('Factories:', factoriesResponse.data); // Check the data here
-  //       console.log('Floors:', floorsResponse.data); // Check the data here
-
-  //       setAreas(areasResponse.data);
-  //       setFactories(factoriesResponse.data);
-  //       setFloors(floorsResponse.data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  const fetchData = async () => {
-    try {
-      const areasResponse = await axios.get(API_URL + 'area_page');
-      const factoriesResponse = await axios.get(API_URL + 'factories_page');
-      const floorsResponse = await axios.get(API_URL + 'floors');
-  
-      console.log('Areas:', areasResponse.data); // Check the data here
-      console.log('Factories:', factoriesResponse.data); // Check the data here
-      console.log('Floors:', floorsResponse.data); // Check the data here
-  
-      setAreas(areasResponse.data);
-      setFactories(factoriesResponse.data);
-      setFloors(floorsResponse.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
-
+ 
 
   return (
     <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'>
@@ -221,8 +176,9 @@ export default function Motors(props) {
           name='Motor'
           // onAddMotor={handleAddMotor}
           areas_list={areas_list}
-          factories={factories}
-          floors={floors} />
+          // factories={factories}
+          // floors={floors} 
+          />
       }
       {/* logic for showing delete modal */}
       {

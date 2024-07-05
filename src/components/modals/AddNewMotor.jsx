@@ -5,7 +5,7 @@ import axios from 'axios';
 
 let API_URL = process.env.REACT_APP_USERS_API;
 
-const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
+const AddNewMotor = ({ areas_list,  onClose, name }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
 
@@ -14,6 +14,16 @@ const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
     factory: '',
     floor: '',
   });
+  const [factories, setFactories] = useState([]);
+  const [floors, setFloors] = useState([]);
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +31,36 @@ const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
       ...prevData,
       [name]: value,
     }));
+
+    if (name === 'area') {
+      fetchFactories(value);
+      setFloors([]); // Reset floors when area changes
+    }
+
+    if (name === 'factory') {
+      fetchFloors(value);
+    }
+  };
+
+
+
+
+  const fetchFactories = async (areaId) => {
+    try {
+      const response = await axios.get(`${API_URL}get_factories/${areaId}`);
+      setFactories(response.data);
+    } catch (error) {
+      console.error('Error fetching factories:', error);
+    }
+  };
+
+  const fetchFloors = async (factoryId) => {
+    try {
+      const response = await axios.get(`${API_URL}get_floors/${factoryId}`);
+      setFloors(response.data);
+    } catch (error) {
+      console.error('Error fetching floors:', error);
+    }
   };
 
   // const handleSubmit = (e) => {
@@ -44,6 +84,7 @@ const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
           }
         }
       );
+      
       setOpen(false);
       onClose();
     } catch (error) {
@@ -172,3 +213,19 @@ const AddNewMotor = ({ areas_list, factories, floors, onClose, name }) => {
 };
 
 export default AddNewMotor;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

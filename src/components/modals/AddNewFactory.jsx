@@ -5,8 +5,8 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
+let API_URL = process.env.REACT_APP_USERS_API;
+
 const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list, sorted_list  }) => {
 
   const [open, setOpen] = useState(false);
