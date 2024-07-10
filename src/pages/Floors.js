@@ -13,8 +13,7 @@ import FloorCard from '../components/cards/FloorCard';
 import axios from 'axios';
 import SecondNavbar from '../components/SecondNavbar';
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
+
 // Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_USERS_API;
 const Floors = (props) => {
@@ -37,9 +36,10 @@ const Floors = (props) => {
   // State to handle sorting
   const [sortedFloors, setSortedFloors] = useState([]);
 
-  const handleFloorCardClick = () => {
-    navigate('/Motors')
+  const handleFloorCardClick = (FloorNumber) => {
+    navigate(`/Motors`, { state: { FloorNumber } });
   }
+
   async function fetch_data() {
 
     await axios.post(
@@ -87,6 +87,7 @@ const Floors = (props) => {
     let sorted = factories_data.sort((a, b) => a.floor_number - b.floor_number);
     setSortedFloors(sorted);
   };
+
 
 
   return (
@@ -175,14 +176,14 @@ const Floors = (props) => {
               sortedFloors.map((row, idx) => (
                 <FloorCard FloorNumber={row.floor_number} FactoryName={factory_name} AreaName={area_name}
                   CriticalMotor={row.total_critical} FaultyMotors={row.total_faulty} FlawlessMotors={row.total_flawless}
-                  onClick={handleFloorCardClick} />
+                  onClick={()=>handleFloorCardClick(row.floor_number)} />
               ))
             ) : (
               factories_data.map((row, index) =>
 
                 <FloorCard FloorNumber={row.floor_number} FactoryName={factory_name} AreaName={area_name}
                   CriticalMotor={row.total_critical} FaultyMotors={row.total_faulty} FlawlessMotors={row.total_flawless}
-                  onClick={handleFloorCardClick} />
+                  onClick={()=>handleFloorCardClick(row.floor_number)} />
               )
             )
           }

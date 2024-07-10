@@ -6,8 +6,9 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
+function EditFloorIncharge({closeForm, popup_data, floor_data_update, areas}) {
 
   const [open, setOpen] = useState(false);
     const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
@@ -47,6 +48,8 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
     }, []); // Empty dependency array ensures this effect runs only once
         
     const [selectedRole, setSelectedRole] = useState('');
+    const [factories, setFactories] = useState([])
+    const [floors, setFloors] = useState([])
 
     const onSubmit = async (data) => {
 
@@ -95,34 +98,43 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
         })
 
       }
-      
-      // await reset({
-      //     firstName: '',
-      //     lastName: '',
-      //     email: '',
-      //     employeeID: '',
-      //     password: '',
-      //     confirmPassword: '',
-      //   });
     };
 
     const [showFactoryDropdown, setShowFactoryDropdown] = useState(false);
   const [showFloorNumberDropdown, setShowFloorNumberDropdown] = useState(false);
 
-  const areas = [
-    { id: 1, name: 'Area 1' },
-    { id: 2, name: 'Area 2' },
-    
-  ];
 
-  const factories = [
-    { id: 1, name: 'Factory 1' },
-    { id: 2, name: 'Factory 2' },
-    
-  ];
 
-  const floorNumbers = [1, 2, 3, 4];
-    
+  const handleAreaChange = (e) => {
+    const areaId = e.target.value;
+    fetchFactories(areaId);
+  };
+
+
+  const fetchFactories = async (areaId) => {
+    try {
+      const response = await axios.get(`${API_URL}get_factories/${areaId}`);
+      setFactories(response.data);
+    } catch (error) {
+      console.error('Error fetching factories:', error);
+    }
+  };
+
+
+  const handleFactoryChange = (e) => {
+    const factoryId = e.target.value;
+    fetchFloors(factoryId);
+  };
+
+  const fetchFloors = async (factoryId) => {
+    try {
+      const response = await axios.get(`${API_URL}get_floors/${factoryId}`);
+      setFloors(response.data);
+    } catch (error) {
+      console.error('Error fetching floors:', error);
+    }
+  };
+
 
   return (
     <>
@@ -295,75 +307,6 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
           {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword.message}</p>}
         </div>
 
-    
-
-      
-                {/* <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="areaName">
-                    Area Name
-                  </label>
-                  <Controller
-                    name="areaName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="areaName"
-                        placeholder="Area Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.areaName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.areaName && <p className="text-red-500 text-xs italic">{errors.areaName.message}</p>}
-                </div> */}
-
-
-                {/* <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="factoryName">
-                    Factory Name
-                  </label>
-                  <Controller
-                    name="factoryName"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="factoryName"
-                        placeholder="Factory Name"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.factoryName ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
-                </div> */}
-
-                {/* <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="floorNumber">
-                    Floor Number
-                  </label>
-                  <Controller
-                    name="floorNumber"
-                    control={control}
-                    rules={{ required: 'This field is required' }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="floorNumber"
-                        placeholder="Floor Number"
-                        className={`w-full p-2 border rounded-md focus:outline-blue-500 ${errors.floorNumber ? 'border-red-500' : ''}`}
-                      />
-                    )}
-                  />
-                  {errors.floorNumber && <p className="text-red-500 text-xs italic">{errors.floorNumber.message}</p>}
-                </div> */}
-
-
-
 
                             {/* Area Name Dropdown */}
             <div className="mb-4">
@@ -373,6 +316,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
               <Controller
                 name="areaName"
                 control={control}
+                defaultValue=''
                 rules={{ required: 'This field is required' }}
                 render={({ field }) => (
                   <select
@@ -383,14 +327,13 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                     onChange={(e) => {
                       field.onChange(e);
                       setShowFactoryDropdown(!!e.target.value);
+                      handleAreaChange(e)
                     }}
                   >
-                    <option value="" disabled>Select Area</option>
-                    {areas.map((area) => (
-                      <option key={area.id} value={area.id}>
-                        {area.name}
+                    <option value="" disabled>
+                        Select Area
                       </option>
-                    ))}
+                      {areas.map((area, index) => <option key={area.id} value={area.id}>{area.area_name}</option>)}
                   </select>
                 )}
               />
@@ -406,6 +349,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 <Controller
                   name="factoryName"
                   control={control}
+                  defaultValue=''
                   rules={{ required: 'This field is required' }}
                   render={({ field }) => (
                     <select
@@ -416,15 +360,16 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                       onChange={(e) => {
                         field.onChange(e);
                         setShowFloorNumberDropdown(!!e.target.value);
+                        handleFactoryChange(e)
                       }}
                     >
-                      <option value="" disabled>Select Factory</option>
-                      {factories.map((factory) => (
-                        <option key={factory.id} value={factory.id}>
-                          {factory.name}
-                        </option>
-                      ))}
-                    </select>
+                  <option value="" disabled>
+                  Select Factory
+                </option>
+                {factories.map((factory) => (
+                  <option key={factory.id} value={factory.id}>{factory.factory_name}</option>
+                ))}
+              </select>
                   )}
                 />
                 {errors.factoryName && <p className="text-red-500 text-xs italic">{errors.factoryName.message}</p>}
@@ -439,6 +384,7 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                 </label>
                 <Controller
                   name="floorNumber"
+                  defaultValue=''
                   control={control}
                   rules={{ required: 'This field is required' }}
                   render={({ field }) => (
@@ -448,13 +394,13 @@ function EditFloorIncharge({closeForm, popup_data, floor_data_update}) {
                       placeholder="Select Floor Number"
                       className={`w-full p-2 border rounded-md main-color-focus ${errors.floorNumber ? 'border-red-500' : ''}`}
                     >
-                      <option value="" disabled>Select Floor Number</option>
-                      {floorNumbers.map((floorNumber) => (
-                        <option key={floorNumber} value={floorNumber}>
-                          {floorNumber}
-                        </option>
-                      ))}
-                    </select>
+                       <option value="" disabled>
+                  Select Floor
+                </option>
+                {floors.map((floor) => (
+                  <option key={floor.floor_number} value={floor.floor_number}>{floor.floor_number}</option>
+                ))}
+              </select>
                   )}
                 />
                 {errors.floorNumber && <p className="text-red-500 text-xs italic">{errors.floorNumber.message}</p>}

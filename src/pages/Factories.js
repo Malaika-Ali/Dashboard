@@ -99,21 +99,38 @@ const Factories = (props) => {
     };
 
      // ****************Delete Factory Function************************
-  const handleDeleteFactory = async (factory_id) => {
-    alert("Deleted factories", factory_id)
+//   const handleDeleteFactory = async (factory_id) => {
+//     alert("Deleing factory", factory_id)
+//     try {
+//       const response = await axios.delete(API_URL + 'delete_factory', {
+//         data: { factory_id }
+//       });
+//       if (response.status === 200) {
+//         // Refresh data after deletion
+//         fetch_data();
+//         alert('Deleted 2', factory_id)
+//       }
+//     } catch (error) {
+//     //   alert(error.response.data.error);
+//     }
+//   };
+
+
+
+const handleDeleteFactory = async (factory_id)=>{
     try {
-      const response = await axios.delete(API_URL + 'delete_factory', {
-        data: { factory_id }
-      });
-      if (response.status === 200) {
-        // Refresh data after deletion
-        fetch_data();
-        alert('Deleted 2', factory_id)
+        const response = await axios.delete(API_URL + 'delete_factory', {
+          data: { factory_id, role: props.user_details.role }
+        });
+        if (response.status === 200) {
+          // Refresh data after deletion
+          fetch_data();
+        }
+      } catch (error) {
+        alert(error.response.data.error);
       }
-    } catch (error) {
-    //   alert(error.response.data.error);
-    }
-  };
+
+}
 
 // ****************Delete Factory Function************************
 // const handleDeleteFactory = async (factory_id) => {

@@ -30,33 +30,14 @@ function DeleteItem({ onClose, name, options, setArea, setAreasList, emp_id, onD
         console.log('Form Data before deletion:', formData);
         // Handle form submission logic here
         if (name == "Motor") {
-
-            // await axios.post(
-            //     API_URL + "delete_area_admin",
-            //     { area_id: e.target[0].value, employee_id: emp_id },
-            //     {
-            //         headers: {
-            //             'Content-type': 'multipart/form-data',
-            //             "Access-Control-Allow-Origin": "*",
-            //         }
-            //     }
-            // ).then((result) => {
-
-            //     setArea(result.data.area_list);
-            //     setAreasList(result.data.areas_data);
-            //     setOpen(false);
-            //     onClose();
-
-            // }).catch(async (error) => {
-            //     setOpen(false);
-            //     onClose();
-
-            // });
             onDelete(formData.category);
         }
 
         else if (name == "Factory") {
             alert(formData.category)
+            onDelete(formData.category);
+        }
+        else if(name == "Area"){
             onDelete(formData.category);
         }
         onClose();

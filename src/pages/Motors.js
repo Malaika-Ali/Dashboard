@@ -17,7 +17,7 @@ import { StateContext } from '../contexts/ContextProvider';
 let API_URL = process.env.REACT_APP_USERS_API;
 export default function Motors(props) {
   const location = useLocation();
-  const { factoryName } = location.state || {};
+  const { factoryName, FloorNumber } = location.state || {};
 
   const [open, setOpen] = useState(false);
   const [total_critical, setTotalCritical] = useState(0);
@@ -87,8 +87,6 @@ export default function Motors(props) {
       setAreasList(data.areas);
       setFactories(data.factories)
       setFloors(data.floors)
-      console.log('data',data)
-
     }
   }, [data]);
 
@@ -194,7 +192,10 @@ export default function Motors(props) {
 
       {/* *******************    Header     **************/}
 
-      <CardsContainerHeader headingName={`${factoryName ? factoryName : 'Motors Details'}`} name='Motor'
+      <CardsContainerHeader
+      //  headingName={`${factoryName ? factoryName : 'Motors Details'}`} name='Motor'
+      
+      headingName={`${factoryName ? factoryName : ''} ${FloorNumber ? ' Floor ' + FloorNumber + ' Motors' : ''} ${!factoryName && !FloorNumber ? 'Motors Details' : ''}`}
         onAddButton={() => setAddNewItem(true)}
         onDeleteButton={() => setDeleteItem(true)}
         onSortButton={handleSort}

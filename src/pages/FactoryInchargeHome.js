@@ -25,9 +25,6 @@ import { StateContext } from '../contexts/ContextProvider';
 import SecondNavbar from '../components/SecondNavbar';
 
 
-
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
 // Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_USERS_API;
 
@@ -188,23 +185,18 @@ const FactoryInchargeHome = (props) => {
   // state to popup modal on click on calendar
   const [calendarClick, setCalendarClick] = useState(false)
 
-  // const pie_chart_series=['23','34','54']
-
-
   return (
-    <div className='md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-16 large:mt-[4rem]'>
+    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-16 large:mt-[4rem]`}>
    
    {/* *********Div To Show Page Name**************** */}
-   <div className='px-4 my-4'>
+   <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3'>
       <SecondNavbar pageName='Home'/>
       </div>
     
-      
-
         {/* *********Numbers of Areas, factories, motors **************** */}
-        <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-[100%] md:gap-[1em] large:gap-[6em] lg:gap-8 items-center w-full large:w-full'>
+        <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] large:gap-[6em] lg:gap-8 items-center w-full large:w-full'>
           {/* Flex Container */}
-          <div className='flex rounded-xl md:w-[68%] lg:w-[70%] large:w-[70%]'>
+          <div className='flex justify-between rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'>
 
             {/* left box */}
             <TotalNumberCard iconSrc={stairs} placeName='Floors'
@@ -268,12 +260,12 @@ const FactoryInchargeHome = (props) => {
 
         {/* ----- PieChart & Circular Progress Charts ------------ */}
 
-        <div className='flex flex-col justify-center items-start mt-5 md:w-[98%] lg:w-full large:w-full'>
+        <div className='flex flex-col justify-center items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
 
         <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
 
-        <div className='mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[3em]'>
+        <div className='-mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[3em]'>
 
 
           <div className='h-60 rounded-xl md:w-[68%] flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68.5%]'>
@@ -291,7 +283,7 @@ const FactoryInchargeHome = (props) => {
             barColor='#DB1915' motorCategory='Critical' />
           </div>
 
-          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
+          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl shadow-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
         </div>
@@ -299,12 +291,12 @@ const FactoryInchargeHome = (props) => {
 
     {/* ----------------- Line Chart ------------------------ */}
 
-    <div className='flex flex-col justify-center items-start mt-5'>
+    <div className='flex flex-col justify-center items-start mt-8'>
 
         <h2 className='ml-3 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-      <div className='mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-4 large:gap-8 md:w-[98%] lg:w-full'>
-        <div className='bg-main-color h-80 mt-8 rounded-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
+      <div className='-mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-7 large:gap-8 md:w-[98%] lg:w-[99%] large:w-full'>
+        <div className='bg-main-color h-80 mt-8 rounded-xl shadow-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[70%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" chartHeight={280} chartWidth={670} />
         </div>
         <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>

@@ -7,20 +7,22 @@ import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
 import { RiDeleteBinLine } from "react-icons/ri";
 import EditFactoryIncharge from '../components/EditFactoryIncharge';
 import EditFloorIncharge from '../components/EditFloorIncharge';
-import EmployeesTable from '../components/tables/EmployeesTable';
 import { StateContext } from '../contexts/ContextProvider';
 
 
 import axios from 'axios';
 import SecondNavbar from '../components/SecondNavbar';
 
+// Load the API URL from the environment variable
+let API_URL = process.env.REACT_APP_USERS_API;
 
-let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 function Employees() {
     const [open, setOpen] = useState(false);
     const [factory_Incharge_data, setFactoryInchargeData] = useState([]);
     const [floor_Incharge_data, setFloorInchargeData] = useState([]);
     const [edit_data, setEditData] = useState([]);
+    const [areas, setAreas] = useState([])
+    const [factories, setFactories] = useState([])
     // state to handle loading of page
     const { loading, setLoading } = useContext(StateContext);
 
@@ -40,6 +42,8 @@ function Employees() {
             setLoading(false)
             setFactoryInchargeData(result.data.factory_incharge_data);
             setFloorInchargeData(result.data.floor_incharge_data);
+            setAreas(result.data.areas)
+            setFactories(result.data.factories)
             console.log(result.data)
         }).catch(async (error) => {
             //   setOpen(false);
@@ -48,6 +52,8 @@ function Employees() {
         })
 
     }
+
+  
 
     async function deleteData(row) {
         setOpen(true);
@@ -183,8 +189,7 @@ function Employees() {
     }
 
     return (
-        <>
-            <div className='ml-3 mr-5 mt-5 lg:ml-5 lg:mr-5 lg:mt-[5.25rem] large:mx-12 large:mt-[4rem]'>
+            <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'>
 
                 {/* *********Div To Show Page Name**************** */}
                 <div className='px-4 my-4 mt-10 mb-10'>
@@ -236,16 +241,17 @@ function Employees() {
                 {
                     editFactoryIncharge &&
                     <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data}
-                        factory_data_update={setFactoryInchargeData} />
+                        factory_data_update={setFactoryInchargeData}
+                        areas={areas} factories={factories} />
                 }
                 {
                     editFloorIncharge &&
                     <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)} popup_data={edit_data}
-                        floor_data_update={setFloorInchargeData} />
+                        floor_data_update={setFloorInchargeData} 
+                        areas={areas}/>
                 }
 
-            </div>
-        </>
+            </div> 
     )
 }
 

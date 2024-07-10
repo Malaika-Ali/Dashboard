@@ -223,7 +223,7 @@ export default function Navbar(props) {
 
           <div className="flex flex-col">
             <span className='sm:text-xs md:text-sm text-black'>Malaika</span>
-            <span className='text-xs text-gray-400'>role</span>
+            <span className='text-xs text-gray-400'>Admin</span>
           </div>
         </div>
 

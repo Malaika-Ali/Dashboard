@@ -13,8 +13,6 @@ import { StateContext } from '../contexts/ContextProvider';
 import SecondNavbar from '../components/SecondNavbar';
 
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
 // Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_USERS_API;
 const Areas = (props) => {
@@ -92,6 +90,21 @@ setLoading(false)
         let sorted = areas.sort((a, b) => a.area_name.localeCompare(b.area_name));
         setSortedAreas(sorted);
     };
+
+    const handleAreaDelete= async (area_id)=>{
+        try {
+            const response = await axios.delete(API_URL + 'delete_area_admin', {
+              data: { area_id, role: props.user_details.role }
+            });
+            if (response.status === 200) {
+              // Refresh data after deletion
+              fetch_data();
+            }
+          } catch (error) {
+            alert(error.response.data.error);
+          }
+
+    }
 
     
 // *************************Search Functionality*********************
@@ -174,6 +187,7 @@ useEffect(() => {
                 deleteItem &&
                 <DeleteItem onClose={() => setDeleteItem(false)} name='Area'
                     options={areas_list} setArea={setAreas} setAreasList={setAreasList} emp_id={props.user_details.employee_id}
+                    onDelete={handleAreaDelete}
                 />
             }
 
