@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
-import logo from '../assets/logo.png'
+import logo from '../assets/MotorLogo3.png'
 
 
 // let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
@@ -94,15 +94,15 @@ const LoginPage = (props) => {
     >
       <CircularProgress color="inherit" />
     </Backdrop>
-    <div className="min-h-screen flex items-center justify-center rounded-lg">
+    <div className="min-h-screen flex items-center justify-center  bg-main-color">
 
       {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4 large:w-44'>
+      <div className='w-24 absolute top-4 left-4 lg:w-14 large:w-44'>
       <img src={logo} alt="company logo" />
       </div>
 
       <div className="bg-white p-8 rounded-xl shadow-md w-96 mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back!</h2>
+        <h2 className="text-2xl text-seconday-color font-bold mb-6 text-center">Welcome Back!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-semibold mb-2">
@@ -124,7 +124,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="email"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-seconday-color ${errors.email ? 'border-red-500' : ''}`}
                     placeholder="malaika.baig@example.com"
                     autoComplete="email"
                   />
@@ -155,7 +155,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="password"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-seconday-color ${errors.password ? 'border-red-500' : ''}`}
                     placeholder="********"
                     autoComplete="current-password"
                   />

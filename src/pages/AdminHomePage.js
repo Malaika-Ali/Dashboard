@@ -357,7 +357,7 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
         {
           viewMotor &&
           <ViewMotorModal onClick={() => setViewMotor(false)}
-            motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+            motorName='MM-1' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
         }
 
         {

@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 
 import Swal from 'sweetalert2';
-import logo from '../assets/logo.png'
+import logo from '../assets/MotorLogo3.png'
 
 // let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // Load the API URL from the environment variable
@@ -115,10 +115,10 @@ const SignupPage = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-main-color">
 
 {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4 large:w-44'>
+      <div className='w-24 absolute top-4 left-4 lg:w-14 large:w-44'>
       <img src={logo} alt="company logo" />
       </div>
 
