@@ -8,7 +8,7 @@ const History = () => {
   const [dateClicked, setDateClicked] = useState(false);
 
   return (
-    <div className='mx-4 lg:mt-[5rem] lg:ml-5 lg:mr-5 large:mx-12 large:mt-[4rem]'>
+    <div className='mx-4 lg:mt-[5rem] lg:ml-5 lg:mr-5 large:mx-12 large:mt-[5rem]'>
       {/* *********Div To Show Page Name**************** */}
       <div className='px-4 my-2 mt-10 mb-5'>
         <SecondNavbar pageName='History' />

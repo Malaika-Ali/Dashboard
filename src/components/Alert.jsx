@@ -9,10 +9,10 @@ function Alert({ bgColor50, textColor900,iconSrc, iconColor, message, alertsNumb
           <img src={iconSrc} className={`fill-current h-6 w-6 text-${iconColor}-500 mr-4`} />
         </div>
         <div>
-          <p className={`text-sm large:text-lg ${textColor500}`}>{message}</p>
+          <p className={`text-sm large:text-base ${textColor500}`}>{message}</p>
         </div>
           {/* <span className={`${textColor500} text-xl p-2 rounded-full border ${borderColor500} text-xs`}>{alertsNumber}</span> */}
-          <div className={`${textColor500} flex justify-center items-center text-xl h-6 w-6 p-2 rounded-full border ${borderColor500}`}><span className='text-sm large:text-lg'>{alertsNumber}</span> </div>
+          <div className={`${textColor500} flex justify-center items-center text-xl h-6 w-6 p-2 rounded-full border ${borderColor500}`}><span className='text-sm large:text-base'>{alertsNumber}</span> </div>
       </div>
     </div>
   </div>

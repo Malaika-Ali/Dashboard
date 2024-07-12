@@ -91,11 +91,11 @@ const Floors = (props) => {
 
 
   return (
-    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[4rem]'>
+    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'>
      
       
          {/* *********Div To Show Page Name**************** */}
-         <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14'>
+         <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>
                 <SecondNavbar pageName='Floors' />
             </div>
         {/* Floors Report */}
@@ -103,7 +103,7 @@ const Floors = (props) => {
 
         {/* heading section */}
         <div className="flex flex-row justify-between ml-4">
-          <h1 className='font-semibold sm:text-base md:text-lg lg:text-xl large:text-3xl main-font header-heading'>Summary</h1>
+          <h1 className='font-semibold sm:text-base md:text-lg lg:text-xl main-font header-heading'>Summary</h1>
         </div>
 
         {/* Flex Container */}

@@ -127,7 +127,7 @@ function LineChart({ data, chartTitle }) {
     chartHeight = 220;
   }
   else if (screenSize === 'very large') {
-    chartHeight = 400;
+    chartHeight = 380;
   } else {
     chartHeight = 290;
   }
@@ -140,7 +140,7 @@ function LineChart({ data, chartTitle }) {
     chartWidth = 220;
   }
   else if (screenSize === 'very large') {
-    chartWidth = 1000;
+    chartWidth = 900;
   } else {
     chartWidth = 670;
   }

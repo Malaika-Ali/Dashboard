@@ -158,7 +158,7 @@ export default function Navbar(props) {
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
-    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] sm:px-3  md:px-6 md:w-full lg:w-[83%] lg:px-8 z-10 gray-icon
+    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] large:h-[8vh] sm:px-3  md:px-6  md:w-full lg:w-[83%] large:w-[88%] large:ml-4 lg:px-8 z-10 gray-icon
      bg-white
      ${!activeMenu ? "w-full" : "w-[83%]"}
        border-b border-gray-200 shadow-sm`}
