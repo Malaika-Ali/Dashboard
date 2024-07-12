@@ -24,14 +24,15 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </button>
 
 )
-// function getToken() {
-//   const tokenString = localStorage.getItem('token');
-//   const userToken = JSON.parse(tokenString);
-//   return userToken
-// }
+function getToken() {
+  const tokenString = localStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken
+}
 
-// const role = getToken().role;
-// const name = getToken().name;
+const role = getToken().role;
+const name = getToken().first_name;
+
 
 
 export default function Navbar(props) {
@@ -150,6 +151,10 @@ export default function Navbar(props) {
     }
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
@@ -222,8 +227,8 @@ export default function Navbar(props) {
           </div>
 
           <div className="flex flex-col">
-            <span className='sm:text-xs md:text-sm text-black'>Malaika</span>
-            <span className='text-xs text-gray-400'>Admin</span>
+            <span className='sm:text-xs md:text-sm text-black'>{capitalizeFirstLetter(name)}</span>
+            <span className='text-xs text-gray-400'>{capitalizeFirstLetter(role)}</span>
           </div>
         </div>
 

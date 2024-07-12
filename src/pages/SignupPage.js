@@ -124,7 +124,7 @@ const SignupPage = () => {
 
 
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-xl shadow-md w-[50%] large:w-[40%] mt-8 mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-seconday-color">Sign Up</h2>
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-8'>
             <div className="mb-4 ">

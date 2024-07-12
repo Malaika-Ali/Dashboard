@@ -34,6 +34,17 @@ const FullPageCalendar = ({ dateClick }) => {
             end: new Date('2024-06-02T13:00:00'), // same as start time
             title: 'Faulty Alert in Motor ss5 at floor 4'
         },
+        {
+            start: new Date('2024-07-11T13:00:00'),
+            end: new Date('2024-07-11T13:00:00'), // same as start time
+            title: 'Faulty Alert in Motor ss5 at floor 4'
+        },
+        {
+            start: new Date('2024-07-01T13:00:00'),
+            end: new Date('2024-07-01T13:00:00'), // same as start time
+            title: 'Critical Alert in Motor ss5 at floor 4'
+        },
+        
     ]);
 
     const EventComponent = ({ event }) => (

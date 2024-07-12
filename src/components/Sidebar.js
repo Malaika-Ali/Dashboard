@@ -18,10 +18,16 @@ const Sidebar = (props) => {
 
     const { activeMenu, setactiveMenu, screenSize } = useStateContext();
 
-    
-    // const role = props.user_details.role;
+
+    function getToken() {
+        const tokenString = localStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken
+    }
+
     const role = getToken().role;
-    // const role = 'floorIncharge'
+    const name = getToken().first_name+' '+getToken().last_name
+    console.log(role, name)
 
     let roleLinks = [];
     if (role === 'admin') {
@@ -53,10 +59,23 @@ const Sidebar = (props) => {
         return null;
     }
 
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
+      const formatRole = (role) => {
+        const roleMapping = {
+          admin: 'Administrator',
+          factoryIncharge: 'Factory Incharge',
+          floorIncharge: 'Floor Incharge'
+        };
+        return roleMapping[role] || capitalizeFirstLetter(role);
+      };
+
     return (
         <div className="bg-main-color text-white h-screen flex flex-col">
             <div className="flex items-center justify-end p-4">
-            <button
+                <button
                     type="button"
                     onClick={handleCloseSideBar}
                     className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
@@ -71,8 +90,8 @@ const Sidebar = (props) => {
                     className="rounded-full w-14 h-14"
                 />
                 <span className='text-white mt-2 font-semibold plus-jakarta-sans text-xl'>MotorVision</span>
-                <h3 className="mt-14 text-sm font-medium text-seconday-color">Malaika Ali</h3>
-                <p className="text-sm text-gray-400">Administrator</p>
+                <h3 className="mt-14 text-sm font-medium text-seconday-color">{capitalizeFirstLetter(name)}</h3>
+                <p className="text-sm text-gray-400">{formatRole(role)}</p>
             </div>
             <div className="mt-3">
                 {/* <h4 className="px-4 mb-2 text-xs text-seconday-color font-semibold uppercase">Dashboards</h4> */}
