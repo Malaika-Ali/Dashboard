@@ -21,6 +21,16 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+  
+  if (name === 'name') {
+    // Regular expression to allow only letters, numbers, and spaces
+    const regex = /^[a-zA-Z0-9 ]*$/;
+    if (!regex.test(value)) {
+      alert('Only letters, numbers, and spaces are allowed.');
+      return;
+    }
+  }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,

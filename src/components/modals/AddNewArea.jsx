@@ -19,12 +19,26 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
     name: '',
   });
 
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    // Regular expression to allow only letters and numbers
+    const regex = /^[a-zA-Z0-9 ]*$/;
+    if (regex.test(value)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      alert('Only letters, numbers, and spaces are allowed.');
+    }
   };
 
   const handleSubmit = async (e) => {
