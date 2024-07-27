@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddButton } from '../buttons';
 
 import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import { StateContext } from '../../contexts/ContextProvider';
+
 
 let API_URL = process.env.REACT_APP_USERS_API;
 
 const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list, sorted_list  }) => {
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
+  const { setLoading}=useContext(StateContext);
+  
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,8 +30,8 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    setOpen(true)
+    // Handle form submission logic here 
+    setLoading(true)
     await axios.post(
       API_URL + "add_factory_admin",
       {factory_name: e.target[0].value, floors: e.target[1].value, area_id: e.target[2].value},
@@ -44,11 +46,11 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
       setFactory(result.data.factories_list);
       setFactoriesList(result.data.factories_data)
       sorted_list([])
-      setOpen(false);
+      setLoading(false)
       onClose();
 
     }).catch(async (error) =>  {
-      setOpen(false);
+      setLoading(false)
       onClose();
       
     })
@@ -60,12 +62,6 @@ const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list
     <div
       className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful"
     >
-      <Backdrop
-          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
-      >
-          <CircularProgress color="inherit" />
-      </Backdrop>
       <div className="bg-white rounded-lg shadow w-full max-w-md p-4 md:p-5">
         <div className="flex items-center justify-between border-b rounded-t">
           <h3 className="text-lg font-semibold text-gray-900">Add New {name} </h3>

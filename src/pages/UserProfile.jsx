@@ -245,7 +245,7 @@ function UserProfile(props) {
 
                 <div className='flex flex-row items-center justify-between mt-8 gap-5 mb-5'>
                     <button
-                        className="main-color text-white p-2 rounded-md main-color-hover w-16"
+                        className="main-color text-white px-6 py-2 main-color-hover  rounded-full"
                         type="submit"
                     >
                         {isEditing ? "Save" : "Edit"}
@@ -261,7 +261,10 @@ function UserProfile(props) {
 
             {
                 confirmationModal &&
-                <ConfirmationModal closeConfirmation={() => setConfirmationModal(false)} />
+                <ConfirmationModal closeConfirmation={() => setConfirmationModal(false)}
+                message={`By Deleting this account, you won't be able to access the system.`}
+                user_name={token_data.first_name}
+                name="User" />
             }
 
         </div>

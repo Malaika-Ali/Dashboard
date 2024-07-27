@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddButton } from '../buttons';
 import axios from 'axios';
+import { StateContext } from '../../contexts/ContextProvider';
+
 
 
 let API_URL = process.env.REACT_APP_USERS_API;
 
 const AddNewMotor = ({ areas_list,  onClose, name }) => {
   const [open, setOpen] = useState(false);
+  const { setLoading}=useContext(StateContext);
+
   const [formData, setFormData] = useState({
 
     name: '',
@@ -71,7 +75,7 @@ const AddNewMotor = ({ areas_list,  onClose, name }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setOpen(true);
+    setLoading(true)
 
     try {
       await axios.post(
@@ -85,11 +89,11 @@ const AddNewMotor = ({ areas_list,  onClose, name }) => {
         }
       );
       
-      setOpen(false);
+      setLoading(false)
       onClose();
     } catch (error) {
       console.error('Error adding motor:', error);
-      setOpen(false);
+      setLoading(false)
       onClose();
     }
   };

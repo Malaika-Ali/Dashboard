@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddButton } from '../buttons';
 
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { StateContext } from '../../contexts/ContextProvider';
+
 
 let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // let API_URL = "http://localhost:5001/";
 const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) => {
 
   const [open, setOpen] = useState(false);
+  const { setLoading}=useContext(StateContext);
+
 
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +30,8 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    setOpen(true)
+    // setOpen(true)
+    setLoading(true)
 
     await axios.post(
       API_URL + "add_area_admin",
@@ -42,11 +47,13 @@ const AddNewArea = ({ onClose, name, setArea, setAreasList, set_sorted_list }) =
       setArea(result.data.area_list);
       setAreasList(result.data.areas_data);
       set_sorted_list([])
-      setOpen(false);
+      // setOpen(false);
+      setLoading(false)
       onClose();
 
     }).catch(async (error) => {
-      setOpen(false);
+      // setOpen(false);
+      setLoading(false)
       onClose();
 
     })

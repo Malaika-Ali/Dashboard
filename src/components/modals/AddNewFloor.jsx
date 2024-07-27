@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddButton } from '../buttons';
+import { StateContext } from '../../contexts/ContextProvider';
+
 
 const AddNewFloor = ({ onClose, name }) => {
+  const { setLoading}=useContext(StateContext);
+
   const [formData, setFormData] = useState({
     name: '',
     area: '',

@@ -89,7 +89,7 @@ const Sidebar = (props) => {
                     alt="Profile"
                     className="rounded-full w-14 h-14"
                 />
-                <span className='text-white mt-2 font-semibold plus-jakarta-sans text-xl'>MotorVision</span>
+                <span className='text-white mt-2 font-bold plus-jakarta-sans text-xl'>MotorVision</span>
                 <h3 className="mt-14 text-sm font-medium text-seconday-color">{capitalizeFirstLetter(name)}</h3>
                 <p className="text-sm text-gray-400">{formatRole(role)}</p>
             </div>
