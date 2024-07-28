@@ -23,9 +23,6 @@ import { StateContext } from '../contexts/ContextProvider';
 import { SmallCalendar } from '../components/calendars';
 import SecondNavbar from '../components/SecondNavbar';
 
-
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// let API_URL = "http://localhost:5001/";
 // Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_USERS_API;
 
@@ -42,10 +39,10 @@ export default function AdminHomePage(props) {
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
-const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
+const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(StateContext);
 
   // state to control popup of Motor View modal
-  const [viewMotor, setViewMotor, activeMenu] = useState(false)
+  const [viewMotor, setViewMotor] = useState(false)
 
   const navigate = useNavigate();
 
@@ -258,16 +255,23 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
   
 
   return (
-    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-28 large:mt-[5rem]`}
+    <div className={`md:mt-8 md:mx-2 lg:mt-[4rem] large:mx-28 large:mt-[5rem]
+      ${!activeMenu ? 'lg:mr-24 lg:ml-24' : 'lg:mx-5'}
+      `}
     ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3 large:mr-10'>
+      <div className={`px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3 large:mr-10
+        ${!activeMenu ? 'lg:mr-8' : 'lg:mr-3'}
+      `}>
       <SecondNavbar pageName='Home'/>
       </div>
     
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className='flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] lg:gap-8 items-center w-full large:gap-[6em]'>
+      <div className={`flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] lg:gap-8 items-center w-full large:gap-[6em]
+
+       
+      `}>
         {/* Flex Container */}
         <div className='flex justify-between rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'>
 

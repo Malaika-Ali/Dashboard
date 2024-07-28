@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import SingleLineChart from '../charts/SingleLineChart';
 import { RxCross2 } from "react-icons/rx";
 
+import criticalAlert from '../../assets/criticalalert.png';
+import faultyAlert from '../../assets/faultyalert.png';
+import flawless from '../../assets/flawless.png';
 
 function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryName, areaName  }) {
 
@@ -23,6 +26,19 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
               return 'text-gray-500'; // Default color if none of the above conditions match
           }
         };
+
+        const getImageSrc = () => {
+          switch (motorStatus) {
+            case 'Critical':
+              return criticalAlert;
+            case 'Faulty':
+              return faultyAlert;
+            case 'Flawless':
+              return flawless;
+            default:
+              return ''; // Default image if none of the above conditions match
+          }
+        };
       
     return (
         <div className="fixed inset-0 bg-opacity-50 bg-gray-800 z-50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 flex justify-center items-center transition-transform duration-300 ease-in-out transform translate-y-0 -translate-y-ful w-full" >
@@ -33,12 +49,19 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
 
 <div className="bg-gray-900 flex items-center justify-center">
       <div className="rounded shadow-xl overflow-hidden w-full md:flex max-w-screen-md">
-        <div className="flex w-full md:w-1/2 px-5 pb-4 pt-8 main-color text-white items-center">
+        <div className="flex flex-col w-full md:w-1/2 px-5 pb-4 pt-8 main-color text-white items-center">
           {/* Replace the line chart with SingleLineChart component */}
-          <SingleLineChart
+          {/* <SingleLineChart
             data={lineChartData}
             chartTitle="Motor's Weekly Report"
-          />
+          /> */}
+
+         <div className="text-xs mt-2 mb-10 mx-4 flex flex-row justify-between items-start w-full text-gray-400"><span>Last Updated: &nbsp;  <span className='font-mono'>29-7-2024  </span> &nbsp;   <span className='font-mono'> 4:00:32 pm </span> </span></div>
+
+         <div className='flex mb-6'><img src={getImageSrc()} alt='Motor Status' /></div>
+
+          <span className="block mb-10 leading-tight text-2xl text-white">{motorName}</span>
+          <span className={`block mb-10 leading-5 text-xl ${getStatusColor()}`}>{motorStatus}</span>
     
         </div>
         <div className="flex w-full md:w-1/2 pt-0 p-10 bg-gray-100 text-gray-600 items-center justify-center relative">
@@ -48,24 +71,24 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
         ><RxCross2 /></button>
           <div className="w-full">
             {/* <h3 className="text-lg font-semibold leading-tight text-gray-800">Motor Name</h3> */}
-            <div className="text-sm mb-10 flex flex-row justify-between items-start w-full"><span>Updated:
-             Feb 2nd, 2024</span>    <span> 4:00pm </span></div>
+            {/* <div className="text-sm mb-10 flex flex-row justify-between items-start w-full"><span>Updated:
+             Feb 2nd, 2024</span>    <span> 4:00pm </span></div> */}
             <div className="flex w-full items-end mb-10 justify-between">
-              <span className="block leading-none text-2xl text-gray-800">{motorName}</span>
-              <span className={`block leading-5 text-sm ml-4 ${getStatusColor()}`}>{motorStatus}</span>
+              {/* <span className="block leading-none text-2xl text-gray-800">{motorName}</span> */}
+             
             </div>
             <div className="flex flex-col w-full text-base">
-              <div className="flex">
+              <div className="flex mx-4">
                 <div className="flex pr-3 text-left font-semibold">Floor Number</div>
                 <div className="flex-1 px-3 text-right">{floorNumber}</div>
               </div>
-              <div className="flex">
+              <div className="flex mx-4">
                 <div className="flex pr-3 text-left font-semibold">Factory Name</div>
                 <div className="flex-1 pl-3 text-right">{factoryName}</div>
               </div>
             </div>
             {/* <div className="flex w-full text-xs"> */}
-              <div className="flex">
+              <div className="flex mx-4">
                 <div className="flex pr-3 text-left font-semibold">Area Name</div>
                 <div className="pl-3 flex-1 text-right">{areaName}</div>
               </div>

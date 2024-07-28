@@ -30,7 +30,7 @@ const Areas = (props) => {
     const [deleteItem, setDeleteItem] = useState(false)
 
     // state to handle loading of page
-    const { loading, setLoading, searchTerm, setSearchTerm } = useContext(StateContext);
+    const { setLoading, searchTerm, setSearchTerm, activeMenu } = useContext(StateContext);
     const navigate = useNavigate();
 
     // State to handle sorting
@@ -127,7 +127,9 @@ useEffect(() => {
 
 
     return (
-        <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'
+        <div className={`md:ml-2 md:mr-2 mt-5 lg:mt-[4rem] lg:mx-5 large:mx-12 large:mt-[5rem]
+           
+            `}
         ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
