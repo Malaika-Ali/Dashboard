@@ -158,9 +158,8 @@ export default function Navbar(props) {
 
   return (
     //  ${color ? "navbar-bg-onscroll" : "bg-white"}
-    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] large:h-[8vh] sm:px-3  md:px-6  md:w-full lg:w-[83%] large:w-[88%] large:ml-4 lg:px-8 z-10 gray-icon
-     bg-white
-     ${!activeMenu ? "w-full" : "w-[83%]"}
+    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] large:h-[8vh] sm:px-3  md:px-6  md:w-full large:ml-4 lg:px-8 z-10 gray-icon  bg-white
+     ${!activeMenu ? 'lg:w-full' : 'lg:w-[calc(100%-240px)]'}
        border-b border-gray-200 shadow-sm`}
        >
       {loading && <Loader />}
@@ -219,7 +218,7 @@ export default function Navbar(props) {
 
 
         {/* ************************profile section************ */}
-        <div className="flex flex-row items-center justify-between gap-3 hover:bg-gray-100 w-full h-full cursor-pointer px-3" onClick={() => setopen(!open)}
+        <div className="flex flex-row items-center justify-between gap-3 navbutton-hover w-full h-full cursor-pointer px-3" onClick={() => setopen(!open)}
           ref={ProfiledivRef}>
           <div
             className='flex justify-center items-center gray-icon h-full w-full font-bold'>

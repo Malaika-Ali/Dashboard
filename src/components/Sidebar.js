@@ -44,9 +44,9 @@ const Sidebar = (props) => {
         setactiveMenu(true);
     }, []);
 
-    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-300";
+    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-xs font-medium transition-all duration-300";
 
-    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium transition-all duration-300";
+    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-xs font-medium transition-all duration-300";
 
     const handleCloseSideBar = () => {
         if (activeMenu && screenSize <= 1024) {

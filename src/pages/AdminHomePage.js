@@ -379,6 +379,3 @@ const {loading, setLoading, searchTerm, setSearchTerm}=useContext(StateContext);
     </div>
   )
 }
-
-
-
