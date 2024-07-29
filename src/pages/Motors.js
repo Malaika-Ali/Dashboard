@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
@@ -34,7 +34,7 @@ export default function Motors(props) {
   // State to handle sorting
   const [sortedMotors, setSortedMotors] = useState([]);
   // state to handle loading of page
-  const { loading, setLoading } = useContext(StateContext);
+  const { loading, setLoading, searchTerm } = useContext(StateContext);
 
   const [areas, setAreas] = useState([]);
   const [floors, setFloors] = useState([]);
@@ -117,10 +117,30 @@ export default function Motors(props) {
     }
   };
 
+
+  // *************************Search Functionality*********************
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+      if (searchTerm) {
+        const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
+        const content = contentRef.current.innerHTML;
+        const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+        
+        contentRef.current.innerHTML = newContent;
+    
+        const firstMatch = contentRef.current.querySelector('.highlight');
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, [searchTerm]);
+
  
 
   return (
-    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'>
+    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'
+    ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
       <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>

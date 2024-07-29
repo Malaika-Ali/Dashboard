@@ -15,7 +15,7 @@ const FullPageCalendar = ({ dateClick }) => {
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
-        alert("day was clicked")
+    
     };
 
     // setEvents([{
@@ -43,6 +43,21 @@ const FullPageCalendar = ({ dateClick }) => {
             start: new Date('2024-07-01T13:00:00'),
             end: new Date('2024-07-01T13:00:00'), // same as start time
             title: 'Critical Alert in Motor ss5 at floor 4'
+        },
+        {
+            start: new Date('2024-07-29T13:00:00'),
+            end: new Date('2024-07-29T23:00:00'), // same as start time
+            title: 'Critical Alert in Motor MM-1 at floor 1 Of Innovative in Malir'
+        },
+        {
+            start: new Date('2024-07-28T15:00:00'),
+            end: new Date('2024-07-28T16:00:00'), // Fixed end time
+            title: 'Critical Alert in Motor MM-2 at floor 1 Of Innovative in Malir'
+        },
+        {
+            start: new Date('2024-07-16T11:00:00'),
+            end: new Date('2024-07-20T16:00:00'), // Fixed end time
+            title: 'Critical Alert in Motor MS-2 at floor 1 Of Samsung in South City'
         },
         
     ]);

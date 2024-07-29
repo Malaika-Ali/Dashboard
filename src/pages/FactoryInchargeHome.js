@@ -42,6 +42,8 @@ const FactoryInchargeHome = (props) => {
   const [viewMotor, setViewMotor] = useState(false)
   const {loading, setLoading}=useContext(StateContext);
 
+  const [selectedMotor, setSelectedMotor] = useState(null);
+
   async function fetch_data() {
     console.log(props.user_details.employee_id)
     await axios.post(
@@ -137,7 +139,9 @@ const FactoryInchargeHome = (props) => {
     {
       name: "View",
       center: true,
-      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
+      cell: row => <button className='main-color text-white font-semibold py-2 px-4 rounded' onClick={() => {setViewMotor(true)
+        setSelectedMotor(row);
+      }}>View</button>
     }
   ];
 
@@ -321,7 +325,13 @@ const FactoryInchargeHome = (props) => {
         {
           viewMotor &&
           <ViewMotorModal onClick={() => setViewMotor(false)}
-            motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+            // motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' 
+            motorName={selectedMotor.motorName}
+            motorStatus={selectedMotor.status}
+            floorNumber={selectedMotor.floorNumber}
+            factoryName={selectedMotor.factoryName}
+            areaName={selectedMotor.areaName}
+            />
         }
       </div>
   )

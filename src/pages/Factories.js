@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
 import flawless from '../assets/flawless.png'
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { StateContext } from '../contexts/ContextProvider';
+import { useParams } from 'react-router-dom';
 
 
 import { SummaryAlertCard } from '../components'
@@ -21,6 +22,7 @@ const Factories = (props) => {
     const location = useLocation();
     const { areaName } = location.state || {};
 
+    const { areaId } = useParams();
     const [open, setOpen] = useState(false);
     const [total_critical, setTotalCritical] = useState(0);
     const [total_faulty, setTotalFaulty] = useState(0);
@@ -42,38 +44,63 @@ const Factories = (props) => {
     const [sortedFactories, setSortedFactories] = useState([]);
 
     // state to handle loading of the page
-    const { loading, setLoading } = useContext(StateContext);
+    const { loading, setLoading, searchTerm } = useContext(StateContext);
 
 
 
-    async function fetch_data() {
+    // async function fetch_data() {
 
+    //     await axios.get(
+    //         API_URL + "factories_page",
+    //         {
+    //             headers: {
+    //                 'Content-type': 'multipart/form-data',
+    //                 "Access-Control-Allow-Origin": "*",
+    //             }
+    //         }
+    //     ).then((result) => {
+
+    //         setData(result.data)
+
+    //     }).catch(async (error) => {
+    //         setLoading(true)
+    //         alert(error.response.data);
+    //     })
+
+    // }
+
+
+
+
+    async function fetch_data(areaId) {
         await axios.get(
-            API_URL + "factories_page",
-            {
-                headers: {
-                    'Content-type': 'multipart/form-data',
-                    "Access-Control-Allow-Origin": "*",
-                }
-            }
-        ).then((result) => {
-
-            setData(result.data)
-
-        }).catch(async (error) => {
-            setLoading(true)
-            alert(error.response.data);
+          `${API_URL}factories_page`,
+          {
+            headers: {
+              'Content-type': 'multipart/form-data',
+              'Access-Control-Allow-Origin': '*',
+            },
+            params: {
+              areaId, // pass areaId as a query parameter
+            },
+          }
+        )
+        .then((result) => {
+          setData(result.data);
         })
-
-    }
+        .catch((error) => {
+          setLoading(true);
+          alert(error.response.data);
+        });
+      }
 
     useEffect(() => {
 
         // setOpen(true);
         setLoading(false)
-        fetch_data();
+        fetch_data(areaId);
 
-    }, []);
+    }, [areaId]);
 
     useEffect(() => {
         if (data) {
@@ -132,37 +159,30 @@ const handleDeleteFactory = async (factory_id)=>{
 
 }
 
-// ****************Delete Factory Function************************
-// const handleDeleteFactory = async (factory_id) => {
-//     try {
-//       const response = await axios.delete(API_URL + 'delete_factory', {
-//         params: { id: factory_id }
-//       });
+
+// *************************Search Functionality*********************
+const contentRef = useRef(null);
+
+useEffect(() => {
+    if (searchTerm) {
+      const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
+      const content = contentRef.current.innerHTML;
+      const newContent = content.replace(regex, '<span class="highlight">$1</span>');
+      
+      contentRef.current.innerHTML = newContent;
   
-//       if (response.data) {
-//         // Assuming response.data contains the status of the delete operation
-//         if (response.data.success) {
-//           // Update your state or UI to reflect the deletion
-//         //   set_user_data(user_data.map(row => 
-//         //     row.ID === factory_id ? { ...row, permanentlyDeleted: true } : row
-//         //   ));
-//         alert("deleted successfully")
-//           setOpen(false);
-       
-//         } else {
-//           console.log(response.data);
-//           setOpen(false);
-//         }
-//       }
-//     } catch (error) {
-//       console.log(error.response ? error.response.data.error : error.message);
-//     }
-//   };
-  
+      const firstMatch = contentRef.current.querySelector('.highlight');
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [searchTerm]);
 
 
     return (
-        <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'>
+        <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'
+        
+        ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
             <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>

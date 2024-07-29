@@ -45,6 +45,8 @@ const FloorInchargeHomePage = (props) => {
   // state to handle view motor modal
   const [viewMotor, setViewMotor] = useState(false)
 
+  const [selectedMotor, setSelectedMotor] = useState(null);
+
   // state to popup modal on click on calendar
   const [calendarClick, setCalendarClick] = useState(false)
 
@@ -127,7 +129,9 @@ const FloorInchargeHomePage = (props) => {
     {
       name: "View",
       center: true,
-      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
+      cell: row => <button className='bg-blue-500 text-white font-semibold py-2 px-4 rounded' onClick={() => {setViewMotor(true)
+        setSelectedMotor(row);
+      }}>View</button>
     }
   ];
 
@@ -288,7 +292,14 @@ const FloorInchargeHomePage = (props) => {
       {
         viewMotor &&
         <ViewMotorModal onClick={() => setViewMotor(false)}
-          motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+          // motorName='ABC' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' 
+          motorName={selectedMotor.motorName}
+          motorStatus={selectedMotor.status}
+          floorNumber={selectedMotor.floorNumber}
+          factoryName={selectedMotor.factoryName}
+          areaName={selectedMotor.areaName}
+          
+          />
       }
     </div>
   )

@@ -43,6 +43,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor] = useState(false)
+  const [selectedMotor, setSelectedMotor] = useState(null);
 
   const navigate = useNavigate();
 
@@ -146,7 +147,11 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
     {
       name: "View",
       center: true,
-      cell: row => <button className='bg-seconday-color text-white font-semibold py-2 px-4 rounded' onClick={() => setViewMotor(true)}>View</button>
+      cell: row => <button className='bg-seconday-color text-white font-semibold py-2 px-4 rounded'
+       onClick={() =>{ setViewMotor(true);
+        setSelectedMotor(row);
+      }}>
+        View</button>
     }
   ];
 
@@ -361,7 +366,14 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
         {
           viewMotor &&
           <ViewMotorModal onClick={() => setViewMotor(false)}
-            motorName='MM-1' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar' />
+            // motorName='MM-1' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar'
+            motorName={selectedMotor.motorName}
+            motorStatus={selectedMotor.status}
+            floorNumber={selectedMotor.floorNumber}
+            factoryName={selectedMotor.factoryName}
+            areaName={selectedMotor.areaName}
+            
+            />
         }
 
         {

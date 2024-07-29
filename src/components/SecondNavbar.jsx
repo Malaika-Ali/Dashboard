@@ -14,7 +14,7 @@ const SecondNavbar = ({pageName}) => {
 
             <div className="flex justify-between gap-2 items-center  rounded-lg shadow-xl bg-white  px-2 md:my-2 lg:mt-3 py-3">
                 <span className='gray-icon'><FaCalendarAlt /></span>
-                <span className='text-xs gray-icon font-mono'>Last Updated: 9-07-2024  2:00:32 pm</span>
+                <span className='text-xs gray-icon font-mono'>Last Updated: 29-07-2024  2:00:32 pm</span>
             </div>
 
         </div>

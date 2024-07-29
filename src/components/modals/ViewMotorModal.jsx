@@ -77,7 +77,7 @@ function ViewMotorModal( {onClick, motorName, motorStatus,floorNumber, factoryNa
               {/* <span className="block leading-none text-2xl text-gray-800">{motorName}</span> */}
              
             </div>
-            <div className="flex flex-col w-full text-base">
+            <div className="flex flex-col w-full text-base mr-4">
               <div className="flex mx-4">
                 <div className="flex pr-3 text-left font-semibold">Floor Number</div>
                 <div className="flex-1 px-3 text-right">{floorNumber}</div>
