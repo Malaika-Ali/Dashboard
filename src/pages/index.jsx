@@ -13,4 +13,6 @@ export { default as FloorInchargeHomePage } from './FloorInchargeHomePage';
 export { default as Floors } from './Floors';
 export { default as UserProfile } from './UserProfile';
 export { default as Employees } from './Employees';
+export {default as History} from './History'
+export {default as NotificationsPage} from './NotificationsPage'
 

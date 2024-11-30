@@ -14,7 +14,7 @@ import SecondNavbar from '../components/SecondNavbar';
 import { StateContext } from '../contexts/ContextProvider';
 
 
-let API_URL = process.env.REACT_APP_USERS_API;
+const API_URL = process.env.REACT_APP_USERS_API;
 export default function Motors(props) {
   const location = useLocation();
   const { factoryName, FloorNumber } = location.state || {};
@@ -139,7 +139,7 @@ export default function Motors(props) {
  
 
   return (
-    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'
+    <div
     ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}

@@ -12,6 +12,12 @@ module.exports = {
         'main-color': '#1a1a2e',
         'seconday-color': '#5C61F2',
       },
+      gridTemplateRows: {
+        layout: 'auto 1fr auto', 
+      },
+      gridTemplateColumns: {
+        layout: '250px 1fr', 
+      },
     },
   },
   plugins: [],

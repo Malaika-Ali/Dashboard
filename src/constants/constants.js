@@ -8,42 +8,41 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { MdOutlineManageHistory } from "react-icons/md";
 
 export const links = [
-    
-      // title: 'Dashboard',
-      // links: [
         {
           name: 'AdminHomePage',
           icon: <IoHome />,
-          category: 'home'
+          category: 'home',
+          path: ''
         },
         {
           name: 'Areas',
           icon: <FaLocationDot />,
-          category: 'menu'
+          category: 'menu',
+          path: 'areas'
         },
         {
           name: 'Factories',
           icon: <MdFactory />,
-          category: 'menu'
+          category: 'menu',
+          path: 'factories'
         },
-        // {
-        //   name: 'FloorsPage',
-        //   icon: <GiStairs />,
-        // },
         {
           name: 'Motors',
           icon: <IoMdSettings />,
-          category: 'menu'
+          category: 'menu',
+          path: "motors"
         },
         {
           name: 'Employees',
           icon: <FaPeopleGroup />,
-          category: 'menu'
+          category: 'menu',
+          path: 'employees'
         },
         {
           name: 'History',
           icon: <MdOutlineManageHistory />,
-          category: 'menu'
+          category: 'menu',
+          path: 'history'
         },
   ];
 
@@ -54,7 +53,8 @@ export const links = [
         {
           name: 'FactoryInchargeHome',
           icon: <IoHome />,
-          category: 'home'
+          category: 'home',
+          path: ''
         },
         // {
         //   name: 'FactoriesPage',
@@ -63,17 +63,20 @@ export const links = [
         {
           name: 'Floors',
           icon: <GiStairs />,
-          category: 'menu'
+          category: 'menu',
+          path: 'floors'
         },
         {
           name: 'Motors',
           icon: <IoMdSettings />,
-          category: 'menu'
+          category: 'menu',
+          path: 'motors'
         },
         {
           name: 'History',
           icon: <MdOutlineManageHistory />,
-          category: 'menu'
+          category: 'menu',
+          path: 'history'
         },
       // ],
      
@@ -84,52 +87,21 @@ export const links = [
         {
           name: 'FloorInchargeHomePage',
           icon: <IoHome />,
-          category: 'home'
+          category: 'home',
+          path: ''
         },
-        // {
-        //   name: 'FloorsPage',
-        //   icon: <GiStairs />,
-        // },
         {
           name: 'Motors',
           icon: <IoMdSettings />,
-          category: 'menu'
+          category: 'menu',
+          path: 'motors'
         },
         {
           name: 'History',
           icon: <MdOutlineManageHistory />,
-          category: 'menu'
+          category: 'menu',
+          path: 'history'
         },
   ];
 
-  
-  
-
-  export const dummy_api=[
-    {
-      "motorname": "Motor1",
-      "status": "faulty",
-      "details": "High temperature, abnormal noise"
-    },
-    {
-      "motorname": "Motor2",
-      "status": "nonfaulty",
-      "details": "Normal operating conditions"
-    },
-    {
-      "motorname": "Motor3",
-      "status": "mediumcondition",
-      "details": "Slight vibration detected"
-    },
-    {
-      "motorname": "Motor4",
-      "status": "faulty",
-      "details": "Low oil level, overheating"
-    },
-    {
-      "motorname": "Motor5",
-      "status": "nonfaulty",
-      "details": "Stable performance"
-    }
-  ]
   

@@ -257,11 +257,15 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       }
     }
   }, [searchTerm]);
+
+//  md:mx-2 large:mx-28
+
   
 
   return (
-    <div className={`md:mt-8 md:mx-2 lg:mt-[4rem] large:mx-28 large:mt-[5rem]
-      ${!activeMenu ? 'lg:mr-24 lg:ml-24' : 'lg:mx-5'}
+    <div className={`
+ border-red-900 border
+
       `}
     ref={contentRef}>
 
@@ -273,7 +277,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       </div>
     
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className={`flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] lg:gap-8 items-center w-full large:gap-[6em]
+      <div className={`flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] lg:gap-8 items-center w-full large:gap-[6em] border border-pink-400
 
        
       `}>
@@ -319,7 +323,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
 
 
       {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='flex flex-col justify-center items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
+      <div className='flex flex-col justify-center items-start mt-8 md:w-[98%] lg:w-full large:w-full border border-orange-600'>
 
         <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
@@ -339,7 +343,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       </div>
 
       {/* ----------------- Line Chart ------------------------ */}
-      <div className='flex flex-col justify-center items-start mt-8'>
+      <div className='flex flex-col justify-center items-start mt-8 border border-blue-700'>
 
         <h2 className='ml-3 large:ml-6 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
@@ -359,7 +363,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       </div>
 </div>
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-[98%]'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-[98%] border border-green-800'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}

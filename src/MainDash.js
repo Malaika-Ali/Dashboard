@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState}  from 'react'
+import React, { useState}  from 'react'
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useStateContext } from './contexts/ContextProvider';
@@ -9,7 +9,6 @@ import { ContextProvider } from './contexts/ContextProvider';
 
 // Importing components
 import  {Sidebar, Navbar} from './components'; 
-import FullPageCalendar from './components/calendars/FullPageCalendar'
 import History from './pages/History';
 
 

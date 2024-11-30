@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { MdOutlineCancel } from 'react-icons/md'
-import logo from '../assets/logo.png'
-import MotorLogo from '../assets/MotorLogo.png'
 import MotorLogo2 from '../assets/MotorLogo3.png'
 
-import { links, factoryInchargelinks, floorInchargelinks } from '../data/DummyData';
+import { links, factoryInchargelinks, floorInchargelinks } from '../constants/constants';
 import { useStateContext } from '../contexts/ContextProvider'
 
 function getToken() {
@@ -41,12 +39,12 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         // Set activeMenu to true when the component loads or when the user logs in
-        setactiveMenu(true);
+        setactiveMenu(false);
     }, []);
 
-    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-gray-400 text-xs font-medium transition-all duration-300";
+    const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-white text-sm font-medium transition-all duration-300";
 
-    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-xs font-medium transition-all duration-300";
+    const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium hover:text-white transition-all duration-300";
 
     const handleCloseSideBar = () => {
         if (activeMenu && screenSize <= 1024) {
@@ -73,7 +71,7 @@ const Sidebar = (props) => {
       };
 
     return (
-        <div className="bg-main-color text-white h-screen flex flex-col">
+        <div className="bg-main-color text-white h-screen flex flex-col inset-0 z-10 backdrop-blur-sm">
             <div className="flex items-center justify-end p-4">
                 <button
                     type="button"
@@ -89,19 +87,19 @@ const Sidebar = (props) => {
                     alt="Profile"
                     className="rounded-full w-14 h-14"
                 />
-                <span className='text-white mt-2 font-bold plus-jakarta-sans text-xl'>MotorVision</span>
-                <h3 className="mt-14 text-sm font-medium text-seconday-color">{capitalizeFirstLetter(name)}</h3>
+                {/* <span className='text-white mt-2 font-bold plus-jakarta-sans text-xl'>MotorVision</span> */}
+                <h3 className="mt-5 text-sm font-medium text-seconday-color">{capitalizeFirstLetter(name)}</h3>
                 <p className="text-sm text-gray-400">{formatRole(role)}</p>
             </div>
             <div className="mt-3">
                 {/* <h4 className="px-4 mb-2 text-xs text-seconday-color font-semibold uppercase">Dashboards</h4> */}
-                <ul className='px-2 pt-8'>
+                <ul className='px-2 pt-8 flex flex-col gap-1'>
                     {roleLinks.map((link) => (
 
                         <li
                         >
                             <NavLink
-                                to={`/${link.name}`}
+                                to={`/${link.path}`}
                                 key={link.name}
                                 onClick={handleCloseSideBar}
                                 className={({ isActive }) =>

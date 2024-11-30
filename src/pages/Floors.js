@@ -91,7 +91,7 @@ const Floors = (props) => {
 
 
   return (
-    <div className='md:ml-2 md:mr-2 mt-5 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-12 large:mt-[5rem]'>
+    <div>
      
       
          {/* *********Div To Show Page Name**************** */}

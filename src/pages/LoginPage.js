@@ -7,8 +7,7 @@ import axios from 'axios';
 import logo from '../assets/MotorLogo3.png'
 
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// Load the API URL from the environment variable
+
 let API_URL = process.env.REACT_APP_USERS_API;
 
 const LoginPage = (props) => {

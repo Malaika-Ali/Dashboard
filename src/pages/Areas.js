@@ -125,11 +125,11 @@ useEffect(() => {
     }
   }, [searchTerm]);
 
+//   md:ml-2 md:mr-2   lg:mx-5 large:mx-12 
+// mt-5 lg:mt-[4rem] large:mt-[5rem]
 
     return (
-        <div className={`md:ml-2 md:mr-2 mt-5 lg:mt-[4rem] lg:mx-5 large:mx-12 large:mt-[5rem]
-           
-            `}
+        <div
         ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
@@ -213,5 +213,8 @@ useEffect(() => {
 }
 
 export default Areas
+
+
+
 
 
