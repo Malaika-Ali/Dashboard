@@ -23,7 +23,7 @@ const FloorCard = ({ FloorNumber, FactoryName, AreaName, CriticalMotor, FaultyMo
       <div className='flex flex-wrap lg:flex-nowrap justify-center' onClick={onClick}>
         <div className='bg-white dark:bg-secondary-dark-bg
                h-48 rounded-xl w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer'>
-          <div className='flex flex-row justify-center  font-semibold text-xl  mb-2 text-seconday-color'>
+          <div className='flex flex-row justify-center  font-semibold text-xl  mb-2 text-secondary-color'>
             <span>Floor: {FloorNumber}</span>
           </div>
 

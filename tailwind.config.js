@@ -10,7 +10,8 @@ module.exports = {
       },
       colors: {
         'main-color': '#1a1a2e',
-        'seconday-color': '#5C61F2',
+        // 'secondary-color': '#5C61F2',
+        'secondary-color': '#6366F1'
       },
       gridTemplateRows: {
         layout: 'auto 1fr auto', 

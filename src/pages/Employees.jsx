@@ -4,10 +4,11 @@ import Table from '../components/tables/Table'
 
 import { RiAddLine } from "react-icons/ri";
 import AnimatedIconButton from '../components/buttons/AnimatedIconButton';
-import { RiDeleteBinLine } from "react-icons/ri";
 import EditFactoryIncharge from '../components/EditFactoryIncharge';
 import EditFloorIncharge from '../components/EditFloorIncharge';
 import { StateContext } from '../contexts/ContextProvider';
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdEdit } from "react-icons/md";
 
 
 import axios from 'axios';
@@ -53,7 +54,7 @@ function Employees() {
 
     }
 
-  
+
 
     async function deleteData(row) {
         setOpen(true);
@@ -133,11 +134,14 @@ function Employees() {
         {
             name: "Action",
             center: true,
-            cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() => { setEditData(row); setEditFactoryIncharge(true) }
-            }>Edit</button>
-                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => { deleteData(row) }}>Delete</button>
+            cell: row =>
+                <div className='flex flex-row items-center gap-2'>
+                    <button className='flex justify-center items-center border border-1 border-secondary-color text-white font-semibold p-2 rounded-full hover:bg-secondary-color group' onClick={() => { setEditData(row); setEditFactoryIncharge(true) }
+                    }><MdEdit className='text-secondary-color group-hover:text-white transition-all duration-200' /></button>
 
-            </div>
+                    <button className='flex justify-center items-center border border-1 border-red-500 text-white font-semibold p-2 rounded-full hover:bg-red-500 group' onClick={() => { deleteData(row) }}><RiDeleteBin6Line className='text-red-500 group-hover:text-white transition-all duration-200' /></button>
+
+                </div>
         }
     ];
 
@@ -169,11 +173,14 @@ function Employees() {
         {
             name: "Action",
             center: true,
-            cell: row => <div className='flex flex-row items-center gap-2'> <button className='main-color text-white font-semibold py-2 px-4 rounded main-color-hover' onClick={() => { setEditData(row); setEditFloorIncharge(true) }
-            }>Edit</button>
-                <button className='bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-400' onClick={() => { deleteData(row) }}>Delete</button>
+            cell: row =>
+                <div className='flex flex-row items-center gap-2'>
+                    <button className='flex justify-center items-center border border-1 border-secondary-color text-white font-semibold p-2 rounded-full hover:bg-secondary-color group' onClick={() => { setEditData(row); setEditFloorIncharge(true) }
+                    }><MdEdit className='text-secondary-color group-hover:text-white transition-all duration-200' /></button>
 
-            </div>
+                    <button className='flex justify-center items-center border border-1 border-red-500 text-white font-semibold p-2 rounded-full hover:bg-red-500 group' onClick={() => { deleteData(row) }}><RiDeleteBin6Line className='text-red-500 group-hover:text-white transition-all duration-200' /></button>
+
+                </div>
         }
     ];
 
@@ -189,69 +196,59 @@ function Employees() {
     }
 
     return (
-            <div>
+        <div>
 
-                {/* *********Div To Show Page Name**************** */}
-                <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>
-                    <SecondNavbar pageName='Employees' />
+            {/* *********Div To Show Page Name**************** */}
+            <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>
+                <SecondNavbar pageName='Employees' />
+            </div>
+
+
+            {/* Factory Incharge Table section */}
+            <div className='mt-5 mx-auto bg-white  rounded-xl w-[96%]'>
+                <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data}
+                />
+                <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
+
+                    {/* *******Add Factory Incharge Button***** */}
+                    <AnimatedIconButton text='Add Factory Incharge' color='main-color' onClick={() => {
+                        setEditData(); setEditFactoryIncharge(true)
+                    }}>
+                        <RiAddLine size={23} />
+                    </AnimatedIconButton>
                 </div>
+            </div>
 
 
-                {/* Factory Incharge Table section */}
-                <div className='mt-5 mx-auto bg-white  rounded-xl w-[96%]'>
-                    <Table tableSubheading={'Factory Incharges Detail'} column_headings={factoryinchargeHeadings} data={factory_Incharge_data}
-                    />
-                    <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
+            {/* Floor Incharge Table section */}
+            <div className='mt-8 mx-auto bg-white rounded-xl w-[96%]'>
+                <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={floor_Incharge_data} />
+                <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
 
-                        {/* *******Add Factory Incharge Button***** */}
-                        <AnimatedIconButton text='Add Factory Incharge' color='main-color' onClick={() => {
-                            setEditData(); setEditFactoryIncharge(true)
-                        }}>
-                            <RiAddLine size={23} />
-                        </AnimatedIconButton>
-
-                        {/* *******Delete Factory Incharge Button***** */}
-                        {/* <AnimatedIconButton text='Delete Factory Incharge' color='main-color' onClick={() => alert('Delete')}>
-                        <RiDeleteBinLine size={20} />
-                    </AnimatedIconButton> */}
-                    </div>
+                    {/* *******Add Floor Incharge Button***** */}
+                    <AnimatedIconButton text='Add Floor Incharge' color='main-color' onClick={() => { setEditData(); setEditFloorIncharge(true) }}>
+                        <RiAddLine size={23} />
+                    </AnimatedIconButton>
                 </div>
+            </div>
+            {
+                isEditing &&
+                <PopupForm closeForm={() => setIsEditing(false)} />
+            }
+            {
+                editFactoryIncharge &&
+                <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data}
+                    factory_data_update={setFactoryInchargeData}
+                    areas={areas} factories={factories} />
+            }
+            {
+                editFloorIncharge &&
+                <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)} popup_data={edit_data}
+                    floor_data_update={setFloorInchargeData}
+                    areas={areas} />
+            }
 
-
-                {/* Floor Incharge Table section */}
-                <div className='mt-8 mx-auto bg-white rounded-xl w-[96%]'>
-                    <Table tableSubheading={'Floor Incharges Detail'} column_headings={floorinchargeHeadings} data={floor_Incharge_data} />
-                    <div className='bg-white flex flex-row items-center justify-end mb-5 mr-5 gap-2 pb-5'>
-
-                        {/* *******Add Floor Incharge Button***** */}
-                        <AnimatedIconButton text='Add Floor Incharge' color='main-color' onClick={() => { setEditData(); setEditFloorIncharge(true) }}>
-                            <RiAddLine size={23} />
-                        </AnimatedIconButton>
-
-                        {/* *******Delete Floor Incharge Button***** */}
-                        {/* <AnimatedIconButton text='Delete Floor Incharge' color='main-color' onClick={() => alert('Delete')}>
-                        <RiDeleteBinLine size={20} />
-                    </AnimatedIconButton> */}
-                    </div>
-                </div>
-                {
-                    isEditing &&
-                    <PopupForm closeForm={() => setIsEditing(false)} />
-                }
-                {
-                    editFactoryIncharge &&
-                    <EditFactoryIncharge closeForm={() => setEditFactoryIncharge(false)} popup_data={edit_data}
-                        factory_data_update={setFactoryInchargeData}
-                        areas={areas} factories={factories} />
-                }
-                {
-                    editFloorIncharge &&
-                    <EditFloorIncharge closeForm={() => setEditFloorIncharge(false)} popup_data={edit_data}
-                        floor_data_update={setFloorInchargeData} 
-                        areas={areas}/>
-                }
-
-            </div> 
+        </div>
     )
 }
 

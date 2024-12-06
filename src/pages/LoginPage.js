@@ -17,26 +17,13 @@ const LoginPage = (props) => {
   const { handleSubmit, control, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
-    if(props.user_details){
-
-      if(props.user_details.role==='admin'){
-        navigate("/adminHomePage");
-      }
-      else if(props.user_details.role==='factoryIncharge'){
-        navigate("/factoryInchargeHome");
-      }
-      else if(props.user_details.role==='floorIncharge'){
-        navigate("/floorInchargeHomePage");
-      }
-    }
-
     // Clear the form after the page is loaded
     reset({
       email: '',
       password: '',
     });
     // eslint-disable-next-line
-  }, [navigate, props.user_details]); // Empty dependency array ensures this effect runs only once
+  }, [navigate, props.user_details]);
   const [open, setOpen] = useState(false);
   const onSubmit =async (data) => {
     // Handle login logic here
@@ -57,21 +44,23 @@ const LoginPage = (props) => {
       // setOpen(false);
       // alert('Success');
       // navigate('/');
-      // console.log("result", result);
-      let data = Object.fromEntries(Object.entries(result.data).filter(([_, v]) => v != null));
+      console.log("result", result);
+      console.log(result.data)
+      let data = Object.fromEntries(Object.entries(result?.data).filter(([_, v]) => v != null));
       // console.log(data);
       localStorage.setItem('token', JSON.stringify(data));
       props.set_token(data);
       setOpen(false);
-      if(data.role==='admin'){
-        navigate("/adminHomePage");
-      }
-      else if(data.role==='factoryIncharge'){
-        navigate("/factoryInchargeHome");
-      }
-      if(data.role==='floorIncharge'){
-        navigate("/floorInchargeHomePage");
-      }
+      // if(data.role==='admin'){
+      //   navigate("/adminHomePage");
+      // }
+      // else if(data.role==='factoryIncharge'){
+      //   navigate("/factoryInchargeHome");
+      // }
+      // if(data.role==='floorIncharge'){
+      //   navigate("/floorInchargeHomePage");
+      // }
+      navigate("/")
 
     }).catch(async (error) =>  {
       setOpen(false);
@@ -101,7 +90,7 @@ const LoginPage = (props) => {
       </div>
 
       <div className="bg-white p-8 rounded-xl shadow-md w-96 mx-auto">
-        <h2 className="text-2xl text-seconday-color font-bold mb-6 text-center">Welcome Back!</h2>
+        <h2 className="text-2xl text-secondary-color font-bold mb-6 text-center">Welcome Back!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-semibold mb-2">
@@ -123,7 +112,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="email"
-                    className={`w-full p-2 border rounded-md focus:outline-seconday-color ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.email ? 'border-red-500' : ''}`}
                     placeholder="malaika.baig@example.com"
                     autoComplete="email"
                   />
@@ -154,7 +143,7 @@ const LoginPage = (props) => {
                   <input
                     {...field}
                     type="password"
-                    className={`w-full p-2 border rounded-md focus:outline-seconday-color ${errors.password ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.password ? 'border-red-500' : ''}`}
                     placeholder="********"
                     autoComplete="current-password"
                   />
@@ -175,7 +164,7 @@ const LoginPage = (props) => {
           {/* </Link> */}
           <span className='text-center mt-[0.5em]'>
             Not registered on our platform yet?
-            <Link to="/signuppage"><span className='text-blue-500 mx-auto text-center hover:text-blue-400'> Register Now </span></Link>
+            <Link to="/signup"><span className='text-blue-500 mx-auto text-center hover:text-blue-400'> Register Now </span></Link>
           </span>
         </form>
       </div>

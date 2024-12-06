@@ -97,7 +97,9 @@ function LineChart({ data, chartTitle }) {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 768) {
+      if (width < 650) {
+        setScreenSize('v small');}
+      else if (width < 768) {
         setScreenSize('small');
       } else if (width >= 768 && width < 1024) {
         setScreenSize('medium');
@@ -121,10 +123,13 @@ function LineChart({ data, chartTitle }) {
 
   // chart heights for different screen sizes
   let chartHeight;
-  if (screenSize === 'small') {
-    chartHeight = 200;
+  if (screenSize === 'v small') {
+    chartHeight = 290;
+  }
+  else if (screenSize === 'small') {
+    chartHeight = 300;
   } else if (screenSize === 'medium') {
-    chartHeight = 220;
+    chartHeight = 300;
   }
   else if (screenSize === 'very large') {
     chartHeight = 380;
@@ -134,10 +139,13 @@ function LineChart({ data, chartTitle }) {
 
   // chart widths for different screen sizes
   let chartWidth;
-  if (screenSize === 'small') {
-    chartWidth = 200;
+  if (screenSize === 'v small') {
+    chartWidth = 480;
+  }
+  else if (screenSize === 'small') {
+    chartWidth = 510;
   } else if (screenSize === 'medium') {
-    chartWidth = 220;
+    chartWidth = 650;
   }
   else if (screenSize === 'very large') {
     chartWidth = 900;

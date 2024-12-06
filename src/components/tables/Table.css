@@ -5,13 +5,12 @@
 
 /* aligning the toolbar */
 .jmDgLz{
-    justify-content: flex-start !important;
+    justify-content: flex-end !important;
+    align-items: center;
     padding-left: 3rem !important;
 }
 
-.dFZcNM{
-    align-self: flex-end;
-}
+
 
 .cymKXF:disabled{
     fill: var(--secondary-color);

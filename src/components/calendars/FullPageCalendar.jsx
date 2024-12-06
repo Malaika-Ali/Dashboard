@@ -70,7 +70,7 @@ const FullPageCalendar = ({ dateClick }) => {
 
     return (
         <div className="h-screen bg-white">
-            <h1 className="text-xl text-center py-3 bg-seconday-color text-white w-full rounded-t-lg">Motors Performance History</h1>
+            <h1 className="text-xl text-center py-3 bg-secondary-color text-white w-full rounded-t-lg">Motors Performance History</h1>
             <div className="h-full bg-white">
                 <Calendar
                     // localizer={localizer}

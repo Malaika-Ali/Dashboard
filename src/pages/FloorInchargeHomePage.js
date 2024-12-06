@@ -178,7 +178,7 @@ const FloorInchargeHomePage = (props) => {
 
 
   return (
-    <div className={`md:mt-8 md:mx-2 lg:ml-5 lg:mr-5 lg:mt-[4rem] large:mx-16 large:mt-[4rem]`}>
+    <div>
 
        {/* *********Div To Show Page Name**************** */}
        <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3'>

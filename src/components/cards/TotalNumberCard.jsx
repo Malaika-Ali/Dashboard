@@ -2,11 +2,11 @@ import React from 'react'
 
 const TotalNumberCard = ({iconSrc, placeName, quantity, onClick}) => {
   return (
-    <div className='bg-white h-32 rounded-lg w-[15rem] p-5  m-3 shadow-xl border border-slate-200 flex flex-col gap-2 lg:flex-nowrap justify-center items-center cursor-pointer large:w-[20rem] large:h-40 large:gap-4 large:text-xl card-up' onClick={onClick}>
-      <img className='mx-auto' src={iconSrc} alt="overview" />
+    <div className='bg-white h-auto rounded-lg w-auto md:w-[13rem] lg:w-[15rem] p-5  shadow-md border border-slate-200 flex flex-col gap-2 lg:flex-nowrap justify-center items-start cursor-pointer large:w-[20rem] large:h-40 large:gap-4 large:text-xl card-up hover:shadow-xl transition-all duration-500' onClick={onClick}>
+      {/* <img className='mx-auto' src={iconSrc} alt="overview" /> */}
       {/* {iconSrc} */}
-      <span className='text-sm large:text-base text-gray-400'>Total {placeName}</span>
-      <span className='font-bold text-gray-600'>{quantity}</span>
+      <span className='text-sm large:text-base text-gray-500'>Total {placeName}</span>
+      <span className='font-bold ml-0.5 text-gray-600'>{quantity}</span>
     </div>
   )
 }

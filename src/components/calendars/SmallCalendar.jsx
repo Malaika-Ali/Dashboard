@@ -1,7 +1,7 @@
 import Calendar from 'react-calendar';
 import React,{useState} from 'react'
 import 'react-calendar/dist/Calendar.css';
-import './SmallCalendar.css'; // Import custom CSS file
+import './SmallCalendar.css'; 
 
 
 const SmallCalendar = ({onClickDay}) => {

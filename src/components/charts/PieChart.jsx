@@ -49,9 +49,9 @@ const PieChart = ({ title, onClick, series }) => {
   // chart heights for different screen sizes
   let chartHeight;
   if (screenSize === 'small') {
-    chartHeight = 200;
+    chartHeight = 250;
   } else if (screenSize === 'medium') {
-    chartHeight = 220;
+    chartHeight = 240;
   }
   else if (screenSize === 'very large') {
     chartHeight = 285;
@@ -62,9 +62,9 @@ const PieChart = ({ title, onClick, series }) => {
   // chart widths for different screen sizes
   let chartWidth;
   if (screenSize === 'small') {
-    chartWidth = 200;
+    chartWidth = 250;
   } else if (screenSize === 'medium') {
-    chartWidth = 220;
+    chartWidth = 240;
   }
   else if (screenSize === 'very large') {
     chartWidth = 300;
@@ -87,11 +87,11 @@ const PieChart = ({ title, onClick, series }) => {
         series={series}
 
         options={{
-          // title:{text: title},
           title: {
             text: title,
             align: 'center',
             marginLeft: 3,
+            // marginTop:2,
             style: {
               fontSize: '16px',
               // color: '#000000', 
@@ -102,7 +102,7 @@ const PieChart = ({ title, onClick, series }) => {
           },
           noData: { text: "No Records found yet" },
           labels: ['Flawless', 'Faulty', 'Critical'],
-          colors: ['#31C431', '#F9F502', '#DB1915'],
+          colors: ['#22c55e', '#fde047', '#ef4444'],
           legend: {
             position: 'top',
             horizontalAlign: 'center',

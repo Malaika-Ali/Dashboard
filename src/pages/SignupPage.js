@@ -124,7 +124,7 @@ const SignupPage = () => {
 
 
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-xl shadow-md w-[50%] large:w-[40%] mt-8 mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-center text-seconday-color">Sign Up</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-secondary-color">Sign Up</h2>
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-8'>
             <div className="mb-4 ">
@@ -140,7 +140,7 @@ const SignupPage = () => {
                     {...field}
                     type="text"
                     placeholder="First Name"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.firstName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.firstName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -160,7 +160,7 @@ const SignupPage = () => {
                     {...field}
                     type="text"
                     placeholder="Last Name"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.lastName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.lastName ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -186,7 +186,7 @@ const SignupPage = () => {
                     {...field}
                     type="email"
                     placeholder="Email Address"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.email ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -207,7 +207,7 @@ const SignupPage = () => {
                     type="text"
                     placeholder="Employee ID"
                     autoComplete='username'
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.employeeID ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.employeeID ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -228,7 +228,7 @@ const SignupPage = () => {
                     type="password"
                     placeholder="Password"
                     autoComplete="new-password"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.password ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.password ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -261,7 +261,7 @@ const SignupPage = () => {
                     type="password"
                     placeholder="Confirm Password"
                     autoComplete="new-password"
-                    className={`w-full p-2 border rounded-md main-color-focus ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.confirmPassword ? 'border-red-500' : ''}`}
                   />
                 )}
               />
@@ -282,7 +282,7 @@ const SignupPage = () => {
           </div>
 
           <div className='flex justify-center items-center mt-[0.5em]'>Already Have An Account?
-            <Link to="/"><span className='text-blue-500 cursor-pointer hover:text-blue-400'>{`  Login`}</span>
+            <Link to="/login"><span className='text-blue-500 cursor-pointer hover:text-blue-400'>{`  Login`}</span>
             </Link></div>
         </form>
 

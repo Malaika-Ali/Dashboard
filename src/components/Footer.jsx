@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-        <div className="mx-auto py-14 bg-main-color">
+        <div className="mx-auto py-10 bg-main-color">
             <div className="max-w-3xl mx-auto">
                 <a href="https://pagedone.io/" className="flex justify-center ">
                     <svg className="w-40 h-8" viewBox="0 0 164 33" fill="none" xmlns="http://www.w3.org/2000/svg">

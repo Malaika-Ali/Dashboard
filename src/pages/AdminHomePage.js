@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext,useRef } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import factory from '../assets/factory.svg'
 import motors_icon from '../assets/motors.svg'
@@ -39,7 +39,7 @@ export default function AdminHomePage(props) {
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
-const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(StateContext);
+  const { loading, setLoading, searchTerm, setSearchTerm, activeMenu } = useContext(StateContext);
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor] = useState(false)
@@ -59,10 +59,11 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       }
     ).then((result) => {
 
-      setData(result.data)
+      setData(result?.data)
 
     }).catch(async (error) => {
       // setOpen(false);
+      console.log(error)
       setLoading(true)
       // alert(error.response.data);
     })
@@ -127,30 +128,35 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       selector: (row) => {
         // Conditional styling based on the "Status" value
         let color = '';
+        let bg='';
         switch (row.status) {
           case 'Flawless':
-            color = 'text-green-500';
+            color = 'text-green-600';
+            bg= 'bg-green-100';
             break;
           case 'Critical':
-            color = 'text-red-500';
+            color = 'text-red-600';
+            bg= 'bg-red-100';
             break;
           case 'Faulty':
-            color = 'text-yellow-500';
+            color = 'text-yellow-600';
+            bg= 'bg-yellow-100';
             break;
           default:
             color = '';
         }
-        return <span className={color}>{row.status}</span>;
+        return <span className={`${color} ${bg} flex items-center justify-center w-auto h-auto px-1 border rounded-full`}>{row.status}</span>;
       },
       sortable: true
     },
     {
       name: "View",
       center: true,
-      cell: row => <button className='bg-seconday-color text-white font-semibold py-2 px-4 rounded'
-       onClick={() =>{ setViewMotor(true);
-        setSelectedMotor(row);
-      }}>
+      cell: row => <button className='bg-secondary-color text-white font-semibold py-1 px-4 rounded-full'
+        onClick={() => {
+          setViewMotor(true);
+          setSelectedMotor(row);
+        }}>
         View</button>
     }
   ];
@@ -159,8 +165,8 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
     // X-axis labelling
     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     // Y-Axis labelling
-    criticalValues: [10, 15, 8, 12, 18, 45, 16, 25, 32, 46,55,62],
-    faultyValues: [5, 8, 3, 7, 10, 22, 33, 36, 45, 55, 66,68],
+    criticalValues: [10, 15, 8, 12, 18, 45, 16, 25, 32, 46, 55, 62],
+    faultyValues: [5, 8, 3, 7, 10, 22, 33, 36, 45, 55, 66, 68],
     flawlessValues: [66, 60, 55, 48, 30, 24, 22, 20, 11, 9, 5, 0],
   };
 
@@ -224,7 +230,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
 
 
 
-// *************************Search Functionality*********************
+  // *************************Search Functionality*********************
   const contentRef = useRef(null);
 
   // useEffect(() => {
@@ -232,7 +238,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
   //     const regex = new RegExp(`(${searchTerm})`, 'gi');
   //     const content = contentRef.current.innerHTML;
   //     const newContent = content.replace(regex, '<span class="highlight">$1</span>');
-      
+
   //     contentRef.current.innerHTML = newContent;
 
   //     const firstMatch = contentRef.current.querySelector('.highlight');
@@ -248,9 +254,9 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
       const content = contentRef.current.innerHTML;
       const newContent = content.replace(regex, '<span class="highlight">$1</span>');
-      
+
       contentRef.current.innerHTML = newContent;
-  
+
       const firstMatch = contentRef.current.querySelector('.highlight');
       if (firstMatch) {
         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -258,47 +264,43 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
     }
   }, [searchTerm]);
 
-//  md:mx-2 large:mx-28
+  //  md:mx-2 large:mx-28
 
-  
+
 
   return (
-    <div className={`
- border-red-900 border
-
-      `}
-    ref={contentRef}>
+    <div
+      ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className={`px-4 sm:mt-14 sm:mb-2 md:mt-14 lg:mr-3 large:mr-10
-        ${!activeMenu ? 'lg:mr-8' : 'lg:mr-3'}
-      `}>
-      <SecondNavbar pageName='Home'/>
+      <div className={`px-2.5 lg:px-2 my-6`}>
+        <SecondNavbar pageName='Home' />
       </div>
-    
+
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className={`flex flex-row flex-wrap lg:flex-nowrap md:w-full md:gap-[1em] lg:gap-8 items-center w-full large:gap-[6em] border border-pink-400
-
-       
-      `}>
+      <div className={`cards-grid items-center ${activeMenu ? 'lg:justify-between lg:gap-0.5' : 'lg:justify-center lg:gap-10'} gap-1.5
+       sm:gap-y-[0.8em] sm:gap-x-3
+       md:gap-1 md:gap-y-4
+         
+       large:gap-[6em]`}>
         {/* Flex Container */}
-        <div className='flex justify-between rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'>
+        {/* <div className='flex justify-between flex-wrap rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'> */}
 
-          {/* left box */}
-          <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/Areas')} />
-
-
-          {/* middle box */}
-          <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={() => navigate('/Factories')} />
+        {/* left box */}
+        <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/Areas')} />
 
 
-          {/* Right box */}
-          <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={() => navigate('/Motors')} />
+        {/* middle box */}
+        <TotalNumberCard iconSrc={factory} placeName='Factories' quantity={'' + total_factories} onClick={() => navigate('/Factories')} />
 
-        </div>
+
+        {/* Right box */}
+        <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={() => navigate('/Motors')} />
+
+        {/* </div> */}
 
         {/* ********************Alerts Div************************* */}
-        <div className='flex flex-col justify-center items-center gap-2'>
+        <div className='flex flex-col lg:items-center gap-2 lg:ml-2'>
           {/* Critical Alerts card */}
           <Alert bgColor50='bg-red-50' borderColor600='border-red-600' textColor900='text-red-900' iconSrc={criticalalert} iconColor='red' message='Critical Alerts'
             alertsNumber={pie_chart_series[2]} textColor500='text-red-500' borderColor500='border-red-500' onClick={() => setRedPie(true)} />
@@ -322,48 +324,51 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
       </div>
 
 
-      {/* ----- PieChart & Circular Progress Charts ------------ */}
-      <div className='flex flex-col justify-center items-start mt-8 md:w-[98%] lg:w-full large:w-full border border-orange-600'>
 
+      {/* ----- Line Chart ------------ */}
+      <div className='flex flex-col justify-center lg:items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
         <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
-        <div className='-mt-2 rounded-xl flex flex-row items-center md:gap-6 lg:gap-11 md:w-[100%] lg:w-full large:gap-[6em]'>
+        <div className='-mt-2 rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
 
-          <div className='h-60 rounded-xl md:w-[68%] flex flex-row flex-wrap justify-center lg:flex-nowrap lg:justify-between items-center md:gap-4 lg:gap-6 md:ml-2 lg:ml-3 large:w-[68%] large:gap-2'>
-            <CircularProgressChart progress={small_charts_data[0]} barColor='#31C431' motorCategory='Flawless' />
-            <CircularProgressChart progress={small_charts_data[1]} barColor='#F9F502' motorCategory='Faulty' />
-            <CircularProgressChart progress={small_charts_data[2]} barColor='#DB1915' motorCategory='Critical' />
+          <div className='bg-main-color flex justify-center items-center h-80 mt-8 rounded-xl shadow-xl w-[100%]
+  lg:h-[22rem] large:h-[29rem] pt-2 md:pt-4 lg:pt-6  text-center'>
+            <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
           </div>
 
-          <div className='main-color md:h-[14rem] md:w-[28%] lg:h-[17rem] rounded-xl shadow-xl lg:w-[17rem] md:pt-6 lg:pt-9  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]'>
-            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
-          </div>
+
         </div>
 
       </div>
 
-      {/* ----------------- Line Chart ------------------------ */}
-      <div className='flex flex-col justify-center items-start mt-8 border border-blue-700'>
+      {/* ----------------- Pie Chart and Calendar ------------------------ */}
+      <div className='flex flex-col justify-center items-start mt-8'>
 
         <h2 className='ml-3 large:ml-6 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
-      <div className='-mt-2 rounded-xl flex flex-row justify-center items-center md:justify-center lg:gap-7 large:gap-24 md:w-[98%] lg:w-[99%] large:w-[98%]'>
-        <div className='bg-main-color h-80 mt-8 rounded-xl shadow-xl md:w-[90%] lg:w-[70%] lg:h-[22rem] large:w-[71%] large:h-[29rem] pt-9  text-center flex flex-col justify-center items-center flex-wrap lg:flex-nowrap'>
-          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics"/>
-        </div>
+        <div className='-mt-2 rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
 
-        <SmallCalendar onClickDay={()=> setCalendarClick(true)}/>
-        {
-          calendarClick &&
-          <CalendarClickModal 
-          onClick={()=>setCalendarClick(false)}
-           TableHeading='Motors Performance'
-           />
-        }
+
+          <div className='main-color h-auto md:h-[14rem] w-auto md:w-[14rem] lg:h-[17rem] rounded-xl shadow-xl lg:w-[17rem] mt-4 pt-4 md:pt-6 lg:pt-9 flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]
+  lg:ml-5'>
+            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+          </div>
+
+          <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+          {
+            calendarClick &&
+            <CalendarClickModal
+              onClick={() => setCalendarClick(false)}
+              TableHeading='Motors Performance'
+            />
+          }
+        </div>
       </div>
-</div>
+
+
+
       {/* ***************Tabular Motors Summary **************** */}
-      <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-[98%] border border-green-800'>
+      <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-[98%]'>
         <Table tableSubheading={'Overall Motors Report'} column_headings={columns} data={motors_data} />
 
         {/* **************handle view button in table *************/}
@@ -376,8 +381,8 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
             floorNumber={selectedMotor.floorNumber}
             factoryName={selectedMotor.factoryName}
             areaName={selectedMotor.areaName}
-            
-            />
+
+          />
         }
 
         {
@@ -393,7 +398,7 @@ const {loading, setLoading, searchTerm, setSearchTerm, activeMenu}=useContext(St
           greenPie &&
           <MotorsListModal onClick={() => setGreenPie(false)} TableHeading='Flawless Motors' />
         }
-    
+
 
       </div>
     </div>

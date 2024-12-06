@@ -18,8 +18,8 @@
     /* padding-inline: 0.5rem; */
     background: white;
     /* border: none; */
-    border: 1px solid rgb(162, 158, 158);
     font-family: "Poppins", sans-serif;
+    border: none;
 }
 
 .react-calendar__tile--active {
@@ -32,7 +32,6 @@
     color: whitesmoke;
     font-family: "Poppins", sans-serif;
     overflow: hidden;
-    /* width: 100%; */
 }
 
 

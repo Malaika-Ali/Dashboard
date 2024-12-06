@@ -27,7 +27,7 @@ const FactoryCard = ({ FactoryName, AreaName, CriticalMotor, FaultyMotors, Flawl
         >
 
 
-          <span className='flex flex-row justify-center  font-semibold text-xl  mb-4 text-seconday-color' >{FactoryName}</span>
+          <span className='flex flex-row justify-center  font-semibold text-xl  mb-4 text-secondary-color' >{FactoryName}</span>
 
           <div className='flex flex-col justify-center items-center text-sm text-slate-600 mb-3'>
             <span>{`critical motors: ${CriticalMotor}`}</span>

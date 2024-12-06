@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { MdOutlineCancel } from 'react-icons/md'
+import { RxCross2 } from "react-icons/rx";
 import MotorLogo2 from '../assets/MotorLogo3.png'
 
 import { links, factoryInchargelinks, floorInchargelinks } from '../constants/constants';
 import { useStateContext } from '../contexts/ContextProvider'
 
-function getToken() {
-    const tokenString = localStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken
-}
-
 const Sidebar = (props) => {
 
-    const { activeMenu, setactiveMenu, screenSize } = useStateContext();
+    const { activeMenu, setactiveMenu } = useStateContext();
 
 
     function getToken() {
@@ -37,24 +31,16 @@ const Sidebar = (props) => {
     }
 
 
-    useEffect(() => {
-        // Set activeMenu to true when the component loads or when the user logs in
-        setactiveMenu(false);
-    }, []);
+    // useEffect(() => {
+    //     setactiveMenu(false);
+    // }, []);
 
     const activeLink = "flex flex-row items-center px-2 pl-3 py-2 bg-gray-700 rounded-full cursor-pointer text-white text-sm font-medium transition-all duration-300";
 
     const normalLink = "flex flex-row items-center px-2 pl-3 py-2 hover:bg-gray-700 rounded-full cursor-pointer text-gray-400 text-sm font-medium hover:text-white transition-all duration-300";
 
     const handleCloseSideBar = () => {
-        if (activeMenu && screenSize <= 1024) {
-            setactiveMenu(false);
-        }
-    }
-
-
-    if (screenSize <= 1024 && !activeMenu) {
-        return null;
+       setactiveMenu(!activeMenu)
     }
 
     const capitalizeFirstLetter = (string) => {
@@ -71,14 +57,16 @@ const Sidebar = (props) => {
       };
 
     return (
-        <div className="bg-main-color text-white h-screen flex flex-col inset-0 z-10 backdrop-blur-sm">
-            <div className="flex items-center justify-end p-4">
+        <div 
+        className="bg-main-color text-white h-screen flex flex-col inset-0 z-10 backdrop-blur-sm"
+        >
+            <div className="flex items-center justify-end rounded-full p-3 hover:bg-light-gray h-auto w-auto">
                 <button
                     type="button"
                     onClick={handleCloseSideBar}
-                    className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
+                    className="text-xl mt-4 block lg:hidden"
                 >
-                    <MdOutlineCancel />
+                    <RxCross2 />
                 </button>
             </div>
             <div className="flex flex-col items-center p-4">
@@ -88,11 +76,11 @@ const Sidebar = (props) => {
                     className="rounded-full w-14 h-14"
                 />
                 {/* <span className='text-white mt-2 font-bold plus-jakarta-sans text-xl'>MotorVision</span> */}
-                <h3 className="mt-5 text-sm font-medium text-seconday-color">{capitalizeFirstLetter(name)}</h3>
-                <p className="text-sm text-gray-400">{formatRole(role)}</p>
+                <h3 className="mt-5 text-base font-medium text-secondary-color">{capitalizeFirstLetter(name)}</h3>
+                <p className="text-sm text-gray-300">{formatRole(role)}</p>
             </div>
             <div className="mt-3">
-                {/* <h4 className="px-4 mb-2 text-xs text-seconday-color font-semibold uppercase">Dashboards</h4> */}
+                {/* <h4 className="px-4 mb-2 text-xs text-secondary-color font-semibold uppercase">Dashboards</h4> */}
                 <ul className='px-2 pt-8 flex flex-col gap-1'>
                     {roleLinks.map((link) => (
 
@@ -101,7 +89,6 @@ const Sidebar = (props) => {
                             <NavLink
                                 to={`/${link.path}`}
                                 key={link.name}
-                                onClick={handleCloseSideBar}
                                 className={({ isActive }) =>
                                     isActive ? activeLink : normalLink}
                             >

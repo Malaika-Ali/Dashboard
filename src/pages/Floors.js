@@ -95,7 +95,7 @@ const Floors = (props) => {
      
       
          {/* *********Div To Show Page Name**************** */}
-         <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>
+         <div className='px-2 my-6'>
                 <SecondNavbar pageName='Floors' />
             </div>
         {/* Floors Report */}
@@ -107,7 +107,7 @@ const Floors = (props) => {
         </div>
 
         {/* Flex Container */}
-        <div className='flex justify-between mt-4 rounded-xl md:w-[96%] sm:gap-3 md:gap-2 lg:w-[98%] m-3 large:w-[95%] large:gap-[2em]'>
+        <div className='flex flex-col sm:flex-row items-center justify-center md:justify-between mt-4 rounded-xl w-full md:w-[96%] gap-3 md:gap-2 lg:w-[98%] md:m-3 large:w-[95%] large:gap-[2em]'>
           <SummaryAlertCard 
           iconSrc={flawless}
            iconColor="text-green-700"

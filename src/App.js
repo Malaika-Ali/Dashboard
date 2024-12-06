@@ -1,63 +1,51 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, lazy } from 'react'
+import Loadable from './shared/Loadable';
 
 // importing react-router-dom components
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useStateContext } from './contexts/ContextProvider';
-
-// Importing Pages
-import { Factories, LoginPage, SignupPage, Motors, Areas, FactoryInchargeHome, FloorInchargeHomePage, AdminHomePage, Floors, UserProfile, Employees, History, NotificationsPage } from './pages';
-
-// Importing layout
-import AppLayout from './layout/AppLayout';
 
 function App() {
 
-  // const { token, setToken } = useStateContext();
-  // if (!tokenString) {
-  //   <Navigate to="/login" />
-  // }
-
   const [token, setToken] = useState(getToken());
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-
 
   function getToken() {
     const tokenString = localStorage.getItem('token');
-    // if (!tokenString) {
-    //     console.log("No token found")
-    // }
-
     const userToken = JSON.parse(tokenString);
     console.log("here's the token", userToken)
-
     return userToken
   }
-
-  // const userRole = getToken().role
   const userRole = token ? token.role : null;
-  console.log("The role of user is", userRole)
 
   const ProtectedRoute = ({ element, allowedRoles }) => {
     return token && allowedRoles.includes(userRole) ? element : <Navigate replace to="/login" />
   }
 
-
+  // Defining lazy
+  const LoginPage = Loadable(lazy(() => import('./pages/LoginPage')));
+  const SignupPage = Loadable(lazy(() => import('./pages/SignupPage')));
+  const AppLayout = Loadable(lazy(() => import('./layout/AppLayout')));
+  const AdminHomePage = Loadable(lazy(() => import('./pages/AdminHomePage')));
+  const FactoryInchargeHome = Loadable(lazy(() => import('./pages/FactoryInchargeHome')));
+  const FloorInchargeHomePage = Loadable(lazy(() => import('./pages/FloorInchargeHomePage')));
+  const Areas = Loadable(lazy(() => import('./pages/Areas')));
+  const Factories = Loadable(lazy(() => import('./pages/Factories')));
+  const Motors = Loadable(lazy(() => import('./pages/Motors')));
+  const Employees = Loadable(lazy(() => import('./pages/Employees')));
+  const Floors = Loadable(lazy(() => import('./pages/Floors')));
+  const UserProfile = Loadable(lazy(() => import('./pages/UserProfile')));
+  const History = Loadable(lazy(() => import('./pages/History')));
+  const NotificationsPage = Loadable(lazy(() => import('./pages/NotificationsPage')));
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-
-
           <Route path="/signup" element={<SignupPage />} />
-
 
           {/* Protected Routes with Layout */}
           <Route path="/" element={<AppLayout />}>
-          
+
             <Route
               index
               element={

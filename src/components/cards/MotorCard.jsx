@@ -22,7 +22,7 @@ function MotorCard({ motorName, FloorNumber, AreaName, FactoryName, motorStatus 
     <div className='flex flex-wrap lg:flex-nowrap justify-center' >
       <div className='bg-white sm:h-44 sm:w-64
      md:h-48 rounded-xl md:w-72 px-2 m-3 shadow-md flex flex-col justify-center cursor-pointer card'>
-        <div className='flex flex-row justify-center  font-semibold md:text-lg lg:text-xl text-seconday-color mb-2 mt-3'>
+        <div className='flex flex-row justify-center  font-semibold md:text-lg lg:text-xl text-secondary-color mb-2 mt-3'>
           <span> {motorName}</span>
         </div>
 

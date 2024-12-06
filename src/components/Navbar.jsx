@@ -13,7 +13,7 @@ import { SlMenu } from "react-icons/sl";
 // Navigation Button Component
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <button type='button' onClick={customFunc} style={{ color, borderRadius: '50%' }}
-    className='relative md:text-lg lg:text-xl rounded-full p-3 navbutton-hover'>
+    className='relative md:text-lg lg:text-xl rounded-full p-3 navbutton-hover transition-all duration-300 text-gray-400'>
     <span style={{ background: dotColor }} className='absolute inline-flex rounded-full md:h-1 md:w-1 lg:h-2 lg:w-2 right-2 top-2 font-bold' />{icon}
   </button>
 );
@@ -118,11 +118,8 @@ export default function Navbar(props) {
 
 
   return (
-    <div className={`fixed top-0 flex justify-between md:h-[9vh] lg:h-[10vh] large:h-[8vh] sm:px-3 md:px-6 
-      z-10 gray-icon bg-white
-    ${!activeMenu ? 'lg:w-[100%]' : 'lg:w-[calc(100%-250px)]'}
-
-       border-b border-gray-200 shadow-sm`}>
+    <div className={`
+     flex justify-between items-center sm:px-3 md:px-6 lg:px-8 z-10 gray-icon bg-white shadow-md  py-1.5`}>
       {loading && <Loader />}
 
       {/* Menu Button */}
@@ -134,17 +131,17 @@ export default function Navbar(props) {
       <div className="flex mx-auto">
         <div className="relative">
           {/* Search Bar */}
-          <div className="relative sm:w-44 md:w-48 lg:w-56 sm:mt-2 md:mt-1 lg:mt-2">
+          <div className="relative w-44 md:w-48 lg:w-56  group">
             <input
               type="text"
-              placeholder="Search..."
-              className="bg-white sm:text-sm md:text-base lg:text-sm text-gray-700 border-2 border-gray-200 rounded-full sm:pl-4 md:pl-6 lg:pl-5 sm:p-1 lg:p-2 w-full transition-all duration-300 focus:outline-none main-color-focus"
+              placeholder="Search"
+              className="bg-gray-100 text-sm text-gray-700 rounded-full pl-4 lg:pl-5 p-1.5 lg:p-2 w-full transition-all duration-300 focus:outline focus:outline-secondary-color focus:bg-white"
               value={searchinput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
             />
             {/* Search Icon */}
-            <div className="absolute right-0 top-0 sm:mt-2 lg:mt-3 mr-4 text-gray-500">
+            <div className="absolute right-0 top-0 mt-1.5  sm:mt-1.5 md:mt-2  mr-4 text-gray-500 group-focus-within:text-secondary-color transition-all duration-300">
               <FaSearch />
             </div>
           </div>
@@ -152,7 +149,7 @@ export default function Navbar(props) {
       </div>
 
       {/* Notifications button */}
-      <div className='flex flex-row justify-between items-center' ref={divRef}>
+      <div className='flex flex-row justify-center items-center' ref={divRef}>
         <NavButton
           title='Notifications'
           dotColor="#5C61F2"
@@ -161,19 +158,15 @@ export default function Navbar(props) {
         />
         {notificationsClicked && <NotificationsDropDown ref={notificationsRef} />}
 
-        {/* Vertical line */}
-        <div className="h-6 border-[0.8px] border-gray-400 sm:mx-1 md:mx-4 my-3"></div>
 
         {/* Profile section */}
-        <div className="flex flex-row items-center justify-between gap-3 navbutton-hover w-full h-full cursor-pointer " onClick={() => setopen(!open)} ref={ProfiledivRef}>
-          <div className='flex justify-center items-center gray-icon h-full w-full font-bold'>
+        <div className="flex flex-row items-center justify-between gap-3  w-full h-full cursor-pointer " onClick={() => setopen(!open)} ref={ProfiledivRef}>
+          <div className='flex justify-center items-center text-gray-400 h-full w-full font-bold rounded-full p-2 navbutton-hover transition-all duration-300'>
             <IoPersonCircle className='sm:text-2xl md:text-3xl' />
           </div>
-          <div className="flex flex-col">
-            <span className='sm:text-xs md:text-sm text-black'>{capitalizeFirstLetter(name)}</span>
-            <span className='text-xs text-gray-400'>{capitalizeFirstLetter(role)}</span>
-          </div>
         </div>
+
+
         {open && (
           <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg absolute right-4 top-14 text-gray-500' ref={ProfileRef}>
             <ul>

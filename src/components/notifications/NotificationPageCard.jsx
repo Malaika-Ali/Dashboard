@@ -19,7 +19,7 @@ const NotificationPageCard = ({ type, message, date, time, onClick }) => {
 
             <div className='flex flex-row justify-between  items-center'>
             <span className='text-sm text-gray-500 py-1'>{message}</span>
-            {/* <div className='absolute right-20 rounded-full bg-seconday-color w-2 h-2 py-1'>
+            {/* <div className='absolute right-20 rounded-full bg-secondary-color w-2 h-2 py-1'>
             </div> */}
             </div>
 
