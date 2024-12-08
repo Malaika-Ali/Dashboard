@@ -83,24 +83,17 @@ function AppLayout() {
 
       {/* Main Content */}
       <main
-        className={`row-start-2 row-end-3 ${
-          activeMenu
-            ? 'col-start-1 lg:col-start-2 px-6'
-            : 'col-start-1 px-4 md:px-2 lg:px-8'
+        className={`row-start-2 row-end-3 
+          md:px-6
+          ${activeMenu
+            ? 'col-start-1 lg:col-start-2 lg:px-8'
+            : 'col-start-1 px-4 md:px-2 lg:px-[8rem]'
         }  
-               col-end-3 w-[100%]`}
+               col-end-3 w-[100%] mb-4`}
       >
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer
-        className={`row-start-3 row-end-4 
-               ${activeMenu ? 'col-start-1 lg:col-start-2' : 'col-start-1'}  
-              col-end-3 border text-center  mt-4 lg:mt-8 mx-0`}
-      >
-        <Footer />
-      </footer>
     </div>
   );
 }

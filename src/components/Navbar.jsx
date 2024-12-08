@@ -13,7 +13,7 @@ import { SlMenu } from "react-icons/sl";
 // Navigation Button Component
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <button type='button' onClick={customFunc} style={{ color, borderRadius: '50%' }}
-    className='relative md:text-lg lg:text-xl rounded-full p-3 navbutton-hover transition-all duration-300 text-gray-400'>
+    className='relative text-lg md:text-lg lg:text-xl rounded-full p-3 navbutton-hover transition-all duration-300 text-gray-400'>
     <span style={{ background: dotColor }} className='absolute inline-flex rounded-full md:h-1 md:w-1 lg:h-2 lg:w-2 right-2 top-2 font-bold' />{icon}
   </button>
 );
@@ -162,7 +162,7 @@ export default function Navbar(props) {
         {/* Profile section */}
         <div className="flex flex-row items-center justify-between gap-3  w-full h-full cursor-pointer " onClick={() => setopen(!open)} ref={ProfiledivRef}>
           <div className='flex justify-center items-center text-gray-400 h-full w-full font-bold rounded-full p-2 navbutton-hover transition-all duration-300'>
-            <IoPersonCircle className='sm:text-2xl md:text-3xl' />
+            <IoPersonCircle className='text-xl sm:text-2xl md:text-3xl' />
           </div>
         </div>
 

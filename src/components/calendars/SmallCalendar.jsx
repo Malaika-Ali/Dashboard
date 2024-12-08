@@ -14,7 +14,7 @@ setDate(date)
 
   return (
     
-    <Calendar onChange={onChange} value={date} onClickDay={onClickDay} className='rounded-b-xl shadow-xl'/>
+    <Calendar onChange={onChange} value={date} onClickDay={onClickDay} className='rounded-b-xl shadow-xl '/>
     
   )
 }

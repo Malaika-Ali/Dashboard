@@ -95,7 +95,7 @@ const Floors = (props) => {
      
       
          {/* *********Div To Show Page Name**************** */}
-         <div className='px-2 my-6'>
+         <div className='px-3 lg:px-3.5 my-6'>
                 <SecondNavbar pageName='Floors' />
             </div>
         {/* Floors Report */}

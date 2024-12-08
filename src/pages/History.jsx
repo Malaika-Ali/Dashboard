@@ -10,7 +10,7 @@ const History = () => {
   return (
     <div>
       {/* *********Div To Show Page Name**************** */}
-      <div className='px-4 my-2 mt-10 mb-5'>
+      <div className='px-2 lg:px-3.5 my-6'>
         <SecondNavbar pageName='History' />
       </div>
 

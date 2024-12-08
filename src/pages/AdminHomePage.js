@@ -128,19 +128,19 @@ export default function AdminHomePage(props) {
       selector: (row) => {
         // Conditional styling based on the "Status" value
         let color = '';
-        let bg='';
+        let bg = '';
         switch (row.status) {
           case 'Flawless':
             color = 'text-green-600';
-            bg= 'bg-green-100';
+            bg = 'bg-green-100';
             break;
           case 'Critical':
             color = 'text-red-600';
-            bg= 'bg-red-100';
+            bg = 'bg-red-100';
             break;
           case 'Faulty':
             color = 'text-yellow-600';
-            bg= 'bg-yellow-100';
+            bg = 'bg-yellow-100';
             break;
           default:
             color = '';
@@ -273,15 +273,15 @@ export default function AdminHomePage(props) {
       ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className={`px-2.5 lg:px-2 my-6`}>
+      <div className={`px-2.5 md:px-4 lg:px-2 my-6`}>
         <SecondNavbar pageName='Home' />
       </div>
 
       {/* *********Numbers of Areas, factories, motors **************** */}
-      <div className={`cards-grid items-center ${activeMenu ? 'lg:justify-between lg:gap-0.5' : 'lg:justify-center lg:gap-10'} gap-1.5
+      <div className={`cards-grid items-center ${activeMenu ? ' lg:gap-0.5' : ' lg:gap-10'} gap-1.5
        sm:gap-y-[0.8em] sm:gap-x-3
-       md:gap-1 md:gap-y-4
-         
+       md:gap-0.5 md:gap-y-4
+         lg:gap-1 lg:gap-y-4
        large:gap-[6em]`}>
         {/* Flex Container */}
         {/* <div className='flex justify-between flex-wrap rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'> */}
@@ -326,35 +326,40 @@ export default function AdminHomePage(props) {
 
 
       {/* ----- Line Chart ------------ */}
-      <div className='flex flex-col justify-center lg:items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
+      {/* <div className='flex flex-col justify-center lg:items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
         <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
 
-        <div className='-mt-2 rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
+        <div className=' rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
 
           <div className='bg-main-color flex justify-center items-center h-80 mt-8 rounded-xl shadow-xl w-[100%]
-  lg:h-[22rem] large:h-[29rem] pt-2 md:pt-4 lg:pt-6  text-center'>
+  lg:h-[50%] large:h-[29rem] pt-2 md:pt-4 lg:py-5  text-center'>
             <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
           </div>
 
 
         </div>
 
-      </div>
+      </div> */}
 
       {/* ----------------- Pie Chart and Calendar ------------------------ */}
-      <div className='flex flex-col justify-center items-start mt-8'>
+      {/* <div className='flex flex-col justify-center items-start mt-8'>
 
         <h2 className='ml-3 large:ml-6 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
 
         <div className='-mt-2 rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
 
 
-          <div className='main-color h-auto md:h-[14rem] w-auto md:w-[14rem] lg:h-[17rem] rounded-xl shadow-xl lg:w-[17rem] mt-4 pt-4 md:pt-6 lg:pt-9 flex flex-col flex-wrap lg:flex-nowrap justify-center items-center large:h-[18rem] large:w-[19rem]
-  lg:ml-5'>
+          <div className='main-color h-auto 
+          md:h-[14rem] w-auto md:w-[14rem]  rounded-xl border border-1 border-gray-200  mt-4 pt-4 md:pt-6  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
+          lg:h-[100%] lg:py-10 lg:w-[100%]
+          large:h-[18rem] large:w-[19rem]
+  '>
             <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
           </div>
 
-          <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+          <div className='flex justify-center items-center w-[100%] h-[100%] border-1 border-gray-300 rounded-lg bg-white'>
+            <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+          </div>
           {
             calendarClick &&
             <CalendarClickModal
@@ -363,6 +368,45 @@ export default function AdminHomePage(props) {
             />
           }
         </div>
+      </div> */}
+
+
+
+      <div className='charts-grid my-8 w-[100%]'>
+        <div className='bg-main-color flex justify-center items-center rounded-xl shadow-xl 
+        col-start-1 col-end-2
+        text-center'>
+          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
+        </div>
+
+        <div className='flex-column lg:col-start-2 lg:col-end-3'>
+        {/* lg:h-[17rem] lg:w-[17rem] */}
+        <div className='main-color h-auto w-auto rounded-xl border border-1 border-gray-200  pt-4
+        flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
+          md:h-[100%]  md:w-[45%]  md:pt-6  
+         lg:w-auto lg:h-auto
+          
+  '>
+        <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
+        </div>
+        {/* lg:h-[20rem] lg:w-[17rem] */}
+        <div className='flex my-2
+        md:h-[100%] md:w-[42%]
+        lg:w-auto lg:h-auto
+        '>
+        <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+          </div>
+      
+          {
+            calendarClick &&
+            <CalendarClickModal
+              onClick={() => setCalendarClick(false)}
+              TableHeading='Motors Performance'
+            />
+          }
+
+        </div>
+
       </div>
 
 

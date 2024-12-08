@@ -14,7 +14,7 @@ module.exports = {
         'secondary-color': '#6366F1'
       },
       gridTemplateRows: {
-        layout: 'auto 1fr auto', 
+        layout: 'auto 1fr', 
       },
       gridTemplateColumns: {
         layout: '250px 1fr', 

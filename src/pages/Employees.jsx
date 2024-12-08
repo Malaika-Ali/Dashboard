@@ -199,7 +199,7 @@ function Employees() {
         <div>
 
             {/* *********Div To Show Page Name**************** */}
-            <div className='px-4 sm:mt-14 sm:mb-2 md:mt-14 large:mr-10'>
+            <div className='px-2 lg:px-3.5 my-6'>
                 <SecondNavbar pageName='Employees' />
             </div>
 

@@ -71,7 +71,7 @@ const NotificationsDropDown = forwardRef((props, ref) => {
   const navigate=useNavigate();
 
   return (
-    <div className="absolute right-24 top-12 bg-white w-96 rounded-xl shadow-lg max-w-md navbar-bg" ref={ref}>
+    <div className="absolute right-24 top-12 bg-white w-96 rounded-xl shadow-lg max-w-md navbar-bg z-10" ref={ref}>
       <div className="bg-blue-600 p-4 px-6 py-6 rounded-t-xl flex items-center justify-between w-full">
             <h3 className="text-white font-semibold">Notifications</h3>
             <IoNotifications className="text-white text-xl" />

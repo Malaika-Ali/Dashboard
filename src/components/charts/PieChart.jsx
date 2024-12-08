@@ -1,22 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import './piechart.css'
 
 const PieChart = ({ title, onClick, series }) => {
-
-  // useEffect(() => {
-  //   const handleDataPointSelection = (event, chartContext, config) => {
-  //     if (onClick) {
-  //       onClick(config.seriesIndex);
-  //     }
-  //   };
-
-  //   document.addEventListener('dataPointSelection', handleDataPointSelection);
-
-  //   return () => {
-  //     document.removeEventListener('dataPointSelection', handleDataPointSelection);
-  //   };
-  // }, [onClick]);
-
 
   // logic for handling responsiveness of chart
   const [screenSize, setScreenSize] = useState('');
@@ -56,7 +42,9 @@ const PieChart = ({ title, onClick, series }) => {
   else if (screenSize === 'very large') {
     chartHeight = 285;
   } else {
-    chartHeight = 270;
+    // chartHeight = 380;
+    chartHeight = 268;
+
   }
 
   // chart widths for different screen sizes
@@ -69,7 +57,8 @@ const PieChart = ({ title, onClick, series }) => {
   else if (screenSize === 'very large') {
     chartWidth = 300;
   } else {
-    chartWidth = 290;
+    // chartWidth = 380;
+    chartWidth = 268;
   }
 
 
@@ -77,11 +66,8 @@ const PieChart = ({ title, onClick, series }) => {
     <>
       <ReactApexChart
         type="pie"
-        // width={250}
-        // height={250}
         height={chartHeight}
         width={chartWidth}
-
 
         // This shows the quantity in piechart. We give it a number and it converts that number into % itself
         series={series}
@@ -91,25 +77,28 @@ const PieChart = ({ title, onClick, series }) => {
             text: title,
             align: 'center',
             marginLeft: 3,
-            // marginTop:2,
             style: {
-              fontSize: '16px',
+              fontSize: '18px',
               // color: '#000000', 
               fontFamily: 'poppins',
-              color: '#5C61F2',
-              fontWeight: '450'
+              color: 'white',
+              fontWeight: '600'
             }
           },
           noData: { text: "No Records found yet" },
           labels: ['Flawless', 'Faulty', 'Critical'],
           colors: ['#22c55e', '#fde047', '#ef4444'],
           legend: {
+            // position: 'right',
             position: 'top',
+
             horizontalAlign: 'center',
+            marginLeft:'50px',
             offsetY: 0,
             offsetX: 0,
             labels: {
-              colors: ['#31C431', '#F9F502', '#DB1915'], // Set legend text color to white
+              colors: ['#31C431', '#F9F502', '#DB1915'],
+              fontSize: '20px',
             },
           },
           chart: {

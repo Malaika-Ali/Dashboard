@@ -185,7 +185,7 @@ useEffect(() => {
         ref={contentRef}>
 
             {/* *********Div To Show Page Name**************** */}
-            <div className='px-2 my-6'>
+            <div className='px-2 lg:px-3.5 my-6'>
                 <SecondNavbar pageName='Factories' />
             </div>
 
