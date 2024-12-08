@@ -14,7 +14,7 @@ import SecondNavbar from '../components/SecondNavbar';
 import { StateContext } from '../contexts/ContextProvider';
 
 
-const API_URL = process.env.REACT_APP_USERS_API;
+const API_URL = process.env.REACT_APP_API_URL;
 export default function Motors(props) {
   const location = useLocation();
   const { factoryName, FloorNumber } = location.state || {};

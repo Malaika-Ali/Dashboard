@@ -21,6 +21,11 @@ function App() {
     return token && allowedRoles.includes(userRole) ? element : <Navigate replace to="/login" />
   }
 
+  const set_token = (newToken) => {
+    setToken(newToken); 
+  };
+
+
   // Defining lazy
   const LoginPage = Loadable(lazy(() => import('./pages/LoginPage')));
   const SignupPage = Loadable(lazy(() => import('./pages/SignupPage')));
@@ -40,8 +45,21 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login"  element={<LoginPage set_token={set_token} />} />
           <Route path="/signup" element={<SignupPage />} />
+
+          {/* Redirect unauthenticated users to login */}
+          <Route
+            path="/"
+            element={
+              token ? (
+                <Navigate replace to="/" />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
+
 
           {/* Protected Routes with Layout */}
           <Route path="/" element={<AppLayout />}>

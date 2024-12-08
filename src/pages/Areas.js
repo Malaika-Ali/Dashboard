@@ -14,7 +14,7 @@ import SecondNavbar from '../components/SecondNavbar';
 
 
 // Load the API URL from the environment variable
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 const Areas = (props) => {
 
     const [open, setOpen] = useState(false);

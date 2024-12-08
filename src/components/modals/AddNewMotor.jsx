@@ -5,7 +5,7 @@ import { StateContext } from '../../contexts/ContextProvider';
 
 
 
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 const AddNewMotor = ({ areas_list,  onClose, name }) => {
   const [open, setOpen] = useState(false);

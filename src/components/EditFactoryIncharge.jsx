@@ -7,7 +7,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 // Load the API URL from the environment variable
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 function EditFactoryIncharge({ closeForm, popup_data, factory_data_update, areas }) {
 

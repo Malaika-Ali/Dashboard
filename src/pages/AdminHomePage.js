@@ -24,7 +24,7 @@ import { SmallCalendar } from '../components/calendars';
 import SecondNavbar from '../components/SecondNavbar';
 
 // Load the API URL from the environment variable
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 export default function AdminHomePage(props) {
 
@@ -384,7 +384,7 @@ export default function AdminHomePage(props) {
         <div className='main-color h-auto w-auto rounded-xl border border-1 border-gray-200  pt-4
         flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
           md:h-[100%]  md:w-[45%]  md:pt-6  
-         lg:w-auto lg:h-auto
+         lg:w-full lg:h-auto
           
   '>
         <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
@@ -392,7 +392,7 @@ export default function AdminHomePage(props) {
         {/* lg:h-[20rem] lg:w-[17rem] */}
         <div className='flex my-2
         md:h-[100%] md:w-[42%]
-        lg:w-auto lg:h-auto
+        lg:w-full lg:h-auto
         '>
         <SmallCalendar onClickDay={() => setCalendarClick(true)} />
           </div>

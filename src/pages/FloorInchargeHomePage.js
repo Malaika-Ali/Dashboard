@@ -27,7 +27,7 @@ import { StateContext } from '../contexts/ContextProvider';
 
 // let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // Load the API URL from the environment variable
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 const FloorInchargeHomePage = (props) => {
   const navigate = useNavigate();

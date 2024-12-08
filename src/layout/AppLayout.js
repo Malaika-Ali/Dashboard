@@ -58,7 +58,7 @@ function AppLayout() {
   };
 
   return (
-    <div className="grid grid-rows-layout grid-cols-2 lg:grid-cols-layout min-h-screen w-[100%]">
+    <div className="grid grid-rows-layout grid-cols-2 lg:grid-cols-layout h-full min-h-screen w-[100%]">
       {/* Navbar */}
       <motion.header
         className={`row-start-1 row-end-2
@@ -72,7 +72,7 @@ function AppLayout() {
 
       {/* Sidebar */}
       <motion.aside
-        className="row-span-full h-screen col-start-1 col-end-2 sticky top-0 inset-0 z-10 backdrop-blur-sm"
+        className="row-start-1 row-end-3 col-start-1 col-end-2 min-h-screen h-screen sticky top-0 inset-0 z-10 backdrop-blur-sm md:overflow-y-auto lg:overflow-hidden"
         variants={sidebarVariants}
         initial="hidden"
         animate={activeMenu ? 'visible' : 'hidden'}

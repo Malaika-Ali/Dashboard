@@ -37,7 +37,7 @@ const PieChart = ({ title, onClick, series }) => {
   if (screenSize === 'small') {
     chartHeight = 250;
   } else if (screenSize === 'medium') {
-    chartHeight = 240;
+    chartHeight = 280;
   }
   else if (screenSize === 'very large') {
     chartHeight = 285;
@@ -52,7 +52,7 @@ const PieChart = ({ title, onClick, series }) => {
   if (screenSize === 'small') {
     chartWidth = 250;
   } else if (screenSize === 'medium') {
-    chartWidth = 240;
+    chartWidth = 280;
   }
   else if (screenSize === 'very large') {
     chartWidth = 300;

@@ -58,7 +58,8 @@ const Sidebar = (props) => {
 
     return (
         <div 
-        className="bg-main-color text-white h-screen flex flex-col inset-0 z-10 backdrop-blur-sm"
+        className="bg-main-color text-white flex flex-col h-full
+        inset-0 z-10 backdrop-blur-sm fixed top-0 left-0"
         >
             <div className="flex items-center justify-end rounded-full p-3 hover:bg-light-gray h-auto w-auto">
                 <button

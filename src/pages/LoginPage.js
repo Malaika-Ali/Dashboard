@@ -8,9 +8,9 @@ import logo from '../assets/MotorLogo3.png'
 
 
 
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
-const LoginPage = (props) => {
+const LoginPage = ({set_token}) => {
   const navigate = useNavigate();
   
 
@@ -23,56 +23,104 @@ const LoginPage = (props) => {
       password: '',
     });
     // eslint-disable-next-line
-  }, [navigate, props.user_details]);
+  }, [navigate]);
   const [open, setOpen] = useState(false);
-  const onSubmit =async (data) => {
-    // Handle login logic here
-    // console.log(data);
-    setOpen(true);
-    const dat = { 'email': data.email, 'password': data.password};
+  // const onSubmit =async (data) => {
+  //   // Handle login logic here
+  //   // console.log(data);
+  //   setOpen(true);
+  //   const dat = { 'email': data.email, 'password': data.password};
 
-    await axios.post(
-      API_URL + "signin_user",
-      dat,
-      {
+  //   await axios.post(
+  //     API_URL + "signin_user",
+  //     dat,
+  //     {
+  //       headers: {
+  //         'Content-type': 'multipart/form-data',
+  //         "Access-Control-Allow-Origin": "*",
+  //       }
+  //     }
+  //   ).then((result) => {
+  //     // setOpen(false);
+  //     // alert('Success');
+  //     // navigate('/');
+  //     console.log("result", result);
+  //     console.log(result.data)
+  //     let data = Object.fromEntries(Object.entries(result?.data).filter(([_, v]) => v != null));
+  //     // console.log(data);
+  //     localStorage.setItem('token', JSON.stringify(data));
+  //     props.set_token(data);
+  //     setOpen(false);
+  //     // if(data.role==='admin'){
+  //     //   navigate("/adminHomePage");
+  //     // }
+  //     // else if(data.role==='factoryIncharge'){
+  //     //   navigate("/factoryInchargeHome");
+  //     // }
+  //     // if(data.role==='floorIncharge'){
+  //     //   navigate("/floorInchargeHomePage");
+  //     // }
+  //     navigate("/")
+
+  //   }).catch(async (error) =>  {
+  //     setOpen(false);
+  //     alert(error.response.data);
+  //     // Reset the form fields
+  //     await reset({
+  //       email: '',
+  //       password: '',
+  //     });
+      
+  //   })
+  // };
+
+
+
+
+
+
+  const onSubmit = async (data) => {
+    setOpen(true);
+    const dat = { email: data.email, password: data.password };
+  
+    try {
+      const result = await axios.post(`${API_URL}signin_user`, dat, {
         headers: {
           'Content-type': 'multipart/form-data',
           "Access-Control-Allow-Origin": "*",
-        }
-      }
-    ).then((result) => {
-      // setOpen(false);
-      // alert('Success');
-      // navigate('/');
-      console.log("result", result);
-      console.log(result.data)
-      let data = Object.fromEntries(Object.entries(result?.data).filter(([_, v]) => v != null));
-      // console.log(data);
-      localStorage.setItem('token', JSON.stringify(data));
-      props.set_token(data);
-      setOpen(false);
-      // if(data.role==='admin'){
-      //   navigate("/adminHomePage");
-      // }
-      // else if(data.role==='factoryIncharge'){
-      //   navigate("/factoryInchargeHome");
-      // }
-      // if(data.role==='floorIncharge'){
-      //   navigate("/floorInchargeHomePage");
-      // }
-      navigate("/")
-
-    }).catch(async (error) =>  {
-      setOpen(false);
-      alert(error.response.data);
-      // Reset the form fields
-      await reset({
-        email: '',
-        password: '',
+        },
       });
-      
-    })
+  
+      console.log("API Response:", result);
+      if (result?.data && result?.data.role) {
+        const cleanedData = Object.fromEntries(
+          Object.entries(result.data).filter(([_, v]) => v != null)
+        );
+  
+        localStorage.setItem('token', JSON.stringify(cleanedData));
+        set_token(cleanedData);
+        navigate("/");
+        setOpen(false);
+  
+        // if (cleanedData.role === 'admin') {
+        //   navigate("/");
+        // } else if (cleanedData.role === 'factoryIncharge') {
+        //   navigate("/");
+        // } else if (cleanedData.role === 'floorIncharge') {
+        //   navigate("/");
+        // } else {
+        //   navigate("/");
+        // }
+      } else {
+        throw new Error("Invalid API response or missing role.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setOpen(false);
+    }
   };
+  
+  
 
   return (
     <>
@@ -85,7 +133,7 @@ const LoginPage = (props) => {
     <div className="min-h-screen flex items-center justify-center  bg-main-color">
 
       {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4 lg:w-14 large:w-44'>
+      <div className='w-14 absolute top-4 left-4 large:w-18'>
       <img src={logo} alt="company logo" />
       </div>
 

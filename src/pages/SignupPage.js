@@ -12,7 +12,7 @@ import logo from '../assets/MotorLogo3.png'
 
 // let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
 // Load the API URL from the environment variable
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 
 const SignupPage = () => {
@@ -118,7 +118,7 @@ const SignupPage = () => {
       <div className="min-h-screen flex items-center justify-center bg-main-color">
 
 {/* **********************logo************************** */}
-      <div className='w-24 absolute top-4 left-4 lg:w-14 large:w-44'>
+      <div className='w-14 absolute top-4 left-4 large:w-18'>
       <img src={logo} alt="company logo" />
       </div>
 

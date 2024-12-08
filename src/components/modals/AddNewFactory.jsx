@@ -5,7 +5,7 @@ import axios from 'axios';
 import { StateContext } from '../../contexts/ContextProvider';
 
 
-let API_URL = process.env.REACT_APP_USERS_API;
+let API_URL = process.env.REACT_APP_API_URL;
 
 const AddNewFactory = ({ onClose, name, setFactory, setFactoriesList, areas_list, sorted_list  }) => {
 
