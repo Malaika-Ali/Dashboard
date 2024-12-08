@@ -50,15 +50,15 @@ function App() {
 
           {/* Redirect unauthenticated users to login */}
           <Route
-            path="/"
-            element={
-              token ? (
-                <Navigate replace to="/" />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
+    path="/"
+    element={
+      token ? (
+        <AppLayout />
+      ) : (
+        <Navigate replace to="/login" />
+      )
+    }
+  />
 
 
           {/* Protected Routes with Layout */}
@@ -75,7 +75,7 @@ function App() {
                           <Navigate replace to="/login" />
                   }
                   allowedRoles={['admin', 'factoryIncharge', 'floorIncharge']}
-                />
+                />    
               }
             />
             <Route path='/areas' element={<ProtectedRoute element={<Areas user_details={token} />} allowedRoles={['admin']} />} />
