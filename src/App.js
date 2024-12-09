@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, lazy } from 'react'
+import React, { useState, lazy, useEffect } from 'react'
 import Loadable from './shared/Loadable';
 
 // importing react-router-dom components
@@ -7,14 +7,24 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
 
-  const [token, setToken] = useState(getToken());
+  const [token, setToken] = useState(null);
 
-  function getToken() {
+  // function getToken() {
+  //   const tokenString = localStorage.getItem('token');
+  //   const userToken = JSON.parse(tokenString);
+  //   return userToken
+  // }
+  // const userRole = token ? token.role : null;
+
+  useEffect(() => {
+    // Check for token in local storage on initial load
     const tokenString = localStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    console.log("here's the token", userToken)
-    return userToken
-  }
+    if (tokenString) {
+      const userToken = JSON.parse(tokenString);
+      setToken(userToken); // Set the token state if it exists
+    }
+  }, []);
+
   const userRole = token ? token.role : null;
 
   const ProtectedRoute = ({ element, allowedRoles }) => {

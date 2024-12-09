@@ -372,14 +372,14 @@ export default function AdminHomePage(props) {
 
 
 
-      <div className='charts-grid my-8 w-[100%]'>
+      <div className='charts-grid my-8 w-full'>
         <div className='bg-main-color flex justify-center items-center rounded-xl shadow-xl 
         col-start-1 col-end-2
         text-center'>
           <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
         </div>
 
-        <div className='flex-column lg:col-start-2 lg:col-end-3'>
+        <div className='flex-column lg:col-start-2 lg:col-end-3 flex-wrap'>
         {/* lg:h-[17rem] lg:w-[17rem] */}
         <div className='main-color h-auto w-auto rounded-xl border border-1 border-gray-200  pt-4
         flex flex-col flex-wrap lg:flex-nowrap justify-center items-center

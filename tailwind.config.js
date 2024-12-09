@@ -9,7 +9,7 @@ module.exports = {
         'large': '1400px'
       },
       colors: {
-        'main-color': '#1a1a2e',
+        'main-color': '#0f172a',
         // 'secondary-color': '#5C61F2',
         'secondary-color': '#6366F1'
       },

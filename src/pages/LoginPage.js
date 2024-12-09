@@ -91,7 +91,6 @@ const LoginPage = ({set_token}) => {
         },
       });
   
-      console.log("API Response:", result);
       if (result?.data && result?.data.role) {
         const cleanedData = Object.fromEntries(
           Object.entries(result.data).filter(([_, v]) => v != null)
