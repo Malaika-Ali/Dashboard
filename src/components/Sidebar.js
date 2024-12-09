@@ -11,15 +11,20 @@ const Sidebar = (props) => {
     const { activeMenu, setactiveMenu } = useStateContext();
 
 
-    function getToken() {
-        const tokenString = localStorage.getItem('token');
-        const userToken = JSON.parse(tokenString);
-        return userToken
-    }
+    // function getToken() {
+    //     const tokenString = localStorage.getItem('token');
+    //     const userToken = JSON.parse(tokenString);
+    //     return userToken
+    // }
+     // Retrieve the token from local storage
+     const tokenString = localStorage.getItem('token');
+     const token = tokenString ? JSON.parse(tokenString) : null; 
+    // const role = getToken().role;
+    // const name = getToken().first_name+' '+getToken().last_name
+    // console.log(role, name)
+    const role = token ? token.role : null; // Safely access role
+    const name = token ? `${token.first_name} ${token.last_name}` : 'Guest'; 
 
-    const role = getToken().role;
-    const name = getToken().first_name+' '+getToken().last_name
-    console.log(role, name)
 
     let roleLinks = [];
     if (role === 'admin') {
@@ -44,8 +49,11 @@ const Sidebar = (props) => {
     }
 
     const capitalizeFirstLetter = (string) => {
+        if (typeof string !== 'string' || string.length === 0) {
+            return ''; // Return an empty string if input is not valid
+        }
         return string.charAt(0).toUpperCase() + string.slice(1);
-      }
+    };
 
       const formatRole = (role) => {
         const roleMapping = {

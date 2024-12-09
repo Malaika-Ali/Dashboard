@@ -26,6 +26,7 @@ function App() {
   }, []);
 
   const userRole = token ? token.role : null;
+  console.log(`the role of user is cached successfully ${userRole}`)
 
   const ProtectedRoute = ({ element, allowedRoles }) => {
     return token && allowedRoles.includes(userRole) ? element : <Navigate replace to="/login" />
