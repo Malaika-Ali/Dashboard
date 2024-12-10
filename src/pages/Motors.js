@@ -46,7 +46,6 @@ export default function Motors(props) {
 
   async function fetch_data() {
 
-    console.log(props.user_details.employee_id)
     await axios.post(
       API_URL + "motors_page",
       { role: props.user_details.role, employee_id: props.user_details.employee_id },
@@ -61,7 +60,6 @@ export default function Motors(props) {
       setData(result.data)
 
     }).catch(async (error) => {
-      // setOpen(false);
       setLoading(true);
       alert(error.response.data);
     })
@@ -70,7 +68,6 @@ export default function Motors(props) {
 
   useEffect(() => {
 
-    // setOpen(true);
     setLoading(false)
     fetch_data();
 
@@ -192,10 +189,7 @@ export default function Motors(props) {
         <AddNewMotor
           onClose={() => setAddNewItem(false)}
           name='Motor'
-          // onAddMotor={handleAddMotor}
           areas_list={areas_list}
-          // factories={factories}
-          // floors={floors} 
           />
       }
       {/* logic for showing delete modal */}
@@ -212,9 +206,7 @@ export default function Motors(props) {
 
       {/* *******************    Header     **************/}
 
-      <CardsContainerHeader
-      //  headingName={`${factoryName ? factoryName : 'Motors Details'}`} name='Motor'
-      
+      <CardsContainerHeader      
       headingName={`${factoryName ? factoryName : ''} ${FloorNumber ? ' Floor ' + FloorNumber + ' Motors' : ''} ${!factoryName && !FloorNumber ? 'Motors Details' : ''}`}
       name='Motor'
         onAddButton={() => setAddNewItem(true)}
@@ -230,7 +222,7 @@ export default function Motors(props) {
         {
           sortedMotors.length > 0 ? (
             sortedMotors.map((row, idx) => (
-              <MotorCard motorName={row.motorName} FloorNumber={row.floorNumber}
+              <MotorCard key={idx} motorName={row.motorName} FloorNumber={row.floorNumber}
                 AreaName={row.areaName} FactoryName={row.factoryName}
                 motorStatus={row.status} />
             ))
@@ -239,7 +231,7 @@ export default function Motors(props) {
 
             motors.map((row, idx) => {
               return (
-                <MotorCard motorName={row.motorName} FloorNumber={row.floorNumber}
+                <MotorCard key={idx} motorName={row.motorName} FloorNumber={row.floorNumber}
                   AreaName={row.areaName} FactoryName={row.factoryName}
                   motorStatus={row.status} />
               )

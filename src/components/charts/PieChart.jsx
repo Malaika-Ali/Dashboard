@@ -35,30 +35,30 @@ const PieChart = ({ title, onClick, series }) => {
   // chart heights for different screen sizes
   let chartHeight;
   if (screenSize === 'small') {
-    chartHeight = 250;
+    chartHeight = 300;
   } else if (screenSize === 'medium') {
-    chartHeight = 280;
+    chartHeight = 330;
   }
   else if (screenSize === 'very large') {
     chartHeight = 285;
   } else {
     // chartHeight = 380;
-    chartHeight = 268;
+    chartHeight = 350;
 
   }
 
   // chart widths for different screen sizes
   let chartWidth;
   if (screenSize === 'small') {
-    chartWidth = 250;
+    chartWidth = 350;
   } else if (screenSize === 'medium') {
-    chartWidth = 280;
+    chartWidth = 330;
   }
   else if (screenSize === 'very large') {
     chartWidth = 300;
   } else {
     // chartWidth = 380;
-    chartWidth = 268;
+    chartWidth = 350;
   }
 
 
@@ -78,7 +78,7 @@ const PieChart = ({ title, onClick, series }) => {
             align: 'center',
             marginLeft: 3,
             style: {
-              fontSize: '18px',
+              fontSize: '22px',
               // color: '#000000', 
               fontFamily: 'poppins',
               color: 'white',
@@ -94,12 +94,17 @@ const PieChart = ({ title, onClick, series }) => {
 
             horizontalAlign: 'center',
             marginLeft:'50px',
-            offsetY: 0,
+            marginBottom: '5px',
+            offsetY: 20,
             offsetX: 0,
             labels: {
               colors: ['#31C431', '#F9F502', '#DB1915'],
               fontSize: '20px',
             },
+            itemMargin: {
+              horizontal: 10,
+              vertical: 20,
+          },
           },
           chart: {
             events: {
@@ -123,7 +128,7 @@ const PieChart = ({ title, onClick, series }) => {
           },
           
           stroke: {
-            colors: ['#31C431', '#F9F502', '#DB1915'], // Border colors
+            colors: ['#31C431', '#F9F502', '#DB1915'], 
           },
           dataLabels: {
             offset: -50,
@@ -139,7 +144,7 @@ const PieChart = ({ title, onClick, series }) => {
           }
         
         }}
-        style={{ cursor: 'pointer' }} // Set cursor as pointer
+        style={{ cursor: 'pointer',  }} 
       />
     </>
   );

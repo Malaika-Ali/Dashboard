@@ -5,7 +5,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import logo from '../assets/MotorLogo3.png'
-
+import Swal from 'sweetalert2';
 
 
 let API_URL = process.env.REACT_APP_API_URL;
@@ -13,7 +13,6 @@ let API_URL = process.env.REACT_APP_API_URL;
 const LoginPage = ({set_token}) => {
   const navigate = useNavigate();
   
-
   const { handleSubmit, control, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
@@ -22,63 +21,9 @@ const LoginPage = ({set_token}) => {
       email: '',
       password: '',
     });
-    // eslint-disable-next-line
   }, [navigate]);
   const [open, setOpen] = useState(false);
-  // const onSubmit =async (data) => {
-  //   // Handle login logic here
-  //   // console.log(data);
-  //   setOpen(true);
-  //   const dat = { 'email': data.email, 'password': data.password};
-
-  //   await axios.post(
-  //     API_URL + "signin_user",
-  //     dat,
-  //     {
-  //       headers: {
-  //         'Content-type': 'multipart/form-data',
-  //         "Access-Control-Allow-Origin": "*",
-  //       }
-  //     }
-  //   ).then((result) => {
-  //     // setOpen(false);
-  //     // alert('Success');
-  //     // navigate('/');
-  //     console.log("result", result);
-  //     console.log(result.data)
-  //     let data = Object.fromEntries(Object.entries(result?.data).filter(([_, v]) => v != null));
-  //     // console.log(data);
-  //     localStorage.setItem('token', JSON.stringify(data));
-  //     props.set_token(data);
-  //     setOpen(false);
-  //     // if(data.role==='admin'){
-  //     //   navigate("/adminHomePage");
-  //     // }
-  //     // else if(data.role==='factoryIncharge'){
-  //     //   navigate("/factoryInchargeHome");
-  //     // }
-  //     // if(data.role==='floorIncharge'){
-  //     //   navigate("/floorInchargeHomePage");
-  //     // }
-  //     navigate("/")
-
-  //   }).catch(async (error) =>  {
-  //     setOpen(false);
-  //     alert(error.response.data);
-  //     // Reset the form fields
-  //     await reset({
-  //       email: '',
-  //       password: '',
-  //     });
-      
-  //   })
-  // };
-
-
-
-
-
-
+  
   const onSubmit = async (data) => {
     setOpen(true);
     const dat = { email: data.email, password: data.password };
@@ -100,27 +45,23 @@ const LoginPage = ({set_token}) => {
         set_token(cleanedData);
         navigate("/");
         setOpen(false);
-  
-        // if (cleanedData.role === 'admin') {
-        //   navigate("/");
-        // } else if (cleanedData.role === 'factoryIncharge') {
-        //   navigate("/");
-        // } else if (cleanedData.role === 'floorIncharge') {
-        //   navigate("/");
-        // } else {
-        //   navigate("/");
-        // }
+
       } else {
         throw new Error("Invalid API response or missing role.");
       }
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: 'Incorrect email or password. Please try again.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      });
       console.error("Error during login:", error);
       setOpen(false);
     }
   };
   
-  
-
   return (
     <>
     <Backdrop
@@ -180,10 +121,6 @@ const LoginPage = ({set_token}) => {
               defaultValue=""
               rules={{
                 required: 'Password is required',
-                // minLength: {
-                //   value: 6,
-                //   message: 'Password must be at least 6 characters long',
-                // },
               }}
               render={({ field }) => (
                 <>
@@ -201,14 +138,12 @@ const LoginPage = ({set_token}) => {
               )}
             />
           </div>
-          {/* <Link to="/adminHomePage"> */}
           <button
             type="submit"
             className="w-full main-color main-color-hover text-white p-2 rounded-md s"
           >
             Log In
           </button>
-          {/* </Link> */}
           <span className='text-center mt-[0.5em]'>
             Not registered on our platform yet?
             <Link to="/signup"><span className='text-blue-500 mx-auto text-center hover:text-blue-400'> Register Now </span></Link>

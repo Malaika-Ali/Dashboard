@@ -63,8 +63,6 @@ export default function Navbar(props) {
     else setColor(false);
   };
 
-  window.addEventListener("scroll", changeColor);
-
   let notificationsRef = useRef();
   let divRef = useRef();
   let ProfileRef = useRef();
@@ -114,12 +112,8 @@ export default function Navbar(props) {
     navigate("/login");
   };
 
-  // md:w-full large:ml-4 lg:px-8 
-
-
   return (
-    <div className={`
-     flex justify-between items-center sm:px-3 md:px-6 lg:px-8 z-10 gray-icon bg-white shadow-md  py-1.5`}>
+    <div className="flex justify-between items-center sm:px-3 md:px-6 lg:px-8 z-10 gray-icon bg-white shadow-md  py-1.5">
       {loading && <Loader />}
 
       {/* Menu Button */}
@@ -168,15 +162,15 @@ export default function Navbar(props) {
 
 
         {open && (
-          <div className='flex flex-col bg-white pt-4 w-52 shadow-lg z-50 rounded-lg absolute right-4 top-14 text-gray-500' ref={ProfileRef}>
+          <div className='flex flex-col justify-center items-start bg-white pt-4 py-4 w-auto shadow-lg z-50 rounded-lg absolute right-4 top-14 text-gray-500' ref={ProfileRef}>
             <ul>
               {/* Profile Option */}
               <li onClick={() => {
                 setopen(false);
                 navigate('/userProfile');
-              }} className='py-4 px-2 w-full text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><CgProfile />My Profile</li>
+              }} className='py-4 px-8 w-full text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><CgProfile />My Profile</li>
               {/* Logout Option */}
-              <li onClick={handleLogout} className='py-4 px-2 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><TbLogout />Logout</li>
+              <li onClick={handleLogout} className='py-4 px-8 text-lg cursor-pointer rounded flex flex-row gap-4 items-center hover:bg-gray-100'><TbLogout />Logout</li>
             </ul>
           </div>
         )}

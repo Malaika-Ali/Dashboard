@@ -23,9 +23,6 @@ export const ContextProvider = ({ children }) => {
         setisClicked({ ...initialState, [clicked]: true })
     }
 
-
-   
-
     return (
         <StateContext.Provider value={{ activeMenu, setactiveMenu, isClicked, setisClicked, handleClick, screenSize, setscreenSize, userData, setUserData,loading, setLoading, searchTerm, setSearchTerm, token, setToken }}>
             {children}

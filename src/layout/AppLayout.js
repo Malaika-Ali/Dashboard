@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Navbar, Sidebar } from '../components';
-import Footer from '../components/Footer';
 import { useStateContext } from '../contexts/ContextProvider';
 import { motion } from 'framer-motion';
 
@@ -72,7 +71,8 @@ function AppLayout() {
 
       {/* Sidebar */}
       <motion.aside
-        className="row-start-1 row-end-3 col-start-1 col-end-2 min-h-screen h-screen sticky top-0 inset-0 z-10 backdrop-blur-sm md:overflow-y-auto lg:overflow-hidden"
+        className="row-start-1 row-end-3 col-start-1 col-end-2 min-h-screen inset-0 z-10 backdrop-blur-sm
+        h-full fixed top-0 left-0 w-[250px]"
         variants={sidebarVariants}
         initial="hidden"
         animate={activeMenu ? 'visible' : 'hidden'}
@@ -84,12 +84,12 @@ function AppLayout() {
       {/* Main Content */}
       <main
         className={`row-start-2 row-end-3 
-          md:px-6
+          md:px-6 w-full
           ${activeMenu
             ? 'col-start-1 lg:col-start-2 lg:px-8'
             : 'col-start-1 px-4 md:px-2 lg:px-[8rem]'
         }  
-               col-end-3 w-[100%] mb-4`}
+               col-end-[-1] mb-4`}
       >
         <Outlet />
       </main>

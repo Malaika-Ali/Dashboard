@@ -47,19 +47,12 @@ export const links = [
   ];
 
   export const factoryInchargelinks = [
-    
-      // title: 'Dashboard',
-      // links: [
         {
           name: 'FactoryInchargeHome',
           icon: <IoHome />,
           category: 'home',
           path: ''
         },
-        // {
-        //   name: 'FactoriesPage',
-        //   icon: <MdFactory />,
-        // },
         {
           name: 'Floors',
           icon: <GiStairs />,
@@ -78,8 +71,6 @@ export const links = [
           category: 'menu',
           path: 'history'
         },
-      // ],
-     
   ];
 
   export const floorInchargelinks = [
@@ -104,4 +95,10 @@ export const links = [
         },
   ];
 
-  
+
+export  const lineChartData = {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    criticalValues: [10, 15, 8, 12, 18, 45, 16, 25, 32, 46, 55, 62],
+    faultyValues: [5, 8, 3, 7, 10, 22, 33, 36, 45, 55, 66, 68],
+    flawlessValues: [66, 60, 55, 48, 30, 24, 22, 20, 11, 9, 5, 0],
+  };

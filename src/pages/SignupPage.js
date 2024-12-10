@@ -1,5 +1,3 @@
-// Signup.js
-
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,8 +8,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import logo from '../assets/MotorLogo3.png'
 
-// let API_URL = "https://fyp-motors.srv462183.hstgr.cloud/";
-// Load the API URL from the environment variable
 let API_URL = process.env.REACT_APP_API_URL;
 
 
@@ -28,12 +24,12 @@ const SignupPage = () => {
       confirmPassword: '',
       role: '',
     });
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []); 
 
   const [open, setOpen] = useState(false);
 
   const { handleSubmit, control, setError, setValue, reset, formState: { errors }, getValues } = useForm({
-    shouldUnregister: false, // Prevent automatic unregistering of fields
+    shouldUnregister: false, 
   });
 
   const [selectedRole, setSelectedRole] = useState('');
@@ -41,9 +37,6 @@ const SignupPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    // Perform signup logic here
-    // setValue('role', selectedRole);
-    // console.log(data);
     setOpen(true);
     const dat = {
       'first_name': data.firstName, 'last_name': data.lastName, 'email': data.email, 'employee_id': data.employeeID,
@@ -76,7 +69,7 @@ const SignupPage = () => {
         title: 'Registration Success',
         text: 'You have successfully registered!',
       });
-      navigate('/');
+      navigate('/login');
     }).catch(async (error) => {
       setOpen(false);
       // alert(error.response.data);
@@ -134,13 +127,21 @@ const SignupPage = () => {
               <Controller
                 name="firstName"
                 control={control}
-                rules={{ required: 'This field is required' }}
+                rules={{ required: 'First name is required' ,
+                  pattern: {
+                    value: /^[A-Za-z]+$/,
+                    message: 'First name can only contain letters',
+                  },
+                 }}
                 render={({ field }) => (
                   <input
                     {...field}
                     type="text"
                     placeholder="First Name"
                     className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.firstName ? 'border-red-500' : ''}`}
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^A-Za-z]/g, '');
+                    }}
                   />
                 )}
               />
@@ -154,13 +155,21 @@ const SignupPage = () => {
               <Controller
                 name="lastName"
                 control={control}
-                rules={{ required: 'This field is required' }}
+                rules={{ required: 'Last Name field is required' ,
+                  pattern: {
+                    value: /^[A-Za-z]+$/,
+                    message: 'Last name can only contain letters',
+                  },
+                }}
                 render={({ field }) => (
                   <input
                     {...field}
                     type="text"
                     placeholder="Last Name"
                     className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.lastName ? 'border-red-500' : ''}`}
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^A-Za-z]/g, '');
+                    }}
                   />
                 )}
               />
@@ -200,7 +209,12 @@ const SignupPage = () => {
               <Controller
                 name="employeeID"
                 control={control}
-                rules={{ required: 'This field is required' }}
+                rules={{ required: 'This field is required' ,
+                  pattern: {
+                    value: /^[A-Za-z0-9]+$/,
+                    message: 'Employee ID can only contain letters and numbers',
+                  },
+                }}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -208,6 +222,9 @@ const SignupPage = () => {
                     placeholder="Employee ID"
                     autoComplete='username'
                     className={`w-full p-2 border rounded-md focus:outline-secondary-color ${errors.employeeID ? 'border-red-500' : ''}`}
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^A-Za-z0-9]/g, '');
+                    }}
                   />
                 )}
               />
@@ -221,7 +238,7 @@ const SignupPage = () => {
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: 'This field is required' }}
+                rules={{ required: 'Password is required' }}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -245,11 +262,6 @@ const SignupPage = () => {
                 control={control}
                 rules={{
                   required: 'This field is required',
-                  // validate: (value) => {
-                  //   const passwordField = control.fieldsRef?.current?.password;
-                  //   const passwordFieldValue = passwordField?.value;
-                  //   return value === passwordFieldValue || 'Passwords do not match';
-                  // },
                   validate: (value) => {
                     const passwordFieldValue = getValues('password');
                     return value === passwordFieldValue || 'Passwords do not match';

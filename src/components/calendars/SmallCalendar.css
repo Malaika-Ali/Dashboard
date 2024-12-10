@@ -11,7 +11,7 @@
 }
 
 .react-calendar {
-    width: 25%;
+    width: 60%;
     height: 100%;
     max-width: 100%;
     /* padding-bottom: 0.8rem; */
@@ -42,9 +42,14 @@ abbr:where([title]) {
     text-decoration: underline;
 }
 
-@media  screen and (max-width:1400px) {
+@media (width > 1400px) {
     .react-calendar {
-        width: 100%;
-        /* margin-top: 1.8em; */
+        width: 75%!important;
+    }
+}
+
+@media (width < 700px) {
+    .react-calendar {
+        width: 70%!important;
     }
 }

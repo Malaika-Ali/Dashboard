@@ -38,16 +38,12 @@ function Employees() {
                 }
             }
         ).then((result) => {
-            console.log(result.data);
-            // setOpen(false);
             setLoading(false)
             setFactoryInchargeData(result.data.factory_incharge_data);
             setFloorInchargeData(result.data.floor_incharge_data);
             setAreas(result.data.areas)
             setFactories(result.data.factories)
-            console.log(result.data)
         }).catch(async (error) => {
-            //   setOpen(false);
             setLoading(true);
             alert(error.response.data);
         })
@@ -58,7 +54,6 @@ function Employees() {
 
     async function deleteData(row) {
         setOpen(true);
-        console.log(row);
         if (row.role == "floorIncharge") {
             await axios.post(
                 API_URL + "delete_floor_incharge",
@@ -108,9 +103,6 @@ function Employees() {
         setLoading(false)
         fetch_data()
     }, []);
-
-
-
 
     const factoryinchargeHeadings = [
         {

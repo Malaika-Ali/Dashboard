@@ -103,7 +103,6 @@ setLoading(false)
           } catch (error) {
             alert(error.response.data.error);
           }
-
     }
 
     
@@ -125,9 +124,6 @@ useEffect(() => {
     }
   }, [searchTerm]);
 
-//   md:ml-2 md:mr-2   lg:mx-5 large:mx-12 
-// mt-5 lg:mt-[4rem] large:mt-[5rem]
-
     return (
         <div
         ref={contentRef}>
@@ -144,21 +140,18 @@ useEffect(() => {
             {/* Flex Container */}
             <div className='flex flex-col sm:flex-row items-center justify-center md:justify-between mt-4 rounded-xl w-full md:w-[96%] gap-3 md:gap-2 lg:w-[98%] md:m-3 large:w-[95%] large:gap-[2em]'>
                 <SummaryAlertCard iconSrc={flawless} iconColor="text-green-700"
-                    // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
                     value={total_flawless}
                     label="Flawless Motors"
                     percentage="12.6"
                     isPositive />
                 <SummaryAlertCard iconSrc={faultyalert} iconColor="text-yellow-700"
-                    // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
                     value={total_faulty}
                     label="Faulty Motors"
                     percentage="11.6"
                     isPositive />
                 <SummaryAlertCard iconSrc={criticalalert} iconColor="text-red-700"
-                    //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
                     value={total_critical}
                     label="Critical Motors"

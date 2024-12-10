@@ -200,7 +200,6 @@ useEffect(() => {
                 <SummaryAlertCard
                     iconSrc={flawless}
                     iconColor="text-green-700"
-                    // bgColor='bg-green-50'
                     iconBgColor="bg-green-200"
                     value={total_flawless}
                     label="Flawless Motors"
@@ -209,7 +208,6 @@ useEffect(() => {
                 <SummaryAlertCard
                     iconSrc={faultyalert}
                     iconColor="text-yellow-700"
-                    // bgColor='bg-yellow-100'
                     iconBgColor="bg-yellow-200"
                     value={total_faulty}
                     label="Faulty Motors"
@@ -218,7 +216,6 @@ useEffect(() => {
                 <SummaryAlertCard
                     iconSrc={criticalalert}
                     iconColor="text-red-700"
-                    //  bgColor='bg-red-50'
                     iconBgColor="bg-red-200"
                     value={total_critical}
                     label="Critical Motors"
@@ -255,7 +252,6 @@ useEffect(() => {
                 role={props.user_details.role}
             />
 
-
             {/* *******************Cards Container**************/}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 large:grid-cols-4 justify-between sm:h-[40vh] md:h-[40vh] lg:h-[44vh] large:h-96 mt-3 main-color rounded-xl shadow-xl m-3 w-90 px-auto large:w-[96%]"
                 style={{ overflowY: 'auto', maxHeight: '100%', padding: '10px' }}>
@@ -263,6 +259,7 @@ useEffect(() => {
                     sortedFactories.length > 0 ? (
                         sortedFactories.map((row, idx) => (
                             <FactoryCard
+                            key={idx}
                                 FactoryName={row.factory_name}
                                 AreaName={row.area_name}
                                 CriticalMotor={row.critical}
@@ -276,6 +273,7 @@ useEffect(() => {
 
                             return (
                                 <FactoryCard
+                                key={idx}
                                     FactoryName={row.factory_name}
                                     AreaName={row.area_name}
                                     CriticalMotor={row.critical}

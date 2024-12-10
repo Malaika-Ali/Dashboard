@@ -9,31 +9,22 @@ function App() {
 
   const [token, setToken] = useState(null);
 
-  // function getToken() {
-  //   const tokenString = localStorage.getItem('token');
-  //   const userToken = JSON.parse(tokenString);
-  //   return userToken
-  // }
-  // const userRole = token ? token.role : null;
-
   useEffect(() => {
-    // Check for token in local storage on initial load
     const tokenString = localStorage.getItem('token');
     if (tokenString) {
       const userToken = JSON.parse(tokenString);
-      setToken(userToken); // Set the token state if it exists
+      setToken(userToken);
     }
   }, []);
 
   const userRole = token ? token.role : null;
-  console.log(`the role of user is cached successfully ${userRole}`)
 
   const ProtectedRoute = ({ element, allowedRoles }) => {
     return token && allowedRoles.includes(userRole) ? element : <Navigate replace to="/login" />
   }
 
   const set_token = (newToken) => {
-    setToken(newToken); 
+    setToken(newToken);
   };
 
 
@@ -56,22 +47,20 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login"  element={<LoginPage set_token={set_token} />} />
+          <Route path="/login" element={<LoginPage set_token={set_token} />} />
           <Route path="/signup" element={<SignupPage />} />
 
           {/* Redirect unauthenticated users to login */}
           <Route
-    path="/"
-    element={
-      token ? (
-        <AppLayout />
-      ) : (
-        <Navigate replace to="/login" />
-      )
-    }
-  />
-
-
+            path="/"
+            element={
+              token ? (
+                <AppLayout />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
           {/* Protected Routes with Layout */}
           <Route path="/" element={<AppLayout />}>
 
@@ -86,7 +75,7 @@ function App() {
                           <Navigate replace to="/login" />
                   }
                   allowedRoles={['admin', 'factoryIncharge', 'floorIncharge']}
-                />    
+                />
               }
             />
             <Route path='/areas' element={<ProtectedRoute element={<Areas user_details={token} />} allowedRoles={['admin']} />} />

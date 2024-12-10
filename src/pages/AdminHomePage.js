@@ -5,9 +5,8 @@ import motors_icon from '../assets/motors.svg'
 import location from '../assets/location.svg'
 import axios from 'axios';
 
-import { PieChart } from '../components/charts'
-import { CircularProgressChart } from '../components/charts'
-import { LineChart } from '../components/charts'
+import { PieChart, LineChart } from '../components/charts'
+import { lineChartData } from '../constants/constants';
 
 import criticalalert from '../assets/criticalalert.png'
 import faultyalert from '../assets/faultyalert.png'
@@ -28,7 +27,6 @@ let API_URL = process.env.REACT_APP_API_URL;
 
 export default function AdminHomePage(props) {
 
-  const [open, setOpen] = useState(false);
   const [total_areas, setTotalAreas] = useState('0');
   const [total_factories, setTotalFactories] = useState('0');
   const [total_motors, setTotalMotors] = useState('0');
@@ -39,16 +37,17 @@ export default function AdminHomePage(props) {
   const [pie_chart_series, setPieChartSeries] = useState([0, 0, 0]);
   const [small_charts_data, setSmallChartsData] = useState([0, 0, 0]);
 
-  const { loading, setLoading, searchTerm, setSearchTerm, activeMenu } = useContext(StateContext);
+  const { setLoading, searchTerm, activeMenu } = useContext(StateContext);
 
   // state to control popup of Motor View modal
   const [viewMotor, setViewMotor] = useState(false)
   const [selectedMotor, setSelectedMotor] = useState(null);
+  // state to popup modal on click on calendar
+  const [calendarClick, setCalendarClick] = useState(false)
 
   const navigate = useNavigate();
 
   async function fetch_data() {
-
     await axios.get(
       API_URL + "admin_homepage",
       {
@@ -62,28 +61,20 @@ export default function AdminHomePage(props) {
       setData(result?.data)
 
     }).catch(async (error) => {
-      // setOpen(false);
       console.log(error)
       setLoading(true)
-      // alert(error.response.data);
     })
 
   }
 
   useEffect(() => {
-
-    // setOpen(true);
     setLoading(false)
-    // alert(loading)
     fetch_data();
-
-
   }, []);
 
   useEffect(() => {
     if (data) {
       setLoading(false)
-      // setOpen(false);
       setTotalAreas(data.areas_count);
       setTotalFactories(data.factories_count);
       setTotalMotors(data.motors_count);
@@ -101,30 +92,30 @@ export default function AdminHomePage(props) {
     {
       name: 'Motor Name',
       selector: row => row.motorName,
-      sortable: true,
-      center: true,
+      sortable: 'true',
+      center: 'true',
     },
     {
       name: "Floor Number",
       selector: row => row.floorNumber,
-      sortable: true,
-      center: true,
+      sortable: 'true',
+      center: 'true',
     },
     {
       name: "Factory Name",
       selector: row => row.factoryName,
-      sortable: true,
-      center: true,
+      sortable: 'true',
+      center: 'true',
     },
     {
       name: "Area Name",
       selector: row => row.areaName,
-      sortable: true,
-      center: true,
+      sortable: 'true',
+      center: 'true',
     },
     {
       name: "Status",
-      center: true,
+      center: 'true',
       selector: (row) => {
         // Conditional styling based on the "Status" value
         let color = '';
@@ -147,11 +138,11 @@ export default function AdminHomePage(props) {
         }
         return <span className={`${color} ${bg} flex items-center justify-center w-auto h-auto px-1 border rounded-full`}>{row.status}</span>;
       },
-      sortable: true
+      sortable: 'true'
     },
     {
       name: "View",
-      center: true,
+      center: 'true',
       cell: row => <button className='bg-secondary-color text-white font-semibold py-1 px-4 rounded-full'
         onClick={() => {
           setViewMotor(true);
@@ -160,39 +151,6 @@ export default function AdminHomePage(props) {
         View</button>
     }
   ];
-
-  const lineChartData = {
-    // X-axis labelling
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    // Y-Axis labelling
-    criticalValues: [10, 15, 8, 12, 18, 45, 16, 25, 32, 46, 55, 62],
-    faultyValues: [5, 8, 3, 7, 10, 22, 33, 36, 45, 55, 66, 68],
-    flawlessValues: [66, 60, 55, 48, 30, 24, 22, 20, 11, 9, 5, 0],
-  };
-
-  const factory_Incharge_headings = [
-    {
-      name: 'Incharge Name',
-      selector: row => row.motorName,
-      sortable: true
-    },
-    {
-      name: "Factory Name",
-      selector: row => row.factoryName,
-      sortable: true
-    },
-    {
-      name: "Area Name",
-      selector: row => row.areaName,
-      sortable: true
-    },
-    {
-      name: "Email Address",
-      selector: row => row.emailaddress,
-      sortable: true
-    },
-  ];
-
 
   const [redPie, setRedPie] = useState(false)
   const [yellowPie, setYellowPie] = useState(false)
@@ -217,38 +175,12 @@ export default function AdminHomePage(props) {
         setRedPie(true);
         break;
       default:
-        // Do nothing or handle unexpected seriesIndex
         break;
     }
   };
 
-
-  // state to popup modal on click on calendar
-  const [calendarClick, setCalendarClick] = useState(false)
-
-
-
-
-
   // *************************Search Functionality*********************
   const contentRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     const regex = new RegExp(`(${searchTerm})`, 'gi');
-  //     const content = contentRef.current.innerHTML;
-  //     const newContent = content.replace(regex, '<span class="highlight">$1</span>');
-
-  //     contentRef.current.innerHTML = newContent;
-
-  //     const firstMatch = contentRef.current.querySelector('.highlight');
-  //     if (firstMatch) {
-  //       firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  //     }
-  //   }
-  // }, [searchTerm]);
-
-
   useEffect(() => {
     if (searchTerm) {
       const regex = new RegExp(`(?![^<>]*>)(${searchTerm})`, 'gi');
@@ -264,27 +196,22 @@ export default function AdminHomePage(props) {
     }
   }, [searchTerm]);
 
-  //  md:mx-2 large:mx-28
-
-
 
   return (
     <div
       ref={contentRef}>
 
       {/* *********Div To Show Page Name**************** */}
-      <div className={`px-2.5 md:px-4 lg:px-2 my-6`}>
+      <div className='lg:px-2 my-6'>
         <SecondNavbar pageName='Home' />
       </div>
 
       {/* *********Numbers of Areas, factories, motors **************** */}
       <div className={`cards-grid items-center ${activeMenu ? ' lg:gap-0.5' : ' lg:gap-10'} gap-1.5
        sm:gap-y-[0.8em] sm:gap-x-3
-       md:gap-0.5 md:gap-y-4
+       md:justify-between md:gap-y-4
          lg:gap-1 lg:gap-y-4
-       large:gap-[6em]`}>
-        {/* Flex Container */}
-        {/* <div className='flex justify-between flex-wrap rounded-xl md:w-[72%] lg:w-[70%] large:w-[70%]'> */}
+       large:gap-[1em]`}>
 
         {/* left box */}
         <TotalNumberCard iconSrc={location} placeName='Areas' quantity={'' + total_areas} onClick={() => navigate('/Areas')} />
@@ -296,8 +223,6 @@ export default function AdminHomePage(props) {
 
         {/* Right box */}
         <TotalNumberCard iconSrc={motors_icon} placeName='Motors' quantity={'' + total_motors} onClick={() => navigate('/Motors')} />
-
-        {/* </div> */}
 
         {/* ********************Alerts Div************************* */}
         <div className='flex flex-col lg:items-center gap-2 lg:ml-2'>
@@ -323,93 +248,36 @@ export default function AdminHomePage(props) {
         }
       </div>
 
-
-
-      {/* ----- Line Chart ------------ */}
-      {/* <div className='flex flex-col justify-center lg:items-start mt-8 md:w-[98%] lg:w-full large:w-full'>
-        <h2 className='ml-3 main-font  text-xl font-semibold'>Overall Motors Analytics</h2>
-
-        <div className=' rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
-
-          <div className='bg-main-color flex justify-center items-center h-80 mt-8 rounded-xl shadow-xl w-[100%]
-  lg:h-[50%] large:h-[29rem] pt-2 md:pt-4 lg:py-5  text-center'>
-            <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
-          </div>
-
-
-        </div>
-
-      </div> */}
-
-      {/* ----------------- Pie Chart and Calendar ------------------------ */}
-      {/* <div className='flex flex-col justify-center items-start mt-8'>
-
-        <h2 className='ml-3 large:ml-6 main-font  text-xl font-semibold'>Monthly Motors Report</h2>
-
-        <div className='-mt-2 rounded-xl flex items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
-
-
-          <div className='main-color h-auto 
-          md:h-[14rem] w-auto md:w-[14rem]  rounded-xl border border-1 border-gray-200  mt-4 pt-4 md:pt-6  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
-          lg:h-[100%] lg:py-10 lg:w-[100%]
-          large:h-[18rem] large:w-[19rem]
-  '>
-            <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
-          </div>
-
-          <div className='flex justify-center items-center w-[100%] h-[100%] border-1 border-gray-300 rounded-lg bg-white'>
-            <SmallCalendar onClickDay={() => setCalendarClick(true)} />
-          </div>
-          {
-            calendarClick &&
-            <CalendarClickModal
-              onClick={() => setCalendarClick(false)}
-              TableHeading='Motors Performance'
-            />
-          }
-        </div>
-      </div> */}
-
-
-
-      <div className='charts-grid my-8 w-full'>
-        <div className='bg-main-color flex justify-center items-center rounded-xl shadow-xl 
-        col-start-1 col-end-2
-        text-center'>
-          <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
-        </div>
-
-        <div className='flex-column lg:col-start-2 lg:col-end-3 flex-wrap'>
-        {/* lg:h-[17rem] lg:w-[17rem] */}
-        <div className='main-color h-auto w-auto rounded-xl border border-1 border-gray-200  pt-4
-        flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
-          md:h-[100%]  md:w-[45%]  md:pt-6  
-         lg:w-full lg:h-auto
-          
-  '>
-        <PieChart title="Motors' Performance" onClick={handleClick} series={pie_chart_series} />
-        </div>
-        {/* lg:h-[20rem] lg:w-[17rem] */}
-        <div className='flex my-2
-        md:h-[100%] md:w-[42%]
-        lg:w-full lg:h-auto
-        '>
-        <SmallCalendar onClickDay={() => setCalendarClick(true)} />
-          </div>
-      
-          {
-            calendarClick &&
-            <CalendarClickModal
-              onClick={() => setCalendarClick(false)}
-              TableHeading='Motors Performance'
-            />
-          }
-
-        </div>
-
+      {/* ************************************Line Chart*********************************** */}
+      <div className='bg-main-color border-opacity-[0.7] flex justify-center items-center h-80 mt-8 rounded-xl shadow-xl w-[100%]
+  lg:h-full large:h-[29rem] pt-2 md:pt-4 lg:py-5  text-center'>
+        <LineChart data={lineChartData} chartTitle="Monthly Performance Analytics" />
       </div>
 
+      {/* ----------------- Pie Chart and Calendar ------------------------ */}
+      <div className='mt-4 rounded-xl flex flex-col md:flex-row items-center justify-start gap-8 large:gap-24 w-[98%] lg:w-[99%] large:w-[98%]'>
 
+        <div className='main-color h-auto w-auto
+           rounded-xl border border-1 border-gray-200 border-opacity-[0.7]  mt-4 pt-4 md:pt-6  flex flex-col flex-wrap lg:flex-nowrap justify-center items-center
+          md:h-[100%] md:w-[100%]
+          lg:h-[100%] lg:pt-5'>
+          <PieChart title="Motors' Status Report" onClick={handleClick} series={pie_chart_series} />
+        </div>
+
+        <div className='flex flex-col justify-center items-center
+        w-auto
+        md:w-[100%] h-[100%] rounded-xl border border-1 border-secondary-color py-2 pb-4'>
+          <h2 className='py-2 main-font text-lg  lg:text-xl font-semibold'>Monthly Motors Report</h2>
+          <SmallCalendar onClickDay={() => setCalendarClick(true)} />
+        </div>
+        {
+          calendarClick &&
+          <CalendarClickModal
+            onClick={() => setCalendarClick(false)}
+            TableHeading='Motors Performance'
+          />
+        }
+      </div>
 
       {/* ***************Tabular Motors Summary **************** */}
       <div className='mt-12 mx-auto bg-white rounded-xl w-[95%] large:w-[98%]'>
@@ -419,7 +287,6 @@ export default function AdminHomePage(props) {
         {
           viewMotor &&
           <ViewMotorModal onClick={() => setViewMotor(false)}
-            // motorName='MM-1' motorStatus='Flawless' floorNumber='2' factoryName='Agri' areaName='Maymar'
             motorName={selectedMotor.motorName}
             motorStatus={selectedMotor.status}
             floorNumber={selectedMotor.floorNumber}

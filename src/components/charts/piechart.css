@@ -1,9 +1,13 @@
-/* .apexcharts-legend{
-    top: 4em!important;
-    right: -10px!important;
+.apexcharts-legend{
+    top: 3em!important;
+    /* right: -10px!important; */
 
 }
 
-.SvgjsText11615{
-    margin-bottom: 2em!important;
-} */
+.apexcharts-inner .apexcharts-graphical{
+margin-top: 1em;
+}
+
+.apexcharts-pie{
+    margin-top: 2em!important;
+}

@@ -14,21 +14,14 @@ function LineChart({ data, chartTitle }) {
       categories: data.categories,
       labels: {
         style: {
-          colors: 'white', // Set x-axis label text color to white
+          colors: 'white', 
         },
       },
     },
     yaxis: {
-      // title: {
-      //   text: 'Numbers',
-      //   style: {
-      //     color: 'white',
-      //     fontSize:'16px'
-      //   },
-      // },
       labels: {
         style: {
-          colors: 'white', // Set x-axis label text color to white
+          colors: 'white', 
           marginRight: '20px',
           marginLeft: '20px'
         },
@@ -58,15 +51,16 @@ function LineChart({ data, chartTitle }) {
       }
     },
     legend: {
-      position: 'bottom', // Set the legend position to top
-      horizontalAlign: 'center', // Set the horizontal alignment to right
-      offsetY: 15, // Adjust the vertical offset if needed
+      position: 'top', 
+      horizontalAlign: 'center', 
+      offsetY: 15,
       itemMargin: {
-        vertical: 10, // Adjust the vertical margin between legend items
+        vertical: 10, 
         horizontal: 25,
       },
       labels: {
-        colors: ['#FF0000', '#FFFF00', '#00FF00'], // Set legend text color to white
+        colors: ['#FF0000', '#FFFF00', '#00FF00'], 
+        fontSize: "25px"
       },
     },
 
@@ -134,7 +128,7 @@ function LineChart({ data, chartTitle }) {
   else if (screenSize === 'very large') {
     chartHeight = 380;
   } else {
-    chartHeight = 500;
+    chartHeight = 420;
   }
 
   // chart widths for different screen sizes
@@ -150,7 +144,7 @@ function LineChart({ data, chartTitle }) {
   else if (screenSize === 'very large') {
     chartWidth = 900;
   } else {
-    chartWidth = 750;
+    chartWidth = 820;
   }
 
 
