@@ -1,70 +1,89 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Multi-User Dashboard for Motor Health Monitoring
 
-## Available Scripts
+## Overview
+This project is a multi-user dashboard designed to monitor the health of motors using data generated from machine learning models. 
 
-In the project directory, you can run:
+The dashboard caters to three different types of users: Administrators, Factory Incharges, and Floor Incharges. Each user type has specific functionalities and access levels tailored to their roles within the organization.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of Contents
+- [Features](#features)
+- [User Roles](#userroles)
+- [Technologies Used](#tech)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Role-based access control for different user types.
+- User-friendly interface for easy navigation.
+- Visualizations of motor performance and health trends.
+- Responsive.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## User Roles
+### 1. Administrator
+-Full access to all features and functionalities.
+-Access to the motors' health reports from all the factories located in any area.
+-User management (create, update, delete users).
+-Access to comprehensive reports and analytics.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Factory Incharge
+-View motor health data and performance metrics for all motors in his respective factory.
+-Receive alerts for any immediate issues with motors.
+-View historical data for motors in their factory.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Floor Incharge
+-Access to health data for motors on their specific floor.
+-Receive alerts for any immediate issues with motors.
+-View historical data for motors on their floor.
+## Technologies Used
+Frontend: React.js, Tailwind CSS, Apex Charts, Framer Motion, React Calendar, React Hook Form
+Backend: Flask
+Deployment: vercel
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To set up the project locally, follow these steps:
 
-### `npm run eject`
+```bash
+  git clone https://github.com/Malaika-Ali/Dashboard.git
+  cd Dashboard
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To install te dependencies run the following command:
+```bash
+  npm i
+```
+    
+To run the frontend server run the following command:
+    ```bash
+  npm start
+```
+## Usage
+-Log in using the credentials provided for each user role.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For Admin user use :
+ email: harry@gmail.com
+ p.w: harry
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For Factory Incharge use:
+ email: new@gmail.com
+ p.w: new
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For Floor Incharge use:
+ email: alice@gmail.com
+ p.w: alice
 
-## Learn More
+-Navigate through the dashboard to access the features relevant to your role.
+-Monitor motor health and manage maintenance tasks as needed.
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contributions are welcome! If you would like to contribute to this project, please follow these steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fork the repository.
+Create a new branch (git checkout -b feature/YourFeature).
+Make your changes and commit them (git commit -m 'Add some feature').
+Push to the branch (git push origin feature/YourFeature).
+Open a pull request.
